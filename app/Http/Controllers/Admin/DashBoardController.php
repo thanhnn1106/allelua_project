@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class DashBoardController extends Controller
 {
     public function index(Request $request)
     {
         $data = array();
-        echo 'This is admin';exit;
 
-//        return view('admin.index', $data);
+        return view('admin.dashboard.index', $data);
     }
 }

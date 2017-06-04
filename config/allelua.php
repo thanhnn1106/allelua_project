@@ -1,4 +1,7 @@
 <?php
+define('LIMIT_ROW', 10);
+define('ROLE_ADMIN', 'administrator');
+define('ROLE_SELLER', 'seller');
 return [
     'roles' => array(
         'administrator' => 1,
@@ -12,5 +15,4 @@ return [
         'active'   => 1,
         'inactive' => 0
     ),
-    'APP_ENV'
 ];

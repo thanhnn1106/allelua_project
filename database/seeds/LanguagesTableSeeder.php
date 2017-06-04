@@ -14,7 +14,7 @@ class LanguagesTableSeeder extends Seeder
     {
         $langs = array(
             array(
-                'iso2'        => 'vn',
+                'iso2'        => 'vi',
                 'name'        => 'Tiếng việt',
                 'created_at'  => date('Y-m-d H:i:s'),
             ),

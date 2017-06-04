@@ -44,4 +44,29 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\Countries');
     }
+
+    public function language()
+    {
+        return $this->belongsTo('App\Models\Languages');
+    }
+
+    public static function getListFilterUser($params) {
+        $query = \DB::table('users AS t1')
+                ->select('t1.*', 't2.role', 't3.name as country_name')
+                ->leftJoin('roles AS t2', 't2.id', '=', 't1.role_id')
+                ->leftJoin('countries AS t3', 't3.id', '=', 't1.country_id')
+                ->whereNull('t1.deleted_at');
+      
+        self::query_params($query, $params);
+
+        $query->orderBy('t1.created_at', 'DESC');
+
+        $result = $query->paginate(LIMIT_ROW);
+        return $result;
+    }
+
+    public static function query_params($query)
+    {
+        
+    }
 }
