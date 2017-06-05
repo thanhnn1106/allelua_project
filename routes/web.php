@@ -17,10 +17,18 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], function () {
     Route::get('dashboard', 'Admin\DashBoardController@index')->name('admin_dashboard');
+
+    // Users
     Route::get('user', 'Admin\UserManageController@index')->name('admin_user');
     Route::get('user/change_status/{id}', 'Admin\UserManageController@changeStatus')->name('admin_user_status');
     Route::get('user/delete/{id}', 'Admin\UserManageController@delete')->name('admin_user_delete');
-    Route::get('profile', 'Admin\DashBoardController@index')->name('admin_profile');
+    Route::match(['get', 'post'], 'user/add', 'Admin\UserManageController@add')->name('admin_user_add');
+    Route::match(['get', 'post'], 'user/edit/{id}', 'Admin\UserManageController@edit')->name('admin_user_edit');
 
-    Route::get('setting', 'Admin\GeneralController@index')->name('admin_setting_general');
+    // Profile
+    Route::match(['get', 'post'], 'profile', 'Admin\UserProfileController@edit')->name('admin_profile');
+
+    // Setting
+    Route::get('general', 'Admin\GeneralController@index')->name('admin_setting_general');
+    Route::match(['get', 'post'], 'setting', 'Admin\SettingController@index')->name('admin_setting_socical');
 });

@@ -33,19 +33,19 @@ class MainmenuComposer
                         'route' => 'admin_user',
                         'name'  => 'Users',
                     ),
-                    'profile' => array(
-                        'route' => 'admin_profile',
-                        'name'  => 'Profile',
-                    ),
                 ),
             ),
             'setting' => array(
-                'title'      => 'Setting',
+                'title'      => 'Settings',
                 'icon_class' => 'fa fa-dashboard',
                 'childs'     => array(
                     'dashboard' => array(
                         'route' => 'admin_setting_general',
                         'name'  => 'General',
+                    ),
+                    'setting_social' => array(
+                        'route' => 'admin_setting_socical',
+                        'name'  => 'Config'
                     ),
                 ),
             ),

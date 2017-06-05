@@ -13,7 +13,7 @@
                 @include('notifications')
                 <div class="box">
                     <div class="box-header with-border">
-                        <a href="" class="btn btn-default btn-sm">Add new</a>
+                        <a href="{{ route('admin_user_add') }}" class="btn btn-default btn-sm">Add new</a>
                     </div>
                     <div class="box-body">
                         <div class="dataTables_wrapper form-inline dt-bootstrap">
@@ -57,7 +57,7 @@
                                             <td>{{ $user->created_at }}</td>
                                             <td>
                                                 @if(!isAdmin($user->role))
-                                                <a class="btn btn-default btn-xs">Edit</a>
+                                                <a href="{{ route('admin_user_edit', ['id' => $user->id]) }}" class="btn btn-default btn-xs">Edit</a>
                                                 <a href="javascript:void(0);" onclick="fncDelete('{{ route('admin_user_delete', array('id' => $user->id)) }}');" class="btn btn-danger btn-xs">Delete</a>
                                                 @endif
                                             </td>
