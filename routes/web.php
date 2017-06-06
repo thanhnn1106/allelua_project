@@ -29,6 +29,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], func
     Route::match(['get', 'post'], 'profile', 'Admin\UserProfileController@edit')->name('admin_profile');
 
     // Setting
-    Route::get('general', 'Admin\GeneralController@index')->name('admin_setting_general');
+    Route::match(['get', 'post'], 'general', 'Admin\GeneralController@index')->name('admin_setting_general');
     Route::match(['get', 'post'], 'setting', 'Admin\SettingController@index')->name('admin_setting_socical');
 });

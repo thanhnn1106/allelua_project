@@ -6,15 +6,15 @@ use App\Http\Controllers\Admin\BaseController;
 use Illuminate\Http\Request;
 use Validator;
 
-class SettingController extends BaseController
+class GeneralController extends BaseController
 {
     /**
      * Setting config as: rate and social
      * @param Request $request
      * @return type
      */
-    public function index(Request $request) {
-
+    public function index(Request $request)
+    {
         $settings = \App\Settings::all(array('key', 'value'));
         $setting = array_column($settings->toArray(), 'value', 'key');
 
@@ -70,7 +70,7 @@ class SettingController extends BaseController
             return redirect(route('admin_setting_socical'));
         }
 
-        return view('admin/setting/form', [
+        return view('admin/general/form', [
             'setting'      => $setting,
         ]);
     }
