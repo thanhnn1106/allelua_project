@@ -14,6 +14,7 @@
 Route::match(['get', 'post'], 'administrator/login', 'Auth\LoginController@loginAdmin')->name('admin_login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('lang', 'LangController@index')->name('home_lang');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], function () {
     Route::get('dashboard', 'Admin\DashBoardController@index')->name('admin_dashboard');

@@ -1,16 +1,17 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
     public function index(Request $request)
     {
-        $data = array();
-        echo 'This is home';exit;
+        $data = array(
+            'langs' => $this->getLanguages()
+        );
 
-//        return view('admin.index', $data);
+        return view('home', $data);
     }
 }
