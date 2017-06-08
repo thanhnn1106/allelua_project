@@ -11,7 +11,7 @@ class Generals extends Model
      *
      * @var string
      */
-    protected $table = 'languages';
+    protected $table = 'generals';
 
     public function user()
     {

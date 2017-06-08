@@ -13,7 +13,4 @@ return [
     |
     */
 
-    'update_fail' => 'Update Failed',
-    'want_delete' => 'Do you want to delete this row?'
-
 ];

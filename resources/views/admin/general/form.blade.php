@@ -9,64 +9,93 @@
 
     <section class="content">
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-md-12">
                 @include('notifications')
-                <div class="box box-primary">
-                    <form role="form" action="{{ route('admin_setting_socical') }}" id="form-user" method="post">
-                        <div class="box-body">
-                            <div class="form-group input-group-sm @if ($errors->has('setting_rate')) has-error @endif">
-                                <label class="control-label">Rate</label>
-                                <input type="text" class="form-control" id="setting_rate" name="setting_rate" 
-                                       maxlength="255" value="{{ old('setting_rate', isset($setting['setting_rate']) ? $setting['setting_rate'] : '') }}" />
-                                @if ($errors->has('setting_rate'))
-                                  <p class="help-block">{{ $errors->first('setting_rate') }}</p>
-                                @endif
-                            </div>
+                <form role="form" action="{{ route('admin_setting_general') }}" id="form-general" method="post" enctype="multipart/form-data">
+                <div class="nav-tabs-custom">
+                    <div class="box-footer">
+                        {{ csrf_field() }}
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                    <ul class="nav nav-tabs">
+                        @foreach ($languages as $lang)
+                        <li @if($lang->iso2 === 'vi') class="active" @endif><a href="#tab_{{ $lang->id }}" data-toggle="tab">{{ $lang->name }}</a></li>
+                        @endforeach
+                    </ul>
+                    <div class="tab-content">
+                        @foreach ($languages as $lang)
+                        <div class="tab-pane @if($lang->iso2 === 'vi') active @endif" id="tab_{{ $lang->id }}">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="box">
+                                        <div class="box-body">
+                                            <?php 
+                                                $title       = 'title_'.$lang->id;
+                                                $description = 'description_'.$lang->id;
+                                                $seoKeyword  = 'seo_keyword_'.$lang->id;
+                                                $logo        = 'logo_'.$lang->id;
+                                                $chk         = 'check_'.$lang->id;
+                                                $logoRow     = isset($generals[$lang->id]['logo']) ? $generals[$lang->id]['logo'] : '';
+                                            ?>
+                                            <div class="form-group @if ($errors->has($title)) has-error @endif">
+                                                <label class="control-label">{{ trans('admin.title_'.$lang->iso2) }}</label>
+                                                <input type="text" class="form-control border-corner" name="{{ $title }}" placeholder="Input ..."
+                                                        value="{{ old($title, isset($generals[$lang->id]['title']) ? $generals[$lang->id]['title'] : '') }}" />
+                                                @if ($errors->has($title))
+                                                  <p class="help-block">{{ $errors->first($title) }}</p>
+                                                @endif
+                                            </div>
 
-                            <div class="form-group input-group-sm @if ($errors->has('setting_link_facebook')) has-error @endif">
-                                <label class="control-label">Link Facebook</label>
-                                <input type="text" class="form-control" id="setting_link_facebook" name="setting_link_facebook" maxlength="255" 
-                                       value="{{ old('setting_link_facebook', isset($setting['setting_link_facebook']) ? $setting['setting_link_facebook'] : '') }}" />
-                                @if ($errors->has('setting_link_facebook'))
-                                <p class="help-block">{{ $errors->first('setting_link_facebook') }}</p>
-                                @endif
-                            </div>
+                                            <div class="form-group @if ($errors->has($description)) has-error @endif">
+                                                <label class="control-label">{{ trans('admin.description_'.$lang->iso2) }}</label>
+                                                <textarea name="{{ $description }}" class="form-control border-corner" rows="3" placeholder="Input ...">{{ old($description, isset($generals[$lang->id]['description']) ? $generals[$lang->id]['description'] : '') }}</textarea>
+                                                @if ($errors->has($description))
+                                                  <p class="help-block">{{ $errors->first($description) }}</p>
+                                                @endif
+                                            </div>
 
-                            <div class="form-group input-group-sm @if ($errors->has('setting_link_twitter')) has-error @endif">
-                                <label class="control-label">Link Twitter</label>
-                                <input type="text" class="form-control" id="company_name" name="setting_link_twitter" 
-                                       maxlength="255" value="{{ old('setting_link_twitter', isset($setting['setting_link_twitter']) ? $setting['setting_link_twitter'] : '') }}" />
-                                @if ($errors->has('setting_link_twitter'))
-                                  <p class="help-block">{{ $errors->first('setting_link_twitter') }}</p>
-                                @endif
-                            </div>
+                                            <div class="form-group @if ($errors->has($seoKeyword)) has-error @endif">
+                                                <label class="control-label">{{ trans('admin.seo_keyword_'.$lang->iso2) }}</label>
+                                                <textarea name="{{ $seoKeyword }}" class="form-control border-corner" rows="3" placeholder="Input ...">{{ old($seoKeyword, isset($generals[$lang->id]['seo_keyword']) ? $generals[$lang->id]['seo_keyword'] : '') }}</textarea>
+                                                @if ($errors->has($seoKeyword))
+                                                  <p class="help-block">{{ $errors->first($seoKeyword) }}</p>
+                                                @endif
+                                            </div>
 
-                            <div class="form-group input-group-sm @if ($errors->has('setting_link_youtube')) has-error @endif">
-                                <label class="control-label">Link Twitter</label>
-                                <input type="text" class="form-control" id="company_name" name="setting_link_youtube" 
-                                       maxlength="255" value="{{ old('setting_link_youtube', isset($setting['setting_link_youtube']) ? $setting['setting_link_youtube'] : '') }}" />
-                                @if ($errors->has('setting_link_youtube'))
-                                  <p class="help-block">{{ $errors->first('setting_link_youtube') }}</p>
-                                @endif
-                            </div>
+                                            <div class="form-group @if ($errors->has($logo)) has-error @endif">
+                                                <label class="control-label">{{ trans('admin.logo_'.$lang->iso2) }}</label>
+                                                <input name="{{ $logo }}" type="file">
+                                                <?php $logoPath = getLogoImage($logoRow); ?>
+                                                @if(!empty($logoPath))
+                                                <a target="_blank" href="{{ $logoPath }}">View Logo</a>
+                                                @endif
+                                                @if ($errors->has($logo))
+                                                  <p class="help-block">{{ $errors->first($logo) }}</p>
+                                                @endif
+                                            </div>
+                                            <div class="form-group @if ($errors->has($chk)) has-error @endif">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input name="{{ $chk }}" type="checkbox" value="1"> {{ trans('admin.check_'.$lang->iso2) }}
+                                                    </label>
+                                                </div>
+                                                @if ($errors->has($chk))
+                                                  <p class="help-block">{{ $errors->first($chk) }}</p>
+                                                @endif
+                                            </div>
 
-                            <div class="form-group input-group-sm @if ($errors->has('setting_link_zalo')) has-error @endif">
-                                <label class="control-label">Link Twitter</label>
-                                <input type="text" class="form-control" id="company_name" name="setting_link_zalo" 
-                                       maxlength="255" value="{{ old('setting_link_zalo', isset($setting['setting_link_zalo']) ? $setting['setting_link_zalo'] : '') }}" />
-                                @if ($errors->has('setting_link_zalo'))
-                                  <p class="help-block">{{ $errors->first('setting_link_zalo') }}</p>
-                                @endif
+                                        </div>
+                                        <!-- /.box-body -->
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <!-- /.box-body -->
-
-                        <div class="box-footer">
-                            {{ csrf_field() }}
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
+                        @endforeach
+                    </div>
+                    <!-- /.tab-content -->
                 </div>
+                </form>
+                <!-- nav-tabs-custom -->
             </div>
         </div>
     </section>

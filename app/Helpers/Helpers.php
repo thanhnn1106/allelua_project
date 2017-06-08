@@ -36,14 +36,12 @@ function isAdmin($role)
 }
 
 
-function getAvatarImage($value)
+function getLogoImage($filePath)
 {
-    $avatarPath = \Config::get('custom.free_path_upload_avatar').'/';
-    if(!empty($value) && file_exists( public_path().$avatarPath.$value)) {
-        return $avatarPath.$value;
-    } else {
-        return $avatarPath.'default.png';
+    if(!empty($filePath) && file_exists( public_path().$filePath)) {
+        return $filePath;
     }
+    return '';
 }
 
 function getHomeImage($value)

@@ -15,4 +15,7 @@ return [
         'active'   => 1,
         'inactive' => 0
     ),
+    'general_logo' => array(
+        'path_upload_logo' => '/uploads/logo',
+    ),
 ];

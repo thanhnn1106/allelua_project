@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\BaseController;
 use Illuminate\Http\Request;
 use Validator;
+use App\Generals;
 
 class GeneralController extends BaseController
 {
@@ -15,63 +16,95 @@ class GeneralController extends BaseController
      */
     public function index(Request $request)
     {
-        $settings = \App\Settings::all(array('key', 'value'));
-        $setting = array_column($settings->toArray(), 'value', 'key');
+        $generals = $this->getGenerals();
+        $arrGeneral = array();
+        if($generals !== NULL) {
+            foreach ($generals as $general) {
+                $arrGeneral[$general->language_id] = array(
+                    'title'       => $general->title,
+                    'description' => $general->description,
+                    'seo_keyword' => $general->seo_keyword,
+                    'logo'        => $general->logo,
+                );
+            }
+        }
 
+        $langs = $this->getLanguages();
         if ($request->isMethod('POST')) {
 
-            $rules =  array(
-                'setting_rate'              => 'required|numeric|min:1',
-                'setting_link_facebook'     => 'required|url',
-                'setting_link_twitter'      => 'required|url',
-                'setting_link_youtube'      => 'required|url',
-                'setting_link_zalo'         => 'required|url',
-            );
+            $rules =  $this->_setRules($request, $langs);
 
             // run the validation rules on the inputs from the form
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
-                return redirect()->route('admin_setting_socical')
+                return redirect()->route('admin_setting_general')
                             ->withErrors($validator)
                             ->withInput();
             }
 
-            $data = array(
-                array(
-                    'key'   => 'setting_rate',
-                    'value' => $request->get('setting_rate'),
-                ),
-                array(
-                    'key'   => 'setting_link_facebook',
-                    'value' => $request->get('setting_link_facebook'),
-                ),
-                array(
-                    'key'   => 'setting_link_twitter',
-                    'value' => $request->get('setting_link_twitter'),
-                ),
-                array(
-                    'key'   => 'setting_link_youtube',
-                    'value' => $request->get('setting_link_youtube'),
-                ),
-                array(
-                    'key'   => 'setting_link_zalo',
-                    'value' => $request->get('setting_link_zalo'),
-                ),
-            );
-            foreach ($data as $item) {
-                $row = \App\Settings::where('key', $item['key'])->first();
+            foreach ($langs as $lang) {
+                $title       = $request->get('title_'.$lang->id);
+                $description = $request->get('description_'.$lang->id);
+                $seoKeyword  = $request->get('seo_keyword_'.$lang->id);
+                $chk         = $request->get('check_'.$lang->id);
+
+                $data = null;
+                if ($request->hasFile('logo_'.$lang->id)) {
+                    $data = $this->_uploadLogo($request->file('logo_'.$lang->id));
+                }
+
+                $row = Generals::where('language_id', $lang->id)->first();
                 if ($row !== null) {
-                    $row->value = $item['value'];
+                    $row->title       = $title;
+                    $row->description = $description;
+                    $row->seo_keyword = $seoKeyword;
+                    if (isset($data['rand_name'])) {
+                        $this->removeFile($row->logo);
+                        $row->logo = $data['rand_name'];
+                    } else if ((int) $chk === 1 && $data === null) {
+                        $this->removeFile($row->logo);
+                        $row->logo = null;
+                    }
                     $row->save();
                 }
             }
 
             $request->session()->flash('success', trans('common.update_success'));
-            return redirect(route('admin_setting_socical'));
+            return redirect(route('admin_setting_general'));
         }
 
         return view('admin/general/form', [
-            'setting'      => $setting,
+            'general'      => null,
+            'languages'    => $langs,
+            'generals'     => $arrGeneral,
         ]);
+    }
+
+    private function _setRules($request, $langs)
+    {
+        $rules = array();
+        foreach ($langs as $lang) {
+
+            $rules['title_'.$lang->id] = 'max:255';
+            $rules['check_'.$lang->id] = 'in:1';
+            if($request->hasFile('logo_'.$lang->id)) {
+                $rules['logo_'.$lang->id]  = 'max:2048|mimes:jpeg,gif,png';
+            }
+        }
+        return $rules;
+    }
+
+    private function _uploadLogo($file)
+    {
+        $path = config('allelua.general_logo.path_upload_logo');
+        $extension = $file->getClientOriginalExtension();
+        $fileName = uniqid().'.'.$extension;
+        $file->move(public_path().$path, $fileName);
+
+        return array(
+            'rand_name' => $path . '/' . $fileName,
+            'real_name' => $path . '/' . $file->getClientOriginalName(),
+            'base_name' => $file->getClientOriginalName(),
+        );
     }
 }
