@@ -102,9 +102,9 @@ class RegisterController extends Controller
             }
             $registerResult = $this->create($request->all());
             if ($registerResult) {
-                return redirect(route('seller_register'))->with('success', 'register success');
+                return redirect(route('seller_register'))->with('success', trans('common.register.msg_register_success'));
             }
-            return redirect(route('seller_register'))->with('error', 'register failed')->withInput();
+            return redirect(route('seller_register'))->with('error', trans('common.register.msg_register_failed'))->withInput();
         }
 
         $countryList = Countries::getCountriesList();

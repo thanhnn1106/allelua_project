@@ -43,13 +43,13 @@ class ManageController extends BaseController
                 if (Hash::check($params['current_password'], $sellerInfo->password)) {
                     $updateResult = User::updateSellerPassword($id, $params['new_password']);
                     if ($updateResult) {
-                        $messagesBag = "Changed password successful.";
+                        $messagesBag = trans('common.change_password.msg_changed_password_success');
                         return redirect('seller/change_password/' . $id)->with('success', $messagesBag)->withInput();
                     }
-                    $messagesBag = "Cannot changed password at this time. Please try again later! ";
+                    $messagesBag = trans('common.change_password.msg_changed_password_failed');
                     return redirect('seller/change_password/' . $id)->with('error', $messagesBag)->withInput();
                 }
-                $messagesBag = "Current password is invalid";
+                $messagesBag = trans('common.change_password.msg_invalid_current_password');
                 return redirect('seller/change_password/' . $id)->with('error', $messagesBag)->withInput();
             }
         }
