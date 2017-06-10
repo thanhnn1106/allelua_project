@@ -30,7 +30,7 @@ class BaseController extends Controller
 
     protected function getLanguages()
     {
-        $roles = Languages::all(array('id', 'iso2', 'name'));
+        $roles = Languages::all(array('iso2', 'name'));
 
         return $roles;
     }

@@ -9,7 +9,7 @@ class BaseController extends Controller
 {
     protected function getLanguages()
     {
-        $langs = Languages::all(array('id', 'iso2', 'name'));
+        $langs = Languages::all(array('iso2', 'name'));
 
         return $langs;
     }
