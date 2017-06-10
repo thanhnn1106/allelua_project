@@ -12,8 +12,15 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
-    'update_fail' => 'Update Failed',
-    'want_delete' => 'Do you want to delete this row?'
+    'title_en'        => 'Title',
+    'description_en'  => 'Description',
+    'seo_keyword_en'  => 'SEO Keyword',
+    'logo_en'         => 'Logo',
+    'check_en'        => 'Remove logo',
+    'title_vi'        => 'Tiêu đề',
+    'description_vi'  => 'Miêu tả',
+    'seo_keyword_vi'  => 'SEO từ khóa',
+    'logo_vi'         => 'Logo',
+    'check_vi'        => 'Xóa logo',
 
 ];

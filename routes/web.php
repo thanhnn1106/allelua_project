@@ -17,6 +17,7 @@ Route::match(['get', 'post'], 'seller/change_password/{id}', 'Seller\ManageContr
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('lang', 'LangController@index')->name('home_lang');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], function () {
     Route::get('dashboard', 'Admin\DashBoardController@index')->name('admin_dashboard');

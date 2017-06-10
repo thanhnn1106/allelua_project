@@ -15,13 +15,12 @@ class CreateGeneralsTable extends Migration
     {
         Schema::create('generals', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title', 255);
-            $table->text('description');
-            $table->text('seo_keyword');
-            $table->string('logo', 255);
+            $table->string('title', 255)->nullable();
+            $table->text('description')->nullable();
+            $table->text('seo_keyword')->nullable();
+            $table->string('logo', 255)->nullable();
             $table->integer('language_id')->unsigned();
             $table->foreign('language_id')->references('id')->on('languages')->onDelete('cascade');
-            $table->tinyInteger('status')->comment('1=active, 0=inactive');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
