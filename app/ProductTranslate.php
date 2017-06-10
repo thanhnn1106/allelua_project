@@ -4,18 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Generals extends Model
+class ProductTranslate extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'generals';
+    protected $table = 'product_translate';
 
-    public function user()
+    public function product()
     {
-        return $this->hasOne('App\User');
+        return $this->belongsTo('App\Product', 'product_id');
     }
 
     public function language()

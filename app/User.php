@@ -37,17 +37,22 @@ class User extends Authenticatable
 
     public function role()
     {
-        return $this->belongsTo('App\Models\Roles');
+        return $this->belongsTo('App\Roles', 'role_id');
     }
 
     public function country()
     {
-        return $this->belongsTo('App\Models\Countries');
+        return $this->belongsTo('App\Countries', 'country_id');
     }
 
-    public function language()
+    public function personal()
     {
-        return $this->belongsTo('App\Models\Languages');
+        return $this->hasOne('App\Personal', 'user_id', 'id');
+    }
+
+    public function products()
+    {
+        return $this->hasMany('App\Product', 'user_id', 'id');
     }
 
     public static function getListFilterUser($params) {

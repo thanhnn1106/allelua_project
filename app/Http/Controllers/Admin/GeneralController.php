@@ -20,7 +20,7 @@ class GeneralController extends BaseController
         $arrGeneral = array();
         if($generals !== NULL) {
             foreach ($generals as $general) {
-                $arrGeneral[$general->language_id] = array(
+                $arrGeneral[$general->language_code] = array(
                     'title'       => $general->title,
                     'description' => $general->description,
                     'seo_keyword' => $general->seo_keyword,
@@ -43,17 +43,17 @@ class GeneralController extends BaseController
             }
 
             foreach ($langs as $lang) {
-                $title       = $request->get('title_'.$lang->id);
-                $description = $request->get('description_'.$lang->id);
-                $seoKeyword  = $request->get('seo_keyword_'.$lang->id);
-                $chk         = $request->get('check_'.$lang->id);
+                $title       = $request->get('title_'.$lang->iso2);
+                $description = $request->get('description_'.$lang->iso2);
+                $seoKeyword  = $request->get('seo_keyword_'.$lang->iso2);
+                $chk         = $request->get('check_'.$lang->iso2);
 
                 $data = null;
-                if ($request->hasFile('logo_'.$lang->id)) {
-                    $data = $this->_uploadLogo($request->file('logo_'.$lang->id));
+                if ($request->hasFile('logo_'.$lang->iso2)) {
+                    $data = $this->_uploadLogo($request->file('logo_'.$lang->iso2));
                 }
 
-                $row = Generals::where('language_id', $lang->id)->first();
+                $row = Generals::where('language_code', $lang->iso2)->first();
                 if ($row !== null) {
                     $row->title       = $title;
                     $row->description = $description;
@@ -85,10 +85,10 @@ class GeneralController extends BaseController
         $rules = array();
         foreach ($langs as $lang) {
 
-            $rules['title_'.$lang->id] = 'max:255';
-            $rules['check_'.$lang->id] = 'in:1';
-            if($request->hasFile('logo_'.$lang->id)) {
-                $rules['logo_'.$lang->id]  = 'max:2048|mimes:jpeg,gif,png';
+            $rules['title_'.$lang->iso2] = 'max:255';
+            $rules['check_'.$lang->iso2] = 'in:1';
+            if($request->hasFile('logo_'.$lang->iso2)) {
+                $rules['logo_'.$lang->iso2]  = 'max:2048|mimes:jpeg,gif,png';
             }
         }
         return $rules;

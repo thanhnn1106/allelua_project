@@ -18,7 +18,7 @@ class GeneralsTableSeeder extends Seeder
                 'description'  => 'Description cua website',
                 'seo_keyword'  => 'Gạch men,nhà cửa,...',
                 'logo'         => null,
-                'language_id'  => 1,
+                'language_code'  => 'vi',
                 'created_at'   => date('Y-m-d H:i:s'),
             ),
             array(
@@ -26,7 +26,7 @@ class GeneralsTableSeeder extends Seeder
                 'description'  => 'Description of website',
                 'seo_keyword'  => 'Tone,Prenix...',
                 'logo'         => null,
-                'language_id'  => 2,
+                'language_code'  => 'en',
                 'created_at'   => date('Y-m-d H:i:s'),
             )
         );
