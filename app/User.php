@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use DB;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'company_name', 'email', 'password',
+        'company_name', 'email', 'password','phone_number', 'country_id', 'role_id', 'status'
     ];
 
     /**
@@ -68,5 +69,16 @@ class User extends Authenticatable
     public static function query_params($query)
     {
         
+    }
+
+    public static function updateSellerPassword($id, $password)
+    {
+        $result = DB::table('users')
+            ->where('id', '=', $id)
+            ->update(array(
+                'password' => bcrypt($password),
+                'updated_at' => date('Y-m-d H:i:s'),
+        ));
+        return $result;
     }
 }

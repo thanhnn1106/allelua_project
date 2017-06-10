@@ -104,4 +104,53 @@ class LoginController extends Controller
             return redirect(route('home'));
         }
     }
+
+    public function loginSeller(Request $request)
+    {
+        $data = array('message' => '');
+
+        if ($request->isMethod('POST')) {
+
+            // validate the info, create rules for the inputs
+            $rules = array(
+                'email'    => 'required|email',
+                'password' => 'required|min:8',
+            );
+
+            // run the validation rules on the inputs from the form
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return redirect(route('seller_login'))
+                            ->withErrors($validator)
+                            ->withInput();
+            }
+
+            $loginUser = User::where('email', $request->get('email'))->first();
+            if ($loginUser === NULL) {
+                $data['message'] = trans('auth.login_fail');
+            } else {
+                if ($loginUser->status == config('allelua.user_status_value.inactive')) { 
+                    $data['message'] = trans('auth.login_fail');
+                } else {
+
+                    // create our user data for the authentication
+                    $userData = array(
+                        'email'     => $request->get('email'),
+                        'password'  => $request->get('password'),
+                        'status'    => config('allelua.user_status_value.active'),
+                        'role_id'   => $loginUser->role_id
+                    );
+                    // attempt to do the login
+                    if (Auth::attempt($userData)) {
+                        return redirect(route('seller_dashboard'));
+                    } else {        
+                        $data['message'] = trans('auth.login_fail');
+                    }
+                }
+            }
+        }
+
+        return view('auth/seller_login', $data);
+    }
+
 }
