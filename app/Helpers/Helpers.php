@@ -73,7 +73,7 @@ function format_type_product($str) {
    return $str;
 }
 
-function format_slug($str) {
+function formatSlug($str) {
     $unicode = array(
         'a'=>'á|à|ả|ã|ạ|ă|ắ|ặ|ằ|ẳ|ẵ|â|ấ|ầ|ẩ|ẫ|ậ',
         'd'=>'đ',
@@ -94,8 +94,21 @@ function format_slug($str) {
    foreach($unicode as $nonUnicode=>$uni){
         $str = preg_replace("/($uni)/i", $nonUnicode, $str);
    }
+   $str = str_replace('(', '', strtolower($str));
+   $str = str_replace(')', '', strtolower($str));
    $str = str_replace(' ', '-', strtolower($str));
    $str = str_replace(',', '-', strtolower($str));
    $str = preg_replace('/[^A-Za-z0-9\-]/', '', $str);
    return $str;
+}
+
+function splitTitle($titles, $langs)
+{
+    $langCodes = explode('|===|', $langs);
+    $titles = explode('|===|', $titles);
+    $return = array();
+    foreach ($langCodes as $index => $code) {
+        $return[$code] = isset($titles[$index]) ? $titles[$index] : null;
+    }
+    return $return;
 }

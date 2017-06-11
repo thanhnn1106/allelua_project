@@ -6,6 +6,7 @@ return [
     'delete_success'                => 'Delete success',
     'update_success'                => 'Update success',
     'create_success'                => 'Create success',
+    'num_update_success'            => 'Update success with %d record',
 
     'register' => [
         'msg_register_failed'  => 'Đăng ký thất bại. Vui lòng thử lại sau.',
@@ -16,15 +17,4 @@ return [
         'msg_changed_password_success' => 'Đổi mật khẩu thành công.',
         'msg_invalid_current_password' => 'Mật khẩu hiện tại không đúng.',
     ],
-    'payment_method' => array(
-        'type1' => 'Thanh toán khi nhận hàng',
-        'type2' => 'Thẻ tín dụng/ghi nợ',
-        'type3' => 'Thẻ ATM nội địa',
-        'type4' => 'Trả góp bằng thẻ tín dụng',
-    ),
-    'shipping_method' => array(
-        'type1' => 'Giao hàng tiết kiệm',
-        'type2' => 'Giao hàng tiêu chuẩn',
-        'type3' => 'Giao hàng hỏa tốc',
-    ),
 ];

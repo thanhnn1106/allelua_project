@@ -35,6 +35,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], func
     // Setting
     Route::match(['get', 'post'], 'general', 'Admin\GeneralController@index')->name('admin_setting_general');
     Route::match(['get', 'post'], 'setting', 'Admin\SettingController@index')->name('admin_setting_socical');
+
+    // Category
+    Route::get('category/main', 'Admin\CategoryController@index')->name('admin_category_main');
+    Route::match(['get', 'post'], 'category/edit/{id}/{parent_id}', 'Admin\CategoryController@edit')->name('admin_category_edit');
+    Route::post('category/sort', 'Admin\CategoryController@sort')->name('admin_category_sort');
+    Route::get('category/sub/{id}', 'Admin\CategoryController@sub')->name('admin_category_sub');
 });
 
 Route::get('seller_dashboard', 'Seller\DashBoardController@index')->name('seller_dashboard');

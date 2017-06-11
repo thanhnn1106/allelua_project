@@ -17,10 +17,12 @@ return [
     'seo_keyword_en'  => 'SEO Keyword',
     'logo_en'         => 'Logo',
     'check_en'        => 'Remove logo',
+    'slug_en'        => 'Slug',
     'title_vi'        => 'Tiêu đề',
     'description_vi'  => 'Miêu tả',
     'seo_keyword_vi'  => 'SEO từ khóa',
     'logo_vi'         => 'Logo',
     'check_vi'        => 'Xóa logo',
+    'slug_vi'        => 'Slug',
 
 ];

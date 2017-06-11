@@ -147,6 +147,7 @@
         <script src="{{ asset('plugins/fastclick/fastclick.js') }}"></script>
         <!-- AdminLTE App -->
         <script src="{{ asset('js/app.min.js') }}"></script>
+        <script src="{{ asset('js/common.js') }}"></script>
 
         @yield('footer_script')
     </body>
