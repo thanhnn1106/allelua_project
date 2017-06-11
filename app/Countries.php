@@ -2,6 +2,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Countries extends Model  {
 
@@ -16,5 +17,11 @@ class Countries extends Model  {
     public function user()
     {
         return $this->hasOne('App\User', 'country_id', 'id');
+    }
+
+    public static function getCountriesList()
+    {
+        $result = DB::table('countries')->select('*')->orderBy('id')->get();
+        return $result;
     }
 }

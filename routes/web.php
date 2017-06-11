@@ -12,6 +12,9 @@
 */
 
 Route::match(['get', 'post'], 'administrator/login', 'Auth\LoginController@loginAdmin')->name('admin_login');
+Route::match(['get', 'post'], 'seller/login', 'Auth\LoginController@loginSeller')->name('seller_login');
+Route::match(['get', 'post'], 'seller/change_password/{id}', 'Seller\ManageController@changePasswordSeller')->name('seller_change_password');
+
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('lang', 'LangController@index')->name('home_lang');
@@ -33,3 +36,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], func
     Route::match(['get', 'post'], 'general', 'Admin\GeneralController@index')->name('admin_setting_general');
     Route::match(['get', 'post'], 'setting', 'Admin\SettingController@index')->name('admin_setting_socical');
 });
+
+Route::get('seller_dashboard', 'Seller\DashBoardController@index')->name('seller_dashboard');
+Route::match(['get', 'post'], 'seller/register', 'Auth\RegisterController@register')->name('seller_register');
