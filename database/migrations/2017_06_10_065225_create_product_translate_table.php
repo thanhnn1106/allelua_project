@@ -16,9 +16,9 @@ class CreateProductTranslateTable extends Migration
         Schema::create('product_translate', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->unsigned();
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade')->onUpdate('cascade');
             $table->char('language_code', 2);
-            $table->foreign('language_code')->references('iso2')->on('languages')->onDelete('cascade');
+            $table->foreign('language_code')->references('iso2')->on('languages')->onDelete('cascade')->onUpdate('cascade')->onUpdate('cascade');
             $table->string('title', 255);
             $table->string('slug', 255);
             $table->string('color', 255)->nullable();

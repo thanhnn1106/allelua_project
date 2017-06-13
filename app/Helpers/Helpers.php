@@ -1,40 +1,4 @@
 <?php
-
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-function formatDateUserLogin($createdAt)
-{
-    $timestamp = strtotime($createdAt);
-    return sprintf('Member since %s. %s', date('M', $timestamp), date('Y', $timestamp));
-}
-
-function getUserStatus($status)
-{
-    $statusList = config('allelua.user_status');
-    if(isset($statusList[$status])) {
-        return $statusList[$status];
-    }
-    return null;
-}
-function getUserStatusIcon($status)
-{
-    $active = config('allelua.user_status_value.active');
-    if ((int) $status === $active) {
-        return 'label-success';
-    }
-    return 'label-warning';
-}
-function isAdmin($role)
-{
-    if ($role === ROLE_ADMIN) {
-        return TRUE;
-    }
-    return FALSE;
-}
-
 function getLogoImage($filePath)
 {
     if(!empty($filePath) && file_exists( public_path().$filePath)) {
@@ -102,13 +66,25 @@ function formatSlug($str) {
    return $str;
 }
 
-function splitTitle($titles, $langs)
+function formatNumber($number)
 {
-    $langCodes = explode('|===|', $langs);
-    $titles = explode('|===|', $titles);
-    $return = array();
-    foreach ($langCodes as $index => $code) {
-        $return[$code] = isset($titles[$index]) ? $titles[$index] : null;
+    return number_format($number);
+}
+
+function getPaymentMethod($payment)
+{
+    $lists = config('product.payment_method');
+    if(isset($lists[$payment])) {
+        return trans($lists[$payment]);
     }
-    return $return;
+    return null;
+}
+
+function getShippingMethod($shipping)
+{
+    $lists = config('product.shipping_method');
+    if(isset($lists[$shipping])) {
+        return trans($lists[$shipping]);
+    }
+    return null;
 }

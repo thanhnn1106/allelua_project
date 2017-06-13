@@ -16,7 +16,7 @@ class CreatePersonalTable extends Migration
         Schema::create('personal', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('tax_code')->unique();
             $table->string('license_business', 255);
             $table->timestamp('created_at')->useCurrent();

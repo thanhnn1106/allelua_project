@@ -1,15 +1,23 @@
 <?php
 return [
     'payment_method' => array(
-        1 => 'payment_method.type1',
-        2 => 'payment_method.type2',
-        3 => 'payment_method.type3',
-        4 => 'payment_method.type4',
+        1 => 'product.payment_method.type1',
+        2 => 'product.payment_method.type2',
+        3 => 'product.payment_method.type3',
+        4 => 'product.payment_method.type4',
     ),
     'shipping_method' => array(
-        1 => 'shipping_method.type1',
-        2 => 'shipping_method.type2',
-        3 => 'shipping_method.type3',
+        1 => 'product.shipping_method.type1',
+        2 => 'product.shipping_method.type2',
+        3 => 'product.shipping_method.type3',
+    ),
+    'product_status' => array(
+        1 => 'Active',
+        0 => 'Inactive',
+    ),
+    'product_status_value' => array(
+        'active'   => 1,
+        'inactive' => 0
     ),
 
     'price_1' => array(

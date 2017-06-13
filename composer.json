@@ -27,7 +27,9 @@
             "Tests\\": "tests/"
         },
         "files": [
-            "app/Helpers/Helpers.php"
+            "app/Helpers/Helpers.php",
+            "app/Helpers/Admin.php",
+            "app/Helpers/Seller.php"
         ]
     },
     "scripts": {

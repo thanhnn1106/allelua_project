@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\BaseController;
 use Illuminate\Http\Request;
 use Validator;
-use App\Categories;
-use App\CategoriesTranslate;
+use App\Product;
 
-class CategoryController extends BaseController
+class ProductController extends BaseController
 {
     /**
      * Setting config as: rate and social
@@ -17,17 +16,9 @@ class CategoryController extends BaseController
      */
     public function index(Request $request)
     {
-        $totalSubs = Categories::getTotalSub();
-        $totalSubs = json_decode(json_encode($totalSubs), true);
-        if ($totalSubs !== NULL) {
-            $totalSubs = array_column($totalSubs, 'total', 'id');
-        }
-
-        return view('admin/category/list', [
-            'langs'           => $this->getLanguages(),
-            'categories'      => Categories::getList(),
-            'totalSubs'       => $totalSubs,
-            'parent_id'       => 0,
+        $products = Product::getList();
+        return view('admin/product/list', [
+            'products'      => $products,
         ]);
     }
 
@@ -93,38 +84,22 @@ class CategoryController extends BaseController
     }
 
     /**
-     * Setting config as: rate and social
+     * Delete user with soft delete
+     * 
      * @param Request $request
+     * @param Integer $id user id
      * @return type
      */
-    public function sub(Request $request, $id)
-    {
-        return view('admin/category/list_sub', [
-            'parent_id'       => $id,
-            'langs'           => $this->getLanguages(),
-            'categories'      => Categories::getListSub(array('parent_id' => $id)),
-        ]);
-    }
+    public function delete(Request $request, $id) {
+        $product = Product::find($id);
+        if ($product == null) {
+            $request->session()->flash('error', trans('common.data_not_found'));
+            return redirect(route('admin_product_index'));
+        }
 
-    public function sort(Request $request)
-    {
-        $ids = $request->get('ids');
-        $sorts = $request->get('sort');
-        $parentId = $request->get('parent_id');
-        if (is_array($ids)) {
-            foreach ($ids as $key => $id) {
-                $row = Categories::find($id);
-                if ($row !== NULL) {
-                    $sort = $sorts[$key];
-                    $row->sort = $sort;
-                    $row->save();
-                }
-            }
-            $request->session()->flash('success', trans('common.update_success'));
-        }
-        if (empty($parentId)) {
-            return redirect(route('admin_category_main'));
-        }
-        return redirect(route('admin_category_sub', array('id' => $parentId)));
+        $product->delete();
+        $request->session()->flash('success', trans('common.delete_success'));
+        
+        return redirect(route('admin_product_index'));
     }
 }

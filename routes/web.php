@@ -41,6 +41,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], func
     Route::match(['get', 'post'], 'category/edit/{id}/{parent_id}', 'Admin\CategoryController@edit')->name('admin_category_edit');
     Route::post('category/sort', 'Admin\CategoryController@sort')->name('admin_category_sort');
     Route::get('category/sub/{id}', 'Admin\CategoryController@sub')->name('admin_category_sub');
+
+    // Product
+    Route::get('product', 'Admin\ProductController@index')->name('admin_product_index');
+    Route::get('product/edit/{id}', 'Admin\ProductController@edit')->name('admin_product_edit');
+    Route::get('product/delete/{id}', 'Admin\ProductController@delete')->name('admin_product_delete');
 });
 
 Route::get('seller_dashboard', 'Seller\DashBoardController@index')->name('seller_dashboard');

@@ -16,9 +16,9 @@ class CreatePersonalTranslateTable extends Migration
         Schema::create('personal_translate', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('personal_id')->unsigned();
-            $table->foreign('personal_id')->references('id')->on('personal')->onDelete('cascade');
+            $table->foreign('personal_id')->references('id')->on('personal')->onDelete('cascade')->onUpdate('cascade');
             $table->char('language_code', 2);
-            $table->foreign('language_code')->references('iso2')->on('languages')->onDelete('cascade');
+            $table->foreign('language_code')->references('iso2')->on('languages')->onDelete('cascade')->onUpdate('cascade');
             $table->text('introduce_company')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

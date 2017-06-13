@@ -25,5 +25,8 @@ return [
     'logo_vi'         => 'Logo',
     'check_vi'        => 'Xóa logo',
     'slug_vi'        => 'Slug',
+    'category' => array(
+        'is_home'        => 'Display home',
+    )
 
 ];

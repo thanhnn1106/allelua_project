@@ -21,16 +21,6 @@ class MainmenuComposer
     public function menuAdmin()
     {
         $menus = array(
-            'categories' => array(
-                'title'      => 'Categories',
-                'icon_class' => 'fa fa-dashboard',
-                'childs'     => array(
-                    'category' => array(
-                        'route' => 'admin_category_main',
-                        'name'  => 'Category',
-                    )
-                ),
-            ),
             'manage' => array(
                 'title'      => 'Manage',
                 'icon_class' => 'fa fa-dashboard',
@@ -42,6 +32,20 @@ class MainmenuComposer
                     'user' => array(
                         'route' => 'admin_user',
                         'name'  => 'Users',
+                    ),
+                ),
+            ),
+            'categories' => array(
+                'title'      => 'Categories',
+                'icon_class' => 'fa fa-dashboard',
+                'childs'     => array(
+                    'category' => array(
+                        'route' => 'admin_category_main',
+                        'name'  => 'Category',
+                    ),
+                    'product' => array(
+                        'route' => 'admin_product_index',
+                        'name'  => 'Product',
                     ),
                 ),
             ),

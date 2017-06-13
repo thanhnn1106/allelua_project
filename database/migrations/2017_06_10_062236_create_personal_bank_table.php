@@ -16,7 +16,7 @@ class CreatePersonalBankTable extends Migration
         Schema::create('personal_bank', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('personal_id')->unsigned();
-            $table->foreign('personal_id')->references('id')->on('personal')->onDelete('cascade');
+            $table->foreign('personal_id')->references('id')->on('personal')->onDelete('cascade')->onUpdate('cascade');
             $table->string('account_bank', 255);
             $table->string('name_bank', 255);
             $table->string('address_bank', 255);
