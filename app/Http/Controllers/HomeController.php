@@ -9,7 +9,7 @@ class HomeController extends BaseController
     public function index(Request $request)
     {
         $data = array(
-            'langs' => $this->getLanguages()
+            'langs' => \App\Languages::getResults()
         );
 
         return view('home', $data);

@@ -22,4 +22,10 @@ class Generals extends Model
     {
         return $this->belongsTo('App\Languages', 'language_code');
     }
+
+    public static function getResults()
+    {
+        $generals = Generals::all();
+        return $generals;
+    }
 }

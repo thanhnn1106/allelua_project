@@ -44,8 +44,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], func
 
     // Product
     Route::get('product', 'Admin\ProductController@index')->name('admin_product_index');
+    Route::get('product/add', 'Admin\ProductController@add')->name('admin_product_add');
     Route::get('product/edit/{id}', 'Admin\ProductController@edit')->name('admin_product_edit');
     Route::get('product/delete/{id}', 'Admin\ProductController@delete')->name('admin_product_delete');
+    Route::post('product/save', 'Admin\ProductController@save')->name('ajax_admin_product_save');
 });
 
 Route::get('seller_dashboard', 'Seller\DashBoardController@index')->name('seller_dashboard');

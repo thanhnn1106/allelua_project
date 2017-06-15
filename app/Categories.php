@@ -45,6 +45,18 @@ class Categories extends Model
         return $result;
     }
 
+    public static function getRowByLang($lang, $isParent = null) {
+        $query = \DB::table('categories AS t1')
+                ->select('t1.*', 't2.title')
+                ->join('categories_translate AS t2', 't2.category_id', '=', 't1.id')
+                ->where('t2.language_code', $lang)
+                ->where('t1.parent_id', $isParent)
+                ->orderBy('t1.sort', 'ASC');
+
+        $result = $query->get();
+        return $result;
+    }
+
     public static function getListSub($params = array()) {
         $query = \DB::table('categories AS t1')
                 ->select('t1.id', 't1.sort', 't1.created_at', \DB::raw('GROUP_CONCAT(t2.title separator "|===|") as titles'), \DB::raw('GROUP_CONCAT(t2.language_code separator "|===|") as langs'))

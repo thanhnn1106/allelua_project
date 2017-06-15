@@ -12,6 +12,9 @@
             <div class="col-xs-12">
                 @include('notifications')
                 <div class="box">
+                    <div class="box-header with-border">
+                        <a href="{{ route('admin_product_add') }}" class="btn btn-default btn-sm">Add new</a>
+                    </div>
                     <div class="box-body">
                         <div class="dataTables_wrapper form-inline dt-bootstrap">
                             <div class="row">
