@@ -1,17 +1,28 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
-class HomeController extends BaseController
+class HomeController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        $data = array(
-            'langs' => $this->getLanguages()
-        );
+        $this->middleware('auth');
+    }
 
-        return view('home', $data);
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('home');
     }
 }

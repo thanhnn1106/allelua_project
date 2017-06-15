@@ -50,3 +50,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], func
 
 Route::get('seller_dashboard', 'Seller\DashBoardController@index')->name('seller_dashboard');
 Route::match(['get', 'post'], 'seller/register', 'Auth\RegisterController@register')->name('seller_register');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
