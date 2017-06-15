@@ -14,6 +14,12 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
+        $data = array(
+            'langs' => \App\Languages::getResults()
+        );
+
+        return view('home', $data);
     }
 
     /**

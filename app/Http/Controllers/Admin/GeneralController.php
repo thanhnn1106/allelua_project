@@ -16,7 +16,8 @@ class GeneralController extends BaseController
      */
     public function index(Request $request)
     {
-        $generals = $this->getGenerals();
+        $generals = Generals::getResults();
+
         $arrGeneral = array();
         if($generals !== NULL) {
             foreach ($generals as $general) {
@@ -29,7 +30,7 @@ class GeneralController extends BaseController
             }
         }
 
-        $langs = $this->getLanguages();
+        $langs = \App\Languages::getResults();
         if ($request->isMethod('POST')) {
 
             $rules =  $this->_setRules($request, $langs);

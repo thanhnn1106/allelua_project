@@ -7,6 +7,9 @@
         </h1>
     </section>
 
+    <?php 
+        $const = config('allelua.user_status.value');
+    ?>
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
@@ -84,10 +87,10 @@
                             </div>
 
                             <div class="form-group @if ($errors->has('status')) has-error @endif">
-                                <input type="radio" name="status" id="status_1" value="{{ config('allelua.user_status_value.active') }}" @if (old('status', isset($user->status) ? $user->status : '') == 1) checked="checked" @endif />
+                                <input type="radio" name="status" id="status_1" value="{{ $const['active'] }}" @if (old('status', isset($user->status) ? $user->status : '') == 1) checked="checked" @endif />
                                 <label for="status_1">Active</label>
 
-                                <input type="radio" name="status" id="status_0" value="{{ config('allelua.user_status_value.inactive') }}" @if (old('status', isset($user->status) ? $user->status : '') != 1) checked="checked" @endif />
+                                <input type="radio" name="status" id="status_0" value="{{ $const['inactive'] }}" @if (old('status', isset($user->status) ? $user->status : '') != 1) checked="checked" @endif />
                                 <label for="status_0">Inactive</label>
                                 @if ($errors->has('type_available'))
                                 <p class="help-block">{{ $errors->first('type_available') }}</p>

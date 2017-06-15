@@ -65,11 +65,12 @@ class LoginController extends Controller
                             ->withInput();
             }
 
+            $const = config('allelua.user_status.value');
             $loginUser = User::where('email', $request->get('email'))->first();
             if ($loginUser === NULL) {
                 $data['message'] = trans('auth.login_fail');
             } else {
-                if ($loginUser->status == config('allelua.user_status_value.inactive')) { 
+                if ($loginUser->status == $const['inactive']) { 
                     $data['message'] = trans('auth.login_fail');
                 } else {
 
@@ -77,7 +78,7 @@ class LoginController extends Controller
                     $userData = array(
                         'email'     => $request->get('email'),
                         'password'  => $request->get('password'),
-                        'status'    => config('allelua.user_status_value.active'),
+                        'status'    => $const['active'],
                         'role_id'   => $loginUser->role_id
                     );
                     // attempt to do the login
@@ -125,11 +126,12 @@ class LoginController extends Controller
                             ->withInput();
             }
 
+            $const = config('allelua.user_status.value');
             $loginUser = User::where('email', $request->get('email'))->first();
             if ($loginUser === NULL) {
                 $data['message'] = trans('auth.login_fail');
             } else {
-                if ($loginUser->status == config('allelua.user_status_value.inactive')) { 
+                if ($loginUser->status == $const['inactive']) { 
                     $data['message'] = trans('auth.login_fail');
                 } else {
 
@@ -137,7 +139,7 @@ class LoginController extends Controller
                     $userData = array(
                         'email'     => $request->get('email'),
                         'password'  => $request->get('password'),
-                        'status'    => config('allelua.user_status_value.active'),
+                        'status'    => $const['active'],
                         'role_id'   => $loginUser->role_id
                     );
                     // attempt to do the login

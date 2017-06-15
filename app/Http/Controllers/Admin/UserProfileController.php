@@ -56,7 +56,7 @@ class UserProfileController extends BaseController
 
         return view('admin/profile/form', [
             'user'      => $user,
-            'countries' => $this->getCoutries(),
+            'countries' => \App\Countries::getResults(),
         ]);
     }
 }

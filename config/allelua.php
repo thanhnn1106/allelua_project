@@ -8,13 +8,16 @@ return [
         'seller'        => 2,
     ),
     'user_status' => array(
-        1 => 'Active',
-        0 => 'Inactive',
+        'label' => array(
+            1 => 'Active',
+            0 => 'Inactive',
+        ),
+        'value' => array(
+            'active'   => 1,
+            'inactive' => 0
+        ),
     ),
-    'user_status_value' => array(
-        'active'   => 1,
-        'inactive' => 0
-    ),
+
     'general_logo' => array(
         'path_upload_logo' => '/uploads/logo',
     ),

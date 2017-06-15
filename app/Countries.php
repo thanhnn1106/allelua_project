@@ -24,4 +24,10 @@ class Countries extends Model  {
         $result = DB::table('countries')->select('*')->orderBy('id')->get();
         return $result;
     }
+
+    public static function getResults()
+    {
+        $countries = Countries::all(array('id', 'name'));
+        return $countries;
+    }
 }

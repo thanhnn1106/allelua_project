@@ -1,23 +1,40 @@
 <?php
 return [
+    'product_status' => array(
+        'label' => array(
+            0 => 'product_status.draft',
+            1 => 'product_status.publish',
+        ),
+        'value' => array(
+            'draft'   => 0,
+            'publish' => 1,
+        ),
+    ),
     'payment_method' => array(
-        1 => 'product.payment_method.type1',
-        2 => 'product.payment_method.type2',
-        3 => 'product.payment_method.type3',
-        4 => 'product.payment_method.type4',
+        'label' => array(
+            1 => 'product.payment_method.type1',
+            2 => 'product.payment_method.type2',
+            3 => 'product.payment_method.type3',
+            4 => 'product.payment_method.type4',
+        ),
+        'value' => array(
+            'value1' => 1,
+            'value2' => 2,
+            'value3' => 3,
+            'value4' => 4,
+        ),
     ),
     'shipping_method' => array(
-        1 => 'product.shipping_method.type1',
-        2 => 'product.shipping_method.type2',
-        3 => 'product.shipping_method.type3',
-    ),
-    'product_status' => array(
-        1 => 'Active',
-        0 => 'Inactive',
-    ),
-    'product_status_value' => array(
-        'active'   => 1,
-        'inactive' => 0
+        'label' => array(
+            1 => 'product.shipping_method.type1',
+            2 => 'product.shipping_method.type2',
+            3 => 'product.shipping_method.type3',
+        ),
+        'value' => array(
+            'value1' => 1,
+            'value2' => 2,
+            'value3' => 3,
+        ),
     ),
 
     'price_1' => array(

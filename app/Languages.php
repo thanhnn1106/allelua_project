@@ -27,4 +27,11 @@ class Languages extends Model  {
     {
         return $this->hasMany('App\ProductTranslate', 'language_code', 'iso2');
     }
+
+    public static function getResults()
+    {
+        $results = Languages::all(array('iso2', 'name'));
+
+        return $results;
+    }
 }

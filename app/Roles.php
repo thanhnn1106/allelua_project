@@ -17,4 +17,11 @@ class Roles extends Model  {
     {
         return $this->hasMany('App\User', 'role_id', 'id');
     }
+
+    public static function getRoles()
+    {
+        $roles = Roles::where('id', '!=', 1)->get(array('id', 'role'));
+
+        return $roles;
+    }
 }

@@ -24,7 +24,7 @@ class CategoryController extends BaseController
         }
 
         return view('admin/category/list', [
-            'langs'           => $this->getLanguages(),
+            'langs'           => \App\Languages::getResults(),
             'categories'      => Categories::getList(),
             'totalSubs'       => $totalSubs,
             'parent_id'       => 0,
@@ -41,7 +41,7 @@ class CategoryController extends BaseController
         if ($rows === NULL) {
             $request->session()->flash('error', trans('common.data_not_found'));
         }
-        $langs = $this->getLanguages();
+        $langs = \App\Languages::getResults();
 
         if ($request->isMethod('POST')) {
 
@@ -101,7 +101,7 @@ class CategoryController extends BaseController
     {
         return view('admin/category/list_sub', [
             'parent_id'       => $id,
-            'langs'           => $this->getLanguages(),
+            'langs'           => \App\Languages::getResults(),
             'categories'      => Categories::getListSub(array('parent_id' => $id)),
         ]);
     }

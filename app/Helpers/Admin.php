@@ -9,7 +9,7 @@ function formatDateUserLogin($createdAt)
 
 function getUserStatus($status)
 {
-    $statusList = config('allelua.user_status');
+    $statusList = config('allelua.user_status.label');
     if(isset($statusList[$status])) {
         return $statusList[$status];
     }
@@ -17,7 +17,7 @@ function getUserStatus($status)
 }
 function getUserStatusIcon($status)
 {
-    $active = config('allelua.user_status_value.active');
+    $active = config('allelua.user_status.value.active');
     if ((int) $status === $active) {
         return 'label-success';
     }

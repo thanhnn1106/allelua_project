@@ -87,8 +87,8 @@ class UserManageController extends BaseController
         }
 
         return view('admin/user/form', [
-            'roles'       => $this->getRoles(),
-            'countries'   => $this->getCoutries(),
+            'roles'       => \App\Roles::getRoles(),
+            'countries'   => \App\Countries::getResults(),
             'action'      => route('admin_user_add'),
         ]);
     }
@@ -139,8 +139,8 @@ class UserManageController extends BaseController
 
         return view('admin/user/form', [
             'user'       => $user,
-            'roles'      => $this->getRoles(),
-            'countries'  => $this->getCoutries(),
+            'roles'      => \App\Roles::getRoles(),
+            'countries'  => \App\Countries::getResults(),
             'action'     => route('admin_user_edit', array('id' => $user->id))
         ]);
     }
@@ -188,10 +188,11 @@ class UserManageController extends BaseController
             return redirect()->route('admin_user');
         }
 
-        if ((int) $user->status === config('allelua.user_status_value.active')) {
-            $user->status = config('allelua.user_status_value.inactive');
+        $const = config('allelua.user_status.value');
+        if ((int) $user->status === $const['active']) {
+            $user->status = $const['inactive'];
         } else {
-            $user->status = config('allelua.user_status_value.active');
+            $user->status = $const['active'];
         }
         $user->save();
         $request->session()->flash('success', trans('user.change_status_success'));
@@ -201,7 +202,7 @@ class UserManageController extends BaseController
 
     private function _setRules($request, $id = null)
     {
-        $listStatus = array_keys(config('allelua.user_status'));
+        $listStatus = array_keys(config('allelua.user_status.label'));
         $email = '';
         if ($id === null) {
             $email = 'required|max:255|unique:users,email';

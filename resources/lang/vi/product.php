@@ -1,6 +1,10 @@
 <?php
 
 return [
+    'product_status' => array(
+        'draft'   => 'Nháp',
+        'publish' => 'Đăng sản phẩm',
+    ),
     'payment_method' => array(
         'type1' => 'Thanh toán khi nhận hàng',
         'type2' => 'Thẻ tín dụng/ghi nợ',
@@ -12,6 +16,7 @@ return [
         'type2' => 'Giao hàng tiêu chuẩn',
         'type3' => 'Giao hàng hỏa tốc',
     ),
+
     'gach_men' => array(
         'positon_use' => array(
             'living_room' => 'Phòng khách',
