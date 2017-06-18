@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
     /**
      * Create a new controller instance.
@@ -13,13 +13,9 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+//        $this->middleware('auth');
 
-        $data = array(
-            'langs' => \App\Languages::getResults()
-        );
-
-        return view('home', $data);
+        $this->lang = \App::getLocale();
     }
 
     /**
@@ -29,6 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $langCode = $this->lang;
+        return view('home', [
+            'langs' => \App\Languages::getResults(),
+            'generals' => \App\Generals::getResultsByLang($langCode)
+        ]);
     }
 }

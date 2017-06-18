@@ -1,3 +1,4 @@
+@extends('layout')
 @include('notifications')
 <form action="{{ route('seller_register') }}" method="post">
     <div class="form-group">
