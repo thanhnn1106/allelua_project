@@ -58,6 +58,7 @@
         </div>
         <div class="col-xs-4">
             <a href="{{ url('/seller/register') }}">Register</a>
+            <a href="{{ url('/password/reset') }}">FORGET YOUR PASSWORD?</a>
         </div>
         <!-- /.col -->
       </div>

@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class BaseController extends Controller
 {
     public function __construct() {
-        
+        $this->lang = \App::getLocale();
     }
 }

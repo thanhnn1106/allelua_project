@@ -1,3 +1,4 @@
+@extends('layout')
 @include('notifications')
 <h1>Seller change password</h1>
 <form action="{{ route('seller_change_password', array('id' => $id)) }}" method="post">
