@@ -59,7 +59,10 @@ class Handler extends ExceptionHandler
         if ($request->expectsJson()) {
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
+        if (preg_match("/^https?:\/\/{$request->getHost()}\/admin/i", $request->fullUrl())) {
+            return redirect()->guest(route('admin_login'));
+        }
 
-        return redirect()->guest(route('login'));
+        return redirect()->guest(route('seller_login'));
     }
 }

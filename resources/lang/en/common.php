@@ -8,5 +8,6 @@ return [
     'create_success'                => 'Create success',
     'num_update_success'            => 'Update success with %d record',
     'data_not_found'                => 'Data not found',
+    'error_exception_ajax'          => 'Error occurred please try again',
 ];
 

@@ -1,3 +1,10 @@
+$body = $("body");
+
+$(document).on({
+    ajaxStart: function() { $body.addClass("loading");},
+    ajaxStop: function() { $body.removeClass("loading");}
+});
+
 function putFooterBottom() {
     if ($(document).height() > $(window).height()) {
         $("body").css("position", "relative");
@@ -33,7 +40,3 @@ function formatSlug(str)
     str = str.replace(/\)/g, '');
     return str;
 }
-
-$('.show-loading').on('click', function() {
-    $('#wrapper-loading').css('display', 'block');
-})

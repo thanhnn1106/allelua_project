@@ -7,6 +7,7 @@ return [
     'update_success'                => 'Update success',
     'create_success'                => 'Create success',
     'num_update_success'            => 'Update success with %d record',
+    'error_exception_ajax'          => 'Error occurred please try again',
 
     'register' => [
         'msg_register_failed'  => 'Đăng ký thất bại. Vui lòng thử lại sau.',

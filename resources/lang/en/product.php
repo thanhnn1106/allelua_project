@@ -3,7 +3,7 @@
 return [
     'product_status' => array(
         'draft'   => 'Draft',
-        'Publish' => 'Publish',
+        'publish' => 'Publish',
     ),
     'payment_method' => array(
         'type1' => 'Thanh toán khi nhận hàng',
@@ -18,7 +18,7 @@ return [
     ),
 
     'gach_men' => array(
-        'positon_use' => array(
+        'position_use' => array(
             'living_room' => 'Phòng khách',
             'bed_room' => 'Phòng ngủ',
             'kitchen_room' => 'Phòng nhà bếp',

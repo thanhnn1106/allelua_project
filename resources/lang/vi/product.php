@@ -18,7 +18,7 @@ return [
     ),
 
     'gach_men' => array(
-        'positon_use' => array(
+        'position_use' => array(
             'living_room' => 'Phòng khách',
             'bed_room' => 'Phòng ngủ',
             'kitchen_room' => 'Phòng nhà bếp',
@@ -52,7 +52,7 @@ return [
             '60_120' => '60x120',
             '60_60' => '60x60',
             '60_80' => '60x80',
-            'orders' => 'Orders',
+            'orders' => 'KHÁC',
         )
     ),
     'thiet_bi_ve_sinh' => array(

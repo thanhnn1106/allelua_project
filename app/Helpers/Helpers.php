@@ -32,8 +32,10 @@ function format_type_product($str) {
    $str = str_replace('(', '', strtolower($str));
    $str = str_replace(')', '', strtolower($str));
    $str = str_replace(' ', '_', strtolower($str));
-   $str = str_replace(',', '_', strtolower($str));
+   $str = str_replace(',', '', strtolower($str));
    $str = preg_replace('/[^A-Za-z0-9\_]/', '', $str);
+   $str = preg_replace('/_+/', '_', $str);
+
    return $str;
 }
 

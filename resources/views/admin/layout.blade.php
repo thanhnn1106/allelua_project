@@ -114,6 +114,9 @@
             <div class="content-wrapper">
                 @yield('content')
             </div>
+
+            <div class="modal"></div>
+
             <!-- /.content-wrapper -->
             <footer class="main-footer">
               <div class="pull-right hidden-xs">

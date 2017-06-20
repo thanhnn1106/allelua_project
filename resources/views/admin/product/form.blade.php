@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-md-12">
                 @include('notifications')
-                <form role="form" action="{{ route('ajax_admin_product_save') }}" id="form-product" method="post">
+                <form role="form" action="{{ route('ajax_admin_product_save') }}" id="form-product" method="POST" enctype="multipart/form-data">
                 <div class="nav-tabs-custom">
                     <div class="box-footer">
                         {{ csrf_field() }}
@@ -29,19 +29,19 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label">Categories</label>
-                                    <select name="categories" id="categories" class="form-control border-corner">
+                                    <select name="categories" id="categories" url-cate="{{ route('ajax_product_load_cate') }}" class="form-control border-corner">
                                         <option value="">------</option>
                                         @foreach ($categories as $cate)
                                         <option value="{{ $cate->id }}"  @if (old('categories', isset($product->category_id) ? $product->category_id : '') == $cate->id) selected="selected" @endif>{{ $cate->title }}</option>
                                         @endforeach
-                                        </select>
-                                        <p class="help-block"></p>
+                                    </select>
+                                    <p class="help-block"></p>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Sub Categories</label>
-                                    <select name="sub_categories" id="sub_categories" class="form-control border-corner">
+                                    <select name="sub_categories" id="sub_categories" data-url="{{ route('ajax_product_load_style') }}" class="form-control border-corner">
                                         <option value="">------</option>
-                                    </select>    
+                                    </select>
                                     <p class="help-block"></p>
                                 </div>
                                 <div class="form-group">
@@ -52,29 +52,6 @@
                                         @endforeach
                                     </select>    
                                     <p class="help-block"></p>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Image thumb</label>
-                                    <select name="status" id="status" class="form-control border-corner">
-                                        <option value="">------</option>
-                                    </select>    
-                                    <p class="help-block"></p>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Image detail</label>
-                                    <select name="status" id="status" class="form-control border-corner">
-                                        <option value="">------</option>
-                                    </select>    
-                                    <p class="help-block"></p>
-                                </div>
-                            </div>
-
-                            <!-- right -->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">User</label>
-                                    <input type="text" class="form-control border-corner" name="user" placeholder="Input ..." value="" />
-                                      <p class="help-block"></p>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Price</label>
@@ -90,6 +67,19 @@
                                     <label class="control-label">Quantity limit</label>
                                     <input type="text" class="form-control border-corner" name="quantity_limit" placeholder="Input ..." value="" />
                                       <p class="help-block"></p>
+                                </div>
+                                <div id="load_style">
+                                    
+                                </div>
+                            </div>
+
+                            <!-- right -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Seller</label>
+                                    <input type="text" class="form-control border-corner" data-url="{{ route('ajax_load_seller') }}" name="seller" id="seller" placeholder="Input ..." value="" />
+                                    <input type="text" name="seller_id" id="seller_id" />
+                                    <p class="help-block"></p>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Payment method</label>
@@ -112,25 +102,18 @@
                                     <p class="help-block"></p>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Position use</label>
-                                    <select name="shipping_method" id="shipping_method" class="form-control border-corner">
-                                        <option value="">------</option>
-                                    </select>    
-                                    <p class="help-block"></p>
+                                    <label class="control-label">Image thumb</label>
+                                    <input type="file" accept="image/*" name="image_thumb" id="image_thumb" class="img-value" />
+                                    <p class="help-block">(Max: 2MB - *.jpg, *.jpeg, *.png, *.gif)</p>
+                                    <ul id="image_thumb_review" style="display:none;"></ul>
+                                    <p class="help-block error-msg" style="display:none;"></p>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">Size</label>
-                                    <select name="size" id="size" class="form-control border-corner">
-                                        <option value="">------</option>
-                                    </select>    
-                                    <p class="help-block"></p>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Style</label>
-                                    <select name="style" id="style" class="form-control border-corner">
-                                        <option value="">------</option>
-                                    </select>    
-                                    <p class="help-block"></p>
+                                    <label class="control-label">Image detail</label>
+                                    <input type="file" accept="image/*" name="image_detail" id="image_detail" multiple class="img-value" />
+                                    <p class="help-block">(Max: 2MB - *.jpg, *.jpeg, *.png, *.gif)</p>
+                                    <ul id="image_detail_review" style="display:none;"></ul>
+                                    <p class="help-block error-msg" style="display:none;"></p>
                                 </div>
                             </div>
                         </div>
@@ -163,13 +146,13 @@
                                             ?>
                                             <div class="form-group">
                                                 <label class="control-label">{{ trans('admin.product.'.$title) }}</label>
-                                                <input type="text" class="form-control border-corner" name="{{ $title }}" placeholder="Input ..." value="" />
+                                                <input type="text" class="form-control border-corner title-slug" lang="{{ $lang->iso2 }}" name="{{ $title }}" placeholder="Input ..." value="" />
                                                   <p class="help-block"></p>
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="control-label">{{ trans('admin.product.'.$slug) }}</label>
-                                                <p class="help-block">xxx</p>
+                                                <p class="help-block slug-{{ $lang->iso2 }}"></p>
                                             </div>
 
                                             <div class="form-group">
@@ -250,6 +233,7 @@
 @endsection
 
 @section('footer_script')
+<script src="{{ asset('js/admin/product.js') }}"></script>
 <script>
 $(function() {
     $('.title-cate').bind('keyup change', function () {
