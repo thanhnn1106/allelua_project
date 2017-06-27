@@ -17,4 +17,17 @@ class PersonalBank extends Model
     {
         return $this->belongsTo('App\Personal', 'personal_id');
     }
+
+    public static function updatePersonalBank($params)
+    {
+        $response = PersonalBank::where('personal_id', '=', $params['personal_id'])
+            ->update(array(
+                'account_bank' => $params['bank_account'],
+                'name_bank'    => $params['bank_name'],
+                'address_bank' => $params['bank_address'],
+        ));
+
+        return $response;
+    }
+
 }
