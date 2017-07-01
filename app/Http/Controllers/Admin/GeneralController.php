@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Admin\BaseController;
+use App\Http\Controllers\Admin\AdminBaseController;
 use Illuminate\Http\Request;
 use Validator;
 use App\Generals;
 
-class GeneralController extends BaseController
+class GeneralController extends AdminBaseController
 {
     /**
      * Setting config as: rate and social

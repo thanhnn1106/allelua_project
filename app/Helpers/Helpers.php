@@ -1,10 +1,27 @@
 <?php
 function getLogoImage($filePath)
 {
-    if(!empty($filePath) && file_exists( public_path().$filePath)) {
+    if(!empty($filePath) && file_exists(public_path().$filePath)) {
         return $filePath;
     }
     return '';
+}
+function getImage($fileRandPath, $fileRealPath)
+{
+    $result = array(
+        'img_src' => NULL,
+        'href'    => NULL,
+        'base_name' => NULL,
+    );
+    if(!empty($fileRandPath) && file_exists(public_path().$fileRandPath)) {
+        $result = array(
+            'img_src' => $fileRandPath,
+            'href'    => url($fileRandPath),
+            'base_name' => basename($fileRealPath),
+        );
+        return $result;
+    }
+    return $result;
 }
 
 function format_type_product($str) {
@@ -75,7 +92,7 @@ function formatNumber($number)
 
 function getPaymentMethod($payment)
 {
-    $lists = config('product.payment_method');
+    $lists = config('product.payment_method.label');
     if(isset($lists[$payment])) {
         return trans($lists[$payment]);
     }
@@ -84,7 +101,7 @@ function getPaymentMethod($payment)
 
 function getShippingMethod($shipping)
 {
-    $lists = config('product.shipping_method');
+    $lists = config('product.shipping_method.label');
     if(isset($lists[$shipping])) {
         return trans($lists[$shipping]);
     }

@@ -47,21 +47,21 @@ function splitTitle($titles, $langs)
 function getCategoryName($titles)
 {
     $titles = explode('|===|', $titles);
-    return implode('<br/>', $titles);
+    return implode('/', $titles);
 }
 
 function getProductStatus($status)
 {
-    $statusList = config('product.product_status');
+    $statusList = config('product.product_status.label');
     if(isset($statusList[$status])) {
-        return $statusList[$status];
+        return trans($statusList[$status]);
     }
     return null;
 }
 function getProductStatusIcon($status)
 {
-    $active = config('product.product_status_value.active');
-    if ((int) $status === $active) {
+    $publish = config('product.product_status.value.publish');
+    if ((int) $status === (int) $publish) {
         return 'label-success';
     }
     return 'label-warning';

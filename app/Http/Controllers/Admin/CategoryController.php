@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Admin\BaseController;
+use App\Http\Controllers\Admin\AdminBaseController;
 use Illuminate\Http\Request;
 use Validator;
 use App\Categories;
 use App\CategoriesTranslate;
 
-class CategoryController extends BaseController
+class CategoryController extends AdminBaseController
 {
     /**
      * Setting config as: rate and social

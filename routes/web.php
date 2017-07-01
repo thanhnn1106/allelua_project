@@ -19,10 +19,12 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('lang', 'LangController@index')->name('home_lang');
 
-Route::group(['prefix' => 'ajax'], function () {
+Route::group(['prefix' => 'ajax', 'middleware' => ['auth', 'auth.admin']], function () {
     Route::get('load-categories', 'Ajax\ProductController@loadCategories')->name('ajax_product_load_cate');
     Route::get('load-style', 'Ajax\ProductController@loadStyle')->name('ajax_product_load_style');
     Route::get('load-seller', 'Ajax\UserController@loadSeller')->name('ajax_load_seller');
+    Route::post('product/upload-file', 'Ajax\ProductController@upload')->name('ajax_product_upload_file');
+    Route::post('product/delete-file', 'Ajax\ProductController@deleteFile')->name('ajax_product_delete_file');
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], function () {

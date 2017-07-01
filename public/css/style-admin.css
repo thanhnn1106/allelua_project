@@ -1,10 +1,10 @@
 body.loading {
-    overflow: hidden;   
+    overflow: hidden;
 }
 
 /* Anytime the body has the loading class, our
    modal element will be visible */
-body.loading .modal {
+body.loading .modal-loading {
     display: block;
 }
 .error-msg {
@@ -16,8 +16,31 @@ body.loading .modal {
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
+.form-group.has-error label {
+    color: #333;
+}
+.form-group.has-error .help-block {
+    color: #dd4b39;
+}
+.help-block-default {
+    color: #737373;
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+.control-but {
+    margin-top: 5px;
+}
+.control-but .img-review {
+    margin: 5px 0px;
+    display: block;
+}
+.control-but .img-review img {
+    width: 60px;
+    height: 60px;
+}
 
-.modal {
+.modal-loading {
      display:    none;
     position:   fixed;
     z-index:    1000;

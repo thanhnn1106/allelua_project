@@ -21,4 +21,8 @@ return [
     'general_logo' => array(
         'path_upload_logo' => '/uploads/logo',
     ),
+    'product_image' => array(
+        'path_upload_thumb' => '/uploads/product/thumb',
+        'path_upload_detail' => '/uploads/product',
+    ),
 ];

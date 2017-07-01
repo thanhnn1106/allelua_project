@@ -16,108 +16,138 @@
         <div class="row">
             <div class="col-md-12">
                 @include('notifications')
-                <form role="form" action="{{ route('ajax_admin_product_save') }}" id="form-product" method="POST" enctype="multipart/form-data">
-                <div class="nav-tabs-custom">
+                <div class="alert alert-danger alert-block" style="display:none;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <p></p>
+                </div>
+                <form role="form" action="{{ route('ajax_admin_product_save') }}" id="form_product" method="POST" enctype="multipart/form-data">
                     <div class="box-footer">
                         {{ csrf_field() }}
-                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button type="button" id="save_product" class="btn btn-primary btn-sm">Submit</button>
                         <a href="{{ route('admin_product_index') }}" class="btn btn-default btn-sm">Back</a>
                     </div>
-                    <div class="box-body">
-                        <div class="row">
-                            <!-- left -->
-                            <div class="col-md-6">
-                                <div class="form-group">
+                    <!-- left -->
+                    <div class="col-xs-6" style="padding-left: 0px; margin-top: 5px;">
+                        <div class="box box-success">
+                            <div class="box-body">
+                                <div class="form-group form-categories">
+                                    <input type="hidden" id="hide_category_id" value="{{ $product->category_id or null }}" />
+                                    <input type="hidden" id="hide_sub_category_id" value="{{ $product->sub_category_id or null }}" />
+                                    <input type="hidden" id="hide_position_use" value="{{ $product->position_use or null }}" />
+                                    <input type="hidden" id="hide_size" value="{{ $product->size or null }}" />
+                                    <input type="hidden" id="hide_style" value="{{ $product->style or null }}" />
+                                    <input type="hidden" name="product_id" id="product_id" value="{{ $product->id or null }}" />
                                     <label class="control-label">Categories</label>
                                     <select name="categories" id="categories" url-cate="{{ route('ajax_product_load_cate') }}" class="form-control border-corner">
                                         <option value="">------</option>
                                         @foreach ($categories as $cate)
-                                        <option value="{{ $cate->id }}"  @if (old('categories', isset($product->category_id) ? $product->category_id : '') == $cate->id) selected="selected" @endif>{{ $cate->title }}</option>
+                                        <option value="{{ $cate->id }}"  @if ((isset($product->category_id) ? $product->category_id : '') == $cate->id) selected="selected" @endif>{{ $cate->title }}</option>
                                         @endforeach
                                     </select>
                                     <p class="help-block"></p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group form-sub_categories">
                                     <label class="control-label">Sub Categories</label>
                                     <select name="sub_categories" id="sub_categories" data-url="{{ route('ajax_product_load_style') }}" class="form-control border-corner">
                                         <option value="">------</option>
                                     </select>
                                     <p class="help-block"></p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group form-status">
                                     <label class="control-label">Status</label>
                                     <select name="status" id="status" class="form-control border-corner">
                                         @foreach ($listStatus as $keyStatus => $status)
-                                        <option value="{{ $keyStatus }}">{{ trans($status) }}</option>
+                                        <option value="{{ $keyStatus }}" @if ((isset($product->status) ? $product->status : '') == $keyStatus) selected="selected" @endif>{{ trans($status) }}</option>
                                         @endforeach
-                                    </select>    
+                                    </select>
                                     <p class="help-block"></p>
                                 </div>
-                                <div class="form-group">
-                                    <label class="control-label">Price</label>
-                                    <input type="text" class="form-control border-corner" name="price" placeholder="Input ..." value="" />
-                                      <p class="help-block"></p>
-                                </div>
-                                <div class="form-group">
+                                <div class="form-group form-quantity">
                                     <label class="control-label">Quantity</label>
-                                    <input type="text" class="form-control border-corner" name="quantity" placeholder="Input ..." value="" />
-                                      <p class="help-block"></p>
+                                    <input type="text" class="form-control border-corner" id="quantity" name="quantity" placeholder="Input ..." value="{{ isset($product->quantity) ? $product->quantity : '' }}" />
+                                    <p class="help-block"></p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group form-quantity_limit">
                                     <label class="control-label">Quantity limit</label>
-                                    <input type="text" class="form-control border-corner" name="quantity_limit" placeholder="Input ..." value="" />
-                                      <p class="help-block"></p>
+                                    <input type="text" class="form-control border-corner" id="quantity_limit" name="quantity_limit" placeholder="Input ..." value="{{ isset($product->quantity_limit) ? $product->quantity_limit : '' }}" />
+                                    <p class="help-block"></p>
                                 </div>
                                 <div id="load_style">
-                                    
-                                </div>
-                            </div>
 
-                            <!-- right -->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Seller</label>
-                                    <input type="text" class="form-control border-corner" data-url="{{ route('ajax_load_seller') }}" name="seller" id="seller" placeholder="Input ..." value="" />
-                                    <input type="text" name="seller_id" id="seller_id" />
-                                    <p class="help-block"></p>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Payment method</label>
-                                    <select name="payment_method" id="payment_method" class="form-control border-corner">
-                                        <option value="">------</option>
-                                        @foreach($listPaymentMethod as $keyPay => $payMethod)
-                                        <option value="{{ $keyPay }}">{{ trans($payMethod) }}</option>
-                                        @endforeach
-                                    </select>    
-                                    <p class="help-block"></p>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Shipping method</label>
-                                    <select name="shipping_method" id="shipping_method" class="form-control border-corner">
-                                        <option value="">------</option>
-                                        @foreach ($listShippingMethod as $keyShip => $shipMethod)
-                                        <option value="{{ $keyShip }}">{{ trans($shipMethod) }}</option>
-                                        @endforeach
-                                    </select>    
-                                    <p class="help-block"></p>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Image thumb</label>
-                                    <input type="file" accept="image/*" name="image_thumb" id="image_thumb" class="img-value" />
-                                    <p class="help-block">(Max: 2MB - *.jpg, *.jpeg, *.png, *.gif)</p>
-                                    <ul id="image_thumb_review" style="display:none;"></ul>
-                                    <p class="help-block error-msg" style="display:none;"></p>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">Image detail</label>
-                                    <input type="file" accept="image/*" name="image_detail" id="image_detail" multiple class="img-value" />
-                                    <p class="help-block">(Max: 2MB - *.jpg, *.jpeg, *.png, *.gif)</p>
-                                    <ul id="image_detail_review" style="display:none;"></ul>
-                                    <p class="help-block error-msg" style="display:none;"></p>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- right -->
+                    <div class="col-xs-6" style="padding-right: 0px; margin-top: 5px;">
+                        <div class="box box-success">
+                            <div class="box-body">
+                                <div class="form-group form-seller_id">
+                                    <label class="control-label">Seller</label>
+                                    <input type="text" class="form-control border-corner" data-url="{{ route('ajax_load_seller') }}" name="seller" id="seller" placeholder="Input ..." value="{{ $company_name or null }}" />
+                                    <input type="hidden" name="seller_id" id="seller_id" value="{{ isset($product->user_id) ? $product->user_id : '' }}" />
+                                    <p class="help-block"></p>
+                                </div>
+                                <div class="form-group form-price">
+                                    <label class="control-label">Price</label>
+                                    <input type="text" class="form-control border-corner" id="price" name="price" placeholder="Input ..." value="{{ isset($product->price) ? $product->price : '' }}" />
+                                    <p class="help-block"></p>
+                                </div>
+                                <div class="form-group form-payment_method">
+                                    <label class="control-label">Payment method</label>
+                                    <select name="payment_method" id="payment_method" class="form-control border-corner">
+                                        <option value="">------</option>
+                                        @foreach($listPaymentMethod as $keyPay => $payMethod)
+                                        <option value="{{ $keyPay }}" @if ((isset($product->payment_method) ? $product->payment_method : '') == $keyPay) selected="selected" @endif>{{ trans($payMethod) }}</option>
+                                        @endforeach
+                                    </select>
+                                    <p class="help-block"></p>
+                                </div>
+                                <div class="form-group form-shipping_method">
+                                    <label class="control-label">Shipping method</label>
+                                    <select name="shipping_method" id="shipping_method" class="form-control border-corner">
+                                        <option value="">------</option>
+                                        @foreach ($listShippingMethod as $keyShip => $shipMethod)
+                                        <option value="{{ $keyShip }}" @if ((isset($product->shipping_method) ? $product->shipping_method : '') == $keyShip) selected="selected" @endif>{{ trans($shipMethod) }}</option>
+                                        @endforeach
+                                    </select>
+                                    <p class="help-block"></p>
+                                </div>
+                                <div class="form-group form-upload form-image_thumb">
+                                    <label class="control-label">Image thumb</label>
+                                    <input type="file" accept="image/*" name="image_thumb" id="image_thumb" class="img-value" />
+                                    <p class="help-block-default">(Max: 2MB - *.jpg, *.jpeg, *.png, *.gif)</p>
+                                    <div class="col-sm-10 control-but">
+                                        @if(isset($product->image_rand) && isset($product->image_real))
+                                        <?php $imageThumb = getImage($product->image_rand, $product->image_real); ?>
+                                        <a href="{{ $imageThumb['href'] }}" target="_blank"><img src="{{ $imageThumb['img_src'] }}" width="60px" height="60px" /></a><br/>
+                                        @endif
+                                    </div>
+                                    <div style="clear: both"></div>
+                                    <p class="help-block"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image detail -->
+                    <div class="col-xs-12" style="padding-left: 0px; margin-top: 5px; padding-right: 0px;">
+                        <div class="box box-success">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Image detail</h3>
+                                <p class="help-block-default">(Max: 2MB - *.jpg, *.jpeg, *.png, *.gif)</p>
+                                <div class="form-group form-total_image_detail">
+                                    <p class="help-block"></p>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <input id="image_detail" name="files[]" type="file" multiple class="file-loading" accept="image/*" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end image detail -->
+
                     <ul class="nav nav-tabs">
                         @foreach ($languages as $lang)
                         <li @if($lang->iso2 === 'vi') class="active" @endif><a href="#tab_{{ $lang->iso2 }}" data-toggle="tab">{{ $lang->name }}</a></li>
@@ -127,97 +157,108 @@
                         @foreach ($languages as $lang)
                         <div class="tab-pane @if($lang->iso2 === 'vi') active @endif" id="tab_{{ $lang->iso2 }}">
                             <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="box">
+                                <?php 
+                                    $title       = 'title_'.$lang->iso2;
+                                    $slug        = 'slug_'.$lang->iso2;
+                                    $color       = 'color_'.$lang->iso2;
+                                    $brand       = 'brand_'.$lang->iso2;
+                                    $material    = 'material_'.$lang->iso2;
+                                    $infoTech    = 'info_tech_'.$lang->iso2;
+                                    $featureHighlight = 'feature_highlight_'.$lang->iso2;
+                                    $source           = 'source_'.$lang->iso2;
+                                    $guarantee        = 'guarantee_'.$lang->iso2;
+                                    $deliveryLocation = 'delivery_location_'.$lang->iso2;
+                                    $detail           = 'detail_'.$lang->iso2;
+                                    $formProduct      = 'form_product_'.$lang->iso2;
+                                ?>
+                                <!-- begin left -->
+                                <div class="col-xs-6">
+                                    <div class="box box-success">
                                         <div class="box-body">
-                                            <?php 
-                                                $title       = 'title_'.$lang->iso2;
-                                                $slug        = 'slug_'.$lang->iso2;
-                                                $color       = 'color_'.$lang->iso2;
-                                                $brand       = 'brand_'.$lang->iso2;
-                                                $material    = 'material_'.$lang->iso2;
-                                                $infoTech    = 'info_tech_'.$lang->iso2;
-                                                $featureHighlight = 'feature_highlight_'.$lang->iso2;
-                                                $source           = 'source_'.$lang->iso2;
-                                                $guarantee        = 'guarantee_'.$lang->iso2;
-                                                $deliveryLocation = 'delivery_location_'.$lang->iso2;
-                                                $detail           = 'detail_'.$lang->iso2;
-                                                $formProduct      = 'form_product_'.$lang->iso2;
-                                            ?>
-                                            <div class="form-group">
+                                            <div class="form-group form-{{ $title }}">
                                                 <label class="control-label">{{ trans('admin.product.'.$title) }}</label>
-                                                <input type="text" class="form-control border-corner title-slug" lang="{{ $lang->iso2 }}" name="{{ $title }}" placeholder="Input ..." value="" />
+                                                <input type="text" class="form-control border-corner title-slug" 
+                                                       lang="{{ $lang->iso2 }}" name="{{ $title }}" placeholder="Input ..." value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->title : '' }}" />
                                                   <p class="help-block"></p>
                                             </div>
 
                                             <div class="form-group">
                                                 <label class="control-label">{{ trans('admin.product.'.$slug) }}</label>
-                                                <p class="help-block slug-{{ $lang->iso2 }}"></p>
+                                                <p class="help-block-default slug-{{ $lang->iso2 }}">{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->slug : '' }}</p>
                                             </div>
 
-                                            <div class="form-group">
+                                            <div class="form-group form-{{ $color }}">
                                                 <label class="control-label">{{ trans('admin.product.'.$color) }}</label>
-                                                <input type="text" class="form-control border-corner" name="{{ $color }}" placeholder="Input ..." value="" />
+                                                <input type="text" class="form-control border-corner" name="{{ $color }}" placeholder="Input ..." value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->color : '' }}" />
                                                   <p class="help-block"></p>
                                             </div>
 
-                                            <div class="form-group">
+                                            <div class="form-group form-{{ $brand }}">
                                                 <label class="control-label">{{ trans('admin.product.'.$brand) }}</label>
-                                                <input type="text" class="form-control border-corner" name="{{ $brand }}" placeholder="Input ..." value="" />
+                                                <input type="text" class="form-control border-corner" name="{{ $brand }}" placeholder="Input ..." value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->brand : '' }}" />
                                                   <p class="help-block"></p>
                                             </div>
 
-                                            <div class="form-group">
+                                            <div class="form-group form-{{ $material }}">
                                                 <label class="control-label">{{ trans('admin.product.'.$material) }}</label>
-                                                <input type="text" class="form-control border-corner" name="{{ $material }}" placeholder="Input ..." value="" />
+                                                <input type="text" class="form-control border-corner" name="{{ $material }}" placeholder="Input ..." value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->material : '' }}" />
                                                   <p class="help-block"></p>
                                             </div>
 
-                                            <div class="form-group">
+                                            <div class="form-group form-{{ $infoTech }}">
                                                 <label class="control-label">{{ trans('admin.product.'.$infoTech) }}</label>
-                                                <input type="text" class="form-control border-corner" name="{{ $infoTech }}" placeholder="Input ..." value="" />
+                                                <input type="text" class="form-control border-corner" name="{{ $infoTech }}" placeholder="Input ..." value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->info_tech : '' }}" />
                                                   <p class="help-block"></p>
                                             </div>
 
-                                            <div class="form-group">
+                                            <div class="form-group form-{{ $featureHighlight }}">
                                                 <label class="control-label">{{ trans('admin.product.'.$featureHighlight) }}</label>
-                                                <input type="text" class="form-control border-corner" name="{{ $featureHighlight }}" placeholder="Input ..." value="" />
-                                                  <p class="help-block"></p>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="control-label">{{ trans('admin.product.'.$source) }}</label>
-                                                <input type="text" class="form-control border-corner" name="{{ $source }}" placeholder="Input ..." value="" />
-                                                  <p class="help-block"></p>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="control-label">{{ trans('admin.product.'.$guarantee) }}</label>
-                                                <input type="text" class="form-control border-corner" name="{{ $guarantee }}" placeholder="Input ..." value="" />
-                                                  <p class="help-block"></p>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="control-label">{{ trans('admin.product.'.$deliveryLocation) }}</label>
-                                                <input type="text" class="form-control border-corner" name="{{ $deliveryLocation }}" placeholder="Input ..." value="" />
-                                                  <p class="help-block"></p>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="control-label">{{ trans('admin.product.'.$detail) }}</label>
-                                                <input type="text" class="form-control border-corner" name="{{ $detail }}" placeholder="Input ..." value="" />
-                                                  <p class="help-block"></p>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label class="control-label">{{ trans('admin.product.'.$formProduct) }}</label>
-                                                <input type="text" class="form-control border-corner" name="{{ $formProduct }}" placeholder="Input ..." value="" />
+                                                <input type="text" class="form-control border-corner" name="{{ $featureHighlight }}" placeholder="Input ..." value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->feature_highlight : '' }}" />
                                                   <p class="help-block"></p>
                                             </div>
                                         </div>
                                         <!-- /.box-body -->
                                     </div>
                                 </div>
+                                <!-- end left -->
+
+                                <!-- begin right -->
+                                <div class="col-xs-6">
+                                    <div class="box box-success">
+                                        <div class="box-body">
+                                            <div class="form-group form-{{ $source }}">
+                                                <label class="control-label">{{ trans('admin.product.'.$source) }}</label>
+                                                <input type="text" class="form-control border-corner" name="{{ $source }}" placeholder="Input ..." value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->source : '' }}" />
+                                                  <p class="help-block"></p>
+                                            </div>
+
+                                            <div class="form-group form-{{ $guarantee }}">
+                                                <label class="control-label">{{ trans('admin.product.'.$guarantee) }}</label>
+                                                <input type="text" class="form-control border-corner" name="{{ $guarantee }}" placeholder="Input ..." value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->guarantee : '' }}" />
+                                                  <p class="help-block"></p>
+                                            </div>
+
+                                            <div class="form-group form-{{ $deliveryLocation }}">
+                                                <label class="control-label">{{ trans('admin.product.'.$deliveryLocation) }}</label>
+                                                <input type="text" class="form-control border-corner" name="{{ $deliveryLocation }}" placeholder="Input ..." value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->delivery_location : '' }}" />
+                                                  <p class="help-block"></p>
+                                            </div>
+
+                                            <div class="form-group form-{{ $detail }}">
+                                                <label class="control-label">{{ trans('admin.product.'.$detail) }}</label>
+                                                <textarea name="{{ $detail }}" class="form-control border-corner" rows="3">{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->detail : '' }}</textarea>
+                                                  <p class="help-block"></p>
+                                            </div>
+
+                                            <div class="form-group form-{{ $formProduct }}">
+                                                <label class="control-label">{{ trans('admin.product.'.$formProduct) }}</label>
+                                                <textarea name="{{ $formProduct }}" class="form-control border-corner" rows="3">{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->form_product : '' }}</textarea>
+                                                  <p class="help-block"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end right -->
                             </div>
                         </div>
                         @endforeach
@@ -229,23 +270,43 @@
             </div>
         </div>
     </section>
-</div>
+
+    <div id="content_img" style="display: none;">
+        <a href="javscript:void(0);" class="img-review"></a>
+    </div>
+
+<?php 
+    $initPreviewImage = isset($productImages['initialPreview']) ? json_encode($productImages['initialPreview']) : NULL;
+    $initPreviewConfig = isset($productImages['initialPreviewConfig']) ? json_encode($productImages['initialPreviewConfig']) : NULL;
+?>
+
 @endsection
 
 @section('footer_script')
-<script src="{{ asset('js/admin/product.js') }}"></script>
 <script>
-$(function() {
-    $('.title-cate').bind('keyup change', function () {
-       createSlugLink($(this));
-    });
-    function createSlugLink(obj) {
-        var lang = $(obj).attr('lang');
-        var str = $(obj).val();
-        var slug = formatSlug(str);
-        $(obj).closest('.box-body').find('.slug-'+lang).html(slug);
-    }
-});
+var product_ajax_upload = '{{ route('ajax_product_upload_file') }}';
+var product_ajax_delete = '{{ route('ajax_product_delete_file') }}';
+
+var initialPreviewImg = initialPreviewConfigImg = [];
+    @if( ! is_null($initPreviewImage))
+    initialPreviewImg = {!! $initPreviewImage !!};
+    @endif
+
+    @if( ! is_null($initPreviewConfig))
+    initialPreviewConfigImg = {!! $initPreviewConfig !!};
+    @endif
+
 </script>
+<!-- bootstrap multiple upload -->
+<link rel="stylesheet" href="{{ asset('/plugins/bootstrap-fileinput/css/fileinput.min.css') }}">
+<link rel="stylesheet" href="{{ asset('/plugins/bootstrap-fileinput/themes/explorer/theme.css') }}">
+<script src="{{ asset('/plugins/bootstrap-fileinput/js/plugins/piexif.min.js') }}"></script>
+<script src="{{ asset('/plugins/bootstrap-fileinput/js/plugins/sortable.min.js') }}"></script>
+<script src="{{ asset('/plugins/bootstrap-fileinput/js/plugins/purify.min.js') }}"></script>
+<script src="{{ asset('/plugins/bootstrap-fileinput/js/fileinput.min.js') }}"></script>
+<!--<script src="{{ asset('/plugins/bootstrap-fileinput/themes/fa/theme.js') }}"></script>-->
+<script src="{{ asset('/plugins/bootstrap-fileinput/js/locales/lang.js') }}"></script>
+<script src="{{ asset('/plugins/bootstrap-fileinput/themes/explorer/theme.js') }}"></script>
+<script src="{{ asset('js/admin/product.js') }}"></script>
 
 @endsection

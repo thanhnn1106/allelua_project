@@ -38,6 +38,9 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+        <script>
+            var lang = '{{ App::getLocale() }}';
+        </script>
     </head>
 
     <body class="hold-transition skin-blue sidebar-mini">
@@ -115,7 +118,7 @@
                 @yield('content')
             </div>
 
-            <div class="modal"></div>
+            <div class="modal-loading"></div>
 
             <!-- /.content-wrapper -->
             <footer class="main-footer">
@@ -136,9 +139,10 @@
         <script src="{{ asset('plugins/jQuery/jQuery-2.1.4.min.js') }}" type="text/javascript"></script>
         <script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
         <link rel="stylesheet" href="{{ asset('/plugins/jQueryUI/jquery-ui.min.css') }}">
-        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+        <script src="{{ asset('js/jquery-ui.min.js') }}" type="text/javascript"></script>
+        <!--<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>-->
         <!-- daterangepicker -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+        <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>-->
         <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
         <!-- datepicker -->
         <script src="{{ asset('plugins/datepicker/bootstrap-datepicker.js') }}"></script>

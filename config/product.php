@@ -1,5 +1,11 @@
 <?php
 return [
+    'min_image_detail' => 3,
+    'max_image_detail' => 5,
+    'file_accept_types' => 'jpeg,jpg,gif,png',
+    'cate_not_child' => array(
+        'may_cong_nghiep', 'vat_lieu_moi'
+    ),
     'product_status' => array(
         'label' => array(
             0 => 'product.product_status.draft',

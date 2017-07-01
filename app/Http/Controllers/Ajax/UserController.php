@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Ajax;
 
-use App\Http\Controllers\Admin\BaseController;
+use App\Http\Controllers\Ajax\AjaxBaseController;
 use Illuminate\Http\Request;
 use App\Categories;
 
-class UserController extends BaseController
+class UserController extends AjaxBaseController
 {
     /**
      * Setting config as: rate and social

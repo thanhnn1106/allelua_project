@@ -1,10 +1,10 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\AdminBaseController;
 use Illuminate\Http\Request;
 
-class DashBoardController extends Controller
+class DashBoardController extends AdminBaseController
 {
     public function index(Request $request)
     {

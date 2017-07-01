@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Http\Controllers\Admin\BaseController;
+use App\Http\Controllers\Admin\AdminBaseController;
 use Validator;
 use Illuminate\Support\Facades\Auth;
 
-class UserManageController extends BaseController
+class UserManageController extends AdminBaseController
 {
     /**
      * Create a new controller instance.
