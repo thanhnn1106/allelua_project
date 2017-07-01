@@ -36,6 +36,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], func
     Route::get('user/delete/{id}', 'Admin\UserManageController@delete')->name('admin_user_delete');
     Route::match(['get', 'post'], 'user/add', 'Admin\UserManageController@add')->name('admin_user_add');
     Route::match(['get', 'post'], 'user/edit/{id}', 'Admin\UserManageController@edit')->name('admin_user_edit');
+    Route::get('user/personal_info', 'Admin\UserPersonalController@editPersonalInfo')->name('admin_user_personal_edit');
+    Route::post('user/personal_info', 'Admin\UserPersonalController@editPersonalInfo')->name('admin_user_personal_update');
 
     // Profile
     Route::match(['get', 'post'], 'profile', 'Admin\UserProfileController@edit')->name('admin_profile');

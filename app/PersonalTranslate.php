@@ -17,4 +17,25 @@ class PersonalTranslate extends Model
     {
         return $this->belongsTo('App\Personal', 'personal_id');
     }
+
+    public static function updatePersonalTranslate($params)
+    {
+        $response = false;
+        $response = PersonalTranslate::where('personal_id', '=', $params['personal_id'])
+            ->where('language_code', '=', 'vi')
+            ->update(array(
+                'introduce_company' => $params['introduce_company_vi'],
+        ));
+
+        if ($response) {
+            $response = PersonalTranslate::where('personal_id', '=', $params['personal_id'])
+                ->where('language_code', '=', 'en')
+                ->update(array(
+                    'introduce_company' => $params['introduce_company_en'],
+            ));
+        }
+
+        return $response;
+    }
+
 }

@@ -27,4 +27,20 @@ class Personal extends Model
     {
         return $this->hasMany('App\PersonalBank', 'personal_id', 'id');
     }
+
+    public static function updatePersonal($params)
+    {
+        $response = false;
+        $response = Personal::where('user_id', '=', $params['user_id'])
+            ->update(array(
+                'tax_code'         => $params['tax_code'],
+                'license_business' => $params['license_business'],
+        ));
+
+        if ($response) {
+            $response = \App\Personal::where('user_id', '=', $params['user_id'])->first();
+        }
+
+        return $response;
+    }
 }

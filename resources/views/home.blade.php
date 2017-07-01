@@ -8,7 +8,16 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    @foreach ($categories as $parent)
+                        <ul>{{ $parent['title'] }}</ul>
+                        @if (isset($parent['childs']))
+                            <ul>
+                                @foreach ($parent['childs'] as $child)
+                                    <li>{{ $child['title'] }}</li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    @endforeach
                 </div>
             </div>
         </div>
