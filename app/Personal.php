@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Personal extends Model
 {
@@ -43,4 +44,28 @@ class Personal extends Model
 
         return $response;
     }
+
+    public static function addPersonal($params)
+    {
+        $response = false;
+        $response = DB::table('personal')->insert([
+            'user_id'          => $params['seller_id'],
+            'tax_code'         => $params['tax_code'],
+            'license_business' => $params['license_business'],
+        ]);
+
+        if ($response) {
+            $response = \App\Personal::where('user_id', '=', $params['seller_id'])->first();
+        }
+
+        return $response;
+    }
+    public static function getUserIdList()
+    {
+        $response = DB::table('personal')->select('user_id')->get()->toArray();
+
+        return $response;
+    }
+
 }
+

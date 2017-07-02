@@ -1,0 +1,9 @@
+diff a/routes/web.php b/routes/web.php	(rejected hunks)
+@@ -23,6 +23,7 @@ Route::group(['prefix' => 'ajax'], function () {
+     Route::get('load-categories', 'Ajax\ProductController@loadCategories')->name('ajax_product_load_cate');
+     Route::get('load-style', 'Ajax\ProductController@loadStyle')->name('ajax_product_load_style');
+     Route::get('load-seller', 'Ajax\UserController@loadSeller')->name('ajax_load_seller');
++    Route::get('load-seller-personal', 'Ajax\UserController@loadSellerPersonal')->name('ajax_load_seller_personal');
+ });
+ 
+ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], function () {

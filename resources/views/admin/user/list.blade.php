@@ -58,7 +58,9 @@
                                             <td>
                                                 @if(!isAdmin($user->role))
                                                 <a href="{{ route('admin_user_edit', ['id' => $user->id]) }}" class="btn btn-default btn-xs">Edit</a>
-                                                <a href="{{ route('admin_user_personal_edit', ['id' => $user->id]) }}" class="btn btn-default btn-xs">Personal info</a>
+                                                    @if (!empty($user->personal_id))
+                                                        <a href="{{ route('admin_user_personal_edit', ['id' => $user->id]) }}" class="btn btn-default btn-xs">Personal info</a>
+                                                    @endif
                                                 <a href="javascript:void(0);" onclick="fncDelete('{{ route('admin_user_delete', array('id' => $user->id)) }}');" class="btn btn-danger btn-xs">Delete</a>
                                                 @endif
                                             </td>

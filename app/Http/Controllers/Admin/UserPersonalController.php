@@ -13,6 +13,94 @@ use DB;
 class UserPersonalController extends BaseController
 {
     /**
+     * index
+     * @param Request $request
+     * @return $userPersonalInfoList
+     */
+    public function index(Request $request)
+    {
+        $userPersonalInfoList = User::getUserPersonalInfo();
+        $data = [
+            'userPersonalInfoList' => $userPersonalInfoList,
+            'langs'                => \App\Languages::getResults(),
+        ];
+
+        return view('admin/user_personal_info/list', $data);
+    }
+
+    /**
+     * index
+     * @param Request $request
+     * @return $mix
+     */
+    public function add(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $params = $request->all();
+            $sellerIdArr = Personal::getUserIdList();
+            $personalUserIdArray = array();
+            foreach ($sellerIdArr as $item) {
+                array_push($personalUserIdArray, $item->user_id);
+            }
+            $rules =  array(
+                'seller'               => 'required|exists:users,company_name',
+                'seller_id'            => 'required|not_in:' . implode(',', $personalUserIdArray),
+                'tax_code'             => 'required|max:191',
+                'license_business'     => 'required|max:255',
+                'bank_account'         => 'required|max:255',
+                'bank_name'            => 'required|max:255',
+                'bank_address'         => 'required|max:255',
+                'introduce_company_en' => 'required',
+                'introduce_company_vi' => 'required',
+            );
+            // run the validation rules on the inputs from the form
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return redirect()->route('admin_user_personal_add')
+                            ->withErrors($validator)
+                            ->withInput();
+            }
+            DB::beginTransaction();
+
+            try {
+
+                $addPersonal          = \App\Personal::addPersonal($params);
+                if ($addPersonal == false) {
+                    return redirect()->route('admin_user_personal_add')
+                            ->with('error', trans('common.create_failed'))
+                            ->withInput();
+                }
+
+                $params['personal_id'] = $addPersonal->id;
+                $addBankInfo          = \App\PersonalBank::addPersonalBank($params);
+                $addPersonalTranslate = \App\PersonalTranslate::addPersonalTranslate($params);
+                if ($addBankInfo && $addPersonalTranslate) {
+
+                    DB::commit();
+                    return redirect()->route('admin_user_personal_list')
+                        ->with('success', trans('common.create_success'));
+                }
+                return redirect()->route('admin_user_personal_add')
+                            ->with('error', trans('common.create_failed'))
+                            ->withInput();
+
+            } catch (Exception $ex) {
+                DB::rollback();
+                return redirect()->route('admin_user_personal_add')
+                            ->with('error', trans('common.create_failed'))
+                            ->withInput();
+            }
+        }
+
+        $returnData = array(
+            'languages'         => \App\Languages::getResults(),
+            'title'             => 'add',
+        );
+
+        return view('admin/user_personal_info/form_add', $returnData);
+    }
+
+    /**
      * Edit user personal info
      * @param Request $request
      * @param Integer $id user id
