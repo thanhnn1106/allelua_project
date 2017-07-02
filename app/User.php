@@ -58,9 +58,10 @@ class User extends Authenticatable
 
     public static function getListFilterUser($params) {
         $query = \DB::table('users AS t1')
-                ->select('t1.*', 't2.role', 't3.name as country_name')
+                ->select('t1.*', 't2.role', 't3.name as country_name', 't4.id as personal_id')
                 ->leftJoin('roles AS t2', 't2.id', '=', 't1.role_id')
                 ->leftJoin('countries AS t3', 't3.id', '=', 't1.country_id')
+                ->leftJoin('personal as t4', 't1.id', '=', 't4.user_id')
                 ->whereNull('t1.deleted_at');
       
         self::query_params($query, $params);
@@ -86,4 +87,18 @@ class User extends Authenticatable
         ));
         return $result;
     }
+
+    public static function getUserPersonalInfo()
+    {
+        $result = DB::table('users as u')
+            ->select('u.id as user_id', 'u.company_name', 'p.id', 'p.tax_code', 'p.license_business', 'pb.account_bank', 'pb.name_bank', 'pb.address_bank', \DB::raw('GROUP_CONCAT(pt.introduce_company separator "|===|") as introduce_company'), \DB::raw('GROUP_CONCAT(pt.language_code separator "|===|") as langs'))
+            ->join('personal as p', 'u.id', '=', 'p.user_id')
+            ->join('personal_bank as pb', 'p.id', '=', 'pb.personal_id')
+            ->join('personal_translate as pt', 'p.id', '=', 'pt.personal_id')
+            ->where('u.role_id', '=', 2)
+            ->groupby('u.id')
+            ->get();
+        return $result;
+    }
+
 }

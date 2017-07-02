@@ -34,6 +34,10 @@ class MainmenuComposer
                         'route' => 'admin_user',
                         'name'  => 'Users',
                     ),
+                    'personal_info' => array(
+                        'route' => 'admin_user_personal_list',
+                        'name'  => 'Seller personal info',
+                    ),
                 ),
             ),
             'categories' => array(

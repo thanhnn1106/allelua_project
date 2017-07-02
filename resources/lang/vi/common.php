@@ -7,6 +7,7 @@ return [
     'update_success'                => 'Update success',
     'update_failed'                 => 'Update failed',
     'create_success'                => 'Create success',
+    'create_failed'                 => 'Create failed',
     'save_success'                  => 'Save success',
     'num_update_success'            => 'Update success with %d record',
     'error_exception_ajax'          => 'Error occurred please try again',
