@@ -21,7 +21,7 @@
     </head>
     <body>
 
-        <div class="page clearfix page-home">
+        <div class="page clearfix {{ $cssClass or null }}">
             <!--BEGIN HEADER-->
             <header class="header" id="header" >
                 @include('front.header')

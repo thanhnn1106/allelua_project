@@ -5,7 +5,7 @@ namespace App\Http\ViewComposers;
 use Illuminate\View\View;
 use Auth, Request;
 
-class MainmenuComposer
+class SellermenuComposer
 {
     /**
      * Bind data to the view.
@@ -16,6 +16,7 @@ class MainmenuComposer
     public function compose(View $view)
     {
         $view->with('main_menu', $this->menuAdmin()->render());
+        $view->with('main_menu_xxx', 'This is xxxx');
     }
 
     public function menuAdmin()

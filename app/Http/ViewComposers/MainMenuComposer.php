@@ -15,6 +15,7 @@ class MainmenuComposer
      */
     public function compose(View $view)
     {
+        $view->with('xxxxx', 'This is test');
         $view->with('main_menu', $this->menuAdmin()->render());
     }
 

@@ -81,7 +81,7 @@
                                         <span class="img-lang" >
                                             <img src="dataimages/vi.jpg" alt="" class="img-fluid" >
                                         </span>
-                                        Tiếng anh                                              
+                                        Tiếng anh
                                     </a>
                                 </span>
                                 <span class="dropdown-item">
@@ -89,9 +89,9 @@
                                         <span class="img-lang" >
                                             <img src="dataimages/vi.jpg" alt="" class="img-fluid" >
                                         </span>
-                                        Tiếng việt                                                
+                                        Tiếng việt
                                     </a>
-                                </span>                              
+                                </span>
                             </div>
                         </div>
                     </div>

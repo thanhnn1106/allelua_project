@@ -50,6 +50,7 @@ class HomeController extends BaseController
             'langs' => \App\Languages::getResults(),
             'generals' => \App\Generals::getResultsByLang($langCode),
             'categories' => $filters,
+            'cssClass' => 'page-home',
         ]);
     }
 }
