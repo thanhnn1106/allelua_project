@@ -50,6 +50,7 @@ class Categories extends Model
                 ->select('t1.*', 't2.title', 't2.slug')
                 ->join('categories_translate AS t2', 't2.category_id', '=', 't1.id')
                 ->where('t2.language_code', $lang)
+                ->where('t1.parent_id', $isParent)
                 ->orderBy('t1.sort', 'ASC');
 
         $result = $query->get()->toArray();

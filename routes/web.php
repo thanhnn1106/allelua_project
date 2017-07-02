@@ -16,10 +16,10 @@ Route::match(['get', 'post'], 'seller/login', 'Auth\LoginController@loginSeller'
 Route::match(['get', 'post'], 'seller/change_password/{id}', 'Seller\ManageController@changePasswordSeller')->name('seller_change_password');
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('lang', 'LangController@index')->name('home_lang');
+Route::get('/', 'Front\HomeController@index')->name('home');
+Route::get('{lt}/lang', 'Front\LangController@index')->name('home_lang');
 
-Route::group(['prefix' => 'ajax', 'middleware' => ['auth', 'auth.admin']], function () {
+Route::group(['prefix' => 'ajax'], function () {
     Route::get('load-categories', 'Ajax\ProductController@loadCategories')->name('ajax_product_load_cate');
     Route::get('load-style', 'Ajax\ProductController@loadStyle')->name('ajax_product_load_style');
     Route::get('load-seller', 'Ajax\UserController@loadSeller')->name('ajax_load_seller');
@@ -60,6 +60,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], func
     Route::post('product/save', 'Admin\ProductController@save')->name('ajax_admin_product_save');
 });
 
-Route::get('seller_dashboard', 'Seller\DashBoardController@index')->name('seller_dashboard');
-Route::match(['get', 'post'], 'seller/register', 'Auth\RegisterController@register')->name('seller_register');
+Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], function () {
+    Route::get('dashboard', 'Seller\DashBoardController@index')->name('seller_dashboard');
+    Route::match(['get', 'post'], 'register', 'Auth\RegisterController@register')->name('seller_register');
+
+});
 Auth::routes();

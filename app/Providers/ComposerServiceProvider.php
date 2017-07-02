@@ -16,7 +16,8 @@ class ComposerServiceProvider extends ServiceProvider
     {
         // Using class based composers...
         View::composer(
-            'admin.layout', 'App\Http\ViewComposers\MainMenuComposer'
+            'admin.layout', 'App\Http\ViewComposers\MainMenuComposer',
+            'seller.layout', 'App\Http\ViewComposers\SellerMenuComposer'
         );
     }
 

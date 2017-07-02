@@ -105,7 +105,7 @@
 @endsection
 
 @section('footer_script')
-<script src="{{ asset('js/admin/product.js') }}"></script>
+<script src="{{ asset_admin('js/product.js') }}"></script>
 <script>
 $(function() {
     $('.title-cate').bind('keyup change', function () {

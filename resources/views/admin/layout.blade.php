@@ -6,16 +6,16 @@
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.6 -->
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{ asset_admin('css/bootstrap.min.css') }}">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" />
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" />
         <!-- Theme style -->
-        <link rel="stylesheet" href="{{ asset('css/AdminLTE.min.css') }}">
+        <link rel="stylesheet" href="{{ asset_admin('css/AdminLTE.min.css') }}">
         <!-- AdminLTE Skins. Choose a skin from the css/skins
              folder instead of downloading all of them to reduce the load. -->
-        <link rel="stylesheet" href="{{ asset('css/skins/_all-skins.min.css') }}">
+        <link rel="stylesheet" href="{{ asset_admin('css/skins/_all-skins.min.css') }}">
         <!-- iCheck -->
         <link rel="stylesheet" href="{{ asset('plugins/iCheck/flat/blue.css') }}">
         <!-- Morris chart -->
@@ -30,7 +30,7 @@
         <link rel="stylesheet" href="{{ asset('plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
         <!-- DataTables -->
         <link rel="stylesheet" href="{{ asset('plugins/datatables/dataTables.bootstrap.css') }} ">
-        <link rel="stylesheet" href="{{ asset('css/style-admin.css') }} ">
+        <link rel="stylesheet" href="{{ asset_admin('css/style-admin.css') }} ">
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -65,13 +65,13 @@
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                  <img src="{{ asset('img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+                                  <img src="{{ asset_admin('img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
                                   <span class="hidden-xs">Hi, {{ Auth::user()->company_name }}</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                   <!-- User image -->
                                     <li class="user-header">
-                                        <img src="{{ asset('img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                                        <img src="{{ asset_admin('img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
                                         <p>
                                           {{ Auth::user()->last_name }}
                                           <small>{{ formatDateUserLogin(Auth::user()->created_at) }}</small>
@@ -100,7 +100,7 @@
                     <!-- Sidebar user panel -->
                     <div class="user-panel">
                         <div class="pull-left image">
-                            <img src="{{ asset('img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                            <img src="{{ asset_admin('img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
                         </div>
                         <div class="pull-left info">
                             <p>{{ Auth::user()->company_name }}</p>
@@ -137,9 +137,9 @@
         <![endif]-->
         <!-- BEGIN CORE PLUGINS -->
         <script src="{{ asset('plugins/jQuery/jQuery-2.1.4.min.js') }}" type="text/javascript"></script>
-        <script src="{{ asset('js/bootstrap.min.js') }}" type="text/javascript"></script>
-        <link rel="stylesheet" href="{{ asset('/plugins/jQueryUI/jquery-ui.min.css') }}">
-        <script src="{{ asset('js/jquery-ui.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset_admin('js/bootstrap.min.js') }}" type="text/javascript"></script>
+        <link rel="stylesheet" href="{{ asset('plugins/jQueryUI/jquery-ui.min.css') }}">
+        <script src="{{ asset_admin('js/jquery-ui.min.js') }}" type="text/javascript"></script>
         <!--<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>-->
         <!-- daterangepicker -->
         <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>-->
@@ -153,8 +153,8 @@
         <!-- FastClick -->
         <script src="{{ asset('plugins/fastclick/fastclick.js') }}"></script>
         <!-- AdminLTE App -->
-        <script src="{{ asset('js/app.min.js') }}"></script>
-        <script src="{{ asset('js/common.js') }}"></script>
+        <script src="{{ asset_admin('js/app.min.js') }}"></script>
+        <script src="{{ asset_admin('js/common.js') }}"></script>
 
         @yield('footer_script')
     </body>

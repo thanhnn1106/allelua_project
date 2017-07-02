@@ -1,4 +1,17 @@
 <?php
+function asset_admin($path)
+{
+    return asset('admin/'.$path);
+}
+function asset_seller($path)
+{
+    return asset('seller/'.$path);
+}
+function asset_front($path)
+{
+    return asset('front/'.$path);
+}
+
 function getLogoImage($filePath)
 {
     if(!empty($filePath) && file_exists(public_path().$filePath)) {

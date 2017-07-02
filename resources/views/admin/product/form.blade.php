@@ -298,15 +298,15 @@ var initialPreviewImg = initialPreviewConfigImg = [];
 
 </script>
 <!-- bootstrap multiple upload -->
-<link rel="stylesheet" href="{{ asset('/plugins/bootstrap-fileinput/css/fileinput.min.css') }}">
-<link rel="stylesheet" href="{{ asset('/plugins/bootstrap-fileinput/themes/explorer/theme.css') }}">
-<script src="{{ asset('/plugins/bootstrap-fileinput/js/plugins/piexif.min.js') }}"></script>
-<script src="{{ asset('/plugins/bootstrap-fileinput/js/plugins/sortable.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('plugins/bootstrap-fileinput/css/fileinput.min.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/bootstrap-fileinput/themes/explorer/theme.css') }}">
+<script src="{{ asset('plugins/bootstrap-fileinput/js/plugins/piexif.min.js') }}"></script>
+<script src="{{ asset('plugins/bootstrap-fileinput/js/plugins/sortable.min.js') }}"></script>
 <script src="{{ asset('/plugins/bootstrap-fileinput/js/plugins/purify.min.js') }}"></script>
 <script src="{{ asset('/plugins/bootstrap-fileinput/js/fileinput.min.js') }}"></script>
-<!--<script src="{{ asset('/plugins/bootstrap-fileinput/themes/fa/theme.js') }}"></script>-->
+<!--<script src="{{ asset_admin('/plugins/bootstrap-fileinput/themes/fa/theme.js') }}"></script>-->
 <script src="{{ asset('/plugins/bootstrap-fileinput/js/locales/lang.js') }}"></script>
 <script src="{{ asset('/plugins/bootstrap-fileinput/themes/explorer/theme.js') }}"></script>
-<script src="{{ asset('js/admin/product.js') }}"></script>
+<script src="{{ asset_admin('js/product.js') }}"></script>
 
 @endsection
