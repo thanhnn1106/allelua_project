@@ -7,52 +7,52 @@
             <ul class="list-nation text-xs-center" >
                 <li class="item-nation">
                     <a href="/" title="" class="text-xs-center" >
-                        <img src="dataimages/nat.png" class="img-fluid" >
+                        <img src="{{ asset_front('dataimages/nat.png') }}" class="img-fluid" >
                     </a>
                 </li>
                 <li class="item-nation">
                     <a href="/" title="" class="text-xs-center" >
-                        <img src="dataimages/nat2.png" class="img-fluid" >
+                        <img src="{{ asset_front('dataimages/nat2.png') }}" class="img-fluid" >
                     </a>
                 </li>
                 <li class="item-nation">
                     <a href="/" title="" class="text-xs-center" >
-                        <img src="dataimages/nat3.png" class="img-fluid" >
+                        <img src="{{ asset_front('dataimages/nat3.png') }}" class="img-fluid" >
                     </a>
                 </li>
                 <li class="item-nation">
                     <a href="/" title="" class="text-xs-center" >
-                        <img src="dataimages/nat4.png" class="img-fluid" >
+                        <img src="{{ asset_front('dataimages/nat4.png') }}" class="img-fluid" >
                     </a>
                 </li>
                 <li class="item-nation">
                     <a href="/" title="" class="text-xs-center" >
-                        <img src="dataimages/nat5.png" class="img-fluid" >
+                        <img src="{{ asset_front('dataimages/nat5.png') }}" class="img-fluid" >
                     </a>
                 </li>
                 <li class="item-nation">
                     <a href="/" title="" class="text-xs-center" >
-                        <img src="dataimages/nat6.png" class="img-fluid" >
+                        <img src="{{ asset_front('dataimages/nat6.png') }}" class="img-fluid" >
                     </a>
                 </li>
                 <li class="item-nation">
                     <a href="/" title="" class="text-xs-center" >
-                        <img src="dataimages/nat7.png" class="img-fluid" >
+                        <img src="{{ asset_front('dataimages/nat7.png') }}" class="img-fluid" >
                     </a>
                 </li>
                 <li class="item-nation">
                     <a href="/" title="" class="text-xs-center" >
-                        <img src="dataimages/nat8.png" class="img-fluid" >
+                        <img src="{{ asset_front('dataimages/nat8.png') }}" class="img-fluid" >
                     </a>
                 </li>
                 <li class="item-nation">
                     <a href="/" title="" class="text-xs-center" >
-                        <img src="dataimages/nat9.png" class="img-fluid" >
+                        <img src="{{ asset_front('dataimages/nat9.png') }}" class="img-fluid" >
                     </a>
                 </li>
                 <li class="item-nation">
                     <a href="/" title="" class="text-xs-center" >
-                        <img src="dataimages/nat10.png" class="img-fluid" >
+                        <img src="{{ asset_front('dataimages/nat10.png') }}" class="img-fluid" >
                     </a>
                 </li>
             </ul>
@@ -68,7 +68,7 @@
                 <div class="row" >
                     <div class="col-sm-6" >
                         <div class="item-fearture" >
-                            <img src="dataimages/ft.png" class="img-feature" >
+                            <img src="{{ asset_front('dataimages/ft.png') }}" class="img-feature" >
                             <span class="text-feature">
                                 ĐẢM BẢO THƯƠNG MẠI
                             </span>
@@ -77,7 +77,7 @@
 
                     <div class="col-sm-6" >
                         <div class="item-fearture" >
-                            <img src="dataimages/ft2.png" class="img-feature" >
+                            <img src="{{ asset_front('dataimages/ft2.png') }}" class="img-feature" >
                             <span class="text-feature">
                                 DỊCH VỤ HẬU CẦN
                             </span>
@@ -86,7 +86,7 @@
 
                     <div class="col-sm-6" >
                         <div class="item-fearture" >
-                            <img src="dataimages/ft3.png" class="img-feature" >
+                            <img src="{{ asset_front('dataimages/ft3.png') }}" class="img-feature" >
                             <span class="text-feature">
                                 THANH TOÁN AN TOÀN
                             </span>
@@ -95,7 +95,7 @@
 
                     <div class="col-sm-6" >
                         <div class="item-fearture" >
-                            <img src="dataimages/ft4.png" class="img-feature" >
+                            <img src="{{ asset_front('dataimages/ft4.png') }}" class="img-feature" >
                             <span class="text-feature">
                                 DỊCH VỤ KIỂM TRA
                             </span>

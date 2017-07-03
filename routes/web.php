@@ -12,12 +12,15 @@
 */
 
 Route::match(['get', 'post'], 'administrator/login', 'Auth\LoginController@loginAdmin')->name('admin_login');
-Route::match(['get', 'post'], 'seller/login', 'Auth\LoginController@loginSeller')->name('seller_login');
-Route::match(['get', 'post'], 'seller/change_password/{id}', 'Seller\ManageController@changePasswordSeller')->name('seller_change_password');
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/', 'Front\HomeController@index')->name('home');
 Route::get('{lt}/lang', 'Front\LangController@index')->name('home_lang');
+
+// Product
+Route::get('products/{category}/{id}', 'Front\ProductController@index')->name('product_index_parent');
+Route::get('products/{category}/{id}/{seo_slug}', 'Front\ProductController@index')->name('product_index');
+Route::get('products/{category}/{id}/{seo_slug}', 'Front\ProductController@index')->name('product_detail');
 
 Route::group(['prefix' => 'ajax'], function () {
     Route::get('load-categories', 'Ajax\ProductController@loadCategories')->name('ajax_product_load_cate');
@@ -66,6 +69,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], func
 Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], function () {
     Route::get('dashboard', 'Seller\DashBoardController@index')->name('seller_dashboard');
     Route::match(['get', 'post'], 'register', 'Auth\RegisterController@register')->name('seller_register');
+    Route::match(['get', 'post'], 'login', 'Auth\LoginController@loginSeller')->name('seller_login');
+    Route::match(['get', 'post'], 'change_password/{id}', 'Seller\ManageController@changePasswordSeller')->name('seller_change_password');
 
 });
 Auth::routes();

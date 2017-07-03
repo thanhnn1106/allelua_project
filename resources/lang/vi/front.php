@@ -2,17 +2,6 @@
 
 return [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
-    |
-    */
-
     'title_en'        => 'Title',
     'description_en'  => 'Description',
     'seo_keyword_en'  => 'SEO Keyword',
@@ -23,5 +12,14 @@ return [
     'seo_keyword_vi'  => 'SEO từ khóa',
     'logo_vi'         => 'Logo',
     'check_vi'        => 'Xóa logo',
+
+    'bread_crum' => [
+        'home' => 'Trang chủ',
+        
+    ],
+    'menu' => [
+        'index'                     => 'DANH MỤC',
+        'view_all'                  => 'Xem tất cả'
+    ],
 
 ];

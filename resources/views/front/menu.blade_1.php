@@ -20,21 +20,23 @@
                     <nav class="nav-category navbar-toggleable-lg collapse in" id="navMiniCategory" >
                         @if(isset($categories))
                         <ul class="nav navbar-pills">
-                            @foreach($categories as $id => $items)
+                            @foreach($categories as $items)
                             <li class="nav-item" >
-                                <a href="{{ makeSlug($items['slug'], $id, $items['parent_id']) }}" title="{{ $items['title'] }}" class="nav-link"><span>{{ $items['title'] }}</span></a>
+                                <a href="/" title="Áo Thun" class="nav-link"><span>{{ $items['title'] }}</span></a>
                                 <span class="nav-icon-direct" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >
                                     <i class="fa fa-angle-right" ></i>
                                 </span>
-                                @if(isset($items['childs']))
                                 <ul class="dropdown-menu">
-                                    @foreach($items['childs'] as $sub)
                                     <li class="dropdown-submenu nav-item">
-                                        <a class="nav-link" href="{{ makeSlug($items['slug'], $sub['id'], $sub['parent_id'], $sub['slug']) }}" title="{{ $items['title'] }}" >{{ $sub['title'] }}</a>
+                                        <a class="nav-link" href="/" title="GIÁM ĐỐC SẢN XUẤT" >Gạch men 01</a>
                                     </li>
-                                    @endforeach
+                                    <li class="dropdown-submenu nav-item">
+                                        <a class="nav-link" href="/" title="GIÁM ĐỐC SẢN XUẤT" >Gạch men 02</a>
+                                    </li>
+                                    <li class="dropdown-submenu nav-item">
+                                        <a class="nav-link" href="/" title="GIÁM ĐỐC SẢN XUẤT" >Gạch men 03</a>
+                                    </li>
                                 </ul>
-                                @endif
                             </li>
                             @endforeach
                         </ul>

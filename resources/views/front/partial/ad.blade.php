@@ -15,14 +15,14 @@
                                                 <div class="col-xs-6">
                                                     <div class="item-banner text-xs-center" >
                                                         <a href="/" title="" class="banner-link" >
-                                                            <img src="dataimages/bn1.jpg" alt="" class="img-fluid" >
+                                                            <img src="{{ asset_front('dataimages/bn1.jpg') }}" alt="" class="img-fluid" >
                                                         </a>
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-6">
                                                     <div class="item-banner text-xs-center" >
                                                         <a href="/" title="" class="banner-link" >
-                                                            <img src="dataimages/bn2.jpg" alt="" class="img-fluid" >
+                                                            <img src="{{ asset_front('dataimages/bn2.jpg') }}" alt="" class="img-fluid" >
                                                         </a>
                                                     </div>
                                                 </div>
@@ -34,14 +34,14 @@
                                                 <div class="col-xs-6">
                                                     <div class="item-banner text-xs-center" >
                                                         <a href="/" title="" class="banner-link" >
-                                                            <img src="dataimages/bn3.jpg" alt="" class="img-fluid" >
+                                                            <img src="{{ asset_front('dataimages/bn3.jpg') }}" alt="" class="img-fluid" >
                                                         </a>
                                                     </div>
                                                 </div>
                                                 <div class="col-xs-6">
                                                     <div class="item-banner text-xs-center" >
                                                         <a href="/" title="" class="banner-link" >
-                                                            <img src="dataimages/bn4.jpg" alt="" class="img-fluid" >
+                                                            <img src="{{ asset_front('dataimages/bn4.jpg') }}" alt="" class="img-fluid" >
                                                         </a>
                                                     </div>
                                                 </div>
@@ -53,7 +53,7 @@
                                 <div class="col-sm-4 col-xs-12" >
                                     <div class="item-banner text-xs-center" >
                                         <a href="/" title="" class="banner-link" >
-                                            <img src="dataimages/bn5.jpg" alt="" class="img-fluid" >
+                                            <img src="{{ asset_front('dataimages/bn5.jpg') }}" alt="" class="img-fluid" >
                                         </a>
                                     </div>
                                 </div>

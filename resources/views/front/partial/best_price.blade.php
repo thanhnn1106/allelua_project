@@ -18,7 +18,7 @@
                                                 </div>
                                                 <div class="thumb-product text-xs-center" >
                                                     <a href="/" title="" class="link-product" >
-                                                        <img src="dataimages/p1.jpg" alt="" class="img-fluid" >
+                                                        <img src="{{ asset_front('dataimages/p1.jpg') }}" alt="" class="img-fluid" >
                                                     </a>
                                                 </div>
                                                 <h3 class="name-product" >
@@ -46,7 +46,7 @@
                                                 </div>
                                                 <div class="thumb-product text-xs-center" >
                                                     <a href="/" title="" class="link-product" >
-                                                        <img src="dataimages/p1.jpg" alt="" class="img-fluid" >
+                                                        <img src="{{ asset_front('dataimages/p1.jpg') }}" alt="" class="img-fluid" >
                                                     </a>
                                                 </div>
                                                 <h3 class="name-product" >
@@ -74,7 +74,7 @@
                                                 </div>
                                                 <div class="thumb-product text-xs-center" >
                                                     <a href="/" title="" class="link-product" >
-                                                        <img src="dataimages/p1.jpg" alt="" class="img-fluid" >
+                                                        <img src="{{ asset_front('dataimages/p1.jpg') }}" alt="" class="img-fluid" >
                                                     </a>
                                                 </div>
                                                 <h3 class="name-product" >
@@ -102,7 +102,7 @@
                                                 </div>
                                                 <div class="thumb-product text-xs-center" >
                                                     <a href="/" title="" class="link-product" >
-                                                        <img src="dataimages/p1.jpg" alt="" class="img-fluid" >
+                                                        <img src="{{ asset_front('dataimages/p1.jpg') }}" alt="" class="img-fluid" >
                                                     </a>
                                                 </div>
                                                 <h3 class="name-product" >
@@ -130,7 +130,7 @@
                                                 </div>
                                                 <div class="thumb-product text-xs-center" >
                                                     <a href="/" title="" class="link-product" >
-                                                        <img src="dataimages/p1.jpg" alt="" class="img-fluid" >
+                                                        <img src="{{ asset_front('dataimages/p1.jpg') }}" alt="" class="img-fluid" >
                                                     </a>
                                                 </div>
                                                 <h3 class="name-product" >
@@ -158,7 +158,7 @@
                                                 </div>
                                                 <div class="thumb-product text-xs-center" >
                                                     <a href="/" title="" class="link-product" >
-                                                        <img src="dataimages/p1.jpg" alt="" class="img-fluid" >
+                                                        <img src="{{ asset_front('dataimages/p1.jpg') }}" alt="" class="img-fluid" >
                                                     </a>
                                                 </div>
                                                 <h3 class="name-product" >
@@ -186,7 +186,7 @@
                                                 </div>
                                                 <div class="thumb-product text-xs-center" >
                                                     <a href="/" title="" class="link-product" >
-                                                        <img src="dataimages/p1.jpg" alt="" class="img-fluid" >
+                                                        <img src="{{ asset_front('dataimages/p1.jpg') }}" alt="" class="img-fluid" >
                                                     </a>
                                                 </div>
                                                 <h3 class="name-product" >
@@ -214,7 +214,7 @@
                                                 </div>
                                                 <div class="thumb-product text-xs-center" >
                                                     <a href="/" title="" class="link-product" >
-                                                        <img src="dataimages/p1.jpg" alt="" class="img-fluid" >
+                                                        <img src="{{ asset_front('dataimages/p1.jpg') }}" alt="" class="img-fluid" >
                                                     </a>
                                                 </div>
                                                 <h3 class="name-product" >

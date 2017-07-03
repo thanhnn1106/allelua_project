@@ -12,7 +12,7 @@
                         <span class="txt-type-com" >
                             <a href="" title="" class="mini-gan" >
                                 <span class="mini-logo hidden-sm-down" >
-                                    <img src="images/logo-gray.png" alt="" class="img-fluid" >
+                                    <img src="{{ asset_front('images/logo-gray.png') }}" alt="" class="img-fluid" >
                                 </span>
                                 <span >
                                     Doanh nghiệp & doanh nghiệp
@@ -65,7 +65,7 @@
                         <div class="link-menu-top lang-link" >
                             <a href="javascript:void(0);" class="text-lang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                 <span class="img-lang" >
-                                    <img src="dataimages/vi.jpg" alt="" class="img-fluid" >
+                                    <img src="{{ asset_front('dataimages/vi.jpg') }}" alt="" class="img-fluid" >
                                 </span>
                                 <span class="hidden-md-down" >
                                     vi
@@ -79,7 +79,7 @@
                                 <span class="dropdown-item">
                                     <a title="" href="/" >
                                         <span class="img-lang" >
-                                            <img src="dataimages/vi.jpg" alt="" class="img-fluid" >
+                                            <img src="{{ asset_front('dataimages/vi.jpg') }}" alt="" class="img-fluid" >
                                         </span>
                                         Tiếng anh
                                     </a>
@@ -87,7 +87,7 @@
                                 <span class="dropdown-item">
                                     <a title="" href="/" >
                                         <span class="img-lang" >
-                                            <img src="dataimages/vi.jpg" alt="" class="img-fluid" >
+                                            <img src="{{ asset_front('dataimages/vi.jpg') }}" alt="" class="img-fluid" >
                                         </span>
                                         Tiếng việt
                                     </a>
@@ -108,7 +108,7 @@
                         <div class="row" >
                             <div class="col-xs-6 col-xs-offset-3" >
                                 <a href="/" title="" >
-                                    <img src="images/logo.png" alt="" class="img-fluid" >
+                                    <img src="{{ asset_front('images/logo.png') }}" alt="" class="img-fluid" >
                                 </a>
                             </div>
                         </div>

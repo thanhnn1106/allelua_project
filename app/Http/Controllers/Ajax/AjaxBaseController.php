@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Ajax;
 
-use App\Http\Controllers\BaseController;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class AjaxBaseController extends BaseController
+class AjaxBaseController extends Controller
 {
     protected $lang;
     protected $user;

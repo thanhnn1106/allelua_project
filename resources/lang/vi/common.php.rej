@@ -1,9 +1,0 @@
-diff a/resources/lang/vi/common.php b/resources/lang/vi/common.php	(rejected hunks)
-@@ -7,6 +7,7 @@ return [
-     'update_success'                => 'Update success',
-     'update_failed'                 => 'Update failed',
-     'create_success'                => 'Create success',
-+    'create_failed'                 => 'Create failed',
-     'num_update_success'            => 'Update success with %d record',
-     'error_exception_ajax'          => 'Error occurred please try again',
- 

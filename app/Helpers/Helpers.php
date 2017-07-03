@@ -120,3 +120,24 @@ function getShippingMethod($shipping)
     }
     return null;
 }
+
+function makeSlug($slugCate, $id, $parentId = NULL, $slugChild = NULL)
+{
+    if ($parentId === NULL) {
+        return route('product_index_parent', ['category' => $slugCate, 'id' => $id]);
+    }
+
+    $seoSlug = $slugChild.'-'.$id;
+
+    return route('product_index', ['category' => $slugCate, 'id' => $parentId, 'seo_slug' => $seoSlug]);
+}
+
+
+function getIdFromSlug($slug_input) 
+{
+    $id = substr(strrchr($slug_input, "-"), 1);
+    if (!is_numeric($id)) {
+        return NULL;
+    }
+    return $id;
+}
