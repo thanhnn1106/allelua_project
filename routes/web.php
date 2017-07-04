@@ -65,7 +65,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], func
     Route::post('product/save', 'Admin\ProductController@save')->name('ajax_admin_product_save');
 });
 
-Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], function () {
+//Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], function () {
+Route::group(['prefix' => 'seller'], function () {
     Route::get('dashboard', 'Seller\DashBoardController@index')->name('seller_dashboard');
     Route::match(['get', 'post'], 'register', 'Auth\RegisterController@register')->name('seller_register');
     Route::match(['get', 'post'], 'login', 'Auth\LoginController@loginSeller')->name('seller_login');

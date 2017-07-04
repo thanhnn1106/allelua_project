@@ -68,10 +68,10 @@ class LoginController extends Controller
             $const = config('allelua.user_status.value');
             $loginUser = User::where('email', $request->get('email'))->first();
             if ($loginUser === NULL) {
-                $data['message'] = trans('auth.login_fail');
+                $data['message'] = trans('auth.login_failed');
             } else {
                 if ($loginUser->status == $const['inactive']) { 
-                    $data['message'] = trans('auth.login_fail');
+                    $data['message'] = trans('auth.login_failed');
                 } else {
 
                     // create our user data for the authentication
@@ -85,7 +85,7 @@ class LoginController extends Controller
                     if (Auth::attempt($userData)) {
                         return redirect(route('admin_dashboard'));
                     } else {        
-                        $data['message'] = trans('auth.login_fail');
+                        $data['message'] = trans('auth.login_failed');
                     }
                 }
             }
@@ -108,7 +108,7 @@ class LoginController extends Controller
 
     public function loginSeller(Request $request)
     {
-        $data = array('message' => '');
+        $data = array();
 
         if ($request->isMethod('POST')) {
 
@@ -129,10 +129,12 @@ class LoginController extends Controller
             $const = config('allelua.user_status.value');
             $loginUser = User::where('email', $request->get('email'))->first();
             if ($loginUser === NULL) {
-                $data['message'] = trans('auth.login_fail');
+
+                return view('auth/login', ['message' => trans('auth.login_failed')]);
             } else {
-                if ($loginUser->status == $const['inactive']) { 
-                    $data['message'] = trans('auth.login_fail');
+                if ($loginUser->status == $const['inactive']) {
+
+                    return view('auth/login', ['message' => trans('auth.login_failed')]);
                 } else {
 
                     // create our user data for the authentication
@@ -144,15 +146,16 @@ class LoginController extends Controller
                     );
                     // attempt to do the login
                     if (Auth::attempt($userData)) {
-                        return redirect(route('seller_dashboard'));
-                    } else {        
-                        $data['message'] = trans('auth.login_fail');
+                        return redirect(route('home'));
+                    } else {
+
+                        return view('auth/login', ['message' => trans('auth.login_failed')]);
                     }
                 }
             }
         }
 
-        return view('auth/seller_login', $data);
+        return view('auth/login', $data);
     }
 
 }

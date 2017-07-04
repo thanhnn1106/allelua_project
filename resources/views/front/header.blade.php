@@ -25,23 +25,57 @@
                     <div class="menu-top clearfix" >
                         <div class="link-menu-top hidden-sm-down mini-user" >
                             <a href="javascript:void(0);" class="text-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                <i class="ic i-user" ></i>
-                                Tài khoản
+                                <i class="ic i-user"></i>
+                                @if (Auth::user())
+                                    {{ trans('front.menu_seller.lb_say_hi') }} {{ Auth::user()->company_name }}
+                                @else
+                                    {{ trans('front.menu_seller.lb_account') }}
+                                @endif
                             </a>
                             <div class="dropdown-menu">
-                                <span class="dropdown-label" >
-                                    Chào bạn
-                                </span>
+                                @if (Auth::user())
                                 <span class="dropdown-item">
-                                    <a title="" href="/" >
-                                        Đăng nhập                                              
+                                    <a class="fa fa-bell-o" aria-hidden="true" title="" href="{{ route('seller_login') }}">
+                                        {{ trans('front.menu_seller.lb_notification') }}
                                     </a>
                                 </span>
                                 <span class="dropdown-item">
-                                    <a title="" href="/" >
-                                        Đăng ký                                              
+                                    <a class="fa fa-user-o" aria-hidden="true" title="" href="{{ route('seller_login') }}">
+                                        {{ trans('front.menu_seller.lb_account_management') }}
                                     </a>
-                                </span>                              
+                                </span>
+                                <span class="dropdown-item">
+                                    <a class="fa fa-pencil-square-o" aria-hidden="true" title="" href="{{ route('seller_login') }}">
+                                        {{ trans('front.menu_seller.lb_new_post') }}
+                                    </a>
+                                </span>
+                                <span class="dropdown-item">
+                                    <a class="fa fa-folder-o" aria-hidden="true" title="" href="{{ route('seller_login') }}">
+                                        {{ trans('front.menu_seller.lb_post_management') }}
+                                    </a>
+                                </span>
+                                <span class="dropdown-item">
+                                    <a class="fa fa-envelope-o" aria-hidden="true" title="" href="{{ route('seller_login') }}">
+                                        {{ trans('front.menu_seller.lb_inbox') }}
+                                    </a>
+                                </span>
+                                <span class="dropdown-item">
+                                    <a class="fa fa-power-off" aria-hidden="true" title="" href="{{ route('logout') }}">
+                                        {{ trans('front.menu_seller.lb_logout') }}
+                                    </a>
+                                </span>
+                                @else
+                                <span class="dropdown-item">
+                                    <a title="" href="{{ route('seller_login') }}">
+                                        {{ trans('front.menu_seller.lb_sign_in') }}
+                                    </a>
+                                </span>
+                                <span class="dropdown-item">
+                                    <a title="" href="{{ route('seller_register') }}">
+                                        {{ trans('front.menu_seller.lb_sign_up') }}
+                                    </a>
+                                </span>
+                                @endif
                             </div>
                         </div>
                         <a href="/" class="link-menu-top hidden-sm-down" >

@@ -81,13 +81,13 @@
                             </h2>
                             <ul class="nav-footer" >
                                 <li>
-                                    <a href="" title="" >
-                                        Đăng nhập
+                                    <a title="" href="{{ route('seller_login') }}">
+                                        {{ trans('front.menu_seller.lb_sign_in') }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="" title="" >
-                                        Đăng kí
+                                    <a title="" href="{{ route('seller_register') }}">
+                                        {{ trans('front.menu_seller.lb_sign_up') }}
                                     </a>
                                 </li>
                             </ul>

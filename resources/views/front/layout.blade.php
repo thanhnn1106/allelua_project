@@ -18,6 +18,7 @@
         <link href="{{ asset_front('js/jquery.scrollbar/jquery.scrollbar.css') }}" rel="stylesheet" >
         <link href="{{ asset_front('js/select2/dist/css/select2.css') }}" rel="stylesheet" >
         <link rel="stylesheet" type="text/css" href="{{ asset_front('css/style.css') }}" >
+        <link rel="stylesheet" type="text/css" href="{{ asset_front('css/style_custom.css') }}" >
     </head>
     <body>
 
