@@ -71,6 +71,12 @@ Route::group(['prefix' => 'seller'], function () {
     Route::match(['get', 'post'], 'register', 'Auth\RegisterController@register')->name('seller_register');
     Route::match(['get', 'post'], 'login', 'Auth\LoginController@loginSeller')->name('seller_login');
     Route::match(['get', 'post'], 'change_password/{id}', 'Seller\ManageController@changePasswordSeller')->name('seller_change_password');
+    Route::match(['get', 'post'], 'notification', 'Seller\ManageController@notification')->name('seller_notification');
+    Route::match(['get', 'post'], 'account_management', 'Seller\ManageController@accountManagement')->name('seller_account_management');
+    Route::match(['get', 'post'], 'new_post', 'Seller\ManageController@newPost')->name('seller_new_post');
+    Route::match(['get', 'post'], 'post_management', 'Seller\ManageController@postManagement')->name('seller_post_management');
+    Route::match(['get', 'post'], 'inbox', 'Seller\ManageController@inbox')->name('seller_inbox');
+    
 
 });
 Auth::routes();

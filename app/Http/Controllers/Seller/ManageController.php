@@ -55,4 +55,29 @@ class ManageController extends BaseController
         }
         return view('seller.change_password.index', ['id' => $id]);
     }
+
+    public function notification(Request $request)
+    {
+        return view('seller.dashboard.notification');
+    }
+
+    public function accountManagement(Request $request)
+    {
+        return view('seller.dashboard.account_management');
+    }
+
+    public function newPost(Request $request)
+    {
+        return view('seller.dashboard.new_post');
+    }
+
+    public function postManagement(Request $request)
+    {
+        return view('seller.dashboard.post_management');
+    }
+
+    public function inbox(Request $request)
+    {
+        return view('seller.dashboard.inbox');
+    }
 }

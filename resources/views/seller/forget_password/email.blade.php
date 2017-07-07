@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <legend align="center">
-                    <b>KHÔI PHỤC MẬT KHẨU</b>
+                    <b>{{ trans('front.forgot_password_page.lb_title') }}</b>
                 </legend>
                 <div class="panel-body">
                     @if (session('status'))
@@ -19,7 +19,7 @@
                         <div class="row">
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <div class="col-md-2"></div>
-                                <label for="email" class="col-md-2 control-label">Địa chỉ email</label>
+                                <label for="email" class="col-md-2 control-label">{{ trans('front.forgot_password_page.lb_email') }}</label>
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
                                     @if ($errors->has('email'))
@@ -35,7 +35,7 @@
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">
-                                        Send Password Reset Link
+                                        {{ trans('front.forgot_password_page.btn_send_link_reset_password') }}
                                     </button>
                                 </div>
                             </div>

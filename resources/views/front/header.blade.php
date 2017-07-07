@@ -27,54 +27,60 @@
                             <a href="javascript:void(0);" class="text-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                 <i class="ic i-user"></i>
                                 @if (Auth::user())
-                                    {{ trans('front.menu_seller.lb_say_hi') }} {{ Auth::user()->company_name }}
+                                {{ trans('front.menu_seller.lb_say_hi') }} {{ Auth::user()->company_name }}
                                 @else
-                                    {{ trans('front.menu_seller.lb_account') }}
+                                {{ trans('front.menu_seller.lb_account') }}
                                 @endif
                             </a>
                             <div class="dropdown-menu">
                                 @if (Auth::user())
-                                <span class="dropdown-item">
-                                    <a class="fa fa-bell-o" aria-hidden="true" title="" href="{{ route('seller_login') }}">
+                                <a aria-hidden="true" title="" href="{{ route('seller_notification') }}">
+                                    <span class="dropdown-item">
+                                        <i class="fa fa-bell-o"></i>
                                         {{ trans('front.menu_seller.lb_notification') }}
-                                    </a>
-                                </span>
-                                <span class="dropdown-item">
-                                    <a class="fa fa-user-o" aria-hidden="true" title="" href="{{ route('seller_login') }}">
+                                    </span>
+                                </a>
+                                <a aria-hidden="true" title="" href="{{ route('seller_account_management') }}">
+                                    <span class="dropdown-item">
+                                        <i class="fa fa-user-o"></i>
                                         {{ trans('front.menu_seller.lb_account_management') }}
-                                    </a>
-                                </span>
-                                <span class="dropdown-item">
-                                    <a class="fa fa-pencil-square-o" aria-hidden="true" title="" href="{{ route('seller_login') }}">
+                                    </span>
+                                </a>
+                                <a aria-hidden="true" title="" href="{{ route('seller_new_post') }}">
+                                    <span class="dropdown-item">
+                                        <i class="fa fa-pencil-square-o"></i>
                                         {{ trans('front.menu_seller.lb_new_post') }}
-                                    </a>
-                                </span>
-                                <span class="dropdown-item">
-                                    <a class="fa fa-folder-o" aria-hidden="true" title="" href="{{ route('seller_login') }}">
+                                    </span>
+                                </a>
+                                <a aria-hidden="true" title="" href="{{ route('seller_post_management') }}">
+                                    <span class="dropdown-item">
+                                        <i class="fa fa-folder-o"></i>
                                         {{ trans('front.menu_seller.lb_post_management') }}
-                                    </a>
-                                </span>
-                                <span class="dropdown-item">
-                                    <a class="fa fa-envelope-o" aria-hidden="true" title="" href="{{ route('seller_login') }}">
+                                    </span>
+                                </a>
+                                <a aria-hidden="true" title="" href="{{ route('seller_inbox') }}">
+                                    <span class="dropdown-item">
+                                        <i class="fa fa-envelope-o"></i>
                                         {{ trans('front.menu_seller.lb_inbox') }}
-                                    </a>
-                                </span>
-                                <span class="dropdown-item">
-                                    <a class="fa fa-power-off" aria-hidden="true" title="" href="{{ route('logout') }}">
+                                    </span>
+                                </a>
+                                <a aria-hidden="true" title="" href="{{ route('logout') }}">
+                                    <span class="dropdown-item">
+                                        <i class="fa fa-power-off"></i>
                                         {{ trans('front.menu_seller.lb_logout') }}
-                                    </a>
-                                </span>
+                                    </span>
+                                </a>
                                 @else
-                                <span class="dropdown-item">
-                                    <a title="" href="{{ route('seller_login') }}">
+                                <a title="" href="{{ route('seller_login') }}">
+                                    <span class="dropdown-item">
                                         {{ trans('front.menu_seller.lb_sign_in') }}
-                                    </a>
-                                </span>
-                                <span class="dropdown-item">
-                                    <a title="" href="{{ route('seller_register') }}">
+                                    </span>
+                                </a>
+                                <a title="" href="{{ route('seller_register') }}">
+                                    <span class="dropdown-item">
                                         {{ trans('front.menu_seller.lb_sign_up') }}
-                                    </a>
-                                </span>
+                                    </span>
+                                </a>
                                 @endif
                             </div>
                         </div>
