@@ -54,6 +54,7 @@
                                         <div class="box-body">
                                             <?php 
                                                 $title       = 'title_'.$cate->language_code;
+                                                $slug       = 'slug_'.$cate->language_code;
                                             ?>
                                             <div class="form-group @if ($errors->has($title)) has-error @endif">
                                                 <label class="control-label">{{ trans('admin.title_'.$cate->language_code) }}</label>
@@ -64,9 +65,14 @@
                                                 @endif
                                             </div>
 
-                                            <div class="form-group">
+                                            <div class="form-group @if ($errors->has($slug)) has-error @endif">
                                                 <label class="control-label">{{ trans('admin.slug_'.$cate->language_code) }}</label>
-                                                <p class="help-block slug-{{ $cate->language_code }}">{{ $cate->slug }}</p>
+                                                <input type="hidden" class="form-control border-corner title-cate" id="slug_{{ $cate->language_code }}" lang="{{ $cate->language_code }}" name="{{ $slug }}" placeholder="Input ..."
+                                                        value="{{ old($slug, $cate->slug) }}" />
+                                                <p class="slug-{{ $cate->language_code }}">{{ old($slug, $cate->slug) }}</p>
+                                                @if ($errors->has($slug))
+                                                  <p class="help-block">{{ $errors->first($slug) }}</p>
+                                                @endif
                                             </div>
                                         </div>
                                         <!-- /.box-body -->
@@ -97,6 +103,7 @@ $(function() {
         var str = $(obj).val();
         var slug = formatSlug(str);
         $(obj).closest('.box-body').find('.slug-'+lang).html(slug);
+        $(obj).closest('.box-body').find('#slug_'+lang).val(slug);
     }
 });
 </script>

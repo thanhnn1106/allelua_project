@@ -19,37 +19,6 @@ class Controller extends BaseController
         return $langs;
     }
 
-    protected function loadCategories()
-    {
-        $cateObject = \App\Categories::getRowByLang($this->lang, -1);
-
-        $categories = array();
-        $childs = array();
-        foreach ($cateObject as $item) {
-            if (empty($item->parent_id)) {
-                $categories[$item->id] = array(
-                    'title' => $item->title,
-                    'slug' => $item->slug,
-                    'parent_id' => $item->parent_id,
-                );
-            } else {
-                $childs[$item->parent_id]['childs'][$item->id] = array(
-                    'id'    => $item->id,
-                    'title' => $item->title,
-                    'slug' => $item->slug,
-                    'parent_id' => $item->parent_id,
-                );
-            }
-        }
-        foreach ($categories as $id => $item) {
-            if(isset($childs[$id])) {
-                $categories[$id]['childs'] = $childs[$id]['childs'];
-            }
-        }
-
-        return $categories;
-    }
-
     protected function uploadImage($file, $path)
     {
         $extension = $file->getClientOriginalExtension();

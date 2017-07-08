@@ -18,8 +18,9 @@ Route::get('/', 'Front\HomeController@index')->name('home');
 Route::get('{lt}/lang', 'Front\LangController@index')->name('home_lang');
 
 // Product
-Route::get('products/{category}/{id}', 'Front\ProductController@index')->name('product_index_parent');
-Route::get('products/{category}/{id}/{seo_slug}', 'Front\ProductController@index')->name('product_index');
+Route::get('products/{slug}', 'Front\ProductController@loadCate')->name('product_load_cate');
+Route::get('products/detail/{slug}', 'Front\ProductController@detail')->name('product_detail');
+Route::get('products/{slug}/{id}', 'Front\ProductController@loadSub')->name('product_load_sub_cate');
 
 Route::group(['prefix' => 'ajax'], function () {
     Route::get('load-categories', 'Ajax\ProductController@loadCategories')->name('ajax_product_load_cate');

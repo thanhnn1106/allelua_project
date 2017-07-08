@@ -42,7 +42,7 @@
                             </div>
 
                             <div class="form-group input-group-sm @if ($errors->has('setting_link_youtube')) has-error @endif">
-                                <label class="control-label">Link Twitter</label>
+                                <label class="control-label">Link Youtube</label>
                                 <input type="text" class="form-control" id="company_name" name="setting_link_youtube" 
                                        maxlength="255" value="{{ old('setting_link_youtube', isset($setting['setting_link_youtube']) ? $setting['setting_link_youtube'] : '') }}" />
                                 @if ($errors->has('setting_link_youtube'))
@@ -51,7 +51,7 @@
                             </div>
 
                             <div class="form-group input-group-sm @if ($errors->has('setting_link_zalo')) has-error @endif">
-                                <label class="control-label">Link Twitter</label>
+                                <label class="control-label">Link Zalo</label>
                                 <input type="text" class="form-control" id="company_name" name="setting_link_zalo" 
                                        maxlength="255" value="{{ old('setting_link_zalo', isset($setting['setting_link_zalo']) ? $setting['setting_link_zalo'] : '') }}" />
                                 @if ($errors->has('setting_link_zalo'))

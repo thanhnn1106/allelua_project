@@ -121,17 +121,18 @@ function getShippingMethod($shipping)
     return null;
 }
 
-function makeSlug($slugCate, $id, $parentId = NULL, $slugChild = NULL)
+function makeSlug($slug, $id = null, $isProduct = true)
 {
-    if ($parentId === NULL) {
-        return route('product_index_parent', ['category' => $slugCate, 'id' => $id]);
+    if ( ! empty($id)) {
+        if ($isProduct) {
+            $seoSlug = $slug.'-'.$id;
+            return route('product_detail', ['slug' => $seoSlug]);
+        }
+        return route('product_load_sub_cate', ['slug' => $slug, 'id' => $id]);
     }
 
-    $seoSlug = $slugChild.'-'.$id;
-
-    return route('product_index', ['category' => $slugCate, 'id' => $parentId, 'seo_slug' => $seoSlug]);
+    return route('product_load_cate', ['slug' => $slug]);
 }
-
 
 function getIdFromSlug($slug_input) 
 {
@@ -140,4 +141,18 @@ function getIdFromSlug($slug_input)
         return NULL;
     }
     return $id;
+}
+
+function formatPrice($number)
+{
+    $lang = \App::getLocale();
+
+    if ($lang === 'en') {
+        $rate = App\Settings::where('key', 'setting_rate')->first();
+        if ($rate !== NULL) {
+            $price = floor($number / $rate->value);
+            return number_format($price) . ' $';
+        }
+    }
+    return formatNumber($number) . ' đ';
 }

@@ -23,6 +23,10 @@
     @include('front.partial.favorite')
     <!-- END BEST PRICE -->
 
+    <!-- BEGIN RELATED PRODUCT -->
+    @include('front.partial.related')
+    <!-- END RELATED PRODUCT -->
+
     <!-- BEGIN COUNTRY AND SERVICE -->
     @include('front.partial.country_service')
     <!-- END COUNTRY AND SERVICE -->

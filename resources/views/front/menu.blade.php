@@ -22,7 +22,7 @@
                         <ul class="nav navbar-pills">
                             @foreach($categories as $id => $items)
                             <li class="nav-item" >
-                                <a href="{{ makeSlug($items['slug'], $id, $items['parent_id']) }}" title="{{ $items['title'] }}" class="nav-link"><span>{{ $items['title'] }}</span></a>
+                                <a href="{{ makeSlug($items['slug']) }}" title="{{ $items['title'] }}" class="nav-link"><span>{{ $items['title'] }}</span></a>
                                 <span class="nav-icon-direct" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >
                                     <i class="fa fa-angle-right" ></i>
                                 </span>
@@ -30,7 +30,7 @@
                                 <ul class="dropdown-menu">
                                     @foreach($items['childs'] as $sub)
                                     <li class="dropdown-submenu nav-item">
-                                        <a class="nav-link" href="{{ makeSlug($items['slug'], $sub['id'], $sub['parent_id'], $sub['slug']) }}" title="{{ $items['title'] }}" >{{ $sub['title'] }}</a>
+                                        <a class="nav-link" href="{{ makeSlug($sub['slug'], $sub['id'], false) }}" title="{{ $items['title'] }}" >{{ $sub['title'] }}</a>
                                     </li>
                                     @endforeach
                                 </ul>

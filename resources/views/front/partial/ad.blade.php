@@ -7,28 +7,25 @@
 
                         <div class="banner-box" data-place="groupBannerHome" >
                             <div class="row" >
+                                @if(count($cateHomes))
                                 <div class="col-sm-8" >
                                     <div class="row" >
 
                                         <div class="col-sm-12" >
                                             <div class="row">
+                                                @foreach($cateHomes as $itemH)
                                                 <div class="col-xs-6">
                                                     <div class="item-banner text-xs-center" >
-                                                        <a href="/" title="" class="banner-link" >
-                                                            <img src="{{ asset_front('dataimages/bn1.jpg') }}" alt="" class="img-fluid" >
+                                                        <a href="{{ makeSlug($itemH->slug) }}" title="{{ $itemH->title }}" class="banner-link" >
+                                                            {{ $itemH->title }}
                                                         </a>
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-6">
-                                                    <div class="item-banner text-xs-center" >
-                                                        <a href="/" title="" class="banner-link" >
-                                                            <img src="{{ asset_front('dataimages/bn2.jpg') }}" alt="" class="img-fluid" >
-                                                        </a>
-                                                    </div>
-                                                </div>
+                                                @endforeach
                                             </div>
                                         </div>
 
+                                        <!--
                                         <div class="col-sm-12" >
                                             <div class="row">
                                                 <div class="col-xs-6">
@@ -47,9 +44,10 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        -->
                                     </div>
                                 </div>
+                                @endif
                                 <div class="col-sm-4 col-xs-12" >
                                     <div class="item-banner text-xs-center" >
                                         <a href="/" title="" class="banner-link" >

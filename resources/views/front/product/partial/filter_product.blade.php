@@ -6,11 +6,14 @@
                     <button type="button" class="fa fa-bars pull-xs-left" data-toggle="collapse" href="#navFillter" aria-controls="navFillter>
                         <i class="fa fa-bars pull-xs-left" aria-hidden="true"></i>
                     </button>
-                    <span class="pull-xs-left" >
-                        GẠCH LÁT NỀN
-                    </span>
+                    <span class="pull-xs-left" >@if (isset($cateObj)) {{ $cateObj->title }} @endif</span>
                 </h2>
             </div>
+
+            <!-- BEGIN SUB CATEGORY -->
+            @include('front.product.partial.sub_category')
+            <!-- END SUB CATEGORY -->
+
             <div class="aside-content" >
                 <div class="navbar-toggleable-lg collapse in" id="navFillter" >
                     <div class="bar-fillter clearfix" >

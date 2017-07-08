@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\AdminBaseController;
 use Illuminate\Http\Request;
 use Validator;
+use Illuminate\Validation\Rule;
 use App\Categories;
 use App\CategoriesTranslate;
 
@@ -36,10 +37,18 @@ class CategoryController extends AdminBaseController
         $row = Categories::find($id);
         if ($row === NULL) {
             $request->session()->flash('error', trans('common.data_not_found'));
+            if (empty($parent_id)) {
+                return redirect(route('admin_category_main'));
+            }
+            return redirect(route('admin_category_sub', array('id' => $parent_id)));
         }
         $rows = CategoriesTranslate::where('category_id', $id)->get();
         if ($rows === NULL) {
             $request->session()->flash('error', trans('common.data_not_found'));
+            if (empty($parent_id)) {
+                return redirect(route('admin_category_main'));
+            }
+            return redirect(route('admin_category_sub', array('id' => $parent_id)));
         }
         $langs = \App\Languages::getResults();
 
@@ -50,6 +59,7 @@ class CategoryController extends AdminBaseController
             );
             foreach ($langs as $lang) {
                 $rules['title_'.$lang->iso2] = 'required|max:255';
+                $rules['slug_'.$lang->iso2] = 'required|unique_with:categories_translate,slug,category_id:<>'.$id.',language_code:'.$lang->iso2;
             }
 
             // run the validation rules on the inputs from the form

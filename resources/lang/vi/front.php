@@ -21,5 +21,19 @@ return [
         'index'                     => 'DANH MỤC',
         'view_all'                  => 'Xem tất cả'
     ],
-
+    'partial' => array(
+        'watched_title' => 'SẢN PHẨM BẠN ĐÃ XEM',
+        'related_title' => 'SẢN PHẨM LIÊN QUAN',
+        'best_price_title' => 'SẢN PHẨM <br />GIÁ TỐT',
+        'product_detail' => array(
+            'short_des' => 'Mô tả ngắn',
+            'source' => 'Xuất xứ',
+            'guarantee' => 'Bảo hành',
+            'delivery_location' => 'Địa điểm giao hàng',
+            'shipping_method' => 'Phương thức vận chuyển',
+            'payment_method' => 'Phương thức thanh toán',
+            'long_des' => 'CHI TIẾT sản phẩm',
+            'introduce_company' => 'Mô tả công ty',
+        ),
+    )
 ];

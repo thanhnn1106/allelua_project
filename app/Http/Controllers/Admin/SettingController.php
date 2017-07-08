@@ -22,10 +22,10 @@ class SettingController extends AdminBaseController
 
             $rules =  array(
                 'setting_rate'              => 'required|numeric|min:1',
-                'setting_link_facebook'     => 'required|url',
-                'setting_link_twitter'      => 'required|url',
-                'setting_link_youtube'      => 'required|url',
-                'setting_link_zalo'         => 'required|url',
+                'setting_link_facebook'     => 'nullable|url',
+                'setting_link_twitter'      => 'nullable|url',
+                'setting_link_youtube'      => 'nullable|url',
+                'setting_link_zalo'         => 'nullable|url',
             );
 
             // run the validation rules on the inputs from the form
@@ -36,37 +36,63 @@ class SettingController extends AdminBaseController
                             ->withInput();
             }
 
-            $data = array(
-                array(
-                    'key'   => 'setting_rate',
-                    'value' => $request->get('setting_rate'),
-                ),
-                array(
-                    'key'   => 'setting_link_facebook',
-                    'value' => $request->get('setting_link_facebook'),
-                ),
-                array(
-                    'key'   => 'setting_link_twitter',
-                    'value' => $request->get('setting_link_twitter'),
-                ),
-                array(
-                    'key'   => 'setting_link_youtube',
-                    'value' => $request->get('setting_link_youtube'),
-                ),
-                array(
-                    'key'   => 'setting_link_zalo',
-                    'value' => $request->get('setting_link_zalo'),
-                ),
+            $params = array(
+                'setting_rate' => $request->get('setting_rate'),
+                'setting_link_facebook' => $request->get('setting_link_facebook'),
+                'setting_link_twitter' => $request->get('setting_link_facebook'),
+                'setting_link_youtube' => $request->get('setting_link_youtube'),
+                'setting_link_zalo' => $request->get('setting_link_zalo'),
             );
-            foreach ($data as $item) {
-                $row = \App\Settings::where('key', $item['key'])->first();
-                if ($row !== null) {
-                    $row->value = $item['value'];
-                    $row->save();
-                }
-            }
 
-            $request->session()->flash('success', trans('common.update_success'));
+            $data = array();
+            if ( ! empty($params['setting_rate'])) {
+                $data[] = array(
+                    'key' => 'setting_rate',
+                    'value' => $params['setting_rate'],
+                );
+            }
+            if ( ! empty($params['setting_link_facebook'])) {
+                $data[] = array(
+                    'key' => 'setting_link_facebook',
+                    'value' => $params['setting_link_facebook'],
+                );
+            }
+            if ( ! empty($params['setting_link_twitter'])) {
+                $data[] = array(
+                    'key' => 'setting_link_twitter',
+                    'value' => $params['setting_link_twitter'],
+                );
+            }
+            if ( ! empty($params['setting_link_youtube'])) {
+                $data[] = array(
+                    'key' => 'setting_link_youtube',
+                    'value' => $params['setting_link_youtube'],
+                );
+            }
+            if ( ! empty($params['setting_link_zalo'])) {
+                $data[] = array(
+                    'key' => 'setting_link_zalo',
+                    'value' => $params['setting_link_zalo'],
+                );
+            }
+            if (count($data)) {
+                foreach ($data as $item) {
+                    $row = \App\Settings::where('key', $item['key'])->first();
+                    if ($row !== null) {
+                        $row->value = $item['value'];
+                        $row->save();
+                    } else {
+                        $row = new \App\Settings();
+                        $row->key = $item['key'];
+                        $row->value = $item['value'];
+                        $row->save();
+                    }
+                }
+
+                $request->session()->flash('success', trans('common.update_success'));
+            } else {
+                $request->session()->flash('success', trans('common.not_data_update'));
+            }
             return redirect(route('admin_setting_socical'));
         }
 
