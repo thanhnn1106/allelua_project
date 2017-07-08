@@ -92,13 +92,9 @@ class RegisterController extends Controller
             $validator = Validator::make($paramsAdd, $rules);
             // Return view and error message when data invalid
             if ($validator->fails()) {
-                $messages    = $validator->messages();
-                $messagesBag = "";
-                foreach ($messages->all() as $message) {
-                    $messagesBag .= $message . "<br>";
-                }
-
-                return redirect(route('seller_register'))->with('error', $messagesBag)->withInput();
+                return redirect()->route('seller_register')
+                            ->withErrors($validator)
+                            ->withInput();
             }
             $registerResult = $this->create($request->all());
             if ($registerResult) {

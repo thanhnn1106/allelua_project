@@ -10,7 +10,7 @@ use App\User;
 use App\Personal;
 use DB;
 
-class UserPersonalController extends BaseController
+class UserPersonalController extends AdminBaseController
 {
     /**
      * index
