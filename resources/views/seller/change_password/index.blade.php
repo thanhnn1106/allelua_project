@@ -1,7 +1,7 @@
 @extends('layout')
 @include('notifications')
 <h1>Seller change password</h1>
-<form action="{{ route('seller_change_password', array('id' => $id)) }}" method="post">
+<form action="{{ route('seller_change_password') }}" method="post">
     <div class="form-group">
         <label for="current_password">{{ trans('auth.change_password.lb_current_password') }}</label>
         <input type="password" class="form-control" id="current_password" name="current_password" placeholder="Enter current password" value="{{ old('current_password') }}" />

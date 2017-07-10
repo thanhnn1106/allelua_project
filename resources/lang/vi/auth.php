@@ -24,12 +24,4 @@ return [
         'lb_country'          => 'Quốc gia',
         'btn_register'        => 'Đăng ký',
     ],
-
-    'change_password' => [
-        'lb_current_password'     => 'Mật khẩu cũ',
-        'lb_new_password'         => 'Mật khẩu mới',
-        'lb_confirm_new_password' => 'Xác nhận mật khẩu mới',
-        'btn_save'                => 'Lưu',
-    ],
-
 ];

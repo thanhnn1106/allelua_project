@@ -58,10 +58,10 @@
                                         {{ trans('front.menu_seller.lb_post_management') }}
                                     </span>
                                 </a>
-                                <a aria-hidden="true" title="" href="{{ route('seller_inbox') }}">
+                                <a aria-hidden="true" title="" href="{{ route('seller_change_password') }}">
                                     <span class="dropdown-item">
-                                        <i class="fa fa-envelope-o"></i>
-                                        {{ trans('front.menu_seller.lb_inbox') }}
+                                        <i class="fa fa-cog"></i>
+                                        {{ trans('front.menu_seller.lb_change_password') }}
                                     </span>
                                 </a>
                                 <a aria-hidden="true" title="" href="{{ route('logout') }}">

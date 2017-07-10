@@ -17,9 +17,10 @@ class ManageController extends BaseController
 //        return view('admin.index', $data);
     }
 
-    public function changePasswordSeller(Request $request, $id)
+    public function changePasswordSeller(Request $request)
     {
         if ($request->isMethod('post')) {
+            $userId = $request->id;
             $params = $request->all();
             $rules = array(
                 'current_password' => 'required|min:8|max:32',
@@ -30,30 +31,27 @@ class ManageController extends BaseController
 
             // Return view and error message when data invalid
             if ($validator->fails()) {
-                $messages = $validator->messages();
-                $messagesBag = "";
-                foreach ($messages->all() as $message) {
-                    $messagesBag .= $message . "<br>";
-                }
 
-                return redirect('seller/change_password/' . $id)->with('error', $messagesBag)->withInput();
+                return redirect()->route('seller_change_password')
+                            ->withErrors($validator)
+                            ->withInput();
             } else {
-                $sellerInfo = User::find($id);
+                $sellerInfo = User::find($userId);
                 // Check current password
                 if (Hash::check($params['current_password'], $sellerInfo->password)) {
-                    $updateResult = User::updateSellerPassword($id, $params['new_password']);
+                    $updateResult = User::updateSellerPassword($userId, $params['new_password']);
                     if ($updateResult) {
                         $messagesBag = trans('common.change_password.msg_changed_password_success');
-                        return redirect('seller/change_password/' . $id)->with('success', $messagesBag)->withInput();
+                        return redirect('seller/change_password')->with('success', $messagesBag)->withInput();
                     }
                     $messagesBag = trans('common.change_password.msg_changed_password_failed');
-                    return redirect('seller/change_password/' . $id)->with('error', $messagesBag)->withInput();
+                    return redirect('seller/change_password')->with('error', $messagesBag)->withInput();
                 }
                 $messagesBag = trans('common.change_password.msg_invalid_current_password');
-                return redirect('seller/change_password/' . $id)->with('error', $messagesBag)->withInput();
+                return redirect('seller/change_password/')->with('error', $messagesBag)->withInput();
             }
         }
-        return view('seller.change_password.index', ['id' => $id]);
+        return view('seller.dashboard.change_password');
     }
 
     public function notification(Request $request)

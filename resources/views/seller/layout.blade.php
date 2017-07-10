@@ -112,10 +112,10 @@
                                                             </a>
                                                         </li>
                                                         <li class="nav-item" >
-                                                            <a href="{{ route('seller_inbox') }}" class="nav-link" >
+                                                            <a href="{{ route('seller_change_password') }}" class="nav-link" >
                                                                 <span>
-                                                                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                                                    {{ trans('front.menu_seller.lb_inbox') }}
+                                                                    <i class="fa fa-cog"></i>
+                                                                    {{ trans('front.menu_seller.lb_change_password') }}
                                                                 </span>
                                                             </a>
                                                         </li>
