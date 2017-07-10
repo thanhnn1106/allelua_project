@@ -15,7 +15,7 @@
                         {{ session('status') }}
                     </div>
                     @endif
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('password.request') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ route('reset_password') }}">
                         {{ csrf_field() }}
                         <div class="row">
                             <input type="hidden" name="token" value="{{ $token }}">

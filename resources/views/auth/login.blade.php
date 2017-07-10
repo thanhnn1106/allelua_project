@@ -13,24 +13,29 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-align-height="right"  data-bottom="20" >
                                     <div class="well-sign clearfix">
                                         <div class="clearfix" id="login" >
+                                            @if (session('success'))
+                                            <div class="alert alert-success">
+                                                {{ session('success') }}
+                                            </div>
+                                            @endif
                                             <h2>Khác hàng cũ</h2>
                                             <form action="{{ route('seller_login') }}" method="post">
                                                 <div class="form-group input-group-sm @if ($errors->has('email')) has-error @endif">
                                                     <label class="control-label">{{ trans('front.login_page.lb_email') }}</label>
-                                                    <input type="text" name="email" id="email" class="form-control border-corner" placeholder="..." value="" />
+                                                    <input type="text" name="email" id="email" class="form-control border-corner" placeholder="" value="" />
                                                     @if ($errors->has('email'))
                                                       <p class="help-block">{{ $errors->first('email') }}</p>
                                                     @endif
                                                 </div>
                                                 <div class="form-group input-group-sm @if ($errors->has('password')) has-error @endif">
                                                     <label class="control-label">{{ trans('front.login_page.lb_password') }}</label>
-                                                    <input type="password" name="password" id="password" class="form-control border-corner" placeholder="..." value="" />
+                                                    <input type="password" name="password" id="password" class="form-control border-corner" placeholder="" value="" />
                                                     @if ($errors->has('password'))
                                                       <p class="help-block">{{ $errors->first('password') }}</p>
                                                     @endif
                                                 </div>
                                                 <div class="form-group">
-                                                    <a class="forgotpw" href="{{ url('/password/reset') }}" title="Quên mật khẩu" data-neo="silling" data-from="#login" data-to="#recover-password">
+                                                    <a class="forgotpw" href="{{ route('password_request') }}" title="Quên mật khẩu" data-neo="silling" data-from="#login" data-to="#recover-password">
                                                         Quên mật khẩu
                                                     </a>
                                                 </div>

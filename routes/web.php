@@ -77,7 +77,10 @@ Route::group(['prefix' => 'seller'], function () {
     Route::match(['get', 'post'], 'new_post', 'Seller\ManageController@newPost')->name('seller_new_post');
     Route::match(['get', 'post'], 'post_management', 'Seller\ManageController@postManagement')->name('seller_post_management');
     Route::match(['get', 'post'], 'inbox', 'Seller\ManageController@inbox')->name('seller_inbox');
-    
 
+    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password_request');
+    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password_email');
+    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password_reset');
+    Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('reset_password');
 });
 Auth::routes();

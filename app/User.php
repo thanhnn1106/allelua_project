@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use DB;
+use App\Notifications\sendEmailResetPassword;
 
 class User extends Authenticatable
 {
@@ -101,4 +102,14 @@ class User extends Authenticatable
         return $result;
     }
 
+    /**
+     * Send link reset password. use App\Notifications\sendEmailResetPassword;
+     *
+     * @var array
+     * @author Nguyen Ngoc Thanh <thanh.nn1106@gmail.com>
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new sendEmailResetPassword($token));
+    }
 }
