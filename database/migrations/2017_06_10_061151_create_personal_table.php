@@ -19,6 +19,7 @@ class CreatePersonalTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('tax_code')->unique();
             $table->string('license_business', 255);
+            $table->tinyInteger('status')->comment('1=ok, 0=pending');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });

@@ -82,4 +82,18 @@ return [
         'ph_new_password'         => 'Nhập vào mật khẩu mới',
         'ph_confirm_new_password' => 'Nhập vào xác nhận mật khẩu mới',
     ],
+    'account_manage_page' => array(
+        'lb_title'               => 'Quản lý tài khoản',
+        'lb_company_name'        => 'Tên công ty',
+        'lb_taxcode'             => 'Mã số thuế',
+        'lb_license_business'    => 'Giấy phép kinh doanh',
+        'lb_bank_account_number' => 'Số tài khoản ngân hàng',
+        'lb_bank_name'           => 'Tên ngân hàng',
+        'lb_bank_address'        => 'Địa chỉ ngân hàng',
+        'lb_company_des_en'      => 'Company description',
+        'lb_company_des_vi'      => 'Giới thiệu công ty',
+        'lb_introduce_company'   => 'Giới thiệu công ty',
+        'btn_update'             => 'Cập nhật',
+        'btn_add'                => 'Thêm',
+    ),
 ];

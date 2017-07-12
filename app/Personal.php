@@ -36,6 +36,7 @@ class Personal extends Model
             ->update(array(
                 'tax_code'         => $params['tax_code'],
                 'license_business' => $params['license_business'],
+                'status'           => isset($params['status']) ? $params['status'] : 1,
         ));
 
         if ($response) {
@@ -52,6 +53,7 @@ class Personal extends Model
             'user_id'          => $params['seller_id'],
             'tax_code'         => $params['tax_code'],
             'license_business' => $params['license_business'],
+            'status'           => isset($params['status']) ? $params['status'] : 1,
         ]);
 
         if ($response) {

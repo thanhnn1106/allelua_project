@@ -149,8 +149,6 @@
             </footer>
             <!--END FOOTER-->
         </div>
-        
-
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset_front('js/tether/dist/js/tether.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset_front('js/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js') }}"></script>
