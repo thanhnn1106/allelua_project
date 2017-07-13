@@ -426,7 +426,12 @@ return [
                 'chau_2_hoc' => 'Chậu hai hộc',
                 'chau_2_hoc_1_canh' => 'Chậu 2 hộc 1 cánh',
                 'orders' => 'Chậu 2 hộc 1 cánh',
-            )
+            ),
+            'material' => array(
+                'chat_lieu_kim_loai' => 'Chất liệu kim loại',
+                'chat_lieu_da' => 'Chất liệu đá',
+                'chat_lieu_khac' => 'Chất liệu khác',
+            ),
         ),
         'bep_dat_ban' => array(
             'style' => array(

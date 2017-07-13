@@ -74,22 +74,51 @@ class Controller extends BaseController
         }
     }
 
-    protected function getStyle($objCate, $objSub)
+    protected function getStyle($cateType, $cateSubType = null)
     {
-        if ($objCate->type === 'gach_men') {
-            $hasKey = \Config::has("product.{$objCate->type}");
+        $data = array();
+        if ($cateType === 'gach_men') {
+            $hasKey = \Config::has("product.{$cateType}");
             if (!$hasKey) {
                 return '';
             }
-            $data = config("product.{$objCate->type}");
-        } else {
-            $hasKey = \Config::has("product.{$objCate->type}.{$objSub->type}");
+            $data = config("product.{$cateType}");
+        } else if ($cateSubType !== null) {
+            $hasKey = \Config::has("product.{$cateType}.{$cateSubType}");
             if (!$hasKey) {
                 return '';
             }
-            $data = config("product.{$objCate->type}.{$objSub->type}");
+            $data = config("product.{$cateType}.{$cateSubType}");
+//            $hasMaterial = \Config::has("product.{$cateType}.{$cateSubType}.material");
+//            if ($hasMaterial) {
+//                $data['material'] = config("product.{$cateType}.{$cateSubType}.material");
+//            }
+//            $hasKind = \Config::has("product.{$cateType}.{$cateSubType}.style");
+//            if ($hasKind) {
+//                $data['kind'] = config("product.{$cateType}.{$cateSubType}.style");
+//            }
         }
 
+        return $data;
+    }
+
+    protected function getPrice($data, $cateType, $cateSubType = null)
+    {
+        switch ($cateType) {
+            case 'gach_men':
+                $data['price'] = config('product.price_1');
+                break;
+            case 'may_cong_nghiep':
+                if(empty($cateSubType)) {
+                    $data['price'] = config('product.price_4');
+                } else {
+                    $data['price'] = config('product.price_4');
+                }
+                break;
+            default:
+                $data['price'] = config('product.price_3');
+                break;
+        }
         return $data;
     }
 }

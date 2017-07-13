@@ -15,6 +15,7 @@
                 <div class="nav-tabs-custom">
                     <div class="box-footer">
                         {{ csrf_field() }}
+                        <input type="file" name="data" />
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                     <ul class="nav nav-tabs">

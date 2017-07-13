@@ -99,7 +99,7 @@ class Categories extends Model
     public static function getCateSubCate($lang, $slug, $cateId = NULL) {
         $select = array('t1.*', 't2.title', 't2.slug');
         if ( ! empty($cateId)) {
-            $extend = array('t3.slug AS cate_slug', 't3.title AS cate_title');
+            $extend = array('t3.slug AS cate_slug', 't3.title AS cate_title', 't4.type AS cate_type');
             $select = array_merge($select, $extend);
         }
         $query = \DB::table('categories AS t1')
@@ -110,6 +110,7 @@ class Categories extends Model
         if ( ! empty($cateId)) {
             $query->join('categories_translate AS t3', 't3.category_id', '=', 't1.parent_id')
                 ->where('t1.id', $cateId);
+            $query->join('categories AS t4','t4.id', '=','t1.parent_id');
         }
 
         $row = $query->first();

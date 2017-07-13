@@ -156,3 +156,60 @@ function formatPrice($number)
     }
     return formatNumber($number) . ' đ';
 }
+function splitPrice($prices)
+{
+    $prices = array_keys($prices);
+    if (empty($prices)) {
+        return array();
+    }
+
+    $return = array();
+    foreach ($prices as $price) {
+        $keyTemp = $price;
+        if (preg_match('/^less_/', $price)) {
+            $return[$keyTemp] = str_replace('less_', ' <= ', $price);
+        } else if (preg_match('/^great_/', $price)) {
+            $return[$keyTemp] = str_replace('great_', ' >= ', $price);
+        } else {
+            $return[$keyTemp] = ' BETWEEN '.str_replace('_', ' AND ', $price);
+        }
+    }
+    return $return;
+}
+
+function formatPriceLang($price)
+{
+    $lang = \App::getLocale();
+
+    if (preg_match('/^less_/', $price)) {
+        $lbl = 'Dưới ';
+        if ($lang === 'en') {
+            $lbl = 'Under ';
+        }
+        $priceNew = str_replace('less_', '', $price);
+        return $lbl.  formatPrice($priceNew);
+
+    } else if (preg_match('/^great_/', $price)) {
+        $lbl = 'Trên ';
+        if ($lang === 'en') {
+            $lbl = 'Over ';
+        }
+        $priceNew = str_replace('great_', '', $price);
+        return $lbl.  formatPrice($priceNew);
+
+    } else {
+        $part = explode('_', $price);
+        $min = formatNumber($part[0]);
+        $max = formatNumber($part[1]);
+
+        return $min . '-'. $max;
+    }
+}
+function formatRouteSearch()
+{
+//    {{ URL::route('product_load_sub_cate', ['slug' => 'xxx', 'id' => '4', 'idxxxx'=>urlencode('con cò be bé'),'test_id'=>'77']) }}
+//    $currentRoute = \Route::currentRouteName();
+////    $routeName = $currentRoute->getName();
+////    $params = $currentRoute->getParameter('slug');
+//    var_dump(request()->route()->parameters);exit;
+}

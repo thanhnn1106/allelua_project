@@ -34,6 +34,16 @@ return [
             'long_des' => 'CHI TIẾT sản phẩm',
             'introduce_company' => 'Mô tả công ty',
         ),
+        'filter' => array(
+            'price_type' => 'THEO GIÁ',
+            'from_price' => 'GIÁ TỪ',
+            'color_type' => 'THEO MÀU SẮC',
+            'size_type' => 'THEO KÍCH CỠ',
+            'position_use_type' => 'VỊ TRÍ SỬ DỤNG',
+            'brand_type' => 'THEO THƯƠNG HIỆU',
+            'kind_type' => 'THEO KIỂU DÁNG',
+            'material_type' => 'THEO CHẤT LIỆU',
+        )
     ),
     'menu_seller' => [
         'lb_say_hi'             => 'Chào, ',

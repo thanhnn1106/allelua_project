@@ -61,6 +61,146 @@ class Product extends Model
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->where('t1.status', 1);
 
+        self::_query_param($query, $params);
+
+        $result = $query->paginate(LIMIT_ROW);
+
+        return $result;
+    }
+
+    public static function getBrandFilter($params)
+    {
+        $query = \DB::table('products AS t1')
+                ->select('t2.brand', \DB::raw('COUNT(t1.id) AS total'))
+                ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
+                ->where('t1.status', 1)
+                ->where('t2.brand', '!=', '')
+                ->whereNotNull('t2.brand')
+                ->groupBy('t2.brand');
+
+        self::_query_param($query, $params);
+
+        $result = $query->get();
+
+        return $result;
+    }
+
+    public static function getPositionUseFilter($params)
+    {
+        $query = \DB::table('products AS t1')
+                ->select('t1.position_use', \DB::raw('COUNT(t1.id) AS total'))
+                ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
+                ->where('t1.status', 1)
+                ->groupBy('t1.position_use');
+
+        self::_query_param($query, $params);
+
+        $result = $query->get();
+
+        return $result;
+    }
+
+    public static function getSizeFilter($params)
+    {
+        $query = \DB::table('products AS t1')
+                ->select('t1.size', \DB::raw('COUNT(t1.id) AS total'))
+                ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
+                ->where('t1.status', 1)
+                ->groupBy('t1.size');
+
+        self::_query_param($query, $params);
+
+        $result = $query->get();
+
+        return $result;
+    }
+
+    public static function getColorFilter($params)
+    {
+        $query = \DB::table('products AS t1')
+                ->select('t2.color', \DB::raw('COUNT(t1.id) AS total'))
+                ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
+                ->where('t1.status', 1)
+                ->where('t2.color', '!=', '')
+                ->whereNotNull('t2.color')
+                ->groupBy('t2.color');
+
+        self::_query_param($query, $params);
+
+        $result = $query->get();
+
+        return $result;
+    }
+
+    public static function getPriceFilter($params)
+    {
+        if (empty($params['price'])) {
+            return array();
+        }
+        $select = array();
+        foreach ($params['price'] as $key => $str) {
+            $select[] = 'COUNT(CASE WHEN t1.price'.$str.' THEN 1 END) AS '.$key;
+        }
+
+        $query = \DB::table('products AS t1')
+                ->select(\DB::raw(implode(',', $select)))
+                ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
+                ->where('t1.status', 1)
+                ->groupBy('t1.price');
+
+        self::_query_param($query, $params);
+
+        $result = $query->first();
+
+        return $result;
+    }
+
+    public static function getStyleFilter($params)
+    {
+        if (empty($params['style'])) {
+            return array();
+        }
+
+        $select = array();
+        foreach ($params['style'] as $itemKey) {
+            $select[] = "COUNT(CASE WHEN t1.style = '".$itemKey."' THEN 1 END) AS {$itemKey}";
+        }
+
+        $query = \DB::table('products AS t1')
+                ->select(\DB::raw(implode(',', $select)))
+                ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
+                ->where('t1.status', 1)
+                ->where('t1.style', '<>', '')
+                ->whereNotNull('t1.style')
+                ->groupBy('t1.style');
+
+
+        self::_query_param($query, $params);
+
+        $result = $query->first();
+
+        return $result;
+    }
+
+    public static function getMinMaxPriceFilter($params)
+    {
+        $query = \DB::table('products AS t1')
+                ->select(\DB::raw("MAX(t1.price) AS maxPrice, MIN(t1.price) AS minPrice"))
+                ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
+                ->where('t1.status', 1)
+                ->where('t1.price', '<>', '')
+                ->whereNotNull('t1.price');
+
+
+        self::_query_param($query, $params);
+
+        $result = $query->first();
+
+        return $result;
+    }
+
+    private static function _query_param($query, $params)
+    {
         if( ! empty($params['language_code'])) {
             $query->where('t2.language_code', $params['language_code']);
         }
@@ -70,10 +210,9 @@ class Product extends Model
         if( ! empty($params['sub_category_id'])) {
             $query->where('t1.sub_category_id', $params['sub_category_id']);
         }
-
-        $result = $query->paginate(LIMIT_ROW);
-
-        return $result;
+        if( ! empty($params['position_use'])) {
+            $query->whereIn('t1.position_use', (array) $params['position_use']);
+        }
     }
 
     public static function getProductWatched($lang) {
