@@ -10,3 +10,4 @@ Homestead.yaml
 npm-debug.log
 .env
 /nbproject/private/
+resources/lang/public/front/js/select2/docs/dist/.gitkeep

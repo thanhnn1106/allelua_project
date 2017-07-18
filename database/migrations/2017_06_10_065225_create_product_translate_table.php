@@ -23,7 +23,6 @@ class CreateProductTranslateTable extends Migration
             $table->string('slug', 255);
             $table->string('color', 255)->nullable();
             $table->string('brand', 255);
-            $table->string('material', 255)->nullable();
             $table->string('info_tech', 255)->nullable();
             $table->string('feature_highlight', 255)->nullable();
             $table->string('source', 255);

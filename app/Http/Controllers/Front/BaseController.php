@@ -88,7 +88,99 @@ class BaseController extends Controller
             'language_code' => $this->lang,
             'sub_category_id' => $subCateId,
         );
+
+        $params = $this->getParamSearch($request, $params);
+
         return \App\Product::getProductFilter($params);
+    }
+
+    protected function loadFilterAttr($loadStyles, $params)
+    {
+        $positionUses = NULL;
+        $sizes = NULL;
+        $prices = NULL;
+        $styles = NULL;
+        $materials = NULL;
+        $priceMinMax = NULL;
+
+        $brands = \App\Product::getBrandFilter($params);
+        if (isset($loadStyles['position_use'])) {
+            $paramBrand = $params;
+            $paramBrand['position_use'] = array_keys($loadStyles['position_use']);
+            $positionUses = \App\Product::getPositionUseFilter($paramBrand);
+        }
+        if (isset($loadStyles['size'])) {
+            $paramSize = $params;
+            $paramSize['size'] = array_keys($loadStyles['size']);
+            $sizes = \App\Product::getSizeFilter($paramSize);
+        }
+        if (isset($loadStyles['price'])) {
+            $paramPrice = $params;
+            $paramPrice['price'] = splitPrice($loadStyles['price']);
+            $prices = \App\Product::getPriceFilter($paramPrice);
+            $prices = array_filter((array)$prices, function($n) { 
+                return $n > 0;
+            });
+            $priceMinMax = \App\Product::getMinMaxPriceFilter($params);
+        }
+        if (isset($loadStyles['style'])) {
+            $paramStyle = $params;
+            $paramStyle['style'] = array_keys($loadStyles['style']);
+            $styles = \App\Product::getStyleFilter($paramStyle);
+            $styles = array_filter((array)$styles, function($n) { 
+                return $n > 0;
+            });
+        }
+        if (isset($loadStyles['material'])) {
+            $paramMaterial = $params;
+            $paramMaterial['material'] = array_keys($loadStyles['material']);
+            $materials = \App\Product::getMaterialFilter($paramMaterial);
+            $materials = array_filter((array)$materials, function($n) { 
+                return $n > 0;
+            });
+        }
+        $colors = \App\Product::getColorFilter($params);
+        return array(
+            'brands' => $brands,
+            'positionUses' => $positionUses,
+            'sizes' => $sizes,
+            'prices' => $prices,
+            'colors' => $colors,
+            'styles' => $styles,
+            'materials' => $materials,
+            'priceMinMax' => $priceMinMax,
+        );
+    }
+
+    protected function getParamSearch($request, $params)
+    {
+        $brand = $request->get('brand', null);
+        $pos = $request->get('pos', null);
+        $size = $request->get('size', null);
+        $color = $request->get('color', null);
+        $price = $request->get('price', null);
+
+        if ( ! empty($brand)) {
+            $params['search_brand'] = $brand;
+        }
+
+        if ( ! empty($pos)) {
+            $params['search_position_use'] = $pos;
+        }
+
+        if ( ! empty($size)) {
+            $params['search_size'] = $size;
+        }
+
+        if ( ! empty($color)) {
+            $params['search_color'] = $color;
+        }
+
+        if ( ! empty($price)) {
+            $params['search_price'] = splitPrice($price);
+        }
+
+        return $params;
     }
 
     protected function loadImageDetails($product)

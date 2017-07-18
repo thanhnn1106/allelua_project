@@ -64,6 +64,13 @@ return [
         '10000000_20000000' => '10000000-20000000',
         'great_20000000' => '20000000',
     ),
+    'price_4' => array(
+        'less_1000000' => '1000000',
+        '1000000_5000000' => '1000000-10000000',
+        '10000000_100000000' => '10000000-100000000',
+        '100000000_500000000' => '100000000-500000000',
+        'great_500000000' => '500000000',
+    ),
 
     'gach_men' => array(
         'position_use' => array(
@@ -187,10 +194,10 @@ return [
         ),
         'phu_kien_nha_tam' => array(
             'material' => array(
-                'dong_ma_crom' => 'product.thiet_bi_ve_sinh.phu_kien_nha_tam.style.dong_ma_crom',
-                'inox' => 'product.thiet_bi_ve_sinh.phu_kien_nha_tam.style.inox',
-                'su' => 'product.thiet_bi_ve_sinh.phu_kien_nha_tam.style.su',
-                'orders' => 'product.thiet_bi_ve_sinh.phu_kien_nha_tam.style.orders',
+                'dong_ma_crom' => 'product.thiet_bi_ve_sinh.phu_kien_nha_tam.material.dong_ma_crom',
+                'inox' => 'product.thiet_bi_ve_sinh.phu_kien_nha_tam.material.inox',
+                'su' => 'product.thiet_bi_ve_sinh.phu_kien_nha_tam.material.su',
+                'others' => 'product.thiet_bi_ve_sinh.phu_kien_nha_tam.material.others',
             ),
         ),
     ),
@@ -474,7 +481,12 @@ return [
                 'chau_2_hoc' => 'product.thiet_bi_nha_bep.chau_bep_chau_rua_chen.style.chau_2_hoc',
                 'chau_2_hoc_1_canh' => 'product.thiet_bi_nha_bep.chau_bep_chau_rua_chen.style.chau_2_hoc_1_canh',
                 'orders' => 'product.thiet_bi_nha_bep.chau_bep_chau_rua_chen.style.orders',
-            )
+            ),
+            'material' => array(
+                'chat_lieu_kim_loai' => 'product.thiet_bi_nha_bep.chau_bep_chau_rua_chen.material.chat_lieu_kim_loai',
+                'chat_lieu_da' => 'product.thiet_bi_nha_bep.chau_bep_chau_rua_chen.material.chat_lieu_da',
+                'chat_lieu_khac' => 'product.thiet_bi_nha_bep.chau_bep_chau_rua_chen.material.chat_lieu_khac',
+            ),
         ),
         'bep_dat_ban' => array(
             'style' => array(

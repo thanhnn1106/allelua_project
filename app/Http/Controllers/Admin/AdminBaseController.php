@@ -38,7 +38,7 @@ class AdminBaseController extends Controller
         $cateId    = $request->get('categories');
         $subCateId = $request->get('sub_categories');
 
-        $positionUses = $sizes = $styles = '';
+        $positionUses = $sizes = $styles = $material = '';
         $subCateRules = 'required|exists:categories,id';
         $objCate = \App\Categories::find($cateId);
         if ($objCate !== NULL) {
@@ -48,7 +48,7 @@ class AdminBaseController extends Controller
 
             $objSub = $objCate->subCategories()->find($subCateId);
             if ($objSub !== NULL) {
-                $data = $this->getStyle($objCate, $objSub);
+                $data = $this->getStyle($objCate->type, $objSub->type);
                 if(isset($data['position_use'])) {
                     $positionUses = 'required|in:'.  implode(',', array_keys($data['position_use']));
                 }
@@ -57,6 +57,9 @@ class AdminBaseController extends Controller
                 }
                 if(isset($data['style'])) {
                     $styles = 'required|in:'.  implode(',', array_keys($data['style']));
+                }
+                if(isset($data['material'])) {
+                    $material = 'required|in:'.  implode(',', array_keys($data['material']));
                 }
             }
         }
@@ -71,6 +74,7 @@ class AdminBaseController extends Controller
             'position_use'      => $positionUses,
             'size'              => $sizes,
             'style'             => $styles,
+            'material'          => $material,
             'seller_id'         => 'required|exists:users,id',
             'payment_method'    => 'required|in:'.implode(',', $listPayMethod),
             'shipping_method'   => 'required|in:'.implode(',', $listShipMethod),
@@ -108,16 +112,15 @@ class AdminBaseController extends Controller
         foreach ($langs as $lang) {
 
             $rules['title_'.$lang->iso2] = 'required|max:255';
-            $rules['color_'.$lang->iso2]  = 'required|max:255';
+            $rules['color_'.$lang->iso2]  = 'max:255';
             $rules['brand_'.$lang->iso2]  = 'required|max:255';
-            $rules['material_'.$lang->iso2]  = 'required|max:255';
-            $rules['info_tech_'.$lang->iso2]  = 'required|max:255';
-            $rules['feature_highlight_'.$lang->iso2]  = 'required|max:255';
+            $rules['info_tech_'.$lang->iso2]  = 'max:255';
+            $rules['feature_highlight_'.$lang->iso2]  = 'max:255';
             $rules['source_'.$lang->iso2]  = 'required|max:255';
-            $rules['guarantee_'.$lang->iso2]  = 'required|max:255';
+            $rules['guarantee_'.$lang->iso2]  = 'max:255';
             $rules['delivery_location_'.$lang->iso2]  = 'required|max:255';
-            $rules['detail_'.$lang->iso2]  = 'required|max:16777215';
-            $rules['form_product_'.$lang->iso2]  = 'required|max:16777215';
+            $rules['detail_'.$lang->iso2]  = 'max:16777215';
+            $rules['form_product_'.$lang->iso2]  = 'max:16777215';
         }
         return $rules;
     }

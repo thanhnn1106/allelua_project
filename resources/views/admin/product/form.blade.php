@@ -36,6 +36,7 @@
                                     <input type="hidden" id="hide_position_use" value="{{ $product->position_use or null }}" />
                                     <input type="hidden" id="hide_size" value="{{ $product->size or null }}" />
                                     <input type="hidden" id="hide_style" value="{{ $product->style or null }}" />
+                                    <input type="hidden" id="hide_material" value="{{ $product->material or null }}" />
                                     <input type="hidden" name="product_id" id="product_id" value="{{ $product->id or null }}" />
                                     <label class="control-label">Categories</label>
                                     <select name="categories" id="categories" url-cate="{{ route('ajax_product_load_cate') }}" class="form-control border-corner">
@@ -162,7 +163,6 @@
                                     $slug        = 'slug_'.$lang->iso2;
                                     $color       = 'color_'.$lang->iso2;
                                     $brand       = 'brand_'.$lang->iso2;
-                                    $material    = 'material_'.$lang->iso2;
                                     $infoTech    = 'info_tech_'.$lang->iso2;
                                     $featureHighlight = 'feature_highlight_'.$lang->iso2;
                                     $source           = 'source_'.$lang->iso2;
@@ -196,12 +196,6 @@
                                             <div class="form-group form-{{ $brand }}">
                                                 <label class="control-label">{{ trans('admin.product.'.$brand) }}</label>
                                                 <input type="text" class="form-control border-corner" name="{{ $brand }}" placeholder="Input ..." value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->brand : '' }}" />
-                                                  <p class="help-block"></p>
-                                            </div>
-
-                                            <div class="form-group form-{{ $material }}">
-                                                <label class="control-label">{{ trans('admin.product.'.$material) }}</label>
-                                                <input type="text" class="form-control border-corner" name="{{ $material }}" placeholder="Input ..." value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->material : '' }}" />
                                                   <p class="help-block"></p>
                                             </div>
 

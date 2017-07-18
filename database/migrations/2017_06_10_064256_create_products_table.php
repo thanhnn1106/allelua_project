@@ -31,6 +31,7 @@ class CreateProductsTable extends Migration
             $table->string('position_use', 50)->nullable();
             $table->string('size', 255)->nullable();
             $table->string('style', 255)->nullable();
+            $table->string('material', 255)->nullable();
             $table->bigInteger('view_number')->default(0)->comment('number view product');
             $table->tinyInteger('status')->comment('1=active, 0=inactive');
             $table->softDeletes();

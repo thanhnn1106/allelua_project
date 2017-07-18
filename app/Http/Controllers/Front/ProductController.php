@@ -7,6 +7,9 @@ use App\Http\Controllers\Front\BaseController;
 
 class ProductController extends BaseController
 {
+    public function __construct() {
+        parent::__construct();
+    }
     /**
      * Show the application dashboard.
      *
@@ -20,6 +23,8 @@ class ProductController extends BaseController
         $subCate = NULL;
         $products = NULL;
         $isFinalProduct = false;
+        $loadStyles = NULL;
+        $attrs = array();
 
         if ($cateObj !== NULL) {
             $arrCateId = (array) $cateObj->id;
@@ -33,9 +38,16 @@ class ProductController extends BaseController
             if($products->count() === $products->total()) {
                 $isFinalProduct = true;
             }
+            $loadStyles = $this->getStyle($cateObj->type);
+            $loadStyles = $this->getPrice($loadStyles, $cateObj->type);
+            $params = array(
+                'language_code' => $this->lang,
+                'category_id' => $cateObj->id,
+            );
+            $attrs = $this->loadFilterAttr($loadStyles, $params);
         }
 
-        return view('front.product.index', [
+        $dataView = [
             'cateObj' => $cateObj,
             'subCate' => $subCate,
             'productWatched' => $this->loadProductWatched(),
@@ -43,7 +55,12 @@ class ProductController extends BaseController
             'arrMenuBestPrice' => $this->loadMenuBestPrice($productBestPrice),
             'products' => $products,
             'isFinalProduct' => $isFinalProduct,
-        ]);
+            'loadStyles' => $loadStyles,
+            'urlSearch' => route('product_load_cate', array('slug' => $slug))
+        ];
+        $dataView = array_merge($dataView, $attrs);
+
+        return view('front.product.index', $dataView);
     }
 
     public function loadSub(Request $request, $slug, $id)
@@ -53,6 +70,8 @@ class ProductController extends BaseController
         $productBestPrice = NULL;
         $products = NULL;
         $isFinalProduct = false;
+        $loadStyles = NULL;
+        $attrs = array();
 
         if ($cateObj !== NULL) {
             $arrCateId = (array) $cateObj->id;
@@ -62,16 +81,29 @@ class ProductController extends BaseController
             if($products->count() === $products->total()) {
                 $isFinalProduct = true;
             }
+            $loadStyles = $this->getStyle($cateObj->cate_type, $cateObj->type);
+            $loadStyles = $this->getPrice($loadStyles, $cateObj->cate_type, $cateObj->type);
+
+            $params = array(
+                'language_code' => $this->lang,
+                'sub_category_id' => $cateObj->id,
+            );
+            $attrs = $this->loadFilterAttr($loadStyles, $params);
         }
 
-        return view('front.product.index', [
+        $dataView = [
             'cateObj' => $cateObj,
             'productWatched' => $this->loadProductWatched(),
             'productBestPrice' => $productBestPrice,
             'arrMenuBestPrice' => $this->loadMenuBestPrice($productBestPrice),
             'products' => $products,
             'isFinalProduct' => $isFinalProduct,
-        ]);
+            'loadStyles' => $loadStyles,
+            'urlSearch' => route('product_load_sub_cate', array('slug' => $slug, 'id' => $id))
+        ];
+        $dataView = array_merge($dataView, $attrs);
+
+        return view('front.product.index', $dataView);
     }
 
     public function detail(Request $request, $slug)

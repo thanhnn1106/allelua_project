@@ -244,7 +244,8 @@ function loadStyleCategory(cateId, subCateId)
             subCategory: subCateId,
             positionUse: $('#hide_position_use').val(),
             size: $('#hide_size').val(),
-            style: $('#hide_style').val()
+            style: $('#hide_style').val(),
+            material: $('#hide_material').val()
         },
         cache: false,
         success: function (data) {

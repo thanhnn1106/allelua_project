@@ -62,8 +62,9 @@ class ProductController extends AjaxBaseController
                 'positionUse' => $request->get('positionUse', NULL),
                 'size' => $request->get('size', NULL),
                 'style' => $request->get('style', NULL),
+                'material' => $request->get('material', NULL),
             );
-            $data = $this->getStyle($obj, $objSub, $params);
+            $data = $this->getStyle($obj->type, $objSub->type);
             $html = \View::make('ajax.product.style', array('data' => $data, 'params' => $params))->render();
 
             return response()->json(array('error' => 0, 'result' => $html));

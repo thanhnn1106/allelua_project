@@ -156,3 +156,97 @@ function formatPrice($number)
     }
     return formatNumber($number) . ' đ';
 }
+function splitPrice($prices)
+{
+    $prices = array_keys($prices);
+    if (empty($prices)) {
+        return array();
+    }
+
+    $return = array();
+    foreach ($prices as $price) {
+        $keyTemp = $price;
+        if (preg_match('/^less_/', $price)) {
+            $return[$keyTemp] = str_replace('less_', ' <= ', $price);
+        } else if (preg_match('/^great_/', $price)) {
+            $return[$keyTemp] = str_replace('great_', ' >= ', $price);
+        } else {
+            $return[$keyTemp] = ' BETWEEN '.str_replace('_', ' AND ', $price);
+        }
+    }
+    return $return;
+}
+
+function formatPriceLang($price)
+{
+    $lang = \App::getLocale();
+
+    if (preg_match('/^less_/', $price)) {
+        $lbl = 'Dưới ';
+        if ($lang === 'en') {
+            $lbl = 'Under ';
+        }
+        $priceNew = str_replace('less_', '', $price);
+        return $lbl.  formatPrice($priceNew);
+
+    } else if (preg_match('/^great_/', $price)) {
+        $lbl = 'Trên ';
+        if ($lang === 'en') {
+            $lbl = 'Over ';
+        }
+        $priceNew = str_replace('great_', '', $price);
+        return $lbl.  formatPrice($priceNew);
+
+    } else {
+        $part = explode('_', $price);
+        $min = formatNumber($part[0]);
+        $max = formatNumber($part[1]);
+
+        return $min . '-'. $max;
+    }
+}
+function formatRouteSearch($params)
+{
+    $params = (array) $params;
+    if (count($params)) {
+        foreach ($params as $key => $param) {
+            $params[$key] = urlencode($param);
+        }
+    }
+
+    $brand = request()->get('brand');
+    $positionUse = request()->get('pos');
+    $color = request()->get('color');
+    $kind = request()->get('kind');
+    $material = request()->get('material');
+    $price = request()->get('price');
+    $size = request()->get('size');
+
+    if ( ! empty($brand)) {
+        $params['brand'] = $brand;
+    }
+    if ( ! empty($positionUse)) {
+        $params['pos'] = $positionUse;
+    }
+    if ( ! empty($color)) {
+        $params['color'] = $color;
+    }
+    if ( ! empty($kind)) {
+        $params['kind'] = $kind;
+    }
+    if ( ! empty($material)) {
+        $params['material'] = $material;
+    }
+    if ( ! empty($price)) {
+        $params['price'] = $price;
+    }
+    if ( ! empty($size)) {
+        $params['size'] = $size;
+    }
+
+    $currentRoute = \Route::currentRouteName();
+    $routeParams = request()->route()->parameters;
+    $routeParams = array_merge($routeParams, $params);
+
+    return URL::route($currentRoute, $routeParams);
+}
