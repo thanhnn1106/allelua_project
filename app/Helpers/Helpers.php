@@ -205,11 +205,48 @@ function formatPriceLang($price)
         return $min . '-'. $max;
     }
 }
-function formatRouteSearch()
+function formatRouteSearch($params)
 {
-//    {{ URL::route('product_load_sub_cate', ['slug' => 'xxx', 'id' => '4', 'idxxxx'=>urlencode('con cò be bé'),'test_id'=>'77']) }}
-//    $currentRoute = \Route::currentRouteName();
-////    $routeName = $currentRoute->getName();
-////    $params = $currentRoute->getParameter('slug');
-//    var_dump(request()->route()->parameters);exit;
+    $params = (array) $params;
+    if (count($params)) {
+        foreach ($params as $key => $param) {
+            $params[$key] = urlencode($param);
+        }
+    }
+
+    $brand = request()->get('brand');
+    $positionUse = request()->get('pos');
+    $color = request()->get('color');
+    $kind = request()->get('kind');
+    $material = request()->get('material');
+    $price = request()->get('price');
+    $size = request()->get('size');
+
+    if ( ! empty($brand)) {
+        $params['brand'] = $brand;
+    }
+    if ( ! empty($positionUse)) {
+        $params['pos'] = $positionUse;
+    }
+    if ( ! empty($color)) {
+        $params['color'] = $color;
+    }
+    if ( ! empty($kind)) {
+        $params['kind'] = $kind;
+    }
+    if ( ! empty($material)) {
+        $params['material'] = $material;
+    }
+    if ( ! empty($price)) {
+        $params['price'] = $price;
+    }
+    if ( ! empty($size)) {
+        $params['size'] = $size;
+    }
+
+    $currentRoute = \Route::currentRouteName();
+    $routeParams = request()->route()->parameters;
+    $routeParams = array_merge($routeParams, $params);
+
+    return URL::route($currentRoute, $routeParams);
 }

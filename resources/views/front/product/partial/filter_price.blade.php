@@ -28,14 +28,18 @@
     <div class="body-item-fillter clearfix" data-place="itemBodyFillter" data-id="" >
         @foreach($prices as $keyP => $totalP)
         <div class="list-fillter-check clearfix" >
-            <div class="coz-item-check" data-id="" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
                 <div class="coz-check-box" >
                     <span></span>
                     <input type="checkbox" name="size[]" value="{{ $keyP }}" style="display: none" data-id="" data-input="size" >
                 </div>
+                -->
                 <div class="coz-lable-check" >
-                    <span class="coz-label-check-inner">{{ formatPriceLang($keyP) }}</span>
-                    <span class="coz-sum-check" >({{ formatNumber($totalP) }})</span>
+                    <a href="{{ formatRouteSearch(array('price' => $keyP)) }}">
+                        <span class="coz-label-check-inner">{{ formatPriceLang($keyP) }}</span>
+                        <span class="coz-sum-check" >({{ formatNumber($totalP) }})</span>
+                    </a>
                 </div>
             </div>
         </div>

@@ -11,14 +11,18 @@
     <div class="body-item-fillter clearfix" data-place="itemBodyFillter" data-id="" >
         @foreach($colors as $color)
         <div class="list-fillter-check clearfix" >
-            <div class="coz-item-check" data-id="" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
                 <div class="coz-check-box" >
                     <span></span>
                     <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
                 </div>
+                -->
                 <div class="coz-lable-check" >
-                    <span class="coz-label-check-inner">{{ $color->color }}</span>
-                    <span class="coz-sum-check" >({{ formatNumber($color->total) }})</span>
+                    <a href="{{ formatRouteSearch(array('color' => $color->color)) }}">
+                        <span class="coz-label-check-inner">{{ $color->color }}</span>
+                        <span class="coz-sum-check" >({{ formatNumber($color->total) }})</span>
+                    </a>
                 </div>
             </div>
         </div>

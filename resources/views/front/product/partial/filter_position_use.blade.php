@@ -14,14 +14,18 @@
     <div class="body-item-fillter clearfix" data-place="itemBodyFillter" data-id="" >
         @foreach($positionUses as $position)
         <div class="list-fillter-check clearfix" >
-            <div class="coz-item-check" data-id="" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
                 <div class="coz-check-box" >
                     <span></span>
                     <input type="checkbox" name="position_use[]" value="{{ $position->position_use }}" style="display: none" data-id="" data-input="position_use" >
                 </div>
+                -->
                 <div class="coz-lable-check" >
-                    <span class="coz-label-check-inner">@if(isset($posDefine[$position->position_use])){{ trans($posDefine[$position->position_use]) }} @endif</span>
-                    <span class="coz-sum-check" >({{ formatNumber($position->total) }})</span>
+                    <a href="{{ formatRouteSearch(array('pos' => $position->position_use)) }}">
+                        <span class="coz-label-check-inner">@if(isset($posDefine[$position->position_use])){{ trans($posDefine[$position->position_use]) }} @endif</span>
+                        <span class="coz-sum-check" >({{ formatNumber($position->total) }})</span>
+                    </a>
                 </div>
             </div>
         </div>

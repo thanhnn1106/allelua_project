@@ -89,14 +89,10 @@ class Controller extends BaseController
                 return '';
             }
             $data = config("product.{$cateType}.{$cateSubType}");
-//            $hasMaterial = \Config::has("product.{$cateType}.{$cateSubType}.material");
-//            if ($hasMaterial) {
-//                $data['material'] = config("product.{$cateType}.{$cateSubType}.material");
-//            }
-//            $hasKind = \Config::has("product.{$cateType}.{$cateSubType}.style");
-//            if ($hasKind) {
-//                $data['kind'] = config("product.{$cateType}.{$cateSubType}.style");
-//            }
+            $hasMaterial = \Config::has("product.{$cateType}.{$cateSubType}.material");
+            if ($hasMaterial) {
+                $data['material'] = config("product.{$cateType}.{$cateSubType}.material");
+            }
         }
 
         return $data;

@@ -11,7 +11,7 @@
     <div class="body-item-fillter clearfix" data-place="itemBodyFillter" data-id="" >
         @foreach($brands as $brand)
         <div class="list-fillter-check clearfix" >
-            <div class="coz-item-check" data-id="" >
+            <div class="coz-item-check_xxx">
                 <!--
                 <div class="coz-check-box" >
                     <span></span>
@@ -19,8 +19,10 @@
                 </div>
                 -->
                 <div class="coz-lable-check" >
-                    <span class="coz-label-check-inner">{{ $brand->brand }}</span>
-                    <span class="coz-sum-check" >({{ formatNumber($brand->total) }})</span>
+                    <a href="{{ formatRouteSearch(array('brand' => $brand->brand)) }}">
+                        <span class="coz-label-check-inner">{{ $brand->brand }}</span>
+                        <span class="coz-sum-check" >({{ formatNumber($brand->total) }})</span>
+                    </a>
                 </div>
             </div>
         </div>

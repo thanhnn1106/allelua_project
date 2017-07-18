@@ -141,8 +141,8 @@ return [
             'material' => array(
                 'dong_ma_crom' => 'Đồng mạ Crom',
                 'inox' => 'Inox',
-                'su' => 'Inox',
-                'orders' => 'Inox',
+                'su' => 'Sứ',
+                'others' => 'Khác',
             ),
         ),
     ),

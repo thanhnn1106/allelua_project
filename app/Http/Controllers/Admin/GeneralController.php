@@ -16,26 +16,6 @@ class GeneralController extends AdminBaseController
      */
     public function index(Request $request)
     {
-        echo phpinfo();
-        if (!extension_loaded('imagick')){
-    echo 'imagick not installed';
-}
-exit;
-        if ($_POST) {
-            $filename = $_FILES['data']['tmp_name'];
-            $img = new Imagick(realpath($filename));
-            $profiles = $img->getImageProfiles("icc", true);
-            $img->stripImage();
-
-            if(!empty($profiles)) {
-               $img->profileImage("icc", $profiles['icc']);
-            }
-    
-            $xxx = exif_read_data($img, 0, true);
-            echo '<pre>';print_r($xxx);
-            exit;
-        }
-
         $generals = Generals::getResults();
 
         $arrGeneral = array();

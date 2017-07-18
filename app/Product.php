@@ -48,7 +48,7 @@ class Product extends Model
       
 //        self::query_params($query, $params);
 
-        $query->groupBy('t2.id')
+        $query->groupBy('t1.id')
                 ->orderBy('t1.created_at', 'DESC');
 
         $result = $query->paginate(LIMIT_ROW);
@@ -182,6 +182,33 @@ class Product extends Model
         return $result;
     }
 
+    public static function getMaterialFilter($params)
+    {
+        if (empty($params['material'])) {
+            return array();
+        }
+
+        $select = array();
+        foreach ($params['material'] as $itemKey) {
+            $select[] = "COUNT(CASE WHEN t1.material = '".$itemKey."' THEN 1 END) AS {$itemKey}";
+        }
+
+        $query = \DB::table('products AS t1')
+                ->select(\DB::raw(implode(',', $select)))
+                ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
+                ->where('t1.status', 1)
+                ->where('t1.material', '<>', '')
+                ->whereNotNull('t1.material')
+                ->groupBy('t1.material');
+
+
+        self::_query_param($query, $params);
+
+        $result = $query->first();
+
+        return $result;
+    }
+
     public static function getMinMaxPriceFilter($params)
     {
         $query = \DB::table('products AS t1')
@@ -210,8 +237,22 @@ class Product extends Model
         if( ! empty($params['sub_category_id'])) {
             $query->where('t1.sub_category_id', $params['sub_category_id']);
         }
+        if( ! empty($params['brand'])) {
+            $query->whereIn('t2.brand', (array) $params['brand']);
+        }
         if( ! empty($params['position_use'])) {
             $query->whereIn('t1.position_use', (array) $params['position_use']);
+        }
+        if( ! empty($params['color'])) {
+            $query->whereIn('t2.color', (array) $params['color']);
+        }
+        if( ! empty($params['size'])) {
+            $query->whereIn('t1.size', (array) $params['size']);
+        }
+
+        // Filter
+        if( ! empty($params['search_brand'])) {
+            $query->where('t2.brand', $params['search_brand']);
         }
     }
 

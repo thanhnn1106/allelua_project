@@ -194,10 +194,10 @@ return [
         ),
         'phu_kien_nha_tam' => array(
             'material' => array(
-                'dong_ma_crom' => 'product.thiet_bi_ve_sinh.phu_kien_nha_tam.style.dong_ma_crom',
-                'inox' => 'product.thiet_bi_ve_sinh.phu_kien_nha_tam.style.inox',
-                'su' => 'product.thiet_bi_ve_sinh.phu_kien_nha_tam.style.su',
-                'orders' => 'product.thiet_bi_ve_sinh.phu_kien_nha_tam.style.orders',
+                'dong_ma_crom' => 'product.thiet_bi_ve_sinh.phu_kien_nha_tam.material.dong_ma_crom',
+                'inox' => 'product.thiet_bi_ve_sinh.phu_kien_nha_tam.material.inox',
+                'su' => 'product.thiet_bi_ve_sinh.phu_kien_nha_tam.material.su',
+                'others' => 'product.thiet_bi_ve_sinh.phu_kien_nha_tam.material.others',
             ),
         ),
     ),

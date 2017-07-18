@@ -162,6 +162,7 @@ class ProductController extends AdminBaseController
             'position_use' => $request->get('position_use'),
             'size' => $request->get('size'),
             'style' => $request->get('style'),
+            'material' => $request->get('material'),
             'status' => $request->get('status'),
             'created_at' => date('Y-m-d H:i:s'),
         );
@@ -192,7 +193,6 @@ class ProductController extends AdminBaseController
                 'slug'                 => formatSlug($request->get('title_'.$lang->iso2)),
                 'color'                => $request->get('color_'.$lang->iso2),
                 'brand'                => $request->get('brand_'.$lang->iso2),
-                'material'             => $request->get('material_'.$lang->iso2),
                 'info_tech'            => $request->get('info_tech_'.$lang->iso2),
                 'feature_highlight'    => $request->get('feature_highlight_'.$lang->iso2),
                 'source'               => $request->get('source_'.$lang->iso2),

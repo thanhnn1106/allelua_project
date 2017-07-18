@@ -2,6 +2,7 @@
     $positionUse = isset($params['positionUse']) ? $params['positionUse'] : NULL;
     $size = isset($params['size']) ? $params['size'] : NULL;
     $style = isset($params['style']) ? $params['style'] : NULL;
+    $material = isset($params['material']) ? $params['material'] : NULL;
 ?>
 @if(isset($data['position_use']))
 <div class="form-group form-position_use">
@@ -35,6 +36,18 @@
         <option value="">------</option>
         @foreach($data['style'] as $keyStyle => $itemStyle)
         <option value="{{ $keyStyle }}" @if($style == $keyStyle) selected="selected" @endif>{{ trans($itemStyle) }}</option>
+        @endforeach`
+    </select>
+    <p class="help-block"></p>
+</div>
+@endif
+@if(isset($data['material']))
+<div class="form-group form-material">
+    <label class="control-label">Material</label>
+    <select name="material" id="material" class="form-control border-corner">
+        <option value="">------</option>
+        @foreach($data['material'] as $keyMaterial => $itemMaterial)
+        <option value="{{ $keyMaterial }}" @if($material == $keyMaterial) selected="selected" @endif>{{ trans($itemMaterial) }}</option>
         @endforeach`
     </select>
     <p class="help-block"></p>

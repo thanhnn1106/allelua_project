@@ -9,7 +9,6 @@ class ProductController extends BaseController
 {
     public function __construct() {
         parent::__construct();
-        var_dump(url()->current());
     }
     /**
      * Show the application dashboard.
@@ -72,7 +71,7 @@ class ProductController extends BaseController
         $products = NULL;
         $isFinalProduct = false;
         $loadStyles = NULL;
-        $attrs = NULL;
+        $attrs = array();
 
         if ($cateObj !== NULL) {
             $arrCateId = (array) $cateObj->id;
