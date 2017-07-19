@@ -57,13 +57,31 @@ class Product extends Model
 
     public static function getProductFilter($params) {
         $query = \DB::table('products AS t1')
-                ->select('t1.id', 't1.price', 't1.image_rand', 't1.image_real', 't2.title', 't2.slug')
+                ->select('t1.id', 't1.price', 't1.image_rand', 't1.image_real', 't2.title', 't2.slug', 't1.category_id')
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->where('t1.status', 1);
 
         self::_query_param($query, $params);
 
         $result = $query->paginate(LIMIT_ROW);
+
+        return $result;
+    }
+
+    public static function getCategoryMatchingSearch($params) {
+        $query = \DB::table('products AS t1')
+                ->select('t1.category_id', 't3.type', 't4.slug', \DB::raw('COUNT(t1.category_id) AS total'))
+                ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
+                ->join('categories AS t3', 't3.id', '=', 't1.category_id')
+                ->join('categories_translate AS t4', 't4.category_id', '=', 't3.id')
+                ->where('t1.status', 1)
+                ->groupBy('t1.category_id')
+                ->orderBy('total', 'DESC')
+                ->limit(1);
+
+        self::_query_param($query, $params);
+
+        $result = $query->first();
 
         return $result;
     }
@@ -254,6 +272,27 @@ class Product extends Model
         if( ! empty($params['search_brand'])) {
             $query->where('t2.brand', $params['search_brand']);
         }
+        if( ! empty($params['search_position_use'])) {
+            $query->where('t1.position', $params['search_position_use']);
+        }
+        if( ! empty($params['search_size'])) {
+            $query->where('t1.size', $params['search_size']);
+        }
+        if( ! empty($params['search_color'])) {
+            $query->where('t2.color', $params['search_color']);
+        }
+        if( ! empty($params['search_price'])) {
+            $query->whereRaw(\DB::raw("t1.price " . $params['search_price']));
+        }
+        if( ! empty($params['search_kind'])) {
+            $query->where('t1.style', $params['search_kind']);
+        }
+        if( ! empty($params['search_material'])) {
+            $query->where('t1.material', $params['search_material']);
+        }
+        if( ! empty($params['keyword'])) {
+            $query->where('t2.title', 'LIKE', "%{$params['keyword']}%");
+        }
     }
 
     public static function getProductWatched($lang) {
@@ -268,17 +307,19 @@ class Product extends Model
         return $query->get();
     }
 
-    public static function getProductBestPrice($lang, $arrCateId) {
+    public static function getProductBestPrice($lang, $arrCateId = NULL) {
         $query = \DB::table('products AS t1')
                 ->select('t1.id', 't1.category_id', 't1.price', 't1.image_rand', 't1.image_real', 't2.title', 't2.slug', 't3.title AS cate_title', 't3.slug AS cate_slug')
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->leftJoin('categories_translate AS t3', 't3.id', '=', 't1.category_id')
                 ->where('t1.status', 1)
                 ->where('t2.language_code', $lang)
-                ->whereIn('t1.category_id', $arrCateId)
                 ->groupBy('t1.category_id')
                 ->orderBy('t1.price', 'ASC')
                 ->limit(20);
+        if ( ! empty($arrCateId)) {
+            $query->whereIn('t1.category_id', (array) $arrCateId);
+        }
 
         return $query->get();
     }

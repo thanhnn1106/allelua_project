@@ -18,6 +18,7 @@ Route::get('/', 'Front\HomeController@index')->name('home');
 Route::get('{lt}/lang', 'Front\LangController@index')->name('home_lang');
 
 // Product
+Route::get('search', 'Front\SearchController@index')->name('search_page');
 Route::get('products/{slug}', 'Front\ProductController@loadCate')->name('product_load_cate');
 Route::get('products/detail/{slug}', 'Front\ProductController@detail')->name('product_detail');
 Route::get('products/{slug}/{id}', 'Front\ProductController@loadSub')->name('product_load_sub_cate');
@@ -71,11 +72,16 @@ Route::group(['prefix' => 'seller'], function () {
     Route::get('dashboard', 'Seller\DashBoardController@index')->name('seller_dashboard');
     Route::match(['get', 'post'], 'register', 'Auth\RegisterController@register')->name('seller_register');
     Route::match(['get', 'post'], 'login', 'Auth\LoginController@loginSeller')->name('seller_login');
+
     Route::match(['get', 'post'], 'change_password', 'Seller\ManageController@changePasswordSeller')->name('seller_change_password');
-    Route::match(['get', 'post'], 'notification', 'Seller\ManageController@notification')->name('seller_notification');
     Route::match(['get', 'post'], 'account_management', 'Seller\ManageController@accountManagement')->name('seller_account_management');
     Route::match(['get', 'post'], 'new_post', 'Seller\ManageController@newPost')->name('seller_new_post');
-    Route::match(['get', 'post'], 'post_management', 'Seller\ManageController@postManagement')->name('seller_post_management');
+    Route::match(['get', 'post'], 'inbox', 'Seller\ManageController@inbox')->name('seller_inbox');
+
+    // Product
+    Route::get('product/list', 'Seller\ProductController@index')->name('seller_product_list');
+    Route::get('product/create', 'Seller\ProductController@create')->name('seller_product_create');
+    Route::get('product/edit', 'Seller\ProductController@edit')->name('seller_product_edit');
 
     Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password_request');
     Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password_email');

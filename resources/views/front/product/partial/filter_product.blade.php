@@ -3,7 +3,7 @@
         <aside class="box-aside fillter" data-align-height="left"  data-bottom="20" >
             <div class="aside-heading">
                 <h2 class="title-aside clearfix" >
-                    <button type="button" class="fa fa-bars pull-xs-left" data-toggle="collapse" href="#navFillter" aria-controls="navFillter>
+                    <button type="button" class="fa fa-bars pull-xs-left" data-toggle="collapse" href="#navFillter" aria-controls="navFillter">
                         <i class="fa fa-bars pull-xs-left" aria-hidden="true"></i>
                     </button>
                     <span class="pull-xs-left" >@if (isset($cateObj)) {{ $cateObj->title }} @endif</span>
