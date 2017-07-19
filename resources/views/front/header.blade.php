@@ -34,12 +34,6 @@
                             </a>
                             <div class="dropdown-menu">
                                 @if (Auth::user())
-                                <a aria-hidden="true" title="" href="{{ route('seller_notification') }}">
-                                    <span class="dropdown-item">
-                                        <i class="fa fa-bell-o"></i>
-                                        {{ trans('front.menu_seller.lb_notification') }}
-                                    </span>
-                                </a>
                                 <a aria-hidden="true" title="" href="{{ route('seller_account_management') }}">
                                     <span class="dropdown-item">
                                         <i class="fa fa-user-o"></i>

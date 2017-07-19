@@ -80,14 +80,6 @@
                                                 <nav class="navbar-toggleable-lg collapse in" >
                                                     <ul class="nav navbar-pills nav-member">
                                                         <li class="nav-item" >
-                                                            <a href="{{ route('seller_notification') }}" class="nav-link" >
-                                                                <span>
-                                                                    <i class="fa fa-bell-o" aria-hidden="true"></i> 
-                                                                    {{ trans('front.menu_seller.lb_notification') }}
-                                                                </span>
-                                                            </a>
-                                                        </li>
-                                                        <li class="nav-item" >
                                                             <a href="{{ route('seller_account_management') }}" class="nav-link" >
                                                                 <span>
                                                                     <i class="fa fa-user-o" aria-hidden="true"></i>

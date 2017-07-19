@@ -106,4 +106,8 @@ return [
         'btn_update'             => 'Cập nhật',
         'btn_add'                => 'Thêm',
     ),
+    'product' => array(
+        'published' => 'Sản phẩm đã đăng',
+        'make_product' => 'Đăng sản phầm'
+    )
 ];
