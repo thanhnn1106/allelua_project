@@ -104,7 +104,7 @@
                                                             </a>
                                                         </li>
                                                         <li class="nav-item" >
-                                                            <a href="{{ route('seller_post_management') }}" class="nav-link" >
+                                                            <a href="{{ route('seller_product_list') }}" class="nav-link" >
                                                                 <span>
                                                                     <i class="fa fa-folder-o" aria-hidden="true"></i>
                                                                     {{ trans('front.menu_seller.lb_post_management') }}

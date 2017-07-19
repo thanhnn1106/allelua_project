@@ -52,7 +52,7 @@
                                         {{ trans('front.menu_seller.lb_new_post') }}
                                     </span>
                                 </a>
-                                <a aria-hidden="true" title="" href="{{ route('seller_post_management') }}">
+                                <a aria-hidden="true" title="" href="{{ route('seller_product_list') }}">
                                     <span class="dropdown-item">
                                         <i class="fa fa-folder-o"></i>
                                         {{ trans('front.menu_seller.lb_post_management') }}
@@ -155,9 +155,9 @@
                     </div>
                     <div class="form-search" >
                         <div class="inner-form-search clearfix" >
-                            <form class="fsearch clearfix" action="">
+                            <form class="fsearch clearfix" action="{{ route('search_page') }}">
                                 <div class="inner-fsearch" >
-                                    <input type="text" name="q" class="input-search" >
+                                    <input type="text" name="q" class="input-search" value="{{ app('request')->input('q') }}" >
                                     <button class="btn-search" >
                                         <i class="fa fa-search" aria-hidden="true"></i>
                                     </button>

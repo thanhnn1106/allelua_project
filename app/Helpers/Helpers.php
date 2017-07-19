@@ -166,15 +166,27 @@ function splitPrice($prices)
     $return = array();
     foreach ($prices as $price) {
         $keyTemp = $price;
-        if (preg_match('/^less_/', $price)) {
-            $return[$keyTemp] = str_replace('less_', ' <= ', $price);
-        } else if (preg_match('/^great_/', $price)) {
-            $return[$keyTemp] = str_replace('great_', ' >= ', $price);
-        } else {
-            $return[$keyTemp] = ' BETWEEN '.str_replace('_', ' AND ', $price);
-        }
+        $return[$keyTemp] = formatPriceQuery($price);
+//        if (preg_match('/^less_/', $price)) {
+//            $return[$keyTemp] = str_replace('less_', ' <= ', $price);
+//        } else if (preg_match('/^great_/', $price)) {
+//            $return[$keyTemp] = str_replace('great_', ' >= ', $price);
+//        } else {
+//            $return[$keyTemp] = ' BETWEEN '.str_replace('_', ' AND ', $price);
+//        }
     }
     return $return;
+}
+
+function formatPriceQuery($price)
+{
+    if (preg_match('/^less_/', $price)) {
+        return str_replace('less_', ' <= ', $price);
+    } else if (preg_match('/^great_/', $price)) {
+        return str_replace('great_', ' >= ', $price);
+    } else {
+        return ' BETWEEN '.str_replace('_', ' AND ', $price);
+    }
 }
 
 function formatPriceLang($price)

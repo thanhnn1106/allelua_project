@@ -53,7 +53,7 @@ class BaseController extends Controller
         return \App\Product::getProductWatched($this->lang);
     }
 
-    protected function loadProductBestPrice($arrCateId)
+    protected function loadProductBestPrice($arrCateId = NULL)
     {
         return \App\Product::getProductBestPrice($this->lang, $arrCateId);
     }
@@ -71,6 +71,15 @@ class BaseController extends Controller
             }
         }
         return $arrMenuBestPrice;
+    }
+
+    protected function loadProductSearch($request)
+    {
+        $params = array(
+            'language_code' => $this->lang,
+            'keyword' => $request->get('q'),
+        );
+        return \App\Product::getProductFilter($params);
     }
 
     protected function loadProductCateFilter($request, $cateId)
@@ -159,25 +168,35 @@ class BaseController extends Controller
         $size = $request->get('size', null);
         $color = $request->get('color', null);
         $price = $request->get('price', null);
+        $kind = $request->get('kind', null);
+        $material = $request->get('material', null);
 
         if ( ! empty($brand)) {
-            $params['search_brand'] = $brand;
+            $params['search_brand'] = urldecode($brand);
         }
 
         if ( ! empty($pos)) {
-            $params['search_position_use'] = $pos;
+            $params['search_position_use'] = urldecode($pos);
         }
 
         if ( ! empty($size)) {
-            $params['search_size'] = $size;
+            $params['search_size'] = urldecode($size);
         }
 
         if ( ! empty($color)) {
-            $params['search_color'] = $color;
+            $params['search_color'] = urldecode($color);
         }
 
         if ( ! empty($price)) {
-            $params['search_price'] = splitPrice($price);
+            $params['search_price'] = formatPriceQuery($price);
+        }
+
+        if ( ! empty($kind)) {
+            $params['search_kind'] = urldecode($kind);
+        }
+
+        if ( ! empty($material)) {
+            $params['search_material'] = urldecode($material);
         }
 
         return $params;
