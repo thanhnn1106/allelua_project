@@ -42,14 +42,19 @@ class Product extends Model
 
     public static function getListBySeller($params = array()) {
         $query = \DB::table('products AS t1')
-                ->select('t1.*', 't3.company_name', \DB::raw('GROUP_CONCAT(t2.title separator "|===|") as category_names'))
-                ->leftJoin('categories_translate AS t2', 't2.category_id', '=', 't1.category_id')
-                ->leftJoin('users AS t3', 't3.id', '=', 't1.user_id');
-      
+                ->select('t1.*', 't2.title', 't2.slug', 't2.color', 't2.brand', 't2.info_tech', 't2.feature_highlight', 't2.source', 't2.guarantee',
+                        't3.title AS category_title')
+                ->leftJoin('product_translate AS t2', 't2.product_id', '=', 't1.id')
+                ->leftJoin('categories_translate AS t3', function ($join) use ($params) {
+                    $join->on('t3.category_id', '=', 't1.category_id');
+                    if( ! empty($params['language_code'])) {
+                        $join->where('t3.language_code', $params['language_code']);
+                    }
+                });
+
         self::query_params($query, $params);
 
-        $query->groupBy('t1.id')
-                ->orderBy('t1.created_at', 'DESC');
+        $query->orderBy('t1.created_at', 'DESC');
 
         $result = $query->paginate(LIMIT_ROW);
         return $result;
@@ -60,6 +65,9 @@ class Product extends Model
         if ( ! empty($params['language_code'])) {
             $query->where('t2.language_code', $params['language_code']);
         }
+        if ( ! empty($params['user_id'])) {
+            $query->where('t1.user_id', $params['user_id']);
+        }
     }
 
     public static function getList($params = array()) {
@@ -67,8 +75,7 @@ class Product extends Model
                 ->select('t1.*', 't3.company_name', \DB::raw('GROUP_CONCAT(t2.title separator "|===|") as category_names'))
                 ->leftJoin('categories_translate AS t2', 't2.category_id', '=', 't1.category_id')
                 ->leftJoin('users AS t3', 't3.id', '=', 't1.user_id');
-      
-//        self::query_params($query, $params);
+     
 
         $query->groupBy('t1.id')
                 ->orderBy('t1.created_at', 'DESC');

@@ -57,7 +57,7 @@
             <button type="submit" class="btn btn-primary">Login</button>
         </div>
         <div class="col-xs-4">
-            <a href="{{ url('/seller/register') }}">Register</a>
+            <a href="{{ route('seller_register') }}">Register</a>
             <a href="{{ url('/password/reset') }}">FORGET YOUR PASSWORD?</a>
         </div>
         <!-- /.col -->

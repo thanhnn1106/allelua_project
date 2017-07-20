@@ -11,6 +11,14 @@
 |
 */
 
+Route::match(['get', 'post'], 'register', 'Auth\RegisterController@register')->name('seller_register');
+Route::match(['get', 'post'], 'account/login', 'Auth\LoginController@loginSeller')->name('seller_login');
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password_request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password_email');
+Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password_reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('reset_password');
+
+
 Route::match(['get', 'post'], 'administrator/login', 'Auth\LoginController@loginAdmin')->name('admin_login');
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
@@ -67,11 +75,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], func
     Route::post('product/save', 'Admin\ProductController@save')->name('ajax_admin_product_save');
 });
 
-//Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], function () {
-Route::group(['prefix' => 'seller'], function () {
+Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], function () {
     Route::get('dashboard', 'Seller\DashBoardController@index')->name('seller_dashboard');
-    Route::match(['get', 'post'], 'register', 'Auth\RegisterController@register')->name('seller_register');
-    Route::match(['get', 'post'], 'login', 'Auth\LoginController@loginSeller')->name('seller_login');
 
     Route::match(['get', 'post'], 'change_password', 'Seller\ManageController@changePasswordSeller')->name('seller_change_password');
     Route::match(['get', 'post'], 'account_management', 'Seller\ManageController@accountManagement')->name('seller_account_management');
@@ -82,10 +87,5 @@ Route::group(['prefix' => 'seller'], function () {
     Route::get('product/list', 'Seller\ProductController@index')->name('seller_product_list');
     Route::get('product/create', 'Seller\ProductController@create')->name('seller_product_create');
     Route::get('product/edit', 'Seller\ProductController@edit')->name('seller_product_edit');
-
-    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password_request');
-    Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password_email');
-    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password_reset');
-    Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('reset_password');
 });
-Auth::routes();
+//Auth::routes();

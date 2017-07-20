@@ -108,6 +108,16 @@ return [
     ),
     'product' => array(
         'published' => 'Sản phẩm đã đăng',
-        'make_product' => 'Đăng sản phầm'
+        'make_product' => 'Đăng sản phầm',
+        'id' => '#ID',
+        'image' => 'Hình',
+        'category' => 'Category',
+        'title' => 'Tên sản phẩm',
+        'price' => 'Giá',
+        'quantity' => 'Số lượng',
+        'quantity_limit' => 'Số lượng order',
+        'status' => 'Trạng thái',
+        'payment_method' => 'Phương thức thanh toán',
+        'shipping_method' => 'Phương thức vận chuyển',
     )
 ];

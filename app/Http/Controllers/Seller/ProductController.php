@@ -17,7 +17,11 @@ class ProductController extends BaseController
      */
     public function index(Request $request)
     {
-        $products = Product::getList();
+        $params = array(
+            'language_code' => $this->lang,
+            'user_id' => 1//\Auth::user()->id,
+        );
+        $products = Product::getListBySeller($params);
 
         return view('seller/product/list', [
             'products'      => $products,

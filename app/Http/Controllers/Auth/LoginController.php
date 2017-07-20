@@ -146,7 +146,7 @@ class LoginController extends Controller
                     );
                     // attempt to do the login
                     if (Auth::attempt($userData)) {
-                        return redirect(route('home'));
+                        return redirect(route('seller_dashboard'));
                     } else {
 
                         return view('auth/login', ['message' => trans('auth.login_failed')]);

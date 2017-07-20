@@ -70,7 +70,7 @@
                                         {{ trans('front.menu_seller.lb_sign_in') }}
                                     </span>
                                 </a>
-                                <a title="" href="{{ route('seller_register') }}">
+                                <a title="" href="#">
                                     <span class="dropdown-item">
                                         {{ trans('front.menu_seller.lb_sign_up') }}
                                     </span>

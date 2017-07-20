@@ -13,89 +13,59 @@
                     </div>
 
                     <p class="allelua-note-payment">
-                        <a href="{{ route('seller_product_create') }}">
-                            <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i>{{ trans('front.product.make_product') }}</span>
-                        </a>
+                        <a href="{{ route('seller_product_create') }}" title="txt_edit_profile_here" class="allelua-btn allelua-btn-active">{{ trans('front.product.make_product') }}</a>
                     </p>
+
                     <div class="table-responsive">
                         <table class="allelua-table-cart">
                             <thead>
                                 <tr>
-                                    <th class="text-xs-center" width="20" >#Id</th>
-                                    <th class="text-xs-center" width="100" >Hình</th>
-                                    <th>Tên</th>
+                                    <th class="text-xs-center" width="20" >{{ trans('front.product.id') }}</th>
+                                    <th class="text-xs-center">{{ trans('front.product.image') }}</th>
+                                    <th>{{ trans('front.product.category') }}</th>
+                                    <th>{{ trans('front.product.title') }}</th>
+                                    <th>{{ trans('front.product.price') }}</th>
+                                    <th>{{ trans('front.product.quantity') }}</th>
+                                    <th>{{ trans('front.product.quantity_limit') }}</th>
+                                    <th>{{ trans('front.product.status') }}</th>
+                                    <th>{{ trans('front.product.payment_method') }}</th>
+                                    <th>{{ trans('front.product.shipping_method') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @if (count($products)==0)
+                                <tr><td colspan="9" align="center">Data not found</td></tr>
+                                @else
+                                @foreach($products as $product)
                                 <tr>
-                                    <td class="text-right text-xs-center" width="20">
-                                        #2635  
-                                    </td>
+                                    <td class="text-right text-xs-center" width="20">{{ $product->id }}</td>
                                     <td class="text-right" width="100">
-                                        <a href="" target="_blank" >
-                                            <img src="dataimages/p1.jpg" class="img-fluid">
+                                        @if(isset($product->image_rand) && isset($product->image_real))
+                                        <?php $imageThumb = getImage($product->image_rand, $product->image_real); ?>
+                                        <a href="{{ $imageThumb['href'] }}" target="_blank" >
+                                            <img src="{{ $imageThumb['img_src'] }}" class="img-fluid">
                                         </a>
+                                        @endif
                                     </td>
-                                    <td class="text-right" >
-                                        <a href="" target="_blank" >
-                                            Bộ 5 nồi xửng chảo inox nắp kính Fivestars FS08CG1 (Trắng kim)
-                                        </a>
-                                    </td>
+                                    <td class="text-right">{{ $product->category_title }}</td>
+                                    <td class="text-right"><a href="">{{ $product->title }}</a></td>
+                                    <td class="text-right text-xs-center" >{{ formatPrice($product->price) }}</td>
+                                    <td class="text-right">{{ formatNumber($product->quantity) }}</td>
+                                    <td class="text-right">{{ formatNumber($product->quantity_limit) }}</td>
+                                    <td class="text-right">{{ getProductStatus($product->status) }}</td>
+                                    <td class="text-right">{{ getPaymentMethod($product->payment_method) }}</td>
+                                    <td class="text-right">{{ getShippingMethod($product->shipping_method) }}</td>
                                 </tr>
-
-                                <tr>
-                                    <td class="text-right text-xs-center" width="20">
-                                        #2635  
-                                    </td>
-                                    <td class="text-right" width="100">
-                                        <a href="" target="_blank" >
-                                            <img src="dataimages/p1.jpg" class="img-fluid">
-                                        </a>
-                                    </td>
-                                    <td class="text-right" >
-                                        <a href="" target="_blank" >
-                                            Bộ 5 nồi xửng chảo inox nắp kính Fivestars FS08CG1 (Trắng kim)
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="text-right text-xs-center" width="20">
-                                        #2635  
-                                    </td>
-                                    <td class="text-right" width="100">
-                                        <a href="" target="_blank" >
-                                            <img src="dataimages/p1.jpg" class="img-fluid">
-                                        </a>
-                                    </td>
-                                    <td class="text-right" >
-                                        <a href="" target="_blank" >
-                                            Bộ 5 nồi xửng chảo inox nắp kính Fivestars FS08CG1 (Trắng kim)
-                                        </a>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td class="text-right text-xs-center" width="20">
-                                        #2635  
-                                    </td>
-                                    <td class="text-right" width="100">
-                                        <a href="" target="_blank" >
-                                            <img src="dataimages/p1.jpg" class="img-fluid">
-                                        </a>
-                                    </td>
-                                    <td class="text-right" >
-                                        <a href="" target="_blank" >
-                                            Bộ 5 nồi xửng chảo inox nắp kính Fivestars FS08CG1 (Trắng kim)
-                                        </a>
-                                    </td>
-                                </tr>
+                                @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
 
                     <div class="nav-paging clearfix" >
                         <nav class="pull-right">
+                            {{ $products->links() }}
+                            <!--
                             <ul class="pagination">
                                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
                                 <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -103,15 +73,9 @@
                                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
                             </ul>
+                            -->
                         </nav>
                     </div>
-
-                    <p class="allelua-wrap-edit-profile allelua-text-right">
-                        <a href="/" title="txt_edit_profile_here" class="allelua-btn allelua-btn-active">
-                            Đăng tin mới                               
-                        </a>
-                    </p>
-
                 </div>
 
             </div>

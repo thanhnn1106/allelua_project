@@ -69,7 +69,7 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
                                     <div class="well-sign" data-align-height="left"  data-bottom="20" >
                                         <h2>Khách hàng mới</h2>
-                                        <a href="{{ url('/seller/register') }}" class="btn btn-primary">ĐĂNG KÝ TÀI KHOẢN</a>
+                                        <a href="{{ route('seller_register') }}" class="btn btn-primary">ĐĂNG KÝ TÀI KHOẢN</a>
                                     </div>
                                 </div>
                             </div>
