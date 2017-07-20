@@ -23,6 +23,8 @@ Route::match(['get', 'post'], 'administrator/login', 'Auth\LoginController@login
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/', 'Front\HomeController@index')->name('home');
+Route::get('/home', 'Front\HomeController@index')->name('home');
+Route::get('/trang-chu', 'Front\HomeController@index')->name('home');
 Route::get('{lt}/lang', 'Front\LangController@index')->name('home_lang');
 
 // Product
