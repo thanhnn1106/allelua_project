@@ -107,7 +107,8 @@ return [
         'btn_add'                => 'Thêm',
     ),
     'product' => array(
-        'published' => 'Sản phẩm đã đăng',
+        'list_product' => 'Danh sách sản phẩm',
+        'published' => 'Sản phẩm đã tạo',
         'make_product' => 'Đăng sản phầm',
         'id' => '#ID',
         'image' => 'Hình',

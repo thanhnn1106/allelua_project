@@ -117,4 +117,29 @@ class Controller extends BaseController
         }
         return $data;
     }
+
+    protected function loadProductWatched()
+    {
+        return \App\Product::getProductWatched($this->lang);
+    }
+
+    protected function loadProductBestPrice($arrCateId = NULL)
+    {
+        return \App\Product::getProductBestPrice($this->lang, $arrCateId);
+    }
+
+    protected function loadMenuBestPrice($productBestPrice)
+    {
+        $arrMenuBestPrice = array();
+        if(count($productBestPrice)) {
+            foreach ($productBestPrice as $item) {
+                $arrMenuBestPrice[] = array(
+                    'id' => $item->category_id,
+                    'title' => $item->cate_title,
+                    'slug' => $item->cate_slug,
+                );
+            }
+        }
+        return $arrMenuBestPrice;
+    }
 }

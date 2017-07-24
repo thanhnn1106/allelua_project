@@ -120,6 +120,11 @@ class ProductController extends BaseController
         if ($product !== NULL) {
             $personal = \App\Personal::getPersonalInfo($this->lang, $product->user_id);
             $productImages = $this->loadImageDetails($product);
+
+            // Update view number of product
+            $objProduct = \App\Product::find($product->id);
+            $objProduct->view_number = $objProduct->view_number + 1;
+            $objProduct->save();
         }
 
         return view('front.product.detail', [

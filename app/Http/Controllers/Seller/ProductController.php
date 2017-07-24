@@ -24,12 +24,13 @@ class ProductController extends BaseController
         $products = Product::getListBySeller($params);
 
         return view('seller/product/list', [
-            'products'      => $products,
+            'products'          => $products,
         ]);
     }
 
     public function add(Request $request)
     {
+        /*
         $langs = \App\Languages::getResults();
         $categories = \App\Categories::getRowByLang($this->lang);
 
@@ -38,9 +39,15 @@ class ProductController extends BaseController
             'languages' => $langs,
             'categories' => $categories,
             'product' => null,
+        );*/
+        $productBestPrice = $this->loadProductBestPrice();
+        $data = array(
+            'productBestPrice' => $productBestPrice,
+            'arrMenuBestPrice' => $this->loadMenuBestPrice($productBestPrice),
+            'productWatched' => $this->loadProductWatched(),
         );
 
-        return view('admin/product/form', $data);
+        return view('seller/product/form', $data);
     }
 
     public function edit(Request $request, $id)
