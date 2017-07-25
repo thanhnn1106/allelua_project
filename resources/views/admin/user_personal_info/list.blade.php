@@ -29,9 +29,9 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <table id="sortable" class="table table-bordered table-striped dataTable table-hover">
-                                      @if (count($userPersonalInfoList)==0)
+                                    @if (count($userPersonalInfoList)==0)
                                         <tr><td colspan="6" align="center">Data not found</td></tr>
-                                      @else
+                                    @else
                                         <thead>
                                         <tr>
                                             <th>#ID</th>
@@ -67,7 +67,7 @@
                                         </tr>
                                         @endforeach
                                         </tbody>
-                                        @endif
+                                    @endif
                                     </table>
                                 </div>
                             </div>

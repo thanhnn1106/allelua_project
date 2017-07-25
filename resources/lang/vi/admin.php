@@ -73,4 +73,17 @@ return [
         'btn_edit'               => 'Sửa',
         'btn_action'             => 'Thao tác',
     ),
+    'static_page' => array(
+        'lb_title_list'          => 'Quản lý các trang thông tin về Allelua.com',
+        'lb_title_list_small'    => 'Danh sách trang',
+        'lb_title_edit_small'    => 'Chỉnh sửa',
+        'lb_page_name'           => 'Tên trang',
+        'lb_slug'                => 'Slug',
+        'lb_page_content'        => 'Nội dung',
+        'lb_status_show'         => 'Trạng thái hiển thị',
+        'lb_action'              => 'Thao tác',
+        'btn_edit'               => 'Sửa',
+        'btn_save'               => 'Lưu',
+        'btn_back'               => 'Trở về',
+    ),
 ];
