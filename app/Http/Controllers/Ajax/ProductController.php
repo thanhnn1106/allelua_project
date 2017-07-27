@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ajax;
 use App\Http\Controllers\Ajax\AjaxBaseController;
 use Illuminate\Http\Request;
 use App\Categories;
+use Auth;
 
 class ProductController extends AjaxBaseController
 {
@@ -65,7 +66,13 @@ class ProductController extends AjaxBaseController
                 'material' => $request->get('material', NULL),
             );
             $data = $this->getStyle($obj->type, $objSub->type);
-            $html = \View::make('ajax.product.style', array('data' => $data, 'params' => $params))->render();
+
+            $roleAdmin = config('config.allelua.roles.administrator');
+            if(Auth::user()->role_id === $roleAdmin) {
+                $html = \View::make('ajax.product.style', array('data' => $data, 'params' => $params))->render();
+            } else {
+                $html = \View::make('ajax.product.seller_style', array('data' => $data, 'params' => $params))->render();
+            }
 
             return response()->json(array('error' => 0, 'result' => $html));
         } catch (Exception $e) {

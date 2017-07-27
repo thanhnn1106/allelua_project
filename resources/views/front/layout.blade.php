@@ -69,5 +69,6 @@
     type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
     </script><script>$zopim( function() {
     })</script><!--End of Zopim Live Chat Script-->
+    @yield('footer_script')
     </body>
 </html>
