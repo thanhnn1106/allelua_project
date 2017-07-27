@@ -32,19 +32,14 @@
                                 Thông tin sản phẩm đăng lên
                             </h1>
                             <div class="content-form" >
-                                @include('notifications')
-                                <div class="alert alert-danger alert-block" style="display:none;">
-                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                    <p></p>
-                                </div>
-                                <form id="form_product" name="form_product" class="clearfix" action="{{ route('seller_product_save') }}" id="seller_form_product" method="POST" >
+                                <form class="clearfix" action="{{ route('ajax_admin_product_save') }}" id="seller_form_product" method="POST" >
                                     <div class="form-group" >
                                         <div class="row" >
                                             <div class="col-sm-offset-4" >
-                                                <button type="button" onclick="window.location.href='{{ route('seller_product_list') }}';" class="btn btn-style btn-heart" title="{{ trans('front.product.destroy_product') }}" >
+                                                <button type="button" class="btn btn-style btn-heart" title="" >
                                                     <span>{{ trans('front.product.destroy_product') }}</span>
                                                 </button>
-                                                <button id="save_product" type="button" class="btn btn-style" title="{{ trans('front.product.make_product') }}" >
+                                                <button type="submit" class="btn btn-style" title="" >
                                                     <span>{{ trans('front.product.make_product') }}</span>
                                                 </button>
                                                 {{ csrf_field() }}
@@ -88,9 +83,6 @@
                                                 <div class="input-error"></div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div id="load_style">
-
                                     </div>
 
                                     <div class="form-group" >
@@ -212,7 +204,7 @@
                                             </div>
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12" >
                                                 <div class="list-img-upload clearfix" >
-                                                        <input id="image_detail" name="files[]" type="file" multiple class="file-loading" accept="image/*" />
+                                                    <input id="image_detail" name="files[]" type="file" multiple class="file-loading" accept="image/*" />
                                                     <!--<div class="img-prevew-upload box-body"></div>-->
                                                 </div>
                                             </div>
@@ -432,6 +424,7 @@
     $initPreviewConfig = isset($productImages['initialPreviewConfig']) ? json_encode($productImages['initialPreviewConfig']) : NULL;
 ?>
 @endsection
+
 @section('footer_script')
 <script>
 var product_ajax_upload = '{{ route('ajax_product_upload_file') }}';
@@ -458,4 +451,5 @@ var initialPreviewImg = initialPreviewConfigImg = [];
 <script src="{{ asset('/plugins/bootstrap-fileinput/js/locales/lang.js') }}"></script>
 <script src="{{ asset('/plugins/bootstrap-fileinput/themes/explorer/theme.js') }}"></script>
 <script src="{{ asset_front('js/product.js') }}"></script>
+
 @endsection

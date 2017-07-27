@@ -89,5 +89,6 @@ Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], fu
     Route::get('product/list', 'Seller\ProductController@index')->name('seller_product_list');
     Route::get('product/create', 'Seller\ProductController@add')->name('seller_product_create');
     Route::get('product/edit', 'Seller\ProductController@edit')->name('seller_product_edit');
+    Route::post('product/save', 'Seller\ProductController@save')->name('seller_product_save');
 });
 //Auth::routes();

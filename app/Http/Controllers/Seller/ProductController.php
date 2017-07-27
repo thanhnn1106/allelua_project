@@ -30,18 +30,14 @@ class ProductController extends BaseController
 
     public function add(Request $request)
     {
-        /*
         $langs = \App\Languages::getResults();
         $categories = \App\Categories::getRowByLang($this->lang);
 
+        $productBestPrice = $this->loadProductBestPrice();
         $data = array(
-            'title'     => 'Add new',
             'languages' => $langs,
             'categories' => $categories,
             'product' => null,
-        );*/
-        $productBestPrice = $this->loadProductBestPrice();
-        $data = array(
             'productBestPrice' => $productBestPrice,
             'arrMenuBestPrice' => $this->loadMenuBestPrice($productBestPrice),
             'productWatched' => $this->loadProductWatched(),
