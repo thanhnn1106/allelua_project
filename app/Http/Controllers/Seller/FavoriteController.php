@@ -44,4 +44,34 @@ class FavoriteController extends BaseController
             return response()->json(array('error' => 1, 'result' => trans('common.error_exception_ajax')));
         }
     }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function lists(Request $request)
+    {
+        $cateHomes = \App\Categories::getCategoryHome($this->lang, null);
+        $categories = $this->loadMenuFront();
+        $arrCateId = array_keys($categories);
+
+        $productBestPrice = $this->loadProductBestPrice($arrCateId);
+        $params = array(
+            'language_code' => $this->lang,
+            'user_id' => Auth::user()->id,
+        );
+        $products = Product::getProductFavorites($params);
+
+        return view('seller.favorite.info', [
+            'langs' => \App\Languages::getResults(),
+            'generals' => \App\Generals::getResultsByLang($this->lang),
+            'categories' => $categories,
+            'products' => $products,
+            'cateHomes' => $cateHomes,
+            'productWatched' => $this->loadProductWatched(),
+            'productBestPrice' => $productBestPrice,
+            'arrMenuBestPrice' => $this->loadMenuBestPrice($productBestPrice),
+        ]);
+    }
 }

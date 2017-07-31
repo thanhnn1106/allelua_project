@@ -78,14 +78,13 @@
                                 @endif
                             </div>
                         </div>
-                        <a href="/" class="link-menu-top hidden-sm-down" >
-                            <i class="ic i-heart" ></i>
-                            Danh mục yêu thích
-                        </a>
+                        @if (Auth::user())
+                        <a href="{{ route('seller_product_favorite_lists') }}" class="link-menu-top hidden-sm-down"><i class="ic i-heart" ></i>Danh mục yêu thích</a>
+                        @endif
                         <a href="/" class="link-menu-top" >
                             <span class="ic i-cart" >
                                 <span>                     
-                                    <span class="cartCount">0</span>                 
+                                    <span class="cartCount">0</span>
                                 </span>
                             </span>
                             <span class="hidden-md-down" >
@@ -99,33 +98,23 @@
                         <div class="link-menu-top lang-link" >
                             <a href="javascript:void(0);" class="text-lang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
                                 <span class="img-lang" >
-                                    <img src="{{ asset_front('dataimages/vi.jpg') }}" alt="" class="img-fluid" >
+                                    <img src="{{ asset_front('dataimages/'.App::getLocale().'.jpg') }}" alt="" class="img-fluid" >
                                 </span>
-                                <span class="hidden-md-down" >
-                                    vi
-                                </span>
+                                <span class="hidden-md-down" >{{ App::getLocale() }}</span>
                                 <i class="fa fa-angle-down" data-toggle="dropdown"></i>
                             </a>
                             <div class="dropdown-menu">
-                                <span class="dropdown-label" >
-                                    Chọn ngôn ngữ
-                                </span>
+                                <span class="dropdown-label" >Chọn ngôn ngữ</span>
+                                @foreach($languages as $keyLang => $titleLang)
                                 <span class="dropdown-item">
-                                    <a title="" href="/" >
+                                    <a title="{{ $titleLang }}" href="{{ route('home_lang', ['lt' => $keyLang]) }}" >
                                         <span class="img-lang" >
-                                            <img src="{{ asset_front('dataimages/vi.jpg') }}" alt="" class="img-fluid" >
+                                            <img src="{{ asset_front('dataimages/'.$keyLang.'.jpg') }}" alt="{{ $titleLang }}" class="img-fluid" >
                                         </span>
-                                        Tiếng anh
+                                        {{ $titleLang }}
                                     </a>
                                 </span>
-                                <span class="dropdown-item">
-                                    <a title="" href="/" >
-                                        <span class="img-lang" >
-                                            <img src="{{ asset_front('dataimages/vi.jpg') }}" alt="" class="img-fluid" >
-                                        </span>
-                                        Tiếng việt
-                                    </a>
-                                </span>
+                                @endforeach
                             </div>
                         </div>
                     </div>

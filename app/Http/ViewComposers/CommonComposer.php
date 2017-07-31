@@ -3,7 +3,7 @@
 namespace App\Http\ViewComposers;
 
 use Illuminate\View\View;
-use Auth, Request;
+use App\Languages;
 
 class CommonComposer
 {
@@ -15,6 +15,10 @@ class CommonComposer
      */
     public function compose(View $view)
     {
-        $view->with('xxxxx', 'This is xxxx');
+        // Load languges
+        $langs = Languages::getResults();
+        $langs = array_column($langs->toArray(), 'name', 'iso2');
+
+        $view->with('languages', $langs);
     }
 }

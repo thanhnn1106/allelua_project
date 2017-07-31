@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Front\BaseController;
 use Illuminate\Http\Request;

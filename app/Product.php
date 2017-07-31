@@ -361,6 +361,21 @@ class Product extends Model
         return $query->get();
     }
 
+    public static function getProductFavorites($params) {
+        $query = \DB::table('products AS t1')
+                ->select('t1.id', 't1.price', 't1.image_rand', 't1.image_real', 't2.title', 't2.slug', 't1.category_id')
+                ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
+                ->join('product_likes AS t3', 't3.product_id', '=', 't1.id')
+                ->where('t1.status', 1);
+
+        $query->where('t2.language_code', $params['language_code'])
+                ->where('t3.user_id', $params['user_id']);
+
+        $result = $query->paginate(LIMIT_ROW);
+
+        return $result;
+    }
+
     public static function getProductDetail($params) {
         $query = \DB::table('products AS t1')
                 ->select('t1.id', 't1.category_id', 't1.sub_category_id', 't1.price', 't1.image_rand', 't1.image_real', 't1.payment_method', 't1.shipping_method', 't1.user_id',

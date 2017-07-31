@@ -26,7 +26,7 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/', 'Front\HomeController@index')->name('home');
 Route::get('/home', 'Front\HomeController@index')->name('home');
 Route::get('/trang-chu', 'Front\HomeController@index')->name('home');
-Route::get('{lt}/lang', 'Front\LangController@index')->name('home_lang');
+Route::get('{lt}', 'Front\LangController@index')->name('home_lang');
 
 // Product
 Route::get('search', 'Front\SearchController@index')->name('search_page');
@@ -98,5 +98,6 @@ Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], fu
     Route::get('product/delete/{id}', 'Seller\ProductController@delete')->name('seller_product_delete');
 
     Route::post('favorite', 'Seller\FavoriteController@index')->name('seller_product_favorite');
+    Route::get('favorite/lists', 'Seller\FavoriteController@lists')->name('seller_product_favorite_lists');
 });
 //Auth::routes();
