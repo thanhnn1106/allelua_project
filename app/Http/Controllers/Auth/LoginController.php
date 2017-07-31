@@ -158,4 +158,49 @@ class LoginController extends Controller
         return view('auth/login', $data);
     }
 
+    public function loginAjaxSeller(Request $request)
+    {
+        try {
+            if ( ! $request->isMethod('POST')) {
+                return response()->json(array('error' => 1, 'result' => trans('common.error_exception_ajax')));
+            }
+
+            // validate the info, create rules for the inputs
+            $rules = array(
+                'email'    => 'required|email',
+                'password' => 'required|min:8',
+            );
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return response()->json(array('error' => 1, 'result' => trans('common.please_check_form_below'), 'messages' => $validator->errors()), 422);
+            }
+
+            $const = config('allelua.user_status.value');
+            $loginUser = User::where('email', $request->get('email'))->first();
+            if ($loginUser === NULL) {
+                return response()->json(array('error' => 1, 'result' => trans('common.please_check_form_below'), 'messages' => trans('auth.login_failed')));
+            }
+
+            if ($loginUser->status == $const['inactive']) {
+                return response()->json(array('error' => 1, 'result' => trans('common.please_check_form_below'), 'messages' => trans('auth.login_failed')));
+            }
+
+            // create our user data for the authentication
+            $userData = array(
+                'email'     => $request->get('email'),
+                'password'  => $request->get('password'),
+                'status'    => $const['active'],
+                'role_id'   => $loginUser->role_id
+            );
+            // attempt to do the login
+            if (Auth::attempt($userData)) {
+                 return response()->json(array('error' => 0, 'result' => '', 'urlRedirect' => $request->get('urlBefore')));
+            }
+            return response()->json(array('error' => 1, 'result' => trans('common.please_check_form_below'), 'messages' => trans('auth.login_failed')));
+
+        } catch (Exception $e) {
+            return response()->json(array('error' => 1, 'result' => trans('common.error_exception_ajax')));
+        }
+    }
+
 }

@@ -103,10 +103,9 @@
                                 </div>
 
                                 <div class="product-form-group">
-                                    <a href="/" class="btn btn-block btn-style btn-heart" rel="nofollow" >
-                                        <span>
-                                            Yêu thích
-                                        </span>
+                                    <a href="javascript:void(0);" data-url="{{ route('seller_product_favorite') }}" data-product-id="{{ $product->id }}" 
+                                       onclick="fncFavorite(event, this)" class="btn btn-block btn-style btn-heart" rel="nofollow" >
+                                        <span>Yêu thích</span>
                                     </a>
                                 </div>
 

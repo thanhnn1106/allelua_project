@@ -47,7 +47,6 @@
                                                 <button id="save_product" type="button" class="btn btn-style" title="{{ trans('front.product.make_product') }}" >
                                                     <span>{{ trans('front.product.make_product') }}</span>
                                                 </button>
-                                                {{ csrf_field() }}
                                                 <input type="hidden" id="hide_category_id" value="{{ $product->category_id or null }}" />
                                                 <input type="hidden" id="hide_sub_category_id" value="{{ $product->sub_category_id or null }}" />
                                                 <input type="hidden" id="hide_position_use" value="{{ $product->position_use or null }}" />

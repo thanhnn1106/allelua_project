@@ -38,6 +38,11 @@ class Product extends Model
         return $this->hasMany('App\ProductImage', 'product_id', 'id');
     }
 
+    public function productLikes()
+    {
+        return $this->hasMany('App\ProductLike', 'product_id', 'id');
+    }
+
     public function productTranslates()
     {
         return $this->hasMany('App\ProductTranslate', 'product_id', 'id');

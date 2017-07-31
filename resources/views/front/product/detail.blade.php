@@ -40,7 +40,5 @@
 @endsection
 
 @section('footer_script')
-<script>
-
-</script>
+<script src="{{ asset_front('js/cart.js') }}"></script>
 @endsection

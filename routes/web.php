@@ -13,6 +13,7 @@
 
 Route::match(['get', 'post'], 'register', 'Auth\RegisterController@register')->name('seller_register');
 Route::match(['get', 'post'], 'account/login', 'Auth\LoginController@loginSeller')->name('seller_login');
+Route::match(['get', 'post'], 'account/ajax-login', 'Auth\LoginController@loginAjaxSeller')->name('seller_ajax_login');
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password_request');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password_email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password_reset');
@@ -95,5 +96,7 @@ Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], fu
     Route::get('product/edit/{id}', 'Seller\ProductController@edit')->name('seller_product_edit');
     Route::post('product/save', 'Seller\ProductController@save')->name('seller_product_save');
     Route::get('product/delete/{id}', 'Seller\ProductController@delete')->name('seller_product_delete');
+
+    Route::post('favorite', 'Seller\FavoriteController@index')->name('seller_product_favorite');
 });
 //Auth::routes();

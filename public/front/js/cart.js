@@ -1,0 +1,78 @@
+$(document).ready(function() {
+
+    $('#login_ajax_button').click(function (event) {
+        event.preventDefault();
+        $('#loginAjaxform .input-error').html('');
+        var url = $('#loginAjaxform').attr('action');
+
+        var data = $('#loginAjaxform').serializeArray();
+        data.push({name: 'urlBefore', value: $(this).attr('url-before')});
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            dataType: 'JSON',
+            data: data,
+            success: function (data) {
+                if (data.error === 0) {
+                    window.location.href = data.urlRedirect;
+                } else {
+                    $('.alert').show().find('p').html(data.result);
+                }
+            },
+            error: function (data) {
+                Object.keys(data.responseJSON.messages).forEach(function(key) {
+                    classElement = '.form-'+key;
+                    $('#loginAjaxform '+classElement).find('.input-error').html(data.responseJSON.messages[key][0]);
+                });
+                $('.alert').show().find('p').html(data.responseJSON.result);
+            }
+        });
+    });
+});
+
+var dialogLogin = $('#dialog-login-form');
+openDialogLogin = function () {
+        
+    dialogLogin.dialog({
+        autoOpen: false,
+        height: 'auto',
+        width: '70%',
+        modal: true
+    });
+};
+
+function fncFavorite(event, obj)
+{
+    event.preventDefault();
+    var data = {
+        'product_id': $(obj).attr('data-product-id')
+    };
+
+    $.ajax({
+        url: $(obj).attr('data-url'),
+        type: 'POST',
+        dataType: 'JSON',
+        data: data,
+        success: function (data) {
+            if (data.error === 0) {
+                if(data.isLike === 1)
+                {
+                    // Like here
+                } else {
+                    // Unlike here
+                }
+            }
+        },
+        error: function (xhr, textStatus) {
+            // Token fail
+            if(xhr.status === 400) {
+                location.reload();
+            } else if (xhr.status === 401) {
+                // Do not login
+                openDialogLogin();
+                dialogLogin.dialog('open');
+            }
+        }
+    });
+}
