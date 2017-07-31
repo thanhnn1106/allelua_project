@@ -86,9 +86,10 @@ Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], fu
     Route::match(['get', 'post'], 'inbox', 'Seller\ManageController@inbox')->name('seller_inbox');
 
     // Product
-    Route::get('product/list', 'Seller\ProductController@index')->name('seller_product_list');
+    Route::get('product/list', 'Seller\ProductController@index')->name('seller_product_index');
     Route::get('product/create', 'Seller\ProductController@add')->name('seller_product_create');
-    Route::get('product/edit', 'Seller\ProductController@edit')->name('seller_product_edit');
+    Route::get('product/edit/{id}', 'Seller\ProductController@edit')->name('seller_product_edit');
     Route::post('product/save', 'Seller\ProductController@save')->name('seller_product_save');
+    Route::get('product/delete/{id}', 'Seller\ProductController@delete')->name('seller_product_delete');
 });
 //Auth::routes();

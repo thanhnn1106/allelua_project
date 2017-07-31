@@ -2,6 +2,9 @@
 
 @section('content')
 
+<?php 
+    $draftStatus = config('product.product_seller_status.value.draft');
+?>
 <div class="clearfix">
     <ul class="breadcrumbs">
         <li class="home">
@@ -17,6 +20,7 @@
             <div class="page-right clearfix" >
                     <div class="row">
                         <div class="col-sm-12" >
+                            @include('notifications')
                             <div class="content-center" >
                                 <div class="inner-content-center clearfix" >
 
@@ -43,6 +47,7 @@
                                                         <th>{{ trans('front.product.status') }}</th>
                                                         <th>{{ trans('front.product.payment_method') }}</th>
                                                         <th>{{ trans('front.product.shipping_method') }}</th>
+                                                        <th>{{ trans('common.event.action') }}</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -61,13 +66,19 @@
                                                             @endif
                                                         </td>
                                                         <td class="text-right">{{ $product->category_title }}</td>
-                                                        <td class="text-right"><a href="">{{ $product->title }}</a></td>
+                                                        <td class="text-right">{{ $product->title }}</td>
                                                         <td class="text-right text-xs-center" >{{ formatPrice($product->price) }}</td>
                                                         <td class="text-right">{{ formatNumber($product->quantity) }}</td>
                                                         <td class="text-right">{{ formatNumber($product->quantity_limit) }}</td>
                                                         <td class="text-right">{{ getProductStatus($product->status) }}</td>
                                                         <td class="text-right">{{ getPaymentMethod($product->payment_method) }}</td>
                                                         <td class="text-right">{{ getShippingMethod($product->shipping_method) }}</td>
+                                                        <td>
+                                                            @if((int) $product->status === $draftStatus)
+                                                            <a href="{{ route('seller_product_edit', ['id' => $product->id]) }}" title="{{ trans('common.event.edit') }}" class="allelua-btn allelua-btn-active">{{ trans('common.event.edit') }}</a>
+                                                            <a href="javascript:void(0);" data-url="{{ route('seller_product_delete', ['id' => $product->id]) }} " onclick="fncDeleteProduct(this);" title="{{ trans('common.event.delete') }}" class="allelua-btn allelua-btn-active">{{ trans('common.event.delete') }}</a>
+                                                            @endif
+                                                        </td>
                                                     </tr>
                                                     @endforeach
                                                     @endif
@@ -107,4 +118,15 @@
     </div>
 </div>
 
+@endsection
+@section('footer_script')
+<script>
+function fncDeleteProduct(obj)
+{
+    if ( ! confirm('Are you sure delete this product ?')) {
+        return false;
+    }
+    window.location.href = $(obj).attr('data-url');
+}
+</script>
 @endsection

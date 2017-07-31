@@ -23,7 +23,7 @@ class BaseController extends Controller
 
     protected function setGeneralRules($request)
     {
-        $listStatus     = array_keys(config('product.product_status.label'));
+        $listStatus     = array_keys(config('product.product_seller_status.label'));
         $listPayMethod  = array_keys(config('product.payment_method.label'));
         $listShipMethod = array_keys(config('product.shipping_method.label'));
         $cateId    = $request->get('categories');
@@ -66,7 +66,6 @@ class BaseController extends Controller
             'size'              => $sizes,
             'style'             => $styles,
             'material'          => $material,
-            'seller_id'         => 'required|exists:users,id',
             'payment_method'    => 'required|in:'.implode(',', $listPayMethod),
             'shipping_method'   => 'required|in:'.implode(',', $listShipMethod),
         );

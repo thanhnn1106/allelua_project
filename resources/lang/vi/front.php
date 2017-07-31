@@ -129,5 +129,6 @@ return [
         'shipping_method' => 'Phương thức vận chuyển',
         'image_thumb' => 'Hình sản phẩm chính',
         'image_detail' => 'Hình sản phẩm chi tiết',
+        'not_permit_delete' => 'Bạn không thể chỉnh sửa hay xóa sản phẩm vì không còn là nháp nữa'
     )
 ];

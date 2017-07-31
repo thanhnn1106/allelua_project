@@ -5,6 +5,10 @@ return [
         'draft'   => 'Draft',
         'publish' => 'Publish',
     ),
+    'product_seller_status' => array(
+        'draft'   => 'Nháp',
+        'pending' => 'chờ approve',
+    ),
     'payment_method' => array(
         'type1' => 'Thanh toán khi nhận hàng',
         'type2' => 'Thẻ tín dụng/ghi nợ',

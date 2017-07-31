@@ -8,14 +8,14 @@
             <a href="{{ route('home') }}">{{ trans('front.bread_crum.home') }}</a>
         </li>
         <li>
-            <a href="{{ route('seller_product_list') }}">{{ trans('front.product.list_product') }}</a>
+            <a href="{{ route('seller_product_index') }}">{{ trans('front.product.list_product') }}</a>
         </li>
         <li><span>{{ trans('front.product.make_product') }}</span></li>
     </ul>
 </div>
 
 <?php
-    $listStatus         = config('product.product_status.label');
+    $listStatus         = config('product.product_seller_status.label');
     $listPaymentMethod  = config('product.payment_method.label');
     $listShippingMethod = config('product.shipping_method.label');
 ?>
@@ -34,14 +34,14 @@
                             <div class="content-form" >
                                 @include('notifications')
                                 <div class="alert alert-danger alert-block" style="display:none;">
-                                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                    <button type="button" class="close" data-dismiss="alert"></button>
                                     <p></p>
                                 </div>
                                 <form id="form_product" name="form_product" class="clearfix" action="{{ route('seller_product_save') }}" id="seller_form_product" method="POST" >
                                     <div class="form-group" >
                                         <div class="row" >
                                             <div class="col-sm-offset-4" >
-                                                <button type="button" onclick="window.location.href='{{ route('seller_product_list') }}';" class="btn btn-style btn-heart" title="{{ trans('front.product.destroy_product') }}" >
+                                                <button type="button" onclick="window.location.href='{{ route('seller_product_index') }}';" class="btn btn-style btn-heart" title="{{ trans('front.product.destroy_product') }}" >
                                                     <span>{{ trans('front.product.destroy_product') }}</span>
                                                 </button>
                                                 <button id="save_product" type="button" class="btn btn-style" title="{{ trans('front.product.make_product') }}" >
@@ -60,7 +60,7 @@
                                     </div>
 
                                     <div class="form-group" >
-                                        <div class="row" >
+                                        <div class="row form-categories" >
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                                 <label class="lbl-form-control" >{{ trans('front.product.category') }}</label>
                                             </div>
@@ -77,7 +77,7 @@
                                     </div>
 
                                     <div class="form-group" >
-                                        <div class="row" >
+                                        <div class="row form-sub_categories" >
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                                 <label class="lbl-form-control" >{{ trans('front.product.sub_category') }}</label>
                                             </div>
@@ -94,7 +94,7 @@
                                     </div>
 
                                     <div class="form-group" >
-                                        <div class="row" >
+                                        <div class="row form-status" >
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                                 <label class="lbl-form-control" >{{ trans('front.product.status') }}</label>
                                             </div>
@@ -110,7 +110,7 @@
                                     </div>
 
                                     <div class="form-group" >
-                                        <div class="row" >
+                                        <div class="row form-quantity">
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                                 <label class="lbl-form-control" >{{ trans('front.product.quantity') }}</label>
                                             </div>
@@ -122,7 +122,7 @@
                                     </div>
 
                                     <div class="form-group" >
-                                        <div class="row" >
+                                        <div class="row form-quantity_limit" >
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                                 <label class="lbl-form-control" >{{ trans('front.product.quantity_limit') }}</label>
                                             </div>
@@ -134,7 +134,7 @@
                                     </div>
 
                                     <div class="form-group" >
-                                        <div class="row" >
+                                        <div class="row form-price" >
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                                 <label class="lbl-form-control" >{{ trans('front.product.price') }}</label>
                                             </div>
@@ -146,7 +146,7 @@
                                     </div>
 
                                     <div class="form-group" >
-                                        <div class="row" >
+                                        <div class="row form-payment_method" >
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                                 <label class="lbl-form-control" >{{ trans('front.product.payment_method') }}</label>
                                             </div>
@@ -163,7 +163,7 @@
                                     </div>
 
                                     <div class="form-group" >
-                                        <div class="row" >
+                                        <div class="row form-shipping_method">
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                                 <label class="lbl-form-control" >{{ trans('front.product.shipping_method') }}</label>
                                             </div>
@@ -180,7 +180,7 @@
                                     </div>
 
                                     <div class="form-group" >
-                                        <div class="row" >
+                                        <div class="row form-image_thumb form-upload" >
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                                 <label class="lbl-form-control" >
                                                     {{ trans('front.product.image_thumb') }}<br/>
@@ -189,13 +189,13 @@
                                             </div>
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12" >
                                                 <div class="list-img-upload clearfix" >
-                                                    <div class="img-prevew-upload btn-upload" >
+                                                    <div id="image_thumb_preview" class="img-prevew-upload btn-upload" style="cursor: pointer;">
                                                         @if(isset($product->image_rand) && isset($product->image_real))
                                                         <?php $imageThumb = getImage($product->image_rand, $product->image_real); ?>
-                                                        <a href="{{ $imageThumb['href'] }}" target="_blank"><img src="{{ $imageThumb['img_src'] }}" width="60px" height="60px" /></a><br/>
+                                                        <a href="{{ $imageThumb['href'] }}" target="_blank"><img src="{{ $imageThumb['img_src'] }}" width="100px" height="100px" /></a><br/>
                                                         @endif
                                                     </div>
-                                                    <input type="file" accept="image/*" name="image_thumb" id="image_thumb" class="img-value" />
+                                                    <input type="file" accept="image/*" name="image_thumb" id="image_thumb" class="img-value" style="display: none;" />
                                                     <div class="input-error"></div>
                                                 </div>
                                             </div>
@@ -203,7 +203,7 @@
                                     </div>
 
                                     <div class="form-group" >
-                                        <div class="row" >
+                                        <div class="row form-total_image_detail" >
                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                                 <label class="lbl-form-control" >
                                                     {{ trans('front.product.image_detail') }}t<br />
@@ -212,9 +212,9 @@
                                             </div>
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12" >
                                                 <div class="list-img-upload clearfix" >
-                                                        <input id="image_detail" name="files[]" type="file" multiple class="file-loading" accept="image/*" />
-                                                    <!--<div class="img-prevew-upload box-body"></div>-->
+                                                    <input id="image_detail" name="files[]" type="file" multiple class="file-loading" accept="image/*" />
                                                 </div>
+                                                <div class="input-error"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -255,7 +255,7 @@
                                                             </label>
                                                         </div>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="text" name="" class="form-control form-control-md" lang="{{ $lang->iso2 }}" name="{{ $title }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->title : '' }}" />
+                                                            <input type="text" class="form-control form-control-md" lang="{{ $lang->iso2 }}" name="{{ $title }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->title : '' }}" />
                                                             <div class="input-error"></div>
                                                         </div>
                                                     </div>
@@ -280,7 +280,7 @@
                                                             </label>
                                                         </div>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="text" name="" class="form-control form-control-md" name="{{ $color }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->color : '' }}" />
+                                                            <input type="text" class="form-control form-control-md" name="{{ $color }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->color : '' }}" />
                                                             <div class="input-error"></div>
                                                         </div>
                                                     </div>
@@ -293,7 +293,7 @@
                                                             </label>
                                                         </div>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="text" name="" class="form-control form-control-md" name="{{ $brand }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->brand : '' }}" />
+                                                            <input type="text" class="form-control form-control-md" name="{{ $brand }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->brand : '' }}" />
                                                             <div class="input-error"></div>
                                                         </div>
                                                     </div>
@@ -306,7 +306,7 @@
                                                             </label>
                                                         </div>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="text" name="" class="form-control form-control-md" name="{{ $infoTech }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->info_tech : '' }}" />
+                                                            <input type="text" class="form-control form-control-md" name="{{ $infoTech }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->info_tech : '' }}" />
                                                             <div class="input-error"></div>
                                                         </div>
                                                     </div>
@@ -319,7 +319,7 @@
                                                             </label>
                                                         </div>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="text" name="" class="form-control form-control-md" name="{{ $featureHighlight }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->feature_highlight : '' }}" />
+                                                            <input type="text" class="form-control form-control-md" name="{{ $featureHighlight }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->feature_highlight : '' }}" />
                                                             <div class="input-error"></div>
                                                         </div>
                                                     </div>
@@ -332,7 +332,7 @@
                                                             </label>
                                                         </div>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="text" name="" class="form-control form-control-md" name="{{ $source }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->source : '' }}" />
+                                                            <input type="text" class="form-control form-control-md" name="{{ $source }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->source : '' }}" />
                                                             <div class="input-error"></div>
                                                         </div>
                                                     </div>
@@ -345,7 +345,7 @@
                                                             </label>
                                                         </div>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="text" name="" class="form-control form-control-md" name="{{ $guarantee }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->guarantee : '' }}" />
+                                                            <input type="text" class="form-control form-control-md" name="{{ $guarantee }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->guarantee : '' }}" />
                                                             <div class="input-error"></div>
                                                         </div>
                                                     </div>
@@ -358,7 +358,7 @@
                                                             </label>
                                                         </div>
                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                            <input type="text" name="" class="form-control form-control-md" name="{{ $deliveryLocation }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->delivery_location : '' }}" />
+                                                            <input type="text" class="form-control form-control-md" name="{{ $deliveryLocation }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->delivery_location : '' }}" />
                                                             <div class="input-error"></div>
                                                         </div>
                                                     </div>

@@ -25,14 +25,17 @@ $(document).ready(function() {
         loadStyleCategory(cateId, subCateId);
     }
 
+    $('#image_thumb_preview').click(function () {
+        $('#image_thumb').trigger("click");
+    });
+
     // Review image thumb
     $('#image_thumb').change(function (event) {
         event.preventDefault();
-        $(this).closest('.form-upload').find('.help-block').html('').hide();
+        $(this).closest('.form-group').find('.input-error').html('').hide();
         var message = validateImage(this);
         if (message !== '') {
-            $(this).closest('.form-image_thumb').addClass('has-error');
-            $(this).closest('.form-upload').find('.help-block').html(message).show();
+            $(this).closest('.form-group').find('.input-error').html(message).show();
             clearImage(this, event);
             return;
         }
@@ -45,9 +48,8 @@ $(document).ready(function() {
 
     // Save action
     $('#save_product').click(function (event) {
-//        $('.alert').hide().find('p').html('');
-//        $('.help-block').html('');
-//        $('#form_product').find('.has-error').removeClass('has-error');
+        $('.alert').hide().find('p').html('');
+        $('.input-error').html('');
 
         event.preventDefault();
         var url = $('#form_product').attr('action');
@@ -74,8 +76,8 @@ $(document).ready(function() {
             error: function (data) {
                 Object.keys(data.responseJSON.messages).forEach(function(key) {
                     classElement = '.form-'+key;
-                    $(classElement).addClass('has-error');
-                    $(classElement).find('.help-block').html(data.responseJSON.messages[key][0]);
+//                    $(classElement).addClass('has-error');
+                    $(classElement).find('.input-error').html(data.responseJSON.messages[key][0]);
                 });
                 $('.alert').show().find('p').html(data.responseJSON.result);
             }
@@ -99,8 +101,8 @@ $(document).ready(function() {
         initialPreviewAsData: true,
         browseOnZoneClick: true,
         removeFromPreviewOnError: true,
-//        initialPreview: initialPreviewImg,
-//        initialPreviewConfig: initialPreviewConfigImg,
+        initialPreview: initialPreviewImg,
+        initialPreviewConfig: initialPreviewConfigImg,
         minFileCount: 3,
         maxFileCount: 5,
         validateInitialCount: true,
@@ -154,7 +156,7 @@ function readURL(input) {
                 var strImg = $($.parseHTML(html)).attr('src', event.target.result);
                 $('#content_img').find('.img-review').html(strImg);
                 var content = $('#content_img').html();
-                $(input).closest('.form-upload').find('.control-but').html(content);
+                $(input).closest('.form-upload').find('.btn-upload').html(content);
             }
         }
 

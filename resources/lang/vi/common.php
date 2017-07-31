@@ -21,4 +21,9 @@ return [
         'msg_changed_password_success' => 'Đổi mật khẩu thành công.',
         'msg_invalid_current_password' => 'Mật khẩu hiện tại không đúng.',
     ],
+    'event' => array(
+        'action' => 'Thao tác',
+        'edit' => 'Sửa',
+        'delete' => 'Xóa',
+    ),
 ];

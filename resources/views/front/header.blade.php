@@ -46,7 +46,7 @@
                                         {{ trans('front.menu_seller.lb_new_post') }}
                                     </span>
                                 </a>
-                                <a aria-hidden="true" title="" href="{{ route('seller_product_list') }}">
+                                <a aria-hidden="true" title="" href="{{ route('seller_product_index') }}">
                                     <span class="dropdown-item">
                                         <i class="fa fa-folder-o"></i>
                                         {{ trans('front.menu_seller.lb_post_management') }}

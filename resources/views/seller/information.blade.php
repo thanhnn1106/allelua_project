@@ -3,7 +3,7 @@
         <div class="allelua-card hovercard" >
             <div class="allelua-cardheader"></div>
             <div class="allelua-card-avatar">
-                <img alt="adm team" src="dataimages/no-photo-100x100.png">
+                <img alt="adm team" src="{{ asset_front('dataimages/no-photo-100x100.png') }}">
             </div>
             <div class="allelua-card-info">
                 <div class="allelua-card-title">
@@ -53,7 +53,7 @@
                         </a>
                     </li>
                     <li class="nav-item" >
-                        <a href="{{ route('seller_product_list') }}" class="nav-link" >
+                        <a href="{{ route('seller_product_index') }}" class="nav-link" >
                             <span>
                                 <i class="fa fa-folder-o" aria-hidden="true"></i>
                                 {{ trans('front.menu_seller.lb_post_management') }}

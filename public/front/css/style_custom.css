@@ -2107,3 +2107,18 @@ textarea.input-payment {
         padding:20px;
     }
 }
+
+/* custom bootstrap upload file on 4.x */
+.hide {
+    display: none;
+}
+.input-group .form-control{
+    height: 31px
+}
+.select2-container {
+    z-index: 1000;
+}
+.btn-upload .img-review img {
+    height: 100px;
+    width: 100px;
+}

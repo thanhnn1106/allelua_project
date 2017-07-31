@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Product;
+use Auth;
 
 class ProductController extends BaseController
 {
@@ -19,7 +20,7 @@ class ProductController extends BaseController
     {
         $params = array(
             'language_code' => $this->lang,
-            'user_id' => 1//\Auth::user()->id,
+            'user_id' => Auth::user()->id,
         );
         $products = Product::getListBySeller($params);
 
@@ -50,7 +51,11 @@ class ProductController extends BaseController
     {
         $row = Product::find($id);
         if ($row === NULL) {
-            return redirect(route('admin_product_index'));
+            return redirect(route('seller_product_index'));
+        }
+        if((int)$row->status !== config('product.product_seller_status.value.draft')) {
+            $request->session()->flash('error', trans('front.product.not_permit_delete'));
+            return redirect(route('seller_product_index'));
         }
 
         $langs = \App\Languages::getResults();
@@ -65,14 +70,18 @@ class ProductController extends BaseController
         }
         $productImages = $this->loadImageDetails($row);
 
-        return view('admin/product/form', [
+        $productBestPrice = $this->loadProductBestPrice();
+
+        return view('seller/product/form', [
             'title'        => 'Edit',
             'product'      => $row,
             'productImages' => $productImages,
             'productTrans' => $groupProTrans,
             'languages' => $langs,
             'categories' => $categories,
-            'company_name' => $row->user()->first()->company_name,
+            'productBestPrice' => $productBestPrice,
+            'arrMenuBestPrice' => $this->loadMenuBestPrice($productBestPrice),
+            'productWatched' => $this->loadProductWatched(),
         ]);
     }
 
@@ -123,10 +132,11 @@ class ProductController extends BaseController
             DB::commit();
 
             $request->session()->flash('success', trans('common.save_success'));
-            return response()->json(array('error' => 0, 'result' => route('admin_product_index')));
+            return response()->json(array('error' => 0, 'result' => route('seller_product_index')));
 
         } catch (\Exception $e) {
             DB::rollback();
+            var_dump($e->getMessage());exit;
 
             $this->deleteImageThumb($imageThumb);
             $this->deleteImageDetail($imageDetail);
@@ -144,16 +154,20 @@ class ProductController extends BaseController
      * @return type
      */
     public function delete(Request $request, $id) {
-        $product = Product::find($id);
+        $product = Product::where('id', $id)->where('user_id', Auth::user()->id)->first();
         if ($product == null) {
             $request->session()->flash('error', trans('common.data_not_found'));
-            return redirect(route('admin_product_index'));
+            return redirect(route('seller_product_index'));
+        }
+        if((int)$product->status !== config('product.product_seller_status.value.draft')) {
+            $request->session()->flash('error', trans('front.product.not_permit_delete'));
+            return redirect(route('seller_product_index'));
         }
 
-        $product->delete();
+        $product->soft_delete();
         $request->session()->flash('success', trans('common.delete_success'));
         
-        return redirect(route('admin_product_index'));
+        return redirect(route('seller_product_index'));
     }
 
     private function _saveProduct($request, $imageThumb, $product)
@@ -161,7 +175,7 @@ class ProductController extends BaseController
         $data = array(
             'category_id' => $request->get('categories'),
             'sub_category_id' => $request->get('sub_categories'),
-            'user_id' => $request->get('seller_id'),
+            'user_id' => Auth::user()->id,
             'price' => $request->get('price'),
             'quantity' => $request->get('quantity'),
             'quantity_limit' => $request->get('quantity_limit'),
@@ -188,33 +202,73 @@ class ProductController extends BaseController
 
     private function _saveProductTrans($request, $product)
     {
+        $data_default = $this->_setDefaultDataLang($request, $product);
+
         $langs = \App\Languages::getResults();
         foreach ($langs as $lang) {
             $row = $product->productTranslates()->where('language_code', $lang->iso2)->first();
             if($row === NULL) {
                 $row = new \App\ProductTranslate();
             }
-            $data = array(
-                'product_id'           => $product->id,
-                'language_code'        => $lang->iso2,
-                'title'                => $request->get('title_'.$lang->iso2),
-                'slug'                 => formatSlug($request->get('title_'.$lang->iso2)),
-                'color'                => $request->get('color_'.$lang->iso2),
-                'brand'                => $request->get('brand_'.$lang->iso2),
-                'info_tech'            => $request->get('info_tech_'.$lang->iso2),
-                'feature_highlight'    => $request->get('feature_highlight_'.$lang->iso2),
-                'source'               => $request->get('source_'.$lang->iso2),
-                'guarantee'            => $request->get('guarantee_'.$lang->iso2),
-                'delivery_location'    => $request->get('delivery_location_'.$lang->iso2),
-                'detail'               => $request->get('detail_'.$lang->iso2),
-                'form_product'         => $request->get('form_product_'.$lang->iso2),
-                'created_at'           => date('Y-m-d H:i:s'),
-            );
+            if($lang->iso2 === $this->lang) {
+                $data = $data_default;
+            } else {
+                $title = $request->get('title_'.$lang->iso2);
+                $slug = formatSlug($request->get('title_'.$lang->iso2));
+                $color = $request->get('color_'.$lang->iso2);
+                $branch = $request->get('brand_'.$lang->iso2);
+                $infoTech = $request->get('info_tech_'.$lang->iso2);
+                $featureHigh = $request->get('feature_highlight_'.$lang->iso2);
+                $source = $request->get('source_'.$lang->iso2);
+                $guarantee = $request->get('guarantee_'.$lang->iso2);
+                $deliveryLocation = $request->get('delivery_location_'.$lang->iso2);
+                $detail = $request->get('detail_'.$lang->iso2);
+                $formProduct = $request->get('form_product_'.$lang->iso2);
+
+                $data = array(
+                    'product_id'           => $product->id,
+                    'language_code'        => $lang->iso2,
+                    'title'                => ( ! empty($title)) ? $title : $data_default['title'],
+                    'slug'                 => ( ! empty($slug)) ? $slug : $data_default['slug'],
+                    'color'                => ( ! empty($color)) ? $color : $data_default['color'],
+                    'brand'                => ( ! empty($branch)) ? $branch : $data_default['brand'],
+                    'info_tech'            => ( ! empty($infoTech)) ? $infoTech : $data_default['info_tech'],
+                    'feature_highlight'    => ( ! empty($featureHigh)) ? $featureHigh : $data_default['feature_highlight'],
+                    'source'               => ( ! empty($source)) ? $source : $data_default['source'],
+                    'guarantee'            => ( ! empty($guarantee)) ? $guarantee : $data_default['guarantee'],
+                    'delivery_location'    => ( ! empty($deliveryLocation)) ? $deliveryLocation : $data_default['delivery_location'],
+                    'detail'               => ( ! empty($detail)) ? $detail : $data_default['detail'],
+                    'form_product'         => ( ! empty($formProduct)) ? $formProduct : $data_default['form_product'],
+                    'created_at'           => date('Y-m-d H:i:s'),
+                );
+            }
             foreach ($data as $key => $value) {
                 $row->$key = $value;
             }
             $row->save();
         }
+    }
+
+    private function _setDefaultDataLang($request, $product)
+    {
+        $data = array(
+            'product_id'           => $product->id,
+            'language_code'        => $this->lang,
+            'title'                => $request->get('title_'.$this->lang),
+            'slug'                 => formatSlug($request->get('title_'.$this->lang)),
+            'color'                => $request->get('color_'.$this->lang),
+            'brand'                => $request->get('brand_'.$this->lang),
+            'info_tech'            => $request->get('info_tech_'.$this->lang),
+            'feature_highlight'    => $request->get('feature_highlight_'.$this->lang),
+            'source'               => $request->get('source_'.$this->lang),
+            'guarantee'            => $request->get('guarantee_'.$this->lang),
+            'delivery_location'    => $request->get('delivery_location_'.$this->lang),
+            'detail'               => $request->get('detail_'.$this->lang),
+            'form_product'         => $request->get('form_product_'.$this->lang),
+            'created_at'           => date('Y-m-d H:i:s'),
+        );
+
+        return $data;
     }
 
     private function _saveProductImages($request, $imageDetail, $product)

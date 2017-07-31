@@ -16,6 +16,16 @@ return [
             'publish' => 1,
         ),
     ),
+    'product_seller_status' => array(
+        'label' => array(
+            0 => 'product.product_seller_status.draft',
+            2 => 'product.product_seller_status.pending',
+        ),
+        'value' => array(
+            'draft'   => 0,
+            'pending' => 2,
+        ),
+    ),
     'payment_method' => array(
         'label' => array(
             1 => 'product.payment_method.type1',
