@@ -22,4 +22,30 @@ class StaticsTranslate extends Model
     {
         return $this->belongsTo('App\Languages', 'language_code');
     }
+
+    /**
+     * Update static page content.
+     *
+     * @return boolean $response
+     * @auth Nguyen Ngoc Thanh <thanh.nn1106@gmai.com>
+     */
+    public static function updateStaticsTranslate($postData)
+    {
+        $response = false;
+        $response = StaticsTranslate::where('static_id', '=', $postData['page_id'])
+            ->where('language_code', '=', 'en')
+            ->update(array(
+                'content' => $postData['content_en'],
+        ));
+
+        if ($response) {
+            $response = StaticsTranslate::where('static_id', '=', $postData['page_id'])
+                ->where('language_code', '=', 'vi')
+                ->update(array(
+                    'content' => $postData['content_vi'],
+            ));
+        }
+
+        return $response;
+    }
 }

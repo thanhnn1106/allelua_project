@@ -75,6 +75,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], func
     Route::get('product/edit/{id}', 'Admin\ProductController@edit')->name('admin_product_edit');
     Route::get('product/delete/{id}', 'Admin\ProductController@delete')->name('admin_product_delete');
     Route::post('product/save', 'Admin\ProductController@save')->name('ajax_admin_product_save');
+
+    // Static Page
+    Route::get('static_page', 'Admin\StaticPageController@index')->name('admin_manage_static_page');
+    Route::match(['get', 'post'], 'static_page/edit', 'Admin\StaticPageController@edit')->name('admin_edit_static_page');
 });
 
 Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], function () {

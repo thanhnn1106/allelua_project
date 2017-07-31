@@ -68,6 +68,16 @@ class MainmenuComposer
                     ),
                 ),
             ),
+            'static' => array(
+                'title'      => 'Static Page',
+                'icon_class' => 'fa fa-dashboard',
+                'childs'     => array(
+                    'static' => array(
+                        'route' => 'admin_manage_static_page',
+                        'name'  => 'Static page',
+                    ),
+                ),
+            ),
         );
         $menus = $this->checkActiveMenu($menus);
 

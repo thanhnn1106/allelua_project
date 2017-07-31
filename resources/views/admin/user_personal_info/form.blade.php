@@ -91,7 +91,7 @@
                                                     <label class="control-label">{{ trans('admin.personal_info.lb_company_des_' . $lang->iso2) }}</label>
                                                     @foreach ($userTranslateInfo as $item)
                                                         @if ($item->language_code === $lang->iso2)
-                                                           <textarea type="text" value="" rows="10" class="form-control border-corner title-slug" lang="{{ $lang->iso2 }}" id="{{ $introduceCompany }}}" name="{{ $introduceCompany }}" placeholder="Input ...">{{ $item->introduce_company }}</textarea>
+                                                           <textarea type="text" value="" rows="10" class="form-control border-corner title-slug" lang="{{ $lang->iso2 }}" id="{{ $introduceCompany }}" name="{{ $introduceCompany }}" placeholder="Input ...">{{ $item->introduce_company }}</textarea>
                                                            @if ($errors->has($introduceCompany))
                                                                 <p class="help-block">{{ $errors->first($introduceCompany) }}</p>
                                                            @endif
@@ -117,7 +117,7 @@
 </div>
 @endsection
 
-@section('footer_script')=
+@section('footer_script')
 <script>
 $(function() {
     $('.title-cate').bind('keyup change', function () {
