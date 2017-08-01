@@ -20,5 +20,6 @@ class CommonComposer
         $langs = array_column($langs->toArray(), 'name', 'iso2');
 
         $view->with('languages', $langs);
+        $view->with('cartCount', \Cart::getTotalQuantity());
     }
 }

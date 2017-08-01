@@ -29,6 +29,34 @@ $(document).ready(function() {
             }
         });
     });
+
+    $('#cart_add_ajax_button').click(function (event) {
+        event.preventDefault();
+        var form = $('#form-add-cart');
+
+        var data = form.serializeArray();
+
+        $.ajax({
+            url: form.attr('action'),
+            type: 'POST',
+            dataType: 'JSON',
+            data: data,
+            success: function (data) {
+                if (data.error === 0) {
+                    $('.cartCount').html(data.result);
+                } else {
+                    $('.alert').show().find('p').html(data.result);
+                }
+            },
+            error: function (data) {
+                Object.keys(data.responseJSON.messages).forEach(function(key) {
+                    classElement = '.form-'+key;
+                    $('#form-add-cart '+classElement).find('.input-error').html(data.responseJSON.messages[key][0]);
+                });
+                $('.alert').show().find('p').html(data.responseJSON.result);
+            }
+        });
+    });
 });
 
 var dialogLogin = $('#dialog-login-form');
