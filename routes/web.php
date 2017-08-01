@@ -11,6 +11,10 @@
 |
 */
 
+// Static page
+Route::get('/{slug}', 'Front\StaticPageController@index')->name('static_page');
+Route::get('/', 'Front\HomeController@index')->name('home');
+
 Route::match(['get', 'post'], 'register', 'Auth\RegisterController@register')->name('seller_register');
 Route::match(['get', 'post'], 'account/login', 'Auth\LoginController@loginSeller')->name('seller_login');
 Route::match(['get', 'post'], 'account/ajax-login', 'Auth\LoginController@loginAjaxSeller')->name('seller_ajax_login');
@@ -19,13 +23,9 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password_reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('reset_password');
 
-
 Route::match(['get', 'post'], 'administrator/login', 'Auth\LoginController@loginAdmin')->name('admin_login');
 
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
-Route::get('/', 'Front\HomeController@index')->name('home');
-Route::get('/home', 'Front\HomeController@index')->name('home');
-Route::get('/trang-chu', 'Front\HomeController@index')->name('home');
 Route::get('{lt}', 'Front\LangController@index')->name('home_lang');
 
 // Product

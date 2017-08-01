@@ -36,4 +36,23 @@ class Statics extends Model
         return $result;
     }
 
+    /**
+     * get static page info list.
+     *
+     * @return object $result
+     * @auth Nguyen Ngoc Thanh <thanh.nn1106@gmai.com>
+     */
+    public static function getPageInfoListByLang($lang)
+    {
+        $result = DB::table('statics as s')
+            ->select('s.type', 's.status', 's.id', 'st.title', 'st.slug')
+            ->join('statics_translate as st', 's.id', '=', 'st.static_id')
+            ->where('language_code', '=', $lang)
+            ->groupby('s.id')
+            ->get()
+            ->toArray();
+
+        return $result;
+    }
+
 }

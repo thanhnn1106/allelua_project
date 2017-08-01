@@ -10,12 +10,9 @@
                             <span></span>
                         </a>
                         <span class="txt-type-com" >
-                            <a href="" title="" class="mini-gan" >
+                            <a href="/" title="" class="mini-gan" >
                                 <span class="mini-logo hidden-sm-down" >
                                     <img src="{{ asset_front('images/logo-gray.png') }}" alt="" class="img-fluid" >
-                                </span>
-                                <span >
-                                    Doanh nghiệp & doanh nghiệp
                                 </span>
                             </a>
                         </span>
