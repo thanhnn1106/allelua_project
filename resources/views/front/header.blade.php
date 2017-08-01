@@ -78,15 +78,13 @@
                         @if (Auth::user())
                         <a href="{{ route('seller_product_favorite_lists') }}" class="link-menu-top hidden-sm-down"><i class="ic i-heart" ></i>Danh mục yêu thích</a>
                         @endif
-                        <a href="/" class="link-menu-top" >
+                        <a href="{{ route('cart_list') }}" class="link-menu-top" >
                             <span class="ic i-cart" >
                                 <span>                     
-                                    <span class="cartCount">0</span>
+                                    <span class="cartCount">{{ $cartCount }}</span>
                                 </span>
                             </span>
-                            <span class="hidden-md-down" >
-                                Giỏ hàng
-                            </span>
+                            <span class="hidden-md-down" >Giỏ hàng</span>
                         </a>
                         <a href="/" class="link-menu-top hidden-sm-down" >
                             <i class="ic i-phone" ></i>

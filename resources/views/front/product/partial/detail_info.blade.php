@@ -79,64 +79,60 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" >
                     <div class="action-detail clearfix" >
                         <div class="form-product">
-                            <form enctype="multipart/form-data" id="add-to-cart-form" action="/cart/addToCart" method="post" class="form-inline" >
-                                <input type="hidden" value="" name="products_id" >
+                            <form id="form-add-cart" action="{{ route('cart_add') }}" method="POST" class="form-inline" >
 
                                 <div class="product-form-group">
-                                    <div class="row" >
+                                    <div class="row form-quantity">
                                         <div class="col-xs-12" >
-                                            <label for="select-product-type" class="lbl-type-product" >
-                                                Số lượng
-                                            </label>
+                                            <label for="select-product-type" class="lbl-type-product" >Số lượng</label>
                                         </div>
                                         <div class="col-xs-12" >
-                                            <input type="number" class="quantity-product-dt" title="Qty" value="1" maxlength="12" name="quantity" >
+                                            <input type="number" class="quantity-product-dt" title="quantity" value="1" name="quantity" >
+                                            <div class="input-error"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="product-form-group" >
-                                    <button type="submit" class="btn btn-block btn-style btn-cart add_to_cart" title="" >
-                                        <span>
-                                            Cho vào giỏ hàng
-                                        </span>
+                                <div class="product-form-group">
+                                    <input type="hidden" value="{{ $product->id or null }}" name="product_id" />
+                                    <button type="button" id="cart_add_ajax_button" class="btn btn-block btn-style btn-cart add_to_cart" title="Cho vào giỏ hàng" >
+                                        <span>Cho vào giỏ hàng</span>
                                     </button>
                                 </div>
+                            </form>
 
-                                <div class="product-form-group">
-                                    <a href="javascript:void(0);" data-url="{{ route('seller_product_favorite') }}" data-product-id="{{ $product->id }}" 
-                                       onclick="fncFavorite(event, this)" class="btn btn-block btn-style btn-heart" rel="nofollow" >
-                                        <span>Yêu thích</span>
-                                    </a>
-                                </div>
+                            <div class="product-form-group">
+                                <a href="javascript:void(0);" data-url="{{ route('seller_product_favorite') }}" data-product-id="{{ $product->id }}" 
+                                   onclick="fncFavorite(event, this)" class="btn btn-block btn-style btn-heart" rel="nofollow" >
+                                    <span>Yêu thích</span>
+                                </a>
+                            </div>
 
-                                <div class="product-form-group" >
-                                    <div class="social-media text-xs-left">
-                                        <h2 class="lb-action-share" >
-                                            Chia sẻ 
-                                        </h2>                       
-                                        <div class="bdy-share clearfix" >
-                                            <ul class="nav nav-inline" >
-                                                <li class="nav-item" >
-                                                    <a href="" title="" rel="nofollow" data-btn="share" data-network="facebook" target='_blank' >
-                                                        <i class="ic i-facebook" ></i>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item" >
-                                                    <a href="" title="" rel="nofollow"  data-btn="zaloshare" data-network="zalo" target='_blank' >
-                                                        <i class="ic i-zalo" ></i>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item" rel="nofollow" >
-                                                    <a href="" title=""  data-btn="share" data-network="google" target='_blank' >
-                                                        <i class="ic i-google" ></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                            <div class="product-form-group" >
+                                <div class="social-media text-xs-left">
+                                    <h2 class="lb-action-share" >
+                                        Chia sẻ 
+                                    </h2>                       
+                                    <div class="bdy-share clearfix" >
+                                        <ul class="nav nav-inline" >
+                                            <li class="nav-item" >
+                                                <a href="" title="" rel="nofollow" data-btn="share" data-network="facebook" target='_blank' >
+                                                    <i class="ic i-facebook" ></i>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item" >
+                                                <a href="" title="" rel="nofollow"  data-btn="zaloshare" data-network="zalo" target='_blank' >
+                                                    <i class="ic i-zalo" ></i>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item" rel="nofollow" >
+                                                <a href="" title=""  data-btn="share" data-network="google" target='_blank' >
+                                                    <i class="ic i-google" ></i>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
-
-                            </form>
+                            </div>
                         </div>
 
                     </div>

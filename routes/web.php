@@ -34,6 +34,11 @@ Route::get('products/{slug}', 'Front\ProductController@loadCate')->name('product
 Route::get('products/detail/{slug}', 'Front\ProductController@detail')->name('product_detail');
 Route::get('products/{slug}/{id}', 'Front\ProductController@loadSub')->name('product_load_sub_cate');
 
+// Cart
+Route::post('cart/add', 'Front\CartController@add')->name('cart_add');
+Route::post('cart/update', 'Front\CartController@update')->name('cart_update');
+Route::get('cart/list', 'Front\CartController@lists')->name('cart_list');
+
 Route::group(['prefix' => 'ajax'], function () {
     Route::get('load-categories', 'Ajax\ProductController@loadCategories')->name('ajax_product_load_cate');
     Route::get('load-style', 'Ajax\ProductController@loadStyle')->name('ajax_product_load_style');
