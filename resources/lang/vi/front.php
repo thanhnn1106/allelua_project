@@ -130,5 +130,23 @@ return [
         'image_thumb' => 'Hình sản phẩm chính',
         'image_detail' => 'Hình sản phẩm chi tiết',
         'not_permit_delete' => 'Bạn không thể chỉnh sửa hay xóa sản phẩm vì không còn là nháp nữa'
-    )
+    ),
+    'cart' => array(
+        'badge' => 'Giỏ hàng',
+        'total_product' => '%d sản phẩm',
+        'but_update_cart' => 'Cập nhật đơn hàng',
+        'price_total' => 'Tạm tính :',
+        'price_money' => 'Thành tiền :',
+        'vat' => '(Đã bao gồm VAT)',
+        'but_order_process' => 'Tiến hành đặt hàng',
+    ),
+    'checkout' => array(
+        'infor' => 'Thông tin mua hàng',
+        'full_name' => 'Họ tên',
+        'phone' => 'Điện thoại di động',
+        'provice' => 'Tỉnh/Thành phố',
+        'district' => 'Quận/Huyện',
+        'wards' => 'Phường/Xã',
+        'address' => 'Địa chỉ',
+    ),
 ];

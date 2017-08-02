@@ -8,7 +8,7 @@
     <head>
         <title>alletula</title>
         <meta content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=0" name="viewport">
-        <meta name="csrf-token" content="{!! csrf_token() !!}" /> 
+        <meta name="csrf-token" content="{!! csrf_token() !!}" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,700italic,400italic,300italic,300&subset=vietnamese&coz=20170520090756">
         <link href="{{ asset_front('js/bootstrap/4.0.0-alpha.2/css/bootstrap.css') }}" media="all" rel="stylesheet" type="text/css">
         <link href="{{ asset_front('js/font-awesome/4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" >

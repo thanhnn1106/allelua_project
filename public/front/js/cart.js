@@ -57,6 +57,7 @@ $(document).ready(function() {
             }
         });
     });
+
 });
 
 var dialogLogin = $('#dialog-login-form');

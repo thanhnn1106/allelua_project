@@ -13,6 +13,7 @@ class CartController extends BaseController
     public function __construct() {
         parent::__construct();
     }
+
     /**
      * Show the application dashboard.
      *
@@ -33,14 +34,16 @@ class CartController extends BaseController
             );
             $validator = Validator::make($request->all(), $rules);
 
-            $cartTotalQuantity = Cart::getTotalQuantity();
-            if($cartTotalQuantity === 0) {
-                $cartTotalQuantity = $request->get('quantity');
+            $cartRow = Cart::get($productId);
+
+            $quantitySub = $request->get('quantity');
+            if ($cartRow !== NULL) {
+                $quantitySub = ($cartRow->quantity + $request->get('quantity'));
             }
 
-            $validator->after(function ($validator) use ($request, $cartTotalQuantity, $product) {
-                if ($cartTotalQuantity > $product->quantity_limit) {
-                    $validator->errors()->add('quantity', sprintf('The quantity in cart more than %d', $product->quantity_limit));
+            $validator->after(function ($validator) use ($request, $quantitySub, $product) {
+                if ($quantitySub > $product->quantity_limit) {
+                    $validator->errors()->add('quantity', sprintf('The quantity can not more than %d', $product->quantity_limit));
                 }
             });
 
@@ -50,89 +53,108 @@ class CartController extends BaseController
             $productTrans = $product->productTranslates()->where('language_code', $this->lang)->first();
             $name = ($productTrans !== NULL) ? $productTrans->title : NULL;
 
-            $cartRow = Cart::get($productId);
             if ($cartRow !== NULL) {
                 Cart::update($productId, array('quantity' => $request->get('quantity')));
             } else {
-                Cart::add(array('id' => $productId, 'name' => $name, 'quantity' => $request->get('quantity'), 'price' => $product->price));
+                $info = array(
+                    'id' => $productId, 
+                    'name' => $name, 
+                    'quantity' => $request->get('quantity'), 
+                    'price' => $product->price,
+                    'attributes' => array(
+                        'slug' => $product->slug,
+                        'image_rand' => $product->image_rand,
+                        'image_real' => $product->image_real,
+                    )
+                );
+                Cart::add($info);
             }
 
-            return response()->json(array('error' => 0, 'result' => $cartTotalQuantity));
+            return response()->json(array('error' => 0, 'result' => $quantitySub));
 
         } catch (Exception $e) {
             return response()->json(array('error' => 1, 'result' => trans('common.error_exception_ajax')));
         }
     }
 
-    public function loadSub(Request $request, $slug, $id)
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function remove(Request $request, $id)
     {
-        $cateObj = \App\Categories::getCateSubCate($this->lang, $slug, $id);
-
-        $productBestPrice = NULL;
-        $products = NULL;
-        $isFinalProduct = false;
-        $loadStyles = NULL;
-        $attrs = array();
-
-        if ($cateObj !== NULL) {
-            $arrCateId = (array) $cateObj->id;
-            $productBestPrice = $this->loadProductBestPrice($arrCateId);
-
-            $products = $this->loadProductSubCateFilter($request, $cateObj->id);
-            if($products->count() === $products->total()) {
-                $isFinalProduct = true;
-            }
-            $loadStyles = $this->getStyle($cateObj->cate_type, $cateObj->type);
-            $loadStyles = $this->getPrice($loadStyles, $cateObj->cate_type, $cateObj->type);
-
-            $params = array(
-                'language_code' => $this->lang,
-                'sub_category_id' => $cateObj->id,
-            );
-            $attrs = $this->loadFilterAttr($loadStyles, $params);
+        $cartRow = Cart::get($id);
+        if($cartRow === NULL) {
+            $request->session()->flash('error', trans('front.cart.cart_not_found'));
+            return redirect(route('cart_list'));
         }
 
-        $dataView = [
-            'cateObj' => $cateObj,
-            'productWatched' => $this->loadProductWatched(),
-            'productBestPrice' => $productBestPrice,
-            'arrMenuBestPrice' => $this->loadMenuBestPrice($productBestPrice),
-            'products' => $products,
-            'isFinalProduct' => $isFinalProduct,
-            'loadStyles' => $loadStyles,
-            'urlSearch' => route('product_load_sub_cate', array('slug' => $slug, 'id' => $id))
-        ];
-        $dataView = array_merge($dataView, $attrs);
+        Cart::remove($id);
 
-        return view('front.product.index', $dataView);
+        $request->session()->flash('success', trans('common.update_success'));
+        return redirect(route('cart_list'));
     }
 
-    public function detail(Request $request, $slug)
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request)
     {
-        $id = getIdFromSlug($slug);
-        $params = array(
-            'product_id' => $id,
-            'language_code' => $this->lang,
-        );
-        $product = \App\Product::getProductDetail($params);
-
-        $personal = NULL;
-        $productImages = NULL;
-        if ($product !== NULL) {
-            $personal = \App\Personal::getPersonalInfo($this->lang, $product->user_id);
-            $productImages = $this->loadImageDetails($product);
-
-            // Update view number of product
-            $objProduct = \App\Product::find($product->id);
-            $objProduct->view_number = $objProduct->view_number + 1;
-            $objProduct->save();
+        $cartCollection = Cart::getContent();
+        $totalCart = Cart::getTotal();
+        if ( ! $totalCart) {
+            $request->session()->flash('error', trans('front.cart.cart_not_found'));
+            return redirect(route('cart_list'));
         }
 
-        return view('front.product.detail', [
-            'product' => $product,
-            'productImages' => $productImages,
-            'personal' => $personal,
-            'productWatched' => $this->loadProductWatched(),
-        ]);
+        $rules = array();
+        foreach($cartCollection as $cart) {
+            $product = Product::find($cart->id);
+            $max = '';
+            if($product !== NULL) {
+                $max = '|max:' . $product->quantity_limit;
+            }
+            $rules['quantity_'.$cart->id] = 'required|integer'.$max;
+        }
+
+        // run the validation rules on the inputs from the form
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return redirect(route('cart_list'))
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        $n = 0;
+        foreach($cartCollection as $cart) {
+            $rowCart = Cart::get($cart->id);
+            if($rowCart !== NULL) {
+                Cart::update($cart->id, array('quantity' => array('relative' => false, 'value' => $request->get('quantity_' . $cart->id))));
+                $n++;
+            }
+        }
+        $request->session()->flash('success', sprintf(trans('common.num_update_success'), $n));
+        return redirect(route('cart_list'));
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function lists(Request $request)
+    {
+        $cartCollection = Cart::getContent();
+
+        $dataView = array(
+            'totalCart' => $cartCollection->count(),
+            'cartList'  => $cartCollection,
+            'totalPrice' => Cart::getTotal(),
+        );
+
+        return view('front.cart.index', $dataView);
     }
 }

@@ -36,8 +36,12 @@ Route::get('products/{slug}/{id}', 'Front\ProductController@loadSub')->name('pro
 
 // Cart
 Route::post('cart/add', 'Front\CartController@add')->name('cart_add');
-Route::post('cart/update', 'Front\CartController@update')->name('cart_update');
 Route::get('cart/list', 'Front\CartController@lists')->name('cart_list');
+Route::get('cart/remove/{id}', 'Front\CartController@remove')->name('cart_remove');
+Route::post('cart/update', 'Front\CartController@update')->name('cart_update');
+
+// Checkout
+Route::match(['get', 'post'], 'checkout/shipping', 'Front\CheckoutController@index')->name('checkout_form_infor');
 
 Route::group(['prefix' => 'ajax'], function () {
     Route::get('load-categories', 'Ajax\ProductController@loadCategories')->name('ajax_product_load_cate');

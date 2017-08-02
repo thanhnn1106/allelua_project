@@ -79,7 +79,7 @@
                             </div>
                         </div>
                         @if (Auth::user())
-                        <a href="{{ route('seller_product_favorite_lists') }}" class="link-menu-top hidden-sm-down"><i class="ic i-heart" ></i>Danh mục yêu thích</a>
+                        <!--<a href="{{ route('seller_product_favorite_lists') }}" class="link-menu-top hidden-sm-down"><i class="ic i-heart" ></i>Danh mục yêu thích</a>-->
                         @endif
                         <a href="{{ route('cart_list') }}" class="link-menu-top" >
                             <span class="ic i-cart" >

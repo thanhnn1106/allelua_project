@@ -5,6 +5,7 @@
         <title>AdminAllelua | Dashboard</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <meta name="csrf-token" content="{!! csrf_token() !!}" />
         <!-- Bootstrap 3.3.6 -->
         <link rel="stylesheet" href="{{ asset_admin('css/bootstrap.min.css') }}">
         <!-- Font Awesome -->
@@ -155,6 +156,15 @@
         <!-- AdminLTE App -->
         <script src="{{ asset_admin('js/app.min.js') }}"></script>
         <script src="{{ asset_admin('js/common.js') }}"></script>
+
+        <script>
+        // Add token when use ajax
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        </script>
 
         @yield('footer_script')
     </body>
