@@ -149,4 +149,13 @@ return [
         'wards' => 'Phường/Xã',
         'address' => 'Địa chỉ',
     ),
+    'menu_footer' => array(
+        'lb_allelua_information' => 'THÔNG TIN VỀ ALLELUA.COM',
+        'lb_customer_support' => 'HỖ TRỢ KHÁCH HÀNG',
+        'lb_your_account' => 'TÀI KHOẢN CỦA BẠN',
+        'lb_connect_with_allelua' => 'KẾT NỐI VỚI ALLELUA.COM',
+        'lb_payment_method' => 'HÌNH THỨC THANH TOÁN',
+        'lb_subscribe_text' => 'Đăng ký nhận bản tin để nhận nhiều ưu đãi',
+        'lb_subscribe' => 'Đăng ký',
+    ),
 ];

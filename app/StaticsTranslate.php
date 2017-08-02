@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class StaticsTranslate extends Model
 {
@@ -47,5 +48,21 @@ class StaticsTranslate extends Model
         }
 
         return $response;
+    }
+
+    /**
+     * Get static page content.
+     *
+     * @return boolean $response
+     * @auth Nguyen Ngoc Thanh <thanh.nn1106@gmai.com>
+     */
+    public static function getStaticsTranslateBySlug($slug)
+    {
+        $result = DB::table('statics_translate')
+            ->select('content')
+            ->where('slug', '=', $slug)
+            ->first();
+
+        return $result;
     }
 }

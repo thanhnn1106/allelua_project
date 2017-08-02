@@ -5,31 +5,21 @@
                 <div class="row" >
                     <div class="col-lg-3 col-md-3 col-sm-3" >
                         <div class="col-footer" >
-                            <h2 class="title-footer" >THÔNG TIN VỀ ALLELUA.COM</h2>
+                            <h2 class="title-footer" >{{ trans('front.menu_footer.lb_allelua_information') }}</h2>
                             <ul class="nav-footer" >
                                 <li>
-                                    <a href="" title="" >
-                                        Giới thiệu về allelua.com
+                                    <a href="{{ $staticPage['type_1']['slug'] }}" title="" >
+                                        {{ $staticPage['type_1']['title'] }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="" title="" >
-                                         Chính sách bảo mật thông tin khách hàng
+                                    <a href="{{ $staticPage['type_2']['slug'] }}" title="" >
+                                        {{ $staticPage['type_2']['title'] }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="" title="" >
-                                         Website được sở hữu và quản lý
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="" title="" >
-                                        Cam kết chất lượng
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="" title="" >
-                                         Quy chế hoạt động
+                                    <a href="{{ $staticPage['type_3']['slug'] }}" title="" >
+                                         {{ $staticPage['type_3']['title'] }}
                                     </a>
                                 </li>
                             </ul>
@@ -38,36 +28,36 @@
 
                     <div class="col-lg-3 col-md-3 col-sm-3" >
                         <div class="col-footer" >
-                            <h2 class="title-footer" >HỖ TRỢ KHÁCH HÀNG</h2>
+                            <h2 class="title-footer" >{{ trans('front.menu_footer.lb_customer_support') }}</h2>
                             <ul class="nav-footer" >
                                 <li>
-                                    <a href="" title="" >
-                                         Hướng dẫn mua hàng
+                                    <a href="{{ $staticPage['type_4']['slug'] }}" title="" >
+                                        {{ $staticPage['type_4']['title'] }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="" title="" >
-                                         Chính sách đổi trả
+                                    <a href="{{ $staticPage['type_5']['slug'] }}" title="" >
+                                        {{ $staticPage['type_5']['title'] }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="" title="" >
-                                         Quy trình giải quyết tranh chấp
+                                    <a href="{{ $staticPage['type_6']['slug'] }}" title="" >
+                                        {{ $staticPage['type_6']['title'] }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="" title="" >
-                                        Chính sách bảo hành
+                                    <a href="{{ $staticPage['type_7']['slug'] }}" title="" >
+                                        {{ $staticPage['type_7']['title'] }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="" title="" >
-                                         Quy định và hình thức thanh toán
+                                    <a href="{{ $staticPage['type_8']['slug'] }}" title="" >
+                                        {{ $staticPage['type_8']['title'] }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="" title="" >
-                                         Chính sách vận chuyển
+                                    <a href="{{ $staticPage['type_9']['slug'] }}" title="" >
+                                        {{ $staticPage['type_9']['title'] }}
                                     </a>
                                 </li>
                             </ul>
@@ -77,7 +67,7 @@
                     <div class="col-lg-3 col-md-3 col-sm-3" >
                         <div class="col-footer" >
                             <h2 class="title-footer" >
-                                TÀI KHOẢN CỦA BẠN
+                                {{ trans('front.menu_footer.lb_your_account') }}
                             </h2>
                             <ul class="nav-footer" >
                                 <li>
@@ -92,7 +82,7 @@
                                 </li>
                             </ul>
                             <h2 class="title-footer" >
-                                KẾT NỐI VỚI ALLELUA.COM
+                                {{ trans('front.menu_footer.lb_connect_with_allelua') }}
                             </h2>
                             <div class="nav-socal" >
                                 <a href="" class="link-socal facebook" >
@@ -111,7 +101,7 @@
                     <div class="col-lg-3 col-md-3 col-sm-3" >
                         <div class="col-footer" >
                             <h2 class="title-footer" >
-                                HÌNH THỨC THANH TOÁN
+                                {{ trans('front.menu_footer.lb_payment_method') }}
                             </h2>
                             <div class="img-payment" >
 
@@ -119,13 +109,13 @@
 
                             <div class="news-letter clearfix" >
                                 <p class="note-news-letter" >
-                                    Đăng ký nhận bản tin để nhận nhiều ưu đãi
+                                    {{ trans('front.menu_footer.lb_subscribe_text') }}
                                 </p>
                                 <div class="wrap-news-letter" >
                                     <form action="" class="clearfix form-news-letter" >
                                         <input type="text" name="email" class="input-news-letter" >
                                         <button class="btn-snews-letter" >
-                                            Đăng ký
+                                            {{ trans('front.menu_footer.lb_subscribe') }}
                                         </button>
                                     </form>
                                 </div>
