@@ -15,7 +15,7 @@
 Route::get('/{slug}', 'Front\StaticPageController@index')->name('static_page');
 Route::get('/', 'Front\HomeController@index')->name('home');
 
-Route::match(['get', 'post'], 'register', 'Auth\RegisterController@register')->name('seller_register');
+Route::match(['get', 'post'], 'user/register', 'Auth\RegisterController@register')->name('seller_register');
 Route::match(['get', 'post'], 'account/login', 'Auth\LoginController@loginSeller')->name('seller_login');
 Route::match(['get', 'post'], 'account/ajax-login', 'Auth\LoginController@loginAjaxSeller')->name('seller_ajax_login');
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password_request');
@@ -25,8 +25,11 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('reset
 
 Route::match(['get', 'post'], 'administrator/login', 'Auth\LoginController@loginAdmin')->name('admin_login');
 
-Route::get('logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('seller/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('{lt}', 'Front\LangController@index')->name('home_lang');
+
+Route::get('contact/send-request', 'Front\ContactController@index')->name('contact');
+Route::post('contact/send-request', 'Front\ContactController@index')->name('contact');
 
 // Product
 Route::get('search', 'Front\SearchController@index')->name('search_page');

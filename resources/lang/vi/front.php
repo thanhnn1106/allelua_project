@@ -158,4 +158,12 @@ return [
         'lb_subscribe_text' => 'Đăng ký nhận bản tin để nhận nhiều ưu đãi',
         'lb_subscribe' => 'Đăng ký',
     ),
+    'send_request_page' => array(
+        'lb_send_request_finding' => 'Gửi yêu cầu tìm kiếm',
+        'lb_your_email_address' => 'Địa chỉ email của bạn',
+        'lb_subject' => 'Tiêu đề',
+        'lb_message' => 'Nội dung',
+        'lb_upload_image' => 'Hình ảnh đính kèm',
+        'btn_send_request' => 'Gửi yêu cầu',
+    ),
 ];

@@ -8,17 +8,17 @@
                             <h2 class="title-footer" >{{ trans('front.menu_footer.lb_allelua_information') }}</h2>
                             <ul class="nav-footer" >
                                 <li>
-                                    <a href="{{ $staticPage['type_1']['slug'] }}" title="" >
+                                    <a href="/{{ $staticPage['type_1']['slug'] }}" title="" >
                                         {{ $staticPage['type_1']['title'] }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ $staticPage['type_2']['slug'] }}" title="" >
+                                    <a href="/{{ $staticPage['type_2']['slug'] }}" title="" >
                                         {{ $staticPage['type_2']['title'] }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ $staticPage['type_3']['slug'] }}" title="" >
+                                    <a href="/{{ $staticPage['type_3']['slug'] }}" title="" >
                                          {{ $staticPage['type_3']['title'] }}
                                     </a>
                                 </li>
@@ -78,6 +78,11 @@
                                 <li>
                                     <a title="" href="{{ route('seller_register') }}">
                                         {{ trans('front.menu_seller.lb_sign_up') }}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a title="" href="{{ route('contact') }}">
+                                        Gửi yêu cầu tìm kiếm
                                     </a>
                                 </li>
                             </ul>

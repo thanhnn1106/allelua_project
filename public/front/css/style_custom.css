@@ -2122,3 +2122,9 @@ textarea.input-payment {
     height: 100px;
     width: 100px;
 }
+.form-control-sm, .input-group-sm > .form-control, .input-group-sm > .input-group-addon, .input-group-sm > .input-group-btn > .btn {
+   line-height: 2.5;
+}
+.form-control {
+    font-size: 1.5rem;
+}
