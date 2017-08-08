@@ -15,9 +15,13 @@
 Route::get('/{slug}', 'Front\StaticPageController@index')->name('static_page');
 Route::get('/', 'Front\HomeController@index')->name('home');
 
-Route::match(['get', 'post'], 'user/register', 'Auth\RegisterController@register')->name('seller_register');
+// User
+Route::match(['get', 'post'], 'auth/login', 'Auth\LoginController@loginUser')->name('user_login');
+Route::match(['get', 'post'], 'auth/register', 'Auth\RegisterController@registerUser')->name('user_register');
+
+// Seller
+Route::match(['get', 'post'], 'account/register', 'Auth\RegisterController@register')->name('seller_register');
 Route::match(['get', 'post'], 'account/login', 'Auth\LoginController@loginSeller')->name('seller_login');
-Route::match(['get', 'post'], 'account/ajax-login', 'Auth\LoginController@loginAjaxSeller')->name('seller_ajax_login');
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password_request');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password_email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password_reset');
@@ -25,7 +29,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('reset
 
 Route::match(['get', 'post'], 'administrator/login', 'Auth\LoginController@loginAdmin')->name('admin_login');
 
-Route::get('seller/logout', 'Auth\LoginController@logout')->name('logout');
+Route::get('auth/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('{lt}', 'Front\LangController@index')->name('home_lang');
 
 Route::get('contact/send-request', 'Front\ContactController@index')->name('contact');
@@ -111,5 +115,15 @@ Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], fu
 
     Route::post('favorite', 'Seller\FavoriteController@index')->name('seller_product_favorite');
     Route::get('favorite/lists', 'Seller\FavoriteController@lists')->name('seller_product_favorite_lists');
+});
+Route::group(['prefix' => 'user', 'middleware' => ['auth', 'auth.user']], function () {
+    Route::get('dashboard', 'User\DashBoardController@index')->name('user_dashboard');
+
+//    Route::match(['get', 'post'], 'change_password', 'Seller\ManageController@changePasswordSeller')->name('seller_change_password');
+//    Route::match(['get', 'post'], 'account_management', 'Seller\ManageController@accountManagement')->name('seller_account_management');
+
+    // Product
+    Route::post('favorite', 'User\FavoriteController@index')->name('user_product_favorite');
+    Route::get('favorite/lists', 'User\FavoriteController@lists')->name('user_product_favorite_lists');
 });
 //Auth::routes();

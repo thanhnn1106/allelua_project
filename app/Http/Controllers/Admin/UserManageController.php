@@ -73,11 +73,17 @@ class UserManageController extends AdminBaseController
             }
 
             $user = new User();
-            $user->company_name           = $request->get('company_name');
+            if($request->get('roles') == config('allelua.roles.seller')) {
+                $user->company_name           = $request->get('company_name');
+                $user->phone_number   = $request->get('phone_number');
+                $user->country_id     = $request->get('country');
+            } else if ($request->get('roles') == config('allelua.roles.user')) {
+                $user->full_name = $request->get('full_name');
+                $user->sex = $request->get('sex');
+                $user->dob = $request->get('dob_year'). '-' . $request->get('dob_month') . '-' . $request->get('dob_day');
+            }
             $user->email          = $request->get('email');
             $user->password       = bcrypt($request->get('password'));
-            $user->phone_number   = $request->get('phone_number');
-            $user->country_id     = $request->get('country');
             $user->role_id        = $request->get('roles');
             $user->status         = $request->get('status');
             $user->save();
@@ -90,6 +96,7 @@ class UserManageController extends AdminBaseController
             'roles'       => \App\Roles::getRoles(),
             'countries'   => \App\Countries::getResults(),
             'action'      => route('admin_user_add'),
+            'dob' => $this->getBirthDay(),
         ]);
     }
 
@@ -124,10 +131,17 @@ class UserManageController extends AdminBaseController
                             ->withInput();
             }
 
-            $user->company_name = $request->get('company_name');
-            $user->phone_number = $request->get('phone_number');
+            if($request->get('roles') == config('allelua.roles.seller')) {
+                $user->company_name = $request->get('company_name');
+                $user->phone_number = $request->get('phone_number');
+                $user->country_id = $request->get('country');
+            } else if ($request->get('roles') == config('allelua.roles.user')) {
+                $user->full_name = $request->get('full_name');
+                $user->sex = $request->get('sex');
+                $user->dob = $request->get('dob_year'). '-' . $request->get('dob_month') . '-' . $request->get('dob_day');
+            }
+
             $user->role_id = $request->get('roles');
-            $user->country_id = $request->get('country');
             $user->status = $request->get('status');
             if ($request->get('password') !== NULL && $request->get('password') !== '') {
                 $user->password = bcrypt($request->get('password'));
@@ -212,15 +226,28 @@ class UserManageController extends AdminBaseController
             $password = 'required|';
         }
 
+        $required_seller = $required_user = '';
+        if($request->get('roles') == config('allelua.roles.seller')) {
+            $required_seller = 'required|';
+        }
+        if($request->get('roles') == config('allelua.roles.user')) {
+            $required_user = 'required|';
+        }
+
         $rules =  array(
-            'company_name'     => 'required|max:255',
             'email'            => $email,
             'password'         => $password.'max:255',
             'confirm_password' => $password.'max:255|same:password',
-            'phone_number'     => 'required|numeric',
-            'country'          => 'required|exists:countries,id',
             'roles'            => 'required|exists:roles,id|not_in:1',
             'status'           => 'required|max:1|in:'.implode(',', $listStatus),
+            'company_name'     => $required_seller.'max:255',
+            'phone_number'     => $required_seller.'numeric',
+            'country'          => $required_seller.'exists:countries,id',
+            'full_name'        => $required_user.'max:255',
+            'sex'              => $required_user.'in:' . implode(',', array_keys(config('allelua.sex.label'))),
+            'dob_day'          => $required_user.'in:1,31',
+            'dob_month'        => $required_user.'in:1,12',
+            'dob_year'         => $required_user.'in:1900,'.date('Y'),
         );
 
         return $rules;

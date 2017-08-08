@@ -15,6 +15,7 @@ return [
     'register' => [
         'msg_register_failed'  => 'Đăng ký thất bại. Vui lòng thử lại sau.',
         'msg_register_success' => 'Đăng ký tài khoản thành công. Vui lòng chờ admin duyệt.',
+        'msg_user_register_success' => 'Đăng ký tài khoản thành công. Vui lòng active account trong email của bạn.'
     ],
     'change_password' => [
         'msg_changed_password_failed'  => 'Đổi mật khẩu thất bại. Vui lòng thử lại sau.',

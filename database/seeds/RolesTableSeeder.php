@@ -14,13 +14,18 @@ class RolesTableSeeder extends Seeder
     {
         $roles = array(
             array(
-                'role'        => 'administrator',
+                'role'        => ROLE_ADMIN,
                 'description' => 'Administrator',
                 'created_at'  => date('Y-m-d H:i:s'),
             ),
             array(
-                'role'        => 'seller',
+                'role'        => ROLE_SELLER,
                 'description' => 'Seller',
+                'created_at'  => date('Y-m-d H:i:s'),
+            ),
+            array(
+                'role'        => ROLE_USER,
+                'description' => 'User',
                 'created_at'  => date('Y-m-d H:i:s'),
             )
         );

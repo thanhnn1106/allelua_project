@@ -262,3 +262,14 @@ function formatRouteSearch($params)
 
     return URL::route($currentRoute, $routeParams);
 }
+
+/**
+ * 
+ * @param string $dob
+ * @param string $type: Y or m or d
+ * @return type
+ */
+function getBirthDay($dob, $type = 'd')
+{
+    return $date = date($type, strtotime($dob));
+}

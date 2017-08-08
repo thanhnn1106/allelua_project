@@ -46,8 +46,7 @@
             <p class="help-block">{{ $errors->first('password') }}</p>
             @endif
         </div>
-        <div class="form-group has-feedback">
-            <label class="col-sm-5 control-label"></label>
+        <div class="form-group has-feedback @if( ! empty($message)) has-error @endif">
             <p class="help-block">{{ $message or null }}</p>
         </div>
       <div class="row">
