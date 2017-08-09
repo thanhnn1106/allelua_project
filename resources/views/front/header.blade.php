@@ -62,14 +62,14 @@
                                     </span>
                                 </a>
                                 @else
-                                <a title="" href="{{ route('seller_login') }}">
+                                <a title="{{ trans('front.menu_seller.lb_sign_in') }}" href="{{ route('seller_login') }}">
                                     <span class="dropdown-item">
                                         {{ trans('front.menu_seller.lb_sign_in') }}
                                     </span>
                                 </a>
-                                <a title="" href="#">
+                                <a title="{{ trans('front.menu_user.lbl_sign_in') }}" href="{{ route('user_login') }}">
                                     <span class="dropdown-item">
-                                        {{ trans('front.menu_seller.lb_sign_up') }}
+                                        {{ trans('front.menu_user.lbl_sign_in') }}
                                     </span>
                                 </a>
                                 @endif

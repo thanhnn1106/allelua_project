@@ -21,7 +21,7 @@
                     <div class="inner-content-center clearfix" >
                         <div class="row" >
                             <div class="detail-article" >
-                                {!! $pageInfo->content !!}
+                                {!! $pageInfo->content or null !!}
                             </div>
                         </div>
                     </div>

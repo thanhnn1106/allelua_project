@@ -41,6 +41,34 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    protected function getBirthDay()
+    {
+        $day = array('' => trans('front.register_page.dob.day'));
+        for($i = 1; $i <= 31; $i++) {
+            $j = $i;
+            if($i < 10) {
+                $j = '0'.$i;
+            }
+            $day[$j] = $j;
+        }
+
+        $month = array('' => trans('front.register_page.dob.month'));
+        for($k = 1; $k <= 12; $k++) {
+            $month[$k] = $k;
+        }
+
+        $year = array('' => trans('front.register_page.dob.year'));
+        $currentYear = date('Y');
+        for($m = 1900; $m < $currentYear; $m++) {
+            $year[$m] = $m;
+        }
+        return array(
+            'day' => $day,
+            'month' => $month,
+            'year' => $year,
+        );
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -105,5 +133,44 @@ class RegisterController extends Controller
 
         $countryList = Countries::getCountriesList();
         return view('seller.register.index', ['countryList' => $countryList]);
+    }
+
+    public function registerUser(Request $request)
+    {
+        $dob = $this->getBirthDay();
+        if ($request->isMethod('post')) {
+            $rules = array(
+                'full_name' => 'required|string|max:255',
+                'sex' => 'required|in:' . implode(',', array_keys(config('allelua.sex.label'))),
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:6',
+                'password_confirmation' => 'required|same:password',
+                'dob_day' => 'required|in:'.implode(',', $dob['day']),
+                'dob_month' => 'required|in:'.implode(',', $dob['month']),
+                'dob_year' => 'required|in:'.implode(',', $dob['year']),
+            );
+            $paramsAdd = $request->all();
+            $validator = Validator::make($paramsAdd, $rules);
+            if ($validator->fails()) {
+                return redirect()->route('user_register')
+                            ->withErrors($validator)
+                            ->withInput();
+            }
+
+            $user = new User();
+            $user->full_name = $request->get('full_name');
+            $user->sex = $request->get('sex');
+            $user->dob = $request->get('dob_year'). '-' . $request->get('dob_month') . '-' . $request->get('dob_day');
+            $user->email          = $request->get('email');
+            $user->password       = bcrypt($request->get('password'));
+            $user->role_id        = config('allelua.roles.user');
+            $user->status         = config('allelua.user_status.value.inactive');
+            $user->save();
+
+            // TODO send email to active account
+
+            return redirect(route('user_register'))->with('success', trans('common.register.msg_user_register_success'));
+        }
+        return view('user.register.index', ['dob' => $dob]);
     }
 }

@@ -37,5 +37,5 @@ return [
     'valid_status' => 'Valider l\'utilisateur',
     'admin_refuse_your_modification' => 'Votre modification est refusée par nos équipes.',
     'valid_status_validate' => 'Valider',
-    'valid_status_refuse' => 'Refuser'
+    'valid_status_refuse' => 'Refuser',
 ];

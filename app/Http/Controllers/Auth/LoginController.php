@@ -66,7 +66,8 @@ class LoginController extends Controller
             }
 
             $const = config('allelua.user_status.value');
-            $loginUser = User::where('email', $request->get('email'))->first();
+            $roleAdmin = config('allelua.roles.administrator');
+            $loginUser = User::where('email', $request->get('email'))->where('role_id', $roleAdmin)->first();
             if ($loginUser === NULL) {
                 $data['message'] = trans('auth.login_failed');
             } else {
@@ -121,22 +122,16 @@ class LoginController extends Controller
             // run the validation rules on the inputs from the form
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
-                return redirect(route('seller_login'))
+                return redirect(route('user_login'))
                             ->withErrors($validator)
                             ->withInput();
             }
 
             $const = config('allelua.user_status.value');
-            $loginUser = User::where('email', $request->get('email'))->first();
-            if ($loginUser === NULL) {
-
-                return view('auth/login', ['message' => trans('auth.login_failed')]);
-            } else {
-                if ($loginUser->status == $const['inactive']) {
-
-                    return view('auth/login', ['message' => trans('auth.login_failed')]);
-                } else {
-
+            $roleSeller = config('allelua.roles.seller');
+            $loginUser = User::where('email', $request->get('email'))->where('role_id', $roleSeller)->first();
+            if($loginUser !== NULL) {
+                if ($loginUser->status == $const['active']) {
                     // create our user data for the authentication
                     $userData = array(
                         'email'     => $request->get('email'),
@@ -144,18 +139,58 @@ class LoginController extends Controller
                         'status'    => $const['active'],
                         'role_id'   => $loginUser->role_id
                     );
-                    // attempt to do the login
                     if (Auth::attempt($userData)) {
                         return redirect(route('seller_dashboard'));
-                    } else {
-
-                        return view('auth/login', ['message' => trans('auth.login_failed')]);
                     }
                 }
             }
+            $data['message'] = trans('auth.login_failed');
         }
 
         return view('auth/login', $data);
+    }
+    
+    public function loginUser(Request $request)
+    {
+        $data = array();
+
+        if ($request->isMethod('POST')) {
+
+            // validate the info, create rules for the inputs
+            $rules = array(
+                'email'    => 'required|email',
+                'password' => 'required|min:8',
+            );
+
+            // run the validation rules on the inputs from the form
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return redirect(route('user_login'))
+                            ->withErrors($validator)
+                            ->withInput();
+            }
+
+            $const = config('allelua.user_status.value');
+            $roleUser = config('allelua.roles.user');
+            $loginUser = User::where('email', $request->get('email'))->where('role_id', $roleUser)->first();
+            if($loginUser !== NULL) {
+                if ($loginUser->status == $const['active']) {
+                    // create our user data for the authentication
+                    $userData = array(
+                        'email'     => $request->get('email'),
+                        'password'  => $request->get('password'),
+                        'status'    => $const['active'],
+                        'role_id'   => $loginUser->role_id
+                    );
+                    if (Auth::attempt($userData)) {
+                        return redirect(route('user_dashboard'));
+                    }
+                }
+            }
+            $data['message'] = trans('auth.login_failed');
+        }
+
+        return view('auth/user_login', $data);
     }
 
     public function loginAjaxSeller(Request $request)

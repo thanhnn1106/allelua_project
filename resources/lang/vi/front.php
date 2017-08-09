@@ -53,9 +53,12 @@ return [
         'lb_new_post'           => 'Đăng tin mới',
         'lb_post_management'    => 'Quản lý tin đăng',
         'lb_change_password'    => 'Đổi mật khẩu',
-        'lb_sign_in'            => 'Đăng nhập',
+        'lb_sign_in'            => 'Seller đăng nhập',
         'lb_sign_up'            => 'Đăng ký',
         'lb_logout'             => 'Đăng xuất',
+    ],
+    'menu_user' => [
+        'lbl_sign_in' => 'User đăng nhập'
     ],
     'login_page' => [
         'lb_email'    => 'Email',
@@ -69,6 +72,17 @@ return [
         'lb_confirm_password' => 'Xác nhận mật khẩu',
         'lb_country'          => 'Quốc gia',
         'btn_register'        => 'Đăng ký',
+        'lb_full_name'        => 'Họ tên',
+        'lb_sex' => 'Giới tính',
+        'sex' => array(
+            'male' => 'Nam',
+            'female' => 'Nữ',
+        ),
+        'dob' => array(
+            'day' => 'Ngày',
+            'month' => 'Tháng',
+            'year' => 'Năm',
+        ),
     ],
     'forgot_password_page' => [
         'lb_title'                     => 'KHÔI PHỤC MẬT KHẨU',
