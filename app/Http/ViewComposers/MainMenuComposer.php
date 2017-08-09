@@ -78,6 +78,16 @@ class MainmenuComposer
                     ),
                 ),
             ),
+            'contacts' => array(
+                'title'      => 'Contacts Page',
+                'icon_class' => 'fa fa-dashboard',
+                'childs'     => array(
+                    'static' => array(
+                        'route' => 'admin_manage_contacts',
+                        'name'  => 'Contact list',
+                    ),
+                ),
+            ),
         );
         $menus = $this->checkActiveMenu($menus);
 

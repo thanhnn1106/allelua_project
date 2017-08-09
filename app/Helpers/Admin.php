@@ -66,4 +66,17 @@ function getProductStatusIcon($status)
     }
     return 'label-warning';
 }
+function getContactStatus($status)
+{
+    switch ($status) {
+        case '0':
+            return '<span class="label label-info">Chờ xử lý</span>';
+        case '1':
+            return '<span class="label label-primary">Đang xử lý</span>';
+        case '2':
+            return '<span class="label label-success">Đã xử lý</span>';
+        default:
+            break;
+    }
+}
 /*=========END CATEGORY - PRODUCT===================*/

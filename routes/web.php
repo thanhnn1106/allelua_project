@@ -93,6 +93,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], func
     // Static Page
     Route::get('static_page', 'Admin\StaticPageController@index')->name('admin_manage_static_page');
     Route::match(['get', 'post'], 'static_page/edit', 'Admin\StaticPageController@edit')->name('admin_edit_static_page');
+
+    Route::match(['get', 'post'], 'contact/list',        'Admin\ContactPageController@index')->name('admin_manage_contacts');
+    Route::match(['get', 'post'], 'contact/view',        'Admin\ContactPageController@view')->name('admin_view_contacts');
 });
 
 Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], function () {

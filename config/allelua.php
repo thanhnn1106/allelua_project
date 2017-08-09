@@ -2,6 +2,7 @@
 define('LIMIT_ROW', 10);
 define('ROLE_ADMIN', 'administrator');
 define('ROLE_SELLER', 'seller');
+define('DATETIME_FORMAT', 'Y-m-d H:i:s');
 define('ROLE_USER', 'user');
 return [
     'roles' => array(
