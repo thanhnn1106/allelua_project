@@ -5,7 +5,7 @@
     $sex = config('allelua.sex.value');
 ?>
 
-<form action="{{ route('user_register') }}" method="post">
+<form action="{{ route('user_register', ['redirect' => $url_redirect]) }}" method="post">
 <div class="row" >
     <div class="col-sm-12" >
         <div class="content-center" >

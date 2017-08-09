@@ -75,7 +75,7 @@
                     </div>
 
                     <div class="btn-cart-continue clearfix">
-                        <button type="button" onclick="window.location.href='{{ route('checkout_form_infor') }}';" class="btn btn-block btn-style btn-cart">{{ trans('front.cart.but_order_process') }}</button>
+                        <button type="button" onclick="window.location.href='{{ route('user_checkout_shipping') }}';" class="btn btn-block btn-style btn-cart">{{ trans('front.cart.but_order_process') }}</button>
                     </div>
 
                     <!--

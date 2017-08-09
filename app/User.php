@@ -52,6 +52,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Personal', 'user_id', 'id');
     }
 
+    public function customerShippings()
+    {
+        return $this->hasMany('App\CustomerShipping', 'user_id', 'id');
+    }
+
     public function products()
     {
         return $this->hasMany('App\Product', 'user_id', 'id');

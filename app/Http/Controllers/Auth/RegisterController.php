@@ -137,6 +137,11 @@ class RegisterController extends Controller
 
     public function registerUser(Request $request)
     {
+        $redirect = $request->get('redirect', NULL);
+        if($redirect === NULL) {
+            $redirect = base64_encode(\URL::previous());
+        }
+
         $dob = $this->getBirthDay();
         if ($request->isMethod('post')) {
             $rules = array(
@@ -152,7 +157,7 @@ class RegisterController extends Controller
             $paramsAdd = $request->all();
             $validator = Validator::make($paramsAdd, $rules);
             if ($validator->fails()) {
-                return redirect()->route('user_register')
+                return redirect()->route('user_register', ['redirect' => $redirect])
                             ->withErrors($validator)
                             ->withInput();
             }
@@ -164,13 +169,29 @@ class RegisterController extends Controller
             $user->email          = $request->get('email');
             $user->password       = bcrypt($request->get('password'));
             $user->role_id        = config('allelua.roles.user');
-            $user->status         = config('allelua.user_status.value.inactive');
+            $user->status         = config('allelua.user_status.value.active');
             $user->save();
 
-            // TODO send email to active account
+            // BEGIN TODO send email to active account
+            
+            // END TODO send email
 
+            $userData = array(
+                'email'     => $user->email,
+                'password'  => $user->password,
+                'status'    => $user->status,
+                'role_id'   => $user->role_id,
+            );
+            if (Auth::attempt($userData)) {
+                if( ! empty($redirect)) {
+                    $url = base64_decode($redirect);
+                    if(check_domain_name($url)) {
+                        return \Redirect::to($url);
+                    }
+                }
+            }
             return redirect(route('user_register'))->with('success', trans('common.register.msg_user_register_success'));
         }
-        return view('user.register.index', ['dob' => $dob]);
+        return view('user.register.index', ['dob' => $dob, 'url_redirect' => $redirect]);
     }
 }

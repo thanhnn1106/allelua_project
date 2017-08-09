@@ -15,7 +15,7 @@
                                         <div class="clearfix" id="login" >
                                             @include('notifications')
                                             <h2>Đăng nhập</h2>
-                                            <form action="{{ route('user_login') }}" method="post">
+                                            <form action="{{ route('user_login', ['redirect' => $url_redirect]) }}" method="post">
                                                 <div class="form-group input-group-sm @if ($errors->has('email')) has-error @endif">
                                                     <label class="control-label">{{ trans('front.login_page.lb_email') }}</label>
                                                     <input type="text" name="email" id="email" class="form-control border-corner" placeholder="" value="{{ old('email') }}" />

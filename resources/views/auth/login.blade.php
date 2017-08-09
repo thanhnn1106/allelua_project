@@ -19,7 +19,7 @@
                                             </div>
                                             @endif
                                             <h2>Khác hàng cũ</h2>
-                                            <form action="{{ route('seller_login') }}" method="post">
+                                            <form action="{{ route('seller_login', ['redirect' => $url_redirect]) }}" method="post">
                                                 <div class="form-group input-group-sm @if ($errors->has('email')) has-error @endif">
                                                     <label class="control-label">{{ trans('front.login_page.lb_email') }}</label>
                                                     <input type="text" name="email" id="email" class="form-control border-corner" placeholder="" value="" />

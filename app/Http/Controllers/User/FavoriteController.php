@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Seller;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Seller\BaseController;
 use Illuminate\Http\Request;
@@ -26,20 +26,17 @@ class FavoriteController extends BaseController
             }
 
             $productLikes = $product->productLikes()->where('product_id', $productId)->where('user_id', $userId)->first();
-
-            if($productLikes === NULL) {
-                $productLikes = new ProductLike();
-                $productLikes->user_id = $userId;
-                $productLikes->product_id = $productId;
-                $productLikes->created_at = date('Y-m-d H:i:s');
-                $productLikes->save();
-                $isLike = true;
-            } else {
-                $productLikes->delete();
-                $isLike = false;
+            if($productLikes !== NULL) {
+                return response()->json(array('error' => 0, 'result' => trans('product.favorite_item_added')));
             }
 
-            return response()->json(array('error' => 0, 'result' => '', 'isLike' => $isLike));
+            $productLikes = new ProductLike();
+            $productLikes->user_id = $userId;
+            $productLikes->product_id = $productId;
+            $productLikes->created_at = date('Y-m-d H:i:s');
+            $productLikes->save();
+
+            return response()->json(array('error' => 0, 'result' => trans('product.favorite_item_add_success')));
         } catch (Exception $e) {
             return response()->json(array('error' => 1, 'result' => trans('common.error_exception_ajax')));
         }
@@ -63,7 +60,7 @@ class FavoriteController extends BaseController
         );
         $products = Product::getProductFavorites($params);
 
-        return view('seller.favorite.info', [
+        return view('user.favorite.info', [
             'langs' => \App\Languages::getResults(),
             'generals' => \App\Generals::getResultsByLang($this->lang),
             'categories' => $categories,

@@ -4,7 +4,7 @@
     <div class="inner-page-main" data-align-height="wrap">
         <div class="row" >
             <!-- FAVORITE LISTS -->
-            @include('seller.favorite.partial.list')
+            @include('user.favorite.partial.list')
             <!-- FAVORITE LISTS -->
 
             <!-- BEGIN CATEGORY -->

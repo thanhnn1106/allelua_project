@@ -29,6 +29,14 @@ return [
             'female' => 0
         ),
     ),
+    'domain_name' => array(
+        'local' => array(
+            'thynh.allelua',
+        ),
+        'production' => array(
+            'allelua.com',
+        ),
+    ),
 
     'general_logo' => array(
         'path_upload_logo' => '/uploads/logo',

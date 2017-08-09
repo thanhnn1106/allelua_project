@@ -20,6 +20,9 @@
     </div>
 
     <div class="wrap-d-product" >
+        <div class="alert alert-success alert-block" style="display:none;">
+            <p></p>
+        </div>
         <div class="details-product clearfix" >
             @include('front.product.partial.detail_info');
         </div>

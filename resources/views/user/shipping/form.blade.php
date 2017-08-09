@@ -24,11 +24,12 @@
                             </h1>
                             <div class="content-form" >
                                 @include('notifications')
-                                <form id="form_checkout" name="form_checkout" class="clearfix" action="{{ route('checkout_form_infor') }}" id="seller_form_product" method="POST" >
+                                <form id="form_checkout" name="form_checkout" class="clearfix" action="{{ route('user_checkout_shipping') }}" method="POST" >
                                     <div class="form-group" >
                                         <div class="row" >
                                             <div class="col-sm-offset-4" >
-                                                <button id="save_product" type="button" class="btn btn-style" title="{{ trans('front.product.make_product') }}" >
+                                                {{ csrf_field() }}
+                                                <button type="submit" class="btn btn-style" title="{{ trans('front.product.make_product') }}" >
                                                     <span>Submit</span>
                                                 </button>
                                             </div>
@@ -41,8 +42,24 @@
                                                 <label class="lbl-form-control" >{{ trans('front.checkout.full_name') }}</label>
                                             </div>
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                <input type="text" class="form-control form-control-md" id="full_name" name="full_name" value="" />
-                                                <div class="input-error"></div>
+                                                <input type="text" class="form-control" id="full_name" name="full_name" value="{{ old('full_name') }}" />
+                                                @if ($errors->has('full_name'))
+                                                    <p class="input-error">{{ $errors->first('full_name') }}</p>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" >
+                                        <div class="row form-quantity">
+                                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
+                                                <label class="lbl-form-control" >{{ trans('front.checkout.address') }}</label>
+                                            </div>
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                <textarea class="form-control" id="address" name="address">{{ old('address') }}</textarea>
+                                                @if ($errors->has('address'))
+                                                    <p class="input-error">{{ $errors->first('address') }}</p>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -53,8 +70,10 @@
                                                 <label class="lbl-form-control" >{{ trans('front.checkout.phone') }}</label>
                                             </div>
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                <input type="text" class="form-control form-control-md" id="full_name" name="full_name" value="" />
-                                                <div class="input-error"></div>
+                                                <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" />
+                                                @if ($errors->has('phone'))
+                                                    <p class="input-error">{{ $errors->first('phone') }}</p>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -69,10 +88,6 @@
         </div>
     </div>
 </div>
-<div id="content_img" style="display: none;">
-    <a href="javscript:void(0);" class="img-review"></a>
-</div>
-<!-- end upload product -->
 
     <div class="inner-page-main"  data-align-height="wrap">
         <!-- BEGIN BEST PRICE -->
@@ -91,36 +106,9 @@
     <!-- BEGIN COUNTRY AND SERVICE -->
     @include('front.partial.country_service')
     <!-- END COUNTRY AND SERVICE -->
-
-<?php 
-    $initPreviewImage = isset($productImages['initialPreview']) ? json_encode($productImages['initialPreview']) : NULL;
-    $initPreviewConfig = isset($productImages['initialPreviewConfig']) ? json_encode($productImages['initialPreviewConfig']) : NULL;
-?>
 @endsection
 @section('footer_script')
 <script>
-var product_ajax_upload = '{{ route('ajax_product_upload_file') }}';
-var product_ajax_delete = '{{ route('ajax_product_delete_file') }}';
-
-var initialPreviewImg = initialPreviewConfigImg = [];
-    @if( ! is_null($initPreviewImage))
-    initialPreviewImg = {!! $initPreviewImage !!};
-    @endif
-
-    @if( ! is_null($initPreviewConfig))
-    initialPreviewConfigImg = {!! $initPreviewConfig !!};
-    @endif
 
 </script>
-<!-- bootstrap multiple upload -->
-<link rel="stylesheet" href="{{ asset('plugins/bootstrap-fileinput/css/fileinput.min.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/bootstrap-fileinput/themes/explorer/theme.css') }}">
-<script src="{{ asset('plugins/bootstrap-fileinput/js/plugins/piexif.min.js') }}"></script>
-<script src="{{ asset('plugins/bootstrap-fileinput/js/plugins/sortable.min.js') }}"></script>
-<script src="{{ asset('/plugins/bootstrap-fileinput/js/plugins/purify.min.js') }}"></script>
-<script src="{{ asset('/plugins/bootstrap-fileinput/js/fileinput.min.js') }}"></script>
-<!--<script src="{{ asset_admin('/plugins/bootstrap-fileinput/themes/fa/theme.js') }}"></script>-->
-<script src="{{ asset('/plugins/bootstrap-fileinput/js/locales/lang.js') }}"></script>
-<script src="{{ asset('/plugins/bootstrap-fileinput/themes/explorer/theme.js') }}"></script>
-<script src="{{ asset_front('js/product.js') }}"></script>
 @endsection

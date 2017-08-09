@@ -273,3 +273,18 @@ function getBirthDay($dob, $type = 'd')
 {
     return $date = date($type, strtotime($dob));
 }
+
+function check_domain_name($url)
+{
+    $env = \App::environment();
+    $domain = config('allelua.domain_name');
+    if( ! isset($domain[$env])) {
+        return false;
+    }
+
+    $info = parse_url($url);
+    if(isset($info['host']) && in_array($info['host'], $domain[$env])) {
+        return true;
+    }
+    return false;
+}

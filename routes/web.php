@@ -18,6 +18,7 @@ Route::get('/', 'Front\HomeController@index')->name('home');
 // User
 Route::match(['get', 'post'], 'auth/login', 'Auth\LoginController@loginUser')->name('user_login');
 Route::match(['get', 'post'], 'auth/register', 'Auth\RegisterController@registerUser')->name('user_register');
+Route::get('auth/logout', 'Auth\LoginController@logout')->name('logout');
 
 // Seller
 Route::match(['get', 'post'], 'account/register', 'Auth\RegisterController@register')->name('seller_register');
@@ -29,7 +30,6 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('reset
 
 Route::match(['get', 'post'], 'administrator/login', 'Auth\LoginController@loginAdmin')->name('admin_login');
 
-Route::get('auth/logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('{lt}', 'Front\LangController@index')->name('home_lang');
 
 Route::get('contact/send-request', 'Front\ContactController@index')->name('contact');
@@ -46,9 +46,6 @@ Route::post('cart/add', 'Front\CartController@add')->name('cart_add');
 Route::get('cart/list', 'Front\CartController@lists')->name('cart_list');
 Route::get('cart/remove/{id}', 'Front\CartController@remove')->name('cart_remove');
 Route::post('cart/update', 'Front\CartController@update')->name('cart_update');
-
-// Checkout
-Route::match(['get', 'post'], 'checkout/shipping', 'Front\CheckoutController@index')->name('checkout_form_infor');
 
 Route::group(['prefix' => 'ajax'], function () {
     Route::get('load-categories', 'Ajax\ProductController@loadCategories')->name('ajax_product_load_cate');
@@ -116,7 +113,7 @@ Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], fu
     Route::post('favorite', 'Seller\FavoriteController@index')->name('seller_product_favorite');
     Route::get('favorite/lists', 'Seller\FavoriteController@lists')->name('seller_product_favorite_lists');
 });
-Route::group(['prefix' => 'user', 'middleware' => ['auth', 'auth.user']], function () {
+Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'auth.user']], function () {
     Route::get('dashboard', 'User\DashBoardController@index')->name('user_dashboard');
 
 //    Route::match(['get', 'post'], 'change_password', 'Seller\ManageController@changePasswordSeller')->name('seller_change_password');
@@ -125,5 +122,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['auth', 'auth.user']], functi
     // Product
     Route::post('favorite', 'User\FavoriteController@index')->name('user_product_favorite');
     Route::get('favorite/lists', 'User\FavoriteController@lists')->name('user_product_favorite_lists');
+    Route::match(['get', 'post'], 'shipping', 'User\CheckoutController@index')->name('user_checkout_shipping');
 });
 //Auth::routes();

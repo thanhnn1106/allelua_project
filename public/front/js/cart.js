@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    /*
     $('#login_ajax_button').click(function (event) {
         event.preventDefault();
         $('#loginAjaxform .input-error').html('');
@@ -29,7 +30,7 @@ $(document).ready(function() {
             }
         });
     });
-
+*/
     $('#cart_add_ajax_button').click(function (event) {
         event.preventDefault();
         var form = $('#form-add-cart');
@@ -60,6 +61,7 @@ $(document).ready(function() {
 
 });
 
+/*
 var dialogLogin = $('#dialog-login-form');
 openDialogLogin = function () {
         
@@ -69,11 +71,13 @@ openDialogLogin = function () {
         width: '70%',
         modal: true
     });
-};
+};*/
 
 function fncFavorite(event, obj)
 {
     event.preventDefault();
+    $('.alert-success').hide();
+
     var data = {
         'product_id': $(obj).attr('data-product-id')
     };
@@ -85,12 +89,9 @@ function fncFavorite(event, obj)
         data: data,
         success: function (data) {
             if (data.error === 0) {
-                if(data.isLike === 1)
-                {
-                    // Like here
-                } else {
-                    // Unlike here
-                }
+                // Change button status
+                $('.alert-success').find('p').html(data.result);
+                $('.alert-success').show();
             }
         },
         error: function (xhr, textStatus) {
@@ -98,9 +99,7 @@ function fncFavorite(event, obj)
             if(xhr.status === 400) {
                 location.reload();
             } else if (xhr.status === 401) {
-                // Do not login
-                openDialogLogin();
-                dialogLogin.dialog('open');
+                window.location.href = $(obj).attr('data-url-login');
             }
         }
     });

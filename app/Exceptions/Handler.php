@@ -70,7 +70,10 @@ class Handler extends ExceptionHandler
         if (preg_match("/^https?:\/\/{$request->getHost()}\/admin/i", $request->fullUrl())) {
             return redirect()->guest(route('admin_login'));
         }
+        if (preg_match("/^https?:\/\/{$request->getHost()}\/seller/i", $request->fullUrl())) {
+            return redirect()->guest(route('seller_login'));
+        }
 
-        return redirect()->guest(route('seller_login'));
+        return redirect()->guest(route('user_login'));
     }
 }

@@ -109,7 +109,14 @@ class LoginController extends Controller
 
     public function loginSeller(Request $request)
     {
-        $data = array();
+        $redirect = $request->get('redirect', NULL);
+        if($redirect === NULL) {
+            $redirect = base64_encode(\URL::previous());
+        }
+
+        $data = array(
+            'url_redirect' => $redirect,
+        );
 
         if ($request->isMethod('POST')) {
 
@@ -122,7 +129,7 @@ class LoginController extends Controller
             // run the validation rules on the inputs from the form
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
-                return redirect(route('user_login'))
+                return redirect(route('seller_login', ['redirect' => $redirect]))
                             ->withErrors($validator)
                             ->withInput();
             }
@@ -140,6 +147,12 @@ class LoginController extends Controller
                         'role_id'   => $loginUser->role_id
                     );
                     if (Auth::attempt($userData)) {
+                        if( ! empty($redirect)) {
+                            $url = base64_decode($redirect);
+                            if(check_domain_name($url)) {
+                                return \Redirect::to($url);
+                            }
+                        }
                         return redirect(route('seller_dashboard'));
                     }
                 }
@@ -152,7 +165,14 @@ class LoginController extends Controller
     
     public function loginUser(Request $request)
     {
-        $data = array();
+        $redirect = $request->get('redirect', NULL);
+        if($redirect === NULL) {
+            $redirect = base64_encode(\URL::previous());
+        }
+
+        $data = array(
+            'url_redirect' => $redirect,
+        );
 
         if ($request->isMethod('POST')) {
 
@@ -165,7 +185,7 @@ class LoginController extends Controller
             // run the validation rules on the inputs from the form
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
-                return redirect(route('user_login'))
+                return redirect(route('user_login', ['redirect' => $redirect]))
                             ->withErrors($validator)
                             ->withInput();
             }
@@ -183,6 +203,12 @@ class LoginController extends Controller
                         'role_id'   => $loginUser->role_id
                     );
                     if (Auth::attempt($userData)) {
+                        if( ! empty($redirect)) {
+                            $url = base64_decode($redirect);
+                            if(check_domain_name($url)) {
+                                return \Redirect::to($url);
+                            }
+                        }
                         return redirect(route('user_dashboard'));
                     }
                 }
