@@ -38,6 +38,7 @@
                                             @foreach($langs as $lang)
                                             <th>Title ({{ $lang->name }})</th>
                                             @endforeach
+                                            <th>Display home</th>
                                             <th>Sort</th>
                                             <th>Create date</th>
                                             <th>Action</th>
@@ -60,6 +61,7 @@
                                                 </a>
                                             </td>
                                             @endforeach
+                                            <td>{{ ($category->is_home == 1) ? 'Yes' : '' }}</td>
                                             <td>{{ $category->sort }}</td>
                                             <td>{{ $category->created_at }}</td>
                                             <td>

@@ -17,7 +17,7 @@
                                                 <div class="col-xs-6">
                                                     <div class="item-banner text-xs-center" >
                                                         <a href="{{ makeSlug($itemH->slug) }}" title="{{ $itemH->title }}" class="banner-link" >
-                                                            {{ $itemH->title }}
+                                                            <img src="{{ asset_front('dataimages/'.$itemH->type.'.gif') }}" alt="{{ $itemH->title }}" class="img-fluid" >
                                                         </a>
                                                     </div>
                                                 </div>
@@ -51,7 +51,7 @@
                                 <div class="col-sm-4 col-xs-12" >
                                     <div class="item-banner text-xs-center" >
                                         <a href="/" title="" class="banner-link" >
-                                            <img src="{{ asset_front('dataimages/bn5.jpg') }}" alt="" class="img-fluid" >
+                                            <img src="{{ asset_front('dataimages/ad1.gif') }}" alt="" class="img-fluid" >
                                         </a>
                                     </div>
                                 </div>

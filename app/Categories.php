@@ -35,7 +35,7 @@ class Categories extends Model
 
     public static function getList($params = array()) {
         $query = \DB::table('categories AS t1')
-                ->select('t1.id', 't1.sort', 't1.created_at', \DB::raw('GROUP_CONCAT(t2.title separator "|===|") as titles'), \DB::raw('GROUP_CONCAT(t2.language_code separator "|===|") as langs'))
+                ->select('t1.id', 't1.is_home', 't1.sort', 't1.created_at', \DB::raw('GROUP_CONCAT(t2.title separator "|===|") as titles'), \DB::raw('GROUP_CONCAT(t2.language_code separator "|===|") as langs'))
                 ->join('categories_translate AS t2', 't2.category_id', '=', 't1.id')
                 ->whereNull('t1.parent_id')
                 ->groupBy('t2.category_id')
