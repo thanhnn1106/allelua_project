@@ -7,6 +7,8 @@ use App\Http\Controllers\Front\BaseController;
 use App\Product;
 use Validator;
 use Cart;
+use Auth;
+use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends BaseController
 {
@@ -26,7 +28,7 @@ class CheckoutController extends BaseController
 
         $productBestPrice = $this->loadProductBestPrice();
         $cartCollection = Cart::getContent();
-
+        $customerInfo = \App\CustomerShipping::orderBy('is_default', 'DESC')->first();
         $data = array(
             'languages' => $langs,
             'categories' => $categories,
@@ -37,6 +39,7 @@ class CheckoutController extends BaseController
             'totalCart' => $cartCollection->count(),
             'cartList'  => $cartCollection,
             'totalPrice' => Cart::getTotal(),
+            'customerInfo' => $customerInfo,
         );
 
         if ($request->isMethod('post')) {
@@ -66,6 +69,7 @@ class CheckoutController extends BaseController
                 $customerInfo = \App\CustomerShipping::find($customerShippingId);
                 if($customerInfo === NULL) {
                     $customerInfo = new \App\CustomerShipping();
+                    $customerInfo->user_id = Auth::user()->id;
                     $customerInfo->full_name = $request->get('full_name');
                     $customerInfo->address = $request->get('address');
                     $customerInfo->phone = $request->get('phone');
@@ -82,8 +86,37 @@ class CheckoutController extends BaseController
                 $order->save();
 
                 // Get product item from Cart
+                if($cartCollection->count()) {
+                    foreach ($cartCollection as $cart) {
+                        $orderItem = new \App\OrderItem();
+                        $orderItem->order_id = $order->id;
+                        $orderItem->seller_id = $cart->attributes->seller_id;
+                        $orderItem->product_id = $cart->id;
+                        $orderItem->product_name = $cart->name;
+                        $orderItem->price = $cart->price;
+                        $orderItem->quantity = $cart->quantity;
+                        $orderItem->image_rand = $cart->attributes->image_rand;
+                        $orderItem->image_real = $cart->attributes->image_real;
+                        $orderItem->created_at = date('Y-m-d H:i:s');
+                        $orderItem->save();
+
+                        // Decrease quantity in product after order success
+                        $product = Product::find($cart->id);
+                        if($product !== NULL) {
+                            $product->quantity = $product->quantity - $cart->quantity;
+                            $product->save();
+                        }
+                    }
+                }
 
                 DB::commit();
+
+                // Remove cart after insert order success
+                if($cartCollection->count()) {
+                    foreach ($cartCollection as $cart) {
+                        Cart::remove($cart->id);
+                    }
+                }
 
                 $request->session()->flash('success', trans('front.product.buy_success_sale_group_will_contact_later'));
                 return redirect(route('user_checkout_shipping'));

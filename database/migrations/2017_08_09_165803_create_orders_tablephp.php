@@ -20,6 +20,8 @@ class CreateOrdersTablephp extends Migration
             $table->string('full_name', 255);
             $table->string('address', 255);
             $table->string('phone', 255);
+            $table->tinyInteger('payment_method')->nullable();;
+            $table->tinyInteger('shipping_method')->nullable();;
             $table->tinyInteger('status')->comment('1=ok, 0=fail');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

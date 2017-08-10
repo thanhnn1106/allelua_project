@@ -29,6 +29,7 @@
                                         <div class="row" >
                                             <div class="col-sm-offset-4" >
                                                 {{ csrf_field() }}
+                                                <input type="hidden" name="customer_shipping_id" value="{{ isset($customerInfo->id) ? $customerInfo->id : '' }}" />
                                                 <button type="submit" class="btn btn-style" title="{{ trans('front.product.make_product') }}" >
                                                     <span>Submit</span>
                                                 </button>
@@ -42,7 +43,7 @@
                                                 <label class="lbl-form-control" >{{ trans('front.checkout.full_name') }}</label>
                                             </div>
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                <input type="text" class="form-control" id="full_name" name="full_name" value="{{ old('full_name') }}" />
+                                                <input type="text" class="form-control" id="full_name" name="full_name" value="{{ old('full_name', isset($customerInfo->full_name) ? $customerInfo->full_name : '') }}" />
                                                 @if ($errors->has('full_name'))
                                                     <p class="input-error">{{ $errors->first('full_name') }}</p>
                                                 @endif
@@ -56,7 +57,7 @@
                                                 <label class="lbl-form-control" >{{ trans('front.checkout.address') }}</label>
                                             </div>
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                <textarea class="form-control" id="address" name="address">{{ old('address') }}</textarea>
+                                                <textarea class="form-control" id="address" name="address">{{ old('address', isset($customerInfo->address) ? $customerInfo->address : '') }}</textarea>
                                                 @if ($errors->has('address'))
                                                     <p class="input-error">{{ $errors->first('address') }}</p>
                                                 @endif
@@ -70,7 +71,7 @@
                                                 <label class="lbl-form-control" >{{ trans('front.checkout.phone') }}</label>
                                             </div>
                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone') }}" />
+                                                <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone', isset($customerInfo->phone) ? $customerInfo->phone : '') }}" />
                                                 @if ($errors->has('phone'))
                                                     <p class="input-error">{{ $errors->first('phone') }}</p>
                                                 @endif

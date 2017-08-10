@@ -62,6 +62,7 @@ class CartController extends BaseController
                     'quantity' => $request->get('quantity'), 
                     'price' => $product->price,
                     'attributes' => array(
+                        'seller_id' => $product->user_id,
                         'slug' => $product->slug,
                         'image_rand' => $product->image_rand,
                         'image_real' => $product->image_real,

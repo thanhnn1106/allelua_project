@@ -26,7 +26,6 @@ class CreateOrderItemsTablephp extends Migration
             $table->integer('quantity');
             $table->string('image_rand', 255)->nullable();
             $table->string('image_real', 255)->nullable();
-            $table->tinyInteger('status')->comment('1=ok, 0=fail');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
         });
