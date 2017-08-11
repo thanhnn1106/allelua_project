@@ -100,6 +100,12 @@ class ProductController extends BaseController
             }
         }
 
+        // Check only post product when admin approve
+        $personal = \App\Personal::where('user_id', Auth::user()->id)->where('status', 1)->first();
+        if($personal === NULL) {
+            return response()->json(array('error' => 1, 'result' => trans('common.you_have_to_add_personal_info_before_post_product')));
+        }
+
         // Set rules
         $rules = $this->setRules($request);
         $validator = Validator::make($request->all(), $rules);
