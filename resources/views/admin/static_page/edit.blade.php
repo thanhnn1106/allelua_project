@@ -37,7 +37,7 @@
                                                         <span>{{ $item->slug }}</span>
                                                         <hr>
                                                         <textarea type="text"
-                                                                  class="form-control border-corner title-slug"
+                                                                  class="form-control border-corner title-slug editor-content"
                                                                   lang="{{ $lang->iso2 }}"
                                                                   id="{{ $content }}"
                                                                   name="{{ $content }}">{{ $item->content }}</textarea>
@@ -73,19 +73,24 @@
 @endsection
 
 @section('footer_script')
-<!-- CK Editor -->
-<script src="https://cdn.ckeditor.com/4.5.7/standard/ckeditor.js"></script>
+<!-- TinyMCE -->
+<script type="text/javascript" src="{{ asset('/plugins/tinymce/tinymce.min.js') }}"></script>
 <script>
-  $(function () {
-    // Replace the <textarea id="editor1"> with a CKEditor
-    // instance, using default configuration.
-    @foreach ($languages as $lang)
-        <?php
-            $content = 'content_' . $lang->iso2;
-        ?>
-        CKEDITOR.replace(<?php echo $content; ?>);
-    @endforeach
-  });
+$(function () {
+    tinymce.init({
+        selector: ".editor-content", 
+        theme: "modern", 
+        height: 400,
+        subfolder:"",
+        plugins: [ 
+        "advlist autolink link image lists charmap print preview hr anchor pagebreak", 
+        "searchreplace wordcount visualblocks visualchars code insertdatetime media nonbreaking", 
+        "table contextmenu directionality emoticons paste textcolor filemanager" 
+        ], 
+        image_advtab: true, 
+        toolbar: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect forecolor backcolor | link unlink anchor | image media | print preview code"
+    });
+});
 </script>
 
 @endsection

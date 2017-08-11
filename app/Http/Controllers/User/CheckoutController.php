@@ -66,7 +66,7 @@ class CheckoutController extends BaseController
             DB::beginTransaction();
             try {
 
-                $customerInfo = \App\CustomerShipping::find($customerShippingId);
+                $customerInfo = \App\CustomerShipping::where('id', $customerShippingId)->where('user_id', Auth::user()->id)->first();
                 if($customerInfo === NULL) {
                     $customerInfo = new \App\CustomerShipping();
                     $customerInfo->user_id = Auth::user()->id;
