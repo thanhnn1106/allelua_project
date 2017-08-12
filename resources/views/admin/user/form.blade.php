@@ -76,6 +76,7 @@
                     </div>
                     <!-- /.box-body -->
                 </div>
+                @if ($user->role_id == config('allelua.roles.seller'))  
                 <div class="col-xs-6">
                     <div class="box box-primary">
                         <div class="box-header with-border">
@@ -114,6 +115,7 @@
                         <!-- /.box-body -->
                     </div>
                 </div>
+                @else
                 <div class="col-xs-6">
                     <div class="box box-primary">
                         <div class="box-header with-border">
@@ -138,7 +140,7 @@
                                 <p class="help-block">{{ $errors->first('sex') }}</p>
                                 @endif
                             </div>
-                            <div class="form-group input-group-sm @if ($errors->has('country')) has-error @endif">
+                            <div class="form-group input-group-sm @if ($errors->has('dob_day') || $errors->has('dob_month') || $errors->has('dob_year')) has-error @endif">
                                 <div class="col-xs-4">
                                     <label class="control-label">{{ trans('front.register_page.dob.day') }}</label>
                                     <select name="dob_day" id="dob_day" class="form-control">
@@ -165,7 +167,7 @@
                                     <label class="control-label">{{ trans('front.register_page.dob.year') }}</label>
                                     <select name="dob_year" id="dob_year" class="form-control">
                                     @foreach ($dob['year'] as $year)
-                                    <option value="{{ $year }}"  @if (old('dob_year', isset($user->dob) ? getBirthDay($user->dob) : '') == $year) selected="selected" @endif>{{ $year }}</option>
+                                    <option value="{{ $year }}"  @if (old('dob_year', isset($user->dob) ? getBirthDay($user->dob, 'Y') : '') == $year) selected="selected" @endif>{{ $year }}</option>
                                     @endforeach
                                     </select>
                                     @if ($errors->has('dob_year'))
@@ -177,6 +179,7 @@
                         <!-- /.box-body -->
                     </div>
                 </div>
+                @endif
             </div>
             </form>
         </div>

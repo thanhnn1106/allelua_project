@@ -7,6 +7,8 @@ use App\User;
 use App\Http\Controllers\Admin\AdminBaseController;
 use Validator;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\SellerActiveNotiEmail;
+use Mail;
 
 class UserManageController extends AdminBaseController
 {
@@ -108,7 +110,7 @@ class UserManageController extends AdminBaseController
      */
     public function edit(Request $request, $id) {
         $user = User::find($id);
-
+        $dob = $this->getBirthDay();
         if ($user == null) {
             $request->session()->flash('error', trans('user.there_is_no_user'));
             return redirect()->route('admin_user');
@@ -122,6 +124,10 @@ class UserManageController extends AdminBaseController
         if ($request->isMethod('POST')) {
 
             $rules = $this->_setRules($request, $id);
+            // Active seller
+            $isSendMail = ($user->role_id == config('allelua.roles.seller')
+                    && $user->status == config('allelua.user_status.value.inactive')
+                    && $user->status != $request->status) ? true : false;
 
             // run the validation rules on the inputs from the form
             $validator = Validator::make($request->all(), $rules);
@@ -147,6 +153,11 @@ class UserManageController extends AdminBaseController
                 $user->password = bcrypt($request->get('password'));
             }
             $user->save();
+            if($isSendMail) {
+                $toEmail = $user->email;
+                $fullName = $request->get('company_name');
+                Mail::to($toEmail)->send(new SellerActiveNotiEmail($fullName));
+            }
             $request->session()->flash('success', trans('update_success'));
             return redirect()->route('admin_user');
         }
@@ -155,6 +166,7 @@ class UserManageController extends AdminBaseController
             'user'       => $user,
             'roles'      => \App\Roles::getRoles(),
             'countries'  => \App\Countries::getResults(),
+            'dob'        => $dob,
             'action'     => route('admin_user_edit', array('id' => $user->id))
         ]);
     }
@@ -216,6 +228,7 @@ class UserManageController extends AdminBaseController
 
     private function _setRules($request, $id = null)
     {
+        $dob = $this->getBirthDay();
         $listStatus = array_keys(config('allelua.user_status.label'));
         $email = '';
         if ($id === null) {
@@ -245,9 +258,9 @@ class UserManageController extends AdminBaseController
             'country'          => $required_seller.'exists:countries,id',
             'full_name'        => $required_user.'max:255',
             'sex'              => $required_user.'in:' . implode(',', array_keys(config('allelua.sex.label'))),
-            'dob_day'          => $required_user.'in:1,31',
-            'dob_month'        => $required_user.'in:1,12',
-            'dob_year'         => $required_user.'in:1900,'.date('Y'),
+            'dob_day'          => $required_user.'in:'.implode(',', $dob['day']),
+            'dob_month'        => $required_user.'in:'.implode(',', $dob['month']),
+            'dob_year'         => $required_user.'in:'.implode(',', $dob['year']),
         );
 
         return $rules;

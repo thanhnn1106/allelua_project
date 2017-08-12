@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Mail\WelcomeEmail;
+use Mail;
 
 class RegisterController extends Controller
 {
@@ -41,34 +44,6 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    protected function getBirthDay()
-    {
-        $day = array('' => trans('front.register_page.dob.day'));
-        for($i = 1; $i <= 31; $i++) {
-            $j = $i;
-            if($i < 10) {
-                $j = '0'.$i;
-            }
-            $day[$j] = $j;
-        }
-
-        $month = array('' => trans('front.register_page.dob.month'));
-        for($k = 1; $k <= 12; $k++) {
-            $month[$k] = $k;
-        }
-
-        $year = array('' => trans('front.register_page.dob.year'));
-        $currentYear = date('Y');
-        for($m = 1900; $m < $currentYear; $m++) {
-            $year[$m] = $m;
-        }
-        return array(
-            'day' => $day,
-            'month' => $month,
-            'year' => $year,
-        );
-    }
-
     /**
      * Get a validator for an incoming registration request.
      *
@@ -100,8 +75,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'country_id' => $data['country_id'],
-            'role_id' => 2,
-            'status' => 0,
+            'role_id' => config('allelua.roles.seller'),
+            'status' => config('allelua.user_status.value.inactive'),
         ]);
     }
 
@@ -126,6 +101,11 @@ class RegisterController extends Controller
             }
             $registerResult = $this->create($request->all());
             if ($registerResult) {
+                $toEmail = $request->get('email');
+                $roleId = config('allelua.roles.seller');
+                $fullName = $request->get('company_name');
+                Mail::to($toEmail)->send(new WelcomeEmail($fullName, $roleId));
+
                 return redirect(route('seller_register'))->with('success', trans('common.register.msg_register_success'));
             }
             return redirect(route('seller_register'))->with('error', trans('common.register.msg_register_failed'))->withInput();
@@ -173,7 +153,11 @@ class RegisterController extends Controller
             $user->save();
 
             // BEGIN TODO send email to active account
-            
+            $toEmail = $request->get('email');
+            $roleId = config('allelua.roles.user');
+            $fullName = $request->get('full_name');
+            Mail::to($toEmail)->send(new WelcomeEmail($fullName, $roleId));
+
             // END TODO send email
 
             $userData = array(

@@ -21,7 +21,7 @@
                                 <form accept-charset="UTF-8" action="/sign-up" id="registerform" method="post" class="form-horizontal clearfix" data-form="signup">
                                     <fieldset class="clearfix" >
                                         <legend align="center">
-                                            <b>THÔNG TIN TÀI KHOẢN</b>
+                                            <label><b>THÔNG TIN TÀI KHOẢN</b></label>
                                         </legend>
                                         <div class="form-group required">
                                             <div class="row" >

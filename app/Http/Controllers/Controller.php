@@ -174,4 +174,33 @@ class Controller extends BaseController
         }
         return $arrMenuBestPrice;
     }
+
+    protected function getBirthDay()
+    {
+        $day = array('' => trans('front.register_page.dob.day'));
+        for($i = 1; $i <= 31; $i++) {
+            $j = $i;
+            if($i < 10) {
+                $j = '0'.$i;
+            }
+            $day[$j] = $j;
+        }
+
+        $month = array('' => trans('front.register_page.dob.month'));
+        for($k = 1; $k <= 12; $k++) {
+            $month[$k] = $k;
+        }
+
+        $year = array('' => trans('front.register_page.dob.year'));
+        $currentYear = date('Y');
+        for($m = 1900; $m < $currentYear; $m++) {
+            $year[$m] = $m;
+        }
+        return array(
+            'day' => $day,
+            'month' => $month,
+            'year' => $year,
+        );
+    }
+
 }
