@@ -46,7 +46,7 @@
                                                         @endif
                                                     @endif
                                                 @endforeach
-                                                    <p class="help-block"></p>
+                                                <p class="help-block"></p>
                                                 </div>
                                             </div>
                                             <!-- /.box-body -->

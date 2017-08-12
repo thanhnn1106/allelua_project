@@ -32,9 +32,7 @@
                                                 <th>{{ trans('admin.static_page.lb_page_name') }}</th>
                                                 @foreach($langs as $lang)
                                                 <th>{{ trans('admin.static_page.lb_slug') }}({{ $lang->name }})</th>
-                                                <th>{{ trans('admin.static_page.lb_page_content') }}({{ $lang->name }})</th>
                                                 @endforeach
-                                                <th>{{ trans('admin.static_page.lb_status_show') }}</th>
                                                 <th>{{ trans('admin.static_page.lb_action') }}</th>
                                             </tr>
                                         </thead>
@@ -50,10 +48,6 @@
                                                 @foreach($slug as $code => $slug)
                                                 <td>{{ $slug }}</td>
                                                 @endforeach
-                                                @foreach($titles as $code => $title)
-                                                <td>{{ $title }}</td>
-                                                @endforeach
-                                                <td>{{ $item->status }}</td>
                                                 <td>
                                                     <a href="{{ route('admin_edit_static_page', ['page_id' => $item->id]) }}" class="btn btn-default btn-xs">
                                                        {{ trans('admin.static_page.btn_edit') }}
