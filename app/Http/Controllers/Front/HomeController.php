@@ -7,7 +7,6 @@ use App\Http\Controllers\Front\BaseController;
 
 class HomeController extends BaseController
 {
-
     /**
      * Show the application dashboard.
      *

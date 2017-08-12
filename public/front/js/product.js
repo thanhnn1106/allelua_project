@@ -103,7 +103,7 @@ $(document).ready(function() {
         removeFromPreviewOnError: true,
         initialPreview: initialPreviewImg,
         initialPreviewConfig: initialPreviewConfigImg,
-        minFileCount: 3,
+//        minFileCount: 3,
         maxFileCount: 5,
         validateInitialCount: true,
         allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif']
@@ -166,10 +166,10 @@ function readURL(input) {
 
 function validateImage(obj)
 {
-    var maxSize = 1048756; // 2 MB
+    var maxSize = 4048756; // 2 MB
     var size = obj.files[0].size;
     if (size === undefined || size <= 0 || size > maxSize) {
-        return 'Have a problem with file '+obj.files[0].name;
+        return 'Have a problem with file size '+obj.files[0].name;
     }
 
     var fileExtension = ['jpeg', 'jpg', 'png', 'gif'];
