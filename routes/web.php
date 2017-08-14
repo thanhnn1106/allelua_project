@@ -12,7 +12,7 @@
 */
 
 // Static page
-Route::get('/{slug}', 'Front\StaticPageController@index')->name('static_page');
+Route::get('page/{slug}', 'Front\StaticPageController@index')->name('static_page');
 Route::get('/', 'Front\HomeController@index')->name('home');
 
 // User
@@ -101,9 +101,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], func
 Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], function () {
     Route::get('dashboard', 'Seller\DashBoardController@index')->name('seller_dashboard');
 
-    Route::match(['get', 'post'], 'change_password', 'Seller\ManageController@changePasswordSeller')->name('seller_change_password');
-    Route::match(['get', 'post'], 'account_management', 'Seller\ManageController@accountManagement')->name('seller_account_management');
-    Route::match(['get', 'post'], 'new_post', 'Seller\ManageController@newPost')->name('seller_new_post');
+    Route::match(['get', 'post'], 'change-password', 'Seller\ManageController@changePasswordSeller')->name('seller_change_password');
+    Route::match(['get', 'post'], 'account-management', 'Seller\ManageController@accountManagement')->name('seller_account_management');
+    Route::match(['get', 'post'], 'new-post', 'Seller\ManageController@newPost')->name('seller_new_post');
     Route::match(['get', 'post'], 'inbox', 'Seller\ManageController@inbox')->name('seller_inbox');
 
     // Product
@@ -119,12 +119,15 @@ Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], fu
 Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'auth.user']], function () {
     Route::get('dashboard', 'User\DashBoardController@index')->name('user_dashboard');
 
-//    Route::match(['get', 'post'], 'change_password', 'Seller\ManageController@changePasswordSeller')->name('seller_change_password');
+    Route::match(['get', 'post'], 'account-management', 'User\ManageController@accountManagement')->name('user_account_management');
+    Route::match(['get', 'post'], 'change-password', 'User\ManageController@changePasswordUser')->name('user_change_password');
+    Route::match(['get', 'post'], 'order-history', 'User\ManageController@orderHistory')->name('user_order_history');
 //    Route::match(['get', 'post'], 'account_management', 'Seller\ManageController@accountManagement')->name('seller_account_management');
 
     // Product
     Route::post('favorite', 'User\FavoriteController@index')->name('user_product_favorite');
     Route::get('favorite/lists', 'User\FavoriteController@lists')->name('user_product_favorite_lists');
     Route::match(['get', 'post'], 'shipping', 'User\CheckoutController@index')->name('user_checkout_shipping');
+
 });
 //Auth::routes();

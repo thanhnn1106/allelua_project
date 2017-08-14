@@ -10,7 +10,7 @@
                 {{ trans('front.menu_seller.lb_account_management') }}
             </span>
         </a>
-        <a aria-hidden="true" title="" href="{{ route('seller_new_post') }}">
+        <a aria-hidden="true" title="" href="{{ route('seller_product_create') }}">
             <span class="dropdown-item">
                 <i class="fa fa-pencil-square-o"></i>
                 {{ trans('front.menu_seller.lb_new_post') }}

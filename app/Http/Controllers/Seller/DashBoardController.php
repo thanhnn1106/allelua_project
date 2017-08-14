@@ -8,8 +8,6 @@ class DashBoardController extends Controller
 {
     public function index(Request $request)
     {
-        $data = array();
-
-        return view('seller.dashboard.index', $data);
+        return redirect()->route('seller_account_management');
     }
 }

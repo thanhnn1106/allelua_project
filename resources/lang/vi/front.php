@@ -58,7 +58,12 @@ return [
         'lb_logout'             => 'Đăng xuất',
     ],
     'menu_user' => [
-        'lbl_sign_in' => 'User đăng nhập'
+        'lbl_sign_in' => 'User đăng nhập',
+        'lb_account_management' => 'Quản lý tài khoản',
+        'lb_change_password'    => 'Đổi mật khẩu',
+        'lb_bought_product'     => 'Sản phẩm đã mua',
+        'lb_favorite_product'   => 'Sản phẩm yêu thích',
+        'lb_logout'             => 'Đăng xuất',
     ],
     'login_page' => [
         'lb_email'    => 'Email',
@@ -107,6 +112,7 @@ return [
         'ph_confirm_new_password' => 'Nhập vào xác nhận mật khẩu mới',
     ],
     'account_manage_page' => array(
+        // Seller
         'lb_title'               => 'Quản lý tài khoản',
         'lb_company_name'        => 'Tên công ty',
         'lb_taxcode'             => 'Mã số thuế',
@@ -119,6 +125,21 @@ return [
         'lb_introduce_company'   => 'Giới thiệu công ty',
         'btn_update'             => 'Cập nhật',
         'btn_add'                => 'Thêm',
+        // User
+        'lb_full_name'    => 'Tên đầy đủ',
+        'lb_email'        => 'Địa chỉ email',
+        'lb_phone_number' => 'Số điện thoại',
+        'lb_dob'          => 'Ngày sinh',
+        'lb_sex' => 'Giới tính',
+        'sex' => array(
+            'male' => 'Nam',
+            'female' => 'Nữ',
+        ),
+        'dob' => array(
+            'day' => 'Ngày',
+            'month' => 'Tháng',
+            'year' => 'Năm',
+        ),
     ),
     'product' => array(
         'list_product' => 'Danh sách sản phẩm',
@@ -179,5 +200,16 @@ return [
         'lb_message' => 'Nội dung',
         'lb_upload_image' => 'Hình ảnh đính kèm',
         'btn_send_request' => 'Gửi yêu cầu',
+    ),
+    'user_order_history' => array(
+        'lb_title' => 'Lịch sử mua hàng',
+        'lb_order_id' => 'Mã đơn hàng',
+        'lb_seller_name' => 'Người bán hàng',
+        'lb_product_name' => 'Tên sản phẩm',
+        'lb_price' => 'Giá',
+        'lb_quantity' => 'Số lượng',
+        'lb_total' => 'Tổng',
+        'lb_status' => 'Trạng thái',
+        'lb_created_at' => 'Ngày đặt hàng',
     ),
 ];

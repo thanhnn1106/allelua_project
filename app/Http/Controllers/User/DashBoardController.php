@@ -8,8 +8,6 @@ class DashBoardController extends Controller
 {
     public function index(Request $request)
     {
-        $data = array();
-
-        return view('user.dashboard.index', $data);
+        return redirect()->route('user_account_management');
     }
 }

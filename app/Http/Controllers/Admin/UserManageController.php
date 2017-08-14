@@ -258,9 +258,9 @@ class UserManageController extends AdminBaseController
             'country'          => $required_seller.'exists:countries,id',
             'full_name'        => $required_user.'max:255',
             'sex'              => $required_user.'in:' . implode(',', array_keys(config('allelua.sex.label'))),
-            'dob_day'          => $required_user.'in:'.implode(',', $dob['day']),
-            'dob_month'        => $required_user.'in:'.implode(',', $dob['month']),
-            'dob_year'         => $required_user.'in:'.implode(',', $dob['year']),
+            'dob_day'          => $required_user.'numeric|in:'.implode(',', $dob['day']),
+            'dob_month'        => $required_user.'numeric|in:'.implode(',', $dob['month']),
+            'dob_year'         => $required_user.'numeric|in:'.implode(',', $dob['year']),
         );
 
         return $rules;

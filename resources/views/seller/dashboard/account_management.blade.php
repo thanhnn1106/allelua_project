@@ -105,24 +105,24 @@
                                                                 <div class="box">
                                                                     <div class="box-body">
                                                                         <?php
-                                                                            $introduceCompany = 'introduce_company_' . $lang->iso2;
+                                                                        $introduceCompany = 'introduce_company_' . $lang->iso2;
                                                                         ?>
                                                                         <div class="form-group @if ($errors->has($introduceCompany)) has-error @endif">
                                                                             <label class="control-label">{{ trans('front.account_manage_page.lb_company_des_' . $lang->iso2) }} (*)</label>
                                                                             @if ($userTranslateInfo != null)
-                                                                                @foreach ($userTranslateInfo as $item)
-                                                                                    @if ($item->language_code === $lang->iso2)
-                                                                                        <textarea type="text" value="" rows="10" class="form-control border-corner title-slug" lang="{{ $lang->iso2 }}" id="{{ $introduceCompany }}}" name="{{ $introduceCompany }}" placeholder="">{{ $item->introduce_company }}</textarea>
-                                                                                        @if ($errors->has($introduceCompany))
-                                                                                        <p class="help-block">{{ $errors->first($introduceCompany) }}</p>
-                                                                                        @endif
-                                                                                    @endif
-                                                                                @endforeach
+                                                                            @foreach ($userTranslateInfo as $item)
+                                                                            @if ($item->language_code === $lang->iso2)
+                                                                            <textarea type="text" value="" rows="10" class="form-control border-corner title-slug" lang="{{ $lang->iso2 }}" id="{{ $introduceCompany }}}" name="{{ $introduceCompany }}" placeholder="">{{ $item->introduce_company }}</textarea>
+                                                                            @if ($errors->has($introduceCompany))
+                                                                            <p class="help-block">{{ $errors->first($introduceCompany) }}</p>
+                                                                            @endif
+                                                                            @endif
+                                                                            @endforeach
                                                                             @else
-                                                                                <textarea type="text" value="" rows="10" class="form-control border-corner title-slug" lang="{{ $lang->iso2 }}" id="{{ $introduceCompany }}}" name="{{ $introduceCompany }}" placeholder=""></textarea>
-                                                                                @if ($errors->has('introduce_company_vi') || $errors->has('introduce_company_en'))
-                                                                                    <p class="help-block">{{ $errors->first('introduce_company_vi') }} {{ $errors->first('introduce_company_en') }}</p>
-                                                                                @endif
+                                                                            <textarea type="text" value="" rows="10" class="form-control border-corner title-slug" lang="{{ $lang->iso2 }}" id="{{ $introduceCompany }}}" name="{{ $introduceCompany }}" placeholder=""></textarea>
+                                                                            @if ($errors->has('introduce_company_vi') || $errors->has('introduce_company_en'))
+                                                                            <p class="help-block">{{ $errors->first('introduce_company_vi') }} {{ $errors->first('introduce_company_en') }}</p>
+                                                                            @endif
                                                                             @endif
                                                                         </div>
                                                                     </div>
@@ -141,14 +141,13 @@
                         </div>
                     </div>
                 </div>
-            </div
-        </div>
-    </div><!-- end clearfix save-marle -->
-    <div class="sizebar-left col-ex-2 col-lg-3 col-md-4 col-sm-12 col-xs-12 col-ex-pull-10 col-lg-pull-9 col-md-pull-8 col-sm-pull-0" data-align-height="right" data-bottom="20">
-        <div class="inner-sizebar clearfix">
-            @include('seller.information');
+            </div>
+        </div><!-- end clearfix save-marle -->
+        <div class="sizebar-left col-ex-2 col-lg-3 col-md-4 col-sm-12 col-xs-12 col-ex-pull-10 col-lg-pull-9 col-md-pull-8 col-sm-pull-0" data-align-height="right" data-bottom="20">
+            <div class="inner-sizebar clearfix">
+                @include('seller.information')
+            </div>
         </div>
     </div>
-</div>
 </div>
 @endsection

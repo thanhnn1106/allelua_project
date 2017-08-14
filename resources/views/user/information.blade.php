@@ -37,34 +37,34 @@
             <nav class="navbar-toggleable-lg collapse in" >
                 <ul class="nav navbar-pills nav-member">
                     <li class="nav-item" >
-                        <a href="{{ route('seller_account_management') }}" class="nav-link" >
+                        <a href="{{ route('user_account_management') }}" class="nav-link" >
                             <span>
                                 <i class="fa fa-user-o" aria-hidden="true"></i>
-                                {{ trans('front.menu_seller.lb_account_management') }}
+                                {{ trans('front.menu_user.lb_account_management') }}
                             </span>
                         </a>
                     </li>
                     <li class="nav-item" >
-                        <a href="{{ route('seller_product_create') }}" title="Áo Thun" class="nav-link" >
+                        <a href="{{ route('user_product_favorite_lists') }}" title="Áo Thun" class="nav-link" >
                             <span>
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                {{ trans('front.menu_seller.lb_new_post') }}
+                                {{ trans('front.menu_user.lb_favorite_product') }}
                             </span>
                         </a>
                     </li>
                     <li class="nav-item" >
-                        <a href="{{ route('seller_product_index') }}" class="nav-link" >
+                        <a href="{{ route('user_order_history') }}" class="nav-link" >
                             <span>
                                 <i class="fa fa-folder-o" aria-hidden="true"></i>
-                                {{ trans('front.menu_seller.lb_post_management') }}
+                                {{ trans('front.menu_user.lb_bought_product') }}
                             </span>
                         </a>
                     </li>
                     <li class="nav-item" >
-                        <a href="{{ route('seller_change_password') }}" class="nav-link" >
+                        <a href="{{ route('user_change_password') }}" class="nav-link" >
                             <span>
                                 <i class="fa fa-cog"></i>
-                                {{ trans('front.menu_seller.lb_change_password') }}
+                                {{ trans('front.menu_user.lb_change_password') }}
                             </span>
                         </a>
                     </li>
@@ -72,7 +72,7 @@
                         <a href="{{ route('logout') }}" class="nav-link" >
                             <span>
                                 <i class="fa fa-power-off" aria-hidden="true"></i>
-                                {{ trans('front.menu_seller.lb_logout') }}
+                                {{ trans('front.menu_user.lb_logout') }}
                             </span>
                         </a>
                     </li>

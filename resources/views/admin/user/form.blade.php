@@ -76,7 +76,6 @@
                     </div>
                     <!-- /.box-body -->
                 </div>
-                @if ($user->role_id == config('allelua.roles.seller'))  
                 <div class="col-xs-6">
                     <div class="box box-primary">
                         <div class="box-header with-border">
@@ -115,7 +114,6 @@
                         <!-- /.box-body -->
                     </div>
                 </div>
-                @else
                 <div class="col-xs-6">
                     <div class="box box-primary">
                         <div class="box-header with-border">
@@ -179,7 +177,6 @@
                         <!-- /.box-body -->
                     </div>
                 </div>
-                @endif
             </div>
             </form>
         </div>
