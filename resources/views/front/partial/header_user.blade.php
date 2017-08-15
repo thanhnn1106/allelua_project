@@ -4,36 +4,28 @@
         {{ trans('front.menu_seller.lb_say_hi') }} {{ Auth::user()->full_name }}
     </a>
     <div class="dropdown-menu">
-        <a aria-hidden="true" title="" href="#">
+        <a aria-hidden="true" title="" href="{{ route('user_account_management') }}">
             <span class="dropdown-item">
                 <i class="fa fa-user-o"></i>
-                {{ trans('front.menu_seller.lb_account_management') }}
+                {{ trans('front.menu_user.lb_account_management') }}
             </span>
         </a>
-        <!--
-        <a aria-hidden="true" title="" href="{{ route('seller_new_post') }}">
-            <span class="dropdown-item">
-                <i class="fa fa-pencil-square-o"></i>
-                {{ trans('front.menu_seller.lb_new_post') }}
-            </span>
-        </a>
-        <a aria-hidden="true" title="" href="{{ route('seller_product_index') }}">
+        <a aria-hidden="true" title="" href="{{ route('user_order_history') }}">
             <span class="dropdown-item">
                 <i class="fa fa-folder-o"></i>
-                {{ trans('front.menu_seller.lb_post_management') }}
+                {{ trans('front.menu_user.lb_bought_product') }}
             </span>
         </a>
-        <a aria-hidden="true" title="" href="{{ route('seller_change_password') }}">
+        <a aria-hidden="true" title="" href="{{ route('user_change_password') }}">
             <span class="dropdown-item">
                 <i class="fa fa-cog"></i>
-                {{ trans('front.menu_seller.lb_change_password') }}
+                {{ trans('front.menu_user.lb_change_password') }}
             </span>
         </a>
-        -->
         <a aria-hidden="true" title="" href="{{ route('logout') }}">
             <span class="dropdown-item">
                 <i class="fa fa-power-off"></i>
-                {{ trans('front.menu_seller.lb_logout') }}
+                {{ trans('front.menu_user.lb_logout') }}
             </span>
         </a>
     </div>
