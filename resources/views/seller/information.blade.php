@@ -69,6 +69,14 @@
                         </a>
                     </li>
                     <li class="nav-item" >
+                        <a href="{{ route('seller_manange_order') }}" class="nav-link" >
+                            <span>
+                                <i class="fa fa-list"></i>
+                                {{ trans('front.menu_seller.lb_manage_order') }}
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item" >
                         <a href="{{ route('logout') }}" class="nav-link" >
                             <span>
                                 <i class="fa fa-power-off" aria-hidden="true"></i>

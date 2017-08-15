@@ -105,6 +105,7 @@ Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], fu
     Route::match(['get', 'post'], 'account-management', 'Seller\ManageController@accountManagement')->name('seller_account_management');
     Route::match(['get', 'post'], 'new-post', 'Seller\ManageController@newPost')->name('seller_new_post');
     Route::match(['get', 'post'], 'inbox', 'Seller\ManageController@inbox')->name('seller_inbox');
+    Route::match(['get', 'post'], 'manage-order', 'Seller\ManageController@manageOrder')->name('seller_manange_order');
 
     // Product
     Route::get('product/list', 'Seller\ProductController@index')->name('seller_product_index');

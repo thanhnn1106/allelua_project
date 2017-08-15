@@ -28,6 +28,12 @@
                 {{ trans('front.menu_seller.lb_change_password') }}
             </span>
         </a>
+        <a aria-hidden="true" title="" href="{{ route('seller_manange_order') }}">
+            <span class="dropdown-item">
+                <i class="fa fa-list"></i>
+                {{ trans('front.menu_seller.lb_manage_order') }}
+            </span>
+        </a>
         <a aria-hidden="true" title="" href="{{ route('logout') }}">
             <span class="dropdown-item">
                 <i class="fa fa-power-off"></i>

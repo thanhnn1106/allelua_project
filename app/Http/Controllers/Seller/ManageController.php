@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Order;
 use Hash;
 use DB;
 
@@ -168,6 +169,13 @@ class ManageController extends BaseController
         ];
 
         return view('seller.dashboard.account_management', $returnData);
+    }
+
+    public function manageOrder(Request $request)
+    {
+        $orderList = Order::getOrderList(Auth::user()->id);
+//        echo "<pre>"; print_r($orderList);exit;
+        return view('seller.dashboard.order_list', ['orderList' => $orderList]);
     }
 
     public function newPost(Request $request)
