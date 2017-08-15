@@ -59,4 +59,22 @@ class Order extends Model
         $result = $orderList->paginate(LIMIT_ROW);
         return $result;
     }
+
+    /**
+     * Get order list for admin.
+     *
+     * @var object array
+     * @author Nguyễn Ngọc Thanh <thanh.nn1106@gmail.com>
+     */
+    public static function getList()
+    {
+        $orderList = \DB::table('orders AS o')
+                ->select('o.status', 'oi.*', 'u.company_name AS seller_name', 'u1.email AS customer_email', 'u1.full_name AS customer_full_name')
+                ->join('order_items AS oi', 'oi.order_id', '=', 'o.id')
+                ->join('users AS u', 'u.id', '=', 'oi.seller_id')
+                ->join('users AS u1', 'u1.id', '=', 'o.user_id')
+                ->orderBy('o.created_at', 'desc');
+        $result = $orderList->paginate(LIMIT_ROW);
+        return $result;
+    }
 }

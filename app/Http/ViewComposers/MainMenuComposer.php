@@ -38,6 +38,10 @@ class MainmenuComposer
                         'route' => 'admin_user_personal_list',
                         'name'  => 'Seller personal info',
                     ),
+                    'order' => array(
+                        'route' => 'admin_manage_order',
+                        'name'  => 'Order',
+                    ),
                 ),
             ),
             'categories' => array(

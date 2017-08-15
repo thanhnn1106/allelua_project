@@ -96,6 +96,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], func
 
     Route::match(['get', 'post'], 'contact/list',        'Admin\ContactPageController@index')->name('admin_manage_contacts');
     Route::match(['get', 'post'], 'contact/view',        'Admin\ContactPageController@view')->name('admin_view_contacts');
+
+    // Order
+    Route::match(['get', 'post'], 'order',        'Admin\OrderController@index')->name('admin_manage_order');
 });
 
 Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], function () {

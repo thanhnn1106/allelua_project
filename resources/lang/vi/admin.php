@@ -106,4 +106,18 @@ return [
         'btn_back'            => 'Trở về',
         'lb_update_status'    => 'Cập nhật trạng thái',
     ),
+    'order_page' => array(
+        'lb_title_list'       => 'Quản lý đơn hàng',
+        'lb_title_list_small' => 'Danh sách',
+        'lb_order_id'         => 'Mã đơn hàng',
+        'lb_seller'           => 'Người bán',
+        'lb_customer_name'    => 'Người mua',
+        'lb_customer_email'   => 'Email người mua',
+        'lb_product_name'     => 'Tên sản phẩm',
+        'lb_price'            => 'Giá',
+        'lb_quantity'         => 'Số lượng',
+        'lb_total'            => 'Tổng',
+        'lb_status'           => 'Trạng thái',
+        'lb_created_at'       => 'Ngày đặt hàng',
+    ),
 ];
