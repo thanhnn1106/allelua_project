@@ -19,13 +19,13 @@
         <!-- END BEST PRICE -->
     </div>
 
-    <!-- BEGIN BEST PRICE -->
-    @include('front.partial.favorite')
-    <!-- END BEST PRICE -->
-
     <!-- BEGIN RELATED PRODUCT -->
     @include('front.partial.related')
     <!-- END RELATED PRODUCT -->
+
+    <!-- BEGIN BEST PRICE -->
+    @include('front.partial.favorite')
+    <!-- END BEST PRICE -->
 
     <!-- BEGIN COUNTRY AND SERVICE -->
     @include('front.partial.country_service')
