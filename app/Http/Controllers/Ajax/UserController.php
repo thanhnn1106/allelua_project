@@ -28,7 +28,7 @@ class UserController extends AjaxBaseController
             foreach ($sellers as $seller) {
                 $return[] = array(
                     'id'    => $seller->id,
-                    'value' => $seller->company_name,
+                    'value' => $seller->company_name, $seller->email,
                 );
             }
 

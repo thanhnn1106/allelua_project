@@ -44,10 +44,10 @@ class UserPersonalController extends AdminBaseController
             }
             $rules =  array(
                 'seller'               => 'required|exists:users,company_name',
-                'seller_id'            => 'required|not_in:' . implode(',', $personalUserIdArray),
-                'tax_code'             => 'required|max:191',
+                'user_id'              => 'required|not_in:' . implode(',', $personalUserIdArray),
+                'tax_code'             => 'required|numeric|max:191',
                 'license_business'     => 'required|max:255',
-                'bank_account'         => 'required|max:255',
+                'bank_account'         => 'required|numeric|max:255',
                 'bank_name'            => 'required|max:255',
                 'bank_address'         => 'required|max:255',
                 'introduce_company_en' => 'required',
@@ -64,6 +64,7 @@ class UserPersonalController extends AdminBaseController
 
             try {
 
+                $params['role_id'] = Auth::user()->role_id;
                 $addPersonal          = \App\Personal::addPersonal($params);
                 if ($addPersonal == false) {
                     return redirect()->route('admin_user_personal_add')
@@ -117,9 +118,9 @@ class UserPersonalController extends AdminBaseController
 
             $rules =  array(
                 'user_id'              => 'required|exists:users,id',
-                'tax_code'             => 'required',
+                'tax_code'             => 'required|numeric',
                 'license_business'     => 'required',
-                'bank_account'         => 'required',
+                'bank_account'         => 'required|numeric',
                 'bank_name'            => 'required',
                 'bank_address'         => 'required',
                 'introduce_company_en' => 'required',
@@ -150,7 +151,7 @@ class UserPersonalController extends AdminBaseController
                 if ($updateBankInfo && $updatePersonalTranslate) {
 
                     DB::commit();
-                    return redirect()->route('admin_user', ['id' => $userId])
+                    return redirect()->route('admin_user_personal_list')
                         ->with('success', trans('common.update_success'));
                 }
                 return redirect()->route('admin_user_personal_edit', ['id' => $userId])
@@ -166,16 +167,10 @@ class UserPersonalController extends AdminBaseController
         }
 
         // Return page edit
-        $langs             = \App\Languages::getResults();
-        $id                = $request->id;
-        $user              = User::find($id);
+        $langs          = \App\Languages::getResults();
+        $personalInfoId = $request->id;
 
-        if ($user == null) {
-            $request->session()->flash('error', trans('user.there_is_no_user'));
-            return redirect()->route('admin_user');
-        }
-
-        $userPersonalInfo = \App\Personal::where('user_id', '=', $id)->first();
+        $userPersonalInfo = \App\Personal::where('user_id', '=', $personalInfoId)->first();
         if($userPersonalInfo !== NULL) {
             $userBankInfo      = $userPersonalInfo->personalBanks()->first();
             $userTranslateInfo = $userPersonalInfo->personalTranslates()->get();
@@ -189,6 +184,27 @@ class UserPersonalController extends AdminBaseController
             'userTranslateInfo' => $userTranslateInfo,
         );
 
-        return view('admin/user_personal_info/form', $returnData);
+        return view('admin/user_personal_info/form_edit', $returnData);
+    }
+
+    /**
+     * Approve user personal info
+     * @param Request $request
+     * @param Integer $id user id
+     * @return type
+     * @author Nguyen Ngoc Thanh <thanh.nn1106@gmail.com>
+     */
+    public function approve(Request $request)
+    {
+        $personalInfo = Personal::find($request->id);
+        $personalInfo->status = 1;
+        $approvedResult = $personalInfo->save();
+        if ($approvedResult) {
+            return redirect()->route('admin_user_personal_list')
+                        ->with('success', trans('common.update_success'));
+        }
+        return redirect()->route('admin_user_personal_list')
+                            ->with('error', trans('common.update_failed'))
+                            ->withInput();
     }
 }

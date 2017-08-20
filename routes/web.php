@@ -61,14 +61,20 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], func
 
     // Users
     Route::get('user', 'Admin\UserManageController@index')->name('admin_user');
+    Route::get('user-deleted-list', 'Admin\UserManageController@deletedList')->name('admin_user_deleted_list');
     Route::get('user/change_status/{id}', 'Admin\UserManageController@changeStatus')->name('admin_user_status');
     Route::get('user/delete/{id}', 'Admin\UserManageController@delete')->name('admin_user_delete');
+    Route::get('user/restore/{id}', 'Admin\UserManageController@restore')->name('admin_user_restore');
+    Route::get('user/delete-force/{id}', 'Admin\UserManageController@forceDelete')->name('admin_user_force_deleted');
     Route::match(['get', 'post'], 'user/add', 'Admin\UserManageController@add')->name('admin_user_add');
     Route::match(['get', 'post'], 'user/edit/{id}', 'Admin\UserManageController@edit')->name('admin_user_edit');
+
+    // Manage personal information
     Route::get('user/personal_info/edit', 'Admin\UserPersonalController@editPersonalInfo')->name('admin_user_personal_edit');
     Route::post('user/personal_info/update', 'Admin\UserPersonalController@editPersonalInfo')->name('admin_user_personal_update');
     Route::get('user/personal_info', 'Admin\UserPersonalController@index')->name('admin_user_personal_list');
     Route::match(['get', 'post'], 'user/personal_info/add', 'Admin\UserPersonalController@add')->name('admin_user_personal_add');
+    Route::match(['get', 'post'], 'user/personal_info/approve', 'Admin\UserPersonalController@approve')->name('admin_user_personal_approved');
 
     // Profile
     Route::match(['get', 'post'], 'profile', 'Admin\UserProfileController@edit')->name('admin_profile');
@@ -104,8 +110,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], func
 Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], function () {
     Route::get('dashboard', 'Seller\DashBoardController@index')->name('seller_dashboard');
 
-    Route::match(['get', 'post'], 'change-password', 'Seller\ManageController@changePasswordSeller')->name('seller_change_password');
-    Route::match(['get', 'post'], 'account-management', 'Seller\ManageController@accountManagement')->name('seller_account_management');
+    // Change password page
+    Route::match(['get', 'post'], 'doi-mat-khau', 'Seller\ManageController@changePasswordSeller')->name('seller_change_password');
+    // Personal information page
+    Route::match(['get'], 'quan-ly-thong-tin-ca-nhan', 'Seller\PersonalInfoController@index')->name('seller_account_management');
+    Route::match(['post'], 'quan-ly-thong-tin-ca-nhan/add', 'Seller\PersonalInfoController@add')->name('seller_account_management_add');
+    Route::match(['post'], 'quan-ly-thong-tin-ca-nhan/update', 'Seller\PersonalInfoController@update')->name('seller_account_management_update');
+    // New post page
     Route::match(['get', 'post'], 'new-post', 'Seller\ManageController@newPost')->name('seller_new_post');
     Route::match(['get', 'post'], 'inbox', 'Seller\ManageController@inbox')->name('seller_inbox');
     Route::match(['get', 'post'], 'manage-order', 'Seller\ManageController@manageOrder')->name('seller_manange_order');

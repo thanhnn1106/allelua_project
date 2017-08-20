@@ -68,8 +68,8 @@ $(document).ready(function() {
         },
         minLength: 5,
         select: function( event, ui ) {
-            $('#seller').val(ui.item.value);
-            $('#seller_id').val(ui.item.id);
+            $('#seller').val(ui.item.email);
+            $('#seller_id').val(ui.item.email);
         }
     });
 

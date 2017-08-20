@@ -50,14 +50,16 @@ class Personal extends Model
     {
         $response = false;
         $response = DB::table('personal')->insert([
-            'user_id'          => $params['seller_id'],
+            'user_id'          => $params['user_id'],
             'tax_code'         => $params['tax_code'],
             'license_business' => $params['license_business'],
-            'status'           => isset($params['status']) ? $params['status'] : 1,
+            'status'           => ($params['role_id'] == config('allelua.roles.administrator')) 
+                                  ? config('allelua.seller_personal_info_status.approved')
+                                  : config('allelua.seller_personal_info_status.pending'),
         ]);
 
         if ($response) {
-            $response = \App\Personal::where('user_id', '=', $params['seller_id'])->first();
+            $response = \App\Personal::where('user_id', '=', $params['user_id'])->first();
         }
 
         return $response;

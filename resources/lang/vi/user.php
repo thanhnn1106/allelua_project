@@ -38,4 +38,9 @@ return [
     'admin_refuse_your_modification' => 'Votre modification est refusée par nos équipes.',
     'valid_status_validate' => 'Valider',
     'valid_status_refuse' => 'Refuser',
+
+    // Message notification
+    'there_is_no_user' => 'Tài khoản không tồn tại.',
+    'can_not_change'   => 'Không thể thay đổi trạng thái ngay lúc này.',
+    'restore_success'  => 'Khôi phục tài khoản thành công.',
 ];

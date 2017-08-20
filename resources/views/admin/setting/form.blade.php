@@ -2,8 +2,8 @@
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>Setting
-            <small>Edit</small>
+        <h1>{{ trans('admin.setting.lb_setting') }}
+            <small>{{ trans('admin.setting.lb_edit') }}</small>
         </h1>
     </section>
 
@@ -15,7 +15,7 @@
                     <form role="form" action="{{ route('admin_setting_socical') }}" id="form-user" method="post">
                         <div class="box-body">
                             <div class="form-group input-group-sm @if ($errors->has('setting_rate')) has-error @endif">
-                                <label class="control-label">Rate</label>
+                                <label class="control-label">{{ trans('admin.setting.lb_rate') }}</label>
                                 <input type="text" class="form-control" id="setting_rate" name="setting_rate" 
                                        maxlength="255" value="{{ old('setting_rate', isset($setting['setting_rate']) ? $setting['setting_rate'] : '') }}" />
                                 @if ($errors->has('setting_rate'))
@@ -24,7 +24,7 @@
                             </div>
 
                             <div class="form-group input-group-sm @if ($errors->has('setting_link_facebook')) has-error @endif">
-                                <label class="control-label">Link Facebook</label>
+                                <label class="control-label">{{ trans('admin.setting.lb_link_facebook') }}</label>
                                 <input type="text" class="form-control" id="setting_link_facebook" name="setting_link_facebook" maxlength="255" 
                                        value="{{ old('setting_link_facebook', isset($setting['setting_link_facebook']) ? $setting['setting_link_facebook'] : '') }}" />
                                 @if ($errors->has('setting_link_facebook'))
@@ -33,7 +33,7 @@
                             </div>
 
                             <div class="form-group input-group-sm @if ($errors->has('setting_link_twitter')) has-error @endif">
-                                <label class="control-label">Link Twitter</label>
+                                <label class="control-label">{{ trans('admin.setting.lb_link_twitter') }}</label>
                                 <input type="text" class="form-control" id="company_name" name="setting_link_twitter" 
                                        maxlength="255" value="{{ old('setting_link_twitter', isset($setting['setting_link_twitter']) ? $setting['setting_link_twitter'] : '') }}" />
                                 @if ($errors->has('setting_link_twitter'))
@@ -42,7 +42,7 @@
                             </div>
 
                             <div class="form-group input-group-sm @if ($errors->has('setting_link_youtube')) has-error @endif">
-                                <label class="control-label">Link Youtube</label>
+                                <label class="control-label">{{ trans('admin.setting.lb_link_youtube') }}</label>
                                 <input type="text" class="form-control" id="company_name" name="setting_link_youtube" 
                                        maxlength="255" value="{{ old('setting_link_youtube', isset($setting['setting_link_youtube']) ? $setting['setting_link_youtube'] : '') }}" />
                                 @if ($errors->has('setting_link_youtube'))
@@ -51,7 +51,7 @@
                             </div>
 
                             <div class="form-group input-group-sm @if ($errors->has('setting_link_zalo')) has-error @endif">
-                                <label class="control-label">Link Zalo</label>
+                                <label class="control-label">{{ trans('admin.setting.lb_link_zalo') }}</label>
                                 <input type="text" class="form-control" id="company_name" name="setting_link_zalo" 
                                        maxlength="255" value="{{ old('setting_link_zalo', isset($setting['setting_link_zalo']) ? $setting['setting_link_zalo'] : '') }}" />
                                 @if ($errors->has('setting_link_zalo'))
@@ -63,7 +63,7 @@
 
                         <div class="box-footer">
                             {{ csrf_field() }}
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">{{ trans('admin.setting.btn_submit') }}</button>
                         </div>
                     </form>
                 </div>

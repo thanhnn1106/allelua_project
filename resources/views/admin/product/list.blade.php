@@ -2,8 +2,8 @@
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>Product
-            <small>Lists</small>
+        <h1>{{ trans('admin.product.lb_title_product') }}
+            <small>{{ trans('admin.product.lb_title_list') }}</small>
         </h1>
     </section>
 
@@ -13,7 +13,7 @@
                 @include('notifications')
                 <div class="box">
                     <div class="box-header with-border">
-                        <a href="{{ route('admin_product_add') }}" class="btn btn-default btn-sm">Add new</a>
+                        <a href="{{ route('admin_product_add') }}" class="btn btn-default btn-sm">{{ trans('admin.product.lb_add_new') }}</a>
                     </div>
                     <div class="box-body">
                         <div class="dataTables_wrapper form-inline dt-bootstrap">
@@ -25,15 +25,15 @@
                                       @else
                                         <tr>
                                             <th>#ID</th>
-                                            <th>Category</th>
-                                            <th>Seller</th>
-                                            <th>Price</th>
-                                            <th>Quantity</th>
-                                            <th>Payment method</th>
-                                            <th>Shipping method</th>
-                                            <th>Status</th>
-                                            <th>Create date</th>
-                                            <th>Action</th>
+                                            <th>{{ trans('admin.product.lb_category') }}</th>
+                                            <th>{{ trans('admin.product.lb_seller') }}</th>
+                                            <th>{{ trans('admin.product.lb_price') }}</th>
+                                            <th>{{ trans('admin.product.lb_quantity') }}</th>
+                                            <th>{{ trans('admin.product.lb_payment_method') }}</th>
+                                            <th>{{ trans('admin.product.lb_shipping_method') }}</th>
+                                            <th>{{ trans('admin.product.lb_status') }}</th>
+                                            <th>{{ trans('admin.product.lb_created_date') }}</th>
+                                            <th>{{ trans('admin.product.lb_action') }}</th>
                                         </tr>
                                         @foreach($products as $product)
                                         <tr class="odd">
@@ -53,8 +53,12 @@
                                             </td>
                                             <td>{{ $product->created_at }}</td>
                                             <td>
-                                                <a href="{{ route('admin_product_edit', ['id' => $product->id]) }}" class="btn btn-default btn-xs">Edit</a>
-                                                <a href="javascript:void(0);" onclick="fncDelete('{{ route('admin_product_delete', array('id' => $product->id)) }}');" class="btn btn-danger btn-xs">Delete</a>
+                                                <a href="{{ route('admin_product_edit', ['id' => $product->id]) }}" class="btn btn-default btn-xs">
+                                                    {{ trans('admin.product.btn_edit') }}
+                                                </a>
+                                                <a href="javascript:void(0);" onclick="fncDelete('{{ route('admin_product_delete', array('id' => $product->id)) }}');" class="btn btn-danger btn-xs">
+                                                    {{ trans('admin.product.btn_delete') }}
+                                                </a>
                                             </td>
                                         </tr>
                                         @endforeach

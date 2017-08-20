@@ -222,7 +222,7 @@ class UserManageController extends AdminBaseController
         }
         $user->save();
         $request->session()->flash('success', trans('user.change_status_success'));
-        
+
         return redirect(route('admin_user'));
     }
 
@@ -264,5 +264,78 @@ class UserManageController extends AdminBaseController
         );
 
         return $rules;
+    }
+
+    /**
+     * Show user deleted list.
+     *
+     * @return array
+     * @author Nguyen Ngoc Thanh    <thanh.nn1106@gmail.com>
+     */
+    public function deletedList(Request $request)
+    {
+        $params = array(
+            'email'         => null,
+            'company_name'  => null,
+            'status'        => null,
+            'role'          => null,
+            'deleted_at'    => null,
+        );
+
+        $users = User::getListUserDeleted();
+
+        return view('admin.user.deleted_list', [
+            'users' => $users,
+        ]);
+    }
+
+    /**
+     * Restore user.
+     * 
+     * @param Request $request
+     * @param Integer $id user id
+     * @return type
+     */
+    public function restore(Request $request, $id)
+    {
+        $user = User::getUserDeletedInfo($id);
+        if ($user == null) {
+            $request->session()->flash('error', trans('user.there_is_no_user'));
+            return redirect(route('admin_user'));
+        }
+        $currentUser = Auth::user();
+        if ($user->id == $currentUser->id) {
+            $request->session()->flash('warning', trans('user.can_not_change'));
+            return redirect()->route('admin_user');
+        }
+
+        $restoreResult = User::restoreDeletedUser($id);
+        $request->session()->flash('success', trans('user.restore_success'));
+        return redirect(route('admin_user'));
+    }
+
+    /**
+     * Delete user with hard delete
+     * 
+     * @param Request $request
+     * @param Integer $id user id
+     * @return type
+     */
+    public function forceDelete(Request $request, $id)
+    {
+        $user = User::getUserDeletedInfo($id);
+        if ($user == null) {
+            $request->session()->flash('error', trans('user.there_is_no_user'));
+            return redirect(route('admin_user'));
+        }
+        $currentUser = Auth::user();
+        if ($user->id == $currentUser->id) {
+            $request->session()->flash('warning', trans('user.can_not_change'));
+            return redirect()->route('admin_user');
+        }
+
+        $restoreResult = User::forceDeletedUser($id);
+        $request->session()->flash('success', trans('user.delete_success'));
+        return redirect(route('admin_user'));
     }
 }

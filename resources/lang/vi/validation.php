@@ -104,8 +104,31 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        // Seller personal information
+        'tax_code' => [
+            'required' => ':attribute không được rỗng.',
+            'numeric'  => ':attribute phải là số.',
+        ],
+        'license_business' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'bank_account' => [
+            'required' => ':attribute không được rỗng.',
+            'numeric'  => ':attribute phải là số.',
+        ],
+        'bank_name' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'bank_address' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'introduce_company_en' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'introduce_company_vi' => [
+            'required' => ':attribute không được rỗng.',
+        ],
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -117,6 +140,15 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        // Seller personal information
+        'tax_code' => 'Mã số thuế',
+        'license_business' => 'Giấy phép kinh doanh',
+        'bank_account' => 'Số tài khoản ngân hàng',
+        'bank_name' => 'Tên ngân hàng',
+        'bank_address' => 'Địa chỉ ngân hàng',
+        'introduce_company_en' => 'Thông tin công ty (tiếng Anh)',
+        'introduce_company_vi' => 'Thông tin công ty (tiếng Việt)',
+    ],
 
 ];

@@ -2128,3 +2128,6 @@ textarea.input-payment {
 .form-control {
     font-size: 1.5rem;
 }
+.required-field {
+    color: red;
+}

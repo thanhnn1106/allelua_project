@@ -31,7 +31,7 @@
                                             <th>{{ trans('admin.user.lb_country') }}</th>
                                             <th>{{ trans('admin.user.lb_role') }}</th>
                                             <th>{{ trans('admin.user.lb_status') }}</th>
-                                            <th>{{ trans('admin.user.lb_created_date') }}</th>
+                                            <th>{{ trans('admin.user.lb_deleted_date') }}</th>
                                             <th>{{ trans('admin.user.lb_action') }}</th>
                                         </tr>
                                         @foreach($users as $user)
@@ -54,18 +54,13 @@
                                                 </a>
                                                 @endif
                                             </td>
-                                            <td>{{ $user->created_at }}</td>
+                                            <td>{{ $user->deleted_at }}</td>
                                             <td>
                                                 @if(!isAdmin($user->role))
-                                                <a href="{{ route('admin_user_edit', ['id' => $user->id]) }}" class="btn btn-default btn-xs">
-                                                    {{ trans('admin.user.btn_edit') }}
+                                                <a href="javascript:void(0);" onclick="fncRestore('{{ route('admin_user_restore', array('id' => $user->id)) }}');" class="btn btn-danger btn-xs">
+                                                    {{ trans('admin.user.btn_restore') }}
                                                 </a>
-                                                    @if (!empty($user->personal_id))
-                                                        <a href="{{ route('admin_user_personal_edit', ['id' => $user->id]) }}" class="btn btn-default btn-xs">
-                                                            {{ trans('admin.user.btn_personal_info') }}
-                                                        </a>
-                                                    @endif
-                                                <a href="javascript:void(0);" onclick="fncDelete('{{ route('admin_user_delete', array('id' => $user->id)) }}');" class="btn btn-danger btn-xs">
+                                                <a href="javascript:void(0);" onclick="fncDeleteForce('{{ route('admin_user_force_deleted', array('id' => $user->id)) }}');" class="btn btn-danger btn-xs">
                                                     {{ trans('admin.user.btn_delete') }}
                                                 </a>
                                                 @endif
@@ -104,9 +99,16 @@ function fncUpdateStatus(url)
     }
     window.location.href = url;
 }
-function fncDelete(url)
+function fncRestore(url)
 {
-    if (!confirm('Are you sure delete this account ?')) {
+    if (!confirm('Are you sure restore this account ?')) {
+        return false;
+    }
+    window.location.href = url;
+}
+function fncDeleteForce(url)
+{
+    if (!confirm('Are you sure delete forever this account ?')) {
         return false;
     }
     window.location.href = url;

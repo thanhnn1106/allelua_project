@@ -46,4 +46,8 @@ return [
         'path_upload_thumb' => '/uploads/product/thumb',
         'path_upload_detail' => '/uploads/product',
     ),
+    'seller_personal_info_status' => array(
+        'pending'  => 0,
+        'approved' => 1,
+    ),
 ];

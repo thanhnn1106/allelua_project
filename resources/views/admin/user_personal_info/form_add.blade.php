@@ -16,7 +16,7 @@
                     <div class="box-footer">
                         {{ csrf_field() }}
                         <button type="submit" class="btn btn-primary btn-sm">{{ trans('admin.personal_info.btn_add') }}</button>
-                        <a href="{{ route('admin_user') }}" class="btn btn-default btn-sm">{{ trans('admin.personal_info.btn_back') }}</a>
+                        <a href="{{ route('admin_user_personal_list') }}" class="btn btn-default btn-sm">{{ trans('admin.personal_info.btn_back') }}</a>
                     </div>
                     <div class="box-body">
                         <hr>
@@ -26,9 +26,9 @@
                                 <div class="form-group input-group-sm @if ($errors->has('seller_id')) has-error @endif">
                                     <label class="control-label">{{ trans('admin.personal_info.lb_company_name') }}</label>
                                     <input type="text" class="form-control border-corner" data-url="{{ route('ajax_load_seller_personal') }}" name="seller" id="seller" placeholder="Input ..." value="{{ old('seller') }}" />
-                                    <input type="hidden" name="seller_id" id="seller_id" value="{{ old('seller_id') }}">
-                                    @if ($errors->has('seller') || $errors->has('seller_id'))
-                                      <p class="help-block">{{ $errors->first('seller_id') }}</p>
+                                    <input type="hidden" name="user_id" id="user_id" value="{{ old('user_id') }}">
+                                    @if ($errors->has('seller') || $errors->has('user_id'))
+                                      <p class="help-block">{{ $errors->first('user_id') }}</p>
                                     @endif
                                 </div>
                                 <div class="form-group input-group-sm @if ($errors->has('tax_code')) has-error @endif">
@@ -120,9 +120,34 @@
 @endsection
 
 @section('footer_script')
-<script src="{{ asset('js/admin/product.js') }}"></script>
 <script>
 $(function() {
+    // Autocomplete postal code
+    var urlSeller = $( "#seller" ).attr('data-url');
+    $( "#seller" ).autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                data: {
+                    term: request.term
+                },
+                global: false,
+                type: 'GET',
+                url: urlSeller,
+                success: function (data) {
+                    if(data.length) {
+                        response(data);
+                    } else {
+                        $('#seller_id').val('');
+                    }
+                }
+            });
+        },
+        minLength: 5,
+        select: function( event, ui ) {
+            $('#seller').val(ui.item.value);
+            $('#user_id').val(ui.item.id);
+        }
+    });
     $('.title-cate').bind('keyup change', function () {
        createSlugLink($(this));
     });

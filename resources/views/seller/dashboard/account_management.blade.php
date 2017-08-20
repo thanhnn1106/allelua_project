@@ -22,32 +22,33 @@
                                     <div class="user-heading">
                                         <h3><strong>{{ trans('front.account_manage_page.lb_title') }}</strong></h3>
                                     </div>
-                                    <form role="form" action="{{ route('seller_account_management') }}" id="form-product" method="POST" enctype="multipart/form-data">
+                                    <form role="form" action="{{ ($userPersonalInfo == null) ? route('seller_account_management_add') : route('seller_account_management_update') }}" id="form-product" method="POST" enctype="multipart/form-data">
                                         <div class="nav-tabs-custom">
                                             <div class="box-footer">
                                                 {{ csrf_field() }}
                                                 <!--For Add new -->
-                                                <input type="hidden" id="seller_id" name="seller_id" value="{{ (isset($userInfo->user_id)) ? $userInfo->user_id : Auth::user()->id }}" />
-                                                <!--For update-->
-                                                <input type="hidden" id="user_id" name="user_id" value="{{ (isset($userInfo->user_id)) ? $userInfo->user_id : Auth::user()->id }}" />
-                                                <input type="hidden" id="action" name="action" value="{{ $action }}" />
-                                                <button type="submit" class="btn btn-primary btn-sm">{{ ($action === 'update') ? trans('front.account_manage_page.btn_update') : trans('front.account_manage_page.btn_add')}}</button>
+                                                <input type="hidden" id="seller_id" name="personal_info_id" value="{{ ($userPersonalInfo == null) ? '' : $userPersonalInfo->user_id }}" />
+                                                <button type="submit" class="btn btn-primary btn-sm">{{ ($userPersonalInfo == null) ? trans('front.account_manage_page.btn_add') : trans('front.account_manage_page.btn_update') }}</button>
                                             </div>
                                             <div class="box-body">
                                                 <hr>
+                                                <?php
+                                                    // Disabled input when status = 1
+                                                    $disabled = (isset($userPersonalInfo) != null || isset($userPersonalInfo->status) == config('allelua.seller_personal_info_status.approved')) ? 'disabled' : '';
+                                                ?>
                                                 <div class="row">
                                                     <!-- left -->
                                                     <div class="col-md-6">
                                                         <div class="form-group input-group-sm @if ($errors->has('tax_code')) has-error @endif">
-                                                            <label class="control-label">{{ trans('front.account_manage_page.lb_taxcode') }} (*)</label>
-                                                            <input type="text" name="tax_code" id="tax_code" class="form-control border-corner" placeholder="" value="{{ (isset($userInfo->tax_code)) ? $userInfo->tax_code : ''}}" />
+                                                            <label class="control-label">{{ trans('front.account_manage_page.lb_taxcode') }} <span class="required-field">(*)</span></span></label>
+                                                            <input {{ $disabled }} type="number" name="tax_code" id="tax_code" class="form-control border-corner" placeholder="" value="{{ (isset($userPersonalInfo->tax_code)) ? $userPersonalInfo->tax_code : old('tax_code') }}" />
                                                             @if ($errors->has('tax_code'))
                                                             <p class="help-block">{{ $errors->first('tax_code') }}</p>
                                                             @endif
                                                         </div>
                                                         <div class="form-group input-group-sm @if ($errors->has('license_business')) has-error @endif">
-                                                            <label class="control-label">{{ trans('front.account_manage_page.lb_license_business') }} (*)</label>
-                                                            <input type="text" name="license_business" id="license_business" class="form-control border-corner" placeholder="" value="{{ (isset($userInfo->license_business)) ? $userInfo->license_business : ''}}" />
+                                                            <label class="control-label">{{ trans('front.account_manage_page.lb_license_business') }} <span class="required-field">(*)</span></label>
+                                                            <input {{ $disabled }} type="text" name="license_business" id="license_business" class="form-control border-corner" placeholder="" value="{{ (isset($userPersonalInfo->license_business)) ? $userPersonalInfo->license_business : old('license_business') }}" />
                                                             @if ($errors->has('license_business'))
                                                             <p class="help-block">{{ $errors->first('license_business') }}</p>
                                                             @endif
@@ -61,22 +62,22 @@
                                                     <!-- left -->
                                                     <div class="col-md-6">
                                                         <div class="form-group input-group-sm @if ($errors->has('bank_account')) has-error @endif">
-                                                            <label class="control-label">{{ trans('front.account_manage_page.lb_bank_account_number') }} (*)</label>
-                                                            <input type="text" name="bank_account" id="bank_account" class="form-control border-corner" placeholder="" value="{{ (isset($userBankInfo->account_bank)) ? $userBankInfo->account_bank : '' }}" />
+                                                            <label class="control-label">{{ trans('front.account_manage_page.lb_bank_account_number') }} <span class="required-field">(*)</span></label>
+                                                            <input {{ $disabled }} type="number" name="bank_account" id="bank_account" class="form-control border-corner" placeholder="" value="{{ (isset($userBankInfo->account_bank)) ? $userBankInfo->account_bank : old('bank_account') }}" />
                                                             @if ($errors->has('bank_account'))
                                                             <p class="help-block">{{ $errors->first('bank_account') }}</p>
                                                             @endif
                                                         </div>
                                                         <div class="form-group input-group-sm @if ($errors->has('bank_name')) has-error @endif">
-                                                            <label class="control-label">{{ trans('front.account_manage_page.lb_bank_name') }} (*)</label>
-                                                            <input type="text" name="bank_name" id="bank_name" class="form-control border-corner" placeholder="" value="{{ (isset($userBankInfo->name_bank)) ? $userBankInfo->name_bank : '' }}" />
+                                                            <label class="control-label">{{ trans('front.account_manage_page.lb_bank_name') }} <span class="required-field">(*)</span></label>
+                                                            <input {{ $disabled }} type="text" name="bank_name" id="bank_name" class="form-control border-corner" placeholder="" value="{{ (isset($userBankInfo->name_bank)) ? $userBankInfo->name_bank : old('bank_name') }}" />
                                                             @if ($errors->has('bank_name'))
                                                             <p class="help-block">{{ $errors->first('bank_name') }}</p>
                                                             @endif
                                                         </div>
                                                         <div class="form-group input-group-sm @if ($errors->has('bank_address')) has-error @endif">
-                                                            <label class="control-label">{{ trans('front.account_manage_page.lb_bank_address') }} (*)</label>
-                                                            <input type="text" name="bank_address" id="bank_address" class="form-control border-corner" placeholder="" value="{{ (isset($userBankInfo->address_bank)) ? $userBankInfo->address_bank : '' }}" />
+                                                            <label class="control-label">{{ trans('front.account_manage_page.lb_bank_address') }} <span class="required-field">(*)</span></label>
+                                                            <input {{ $disabled }}  type="text" name="bank_address" id="bank_address" class="form-control border-corner" placeholder="" value="{{ (isset($userBankInfo->address_bank)) ? $userBankInfo->address_bank : old('bank_address') }}" />
                                                             @if ($errors->has('bank_address'))
                                                             <p class="help-block">{{ $errors->first('bank_address') }}</p>
                                                             @endif
@@ -105,24 +106,24 @@
                                                                 <div class="box">
                                                                     <div class="box-body">
                                                                         <?php
-                                                                        $introduceCompany = 'introduce_company_' . $lang->iso2;
+                                                                            $introduceCompany = 'introduce_company_' . $lang->iso2;
                                                                         ?>
                                                                         <div class="form-group @if ($errors->has($introduceCompany)) has-error @endif">
-                                                                            <label class="control-label">{{ trans('front.account_manage_page.lb_company_des_' . $lang->iso2) }} (*)</label>
+                                                                            <label class="control-label">{{ trans('front.account_manage_page.lb_company_des_' . $lang->iso2) }} <span class="required-field">(*)</span></label>
                                                                             @if ($userTranslateInfo != null)
-                                                                            @foreach ($userTranslateInfo as $item)
-                                                                            @if ($item->language_code === $lang->iso2)
-                                                                            <textarea type="text" value="" rows="10" class="form-control border-corner title-slug" lang="{{ $lang->iso2 }}" id="{{ $introduceCompany }}}" name="{{ $introduceCompany }}" placeholder="">{{ $item->introduce_company }}</textarea>
-                                                                            @if ($errors->has($introduceCompany))
-                                                                            <p class="help-block">{{ $errors->first($introduceCompany) }}</p>
-                                                                            @endif
-                                                                            @endif
-                                                                            @endforeach
+                                                                                @foreach ($userTranslateInfo as $item)
+                                                                                    @if ($item->language_code === $lang->iso2)
+                                                                                        <textarea type="text" value="" rows="10" class="form-control border-corner title-slug" lang="{{ $lang->iso2 }}" id="{{ $introduceCompany }}}" name="{{ $introduceCompany }}" placeholder="">{{ isset($item->introduce_company) ? $item->introduce_company : old($introduceCompany) }}</textarea>
+                                                                                        @if ($errors->has($introduceCompany))
+                                                                                            <p class="help-block">{{ $errors->first($introduceCompany) }}</p>
+                                                                                        @endif
+                                                                                    @endif
+                                                                                @endforeach
                                                                             @else
-                                                                            <textarea type="text" value="" rows="10" class="form-control border-corner title-slug" lang="{{ $lang->iso2 }}" id="{{ $introduceCompany }}}" name="{{ $introduceCompany }}" placeholder=""></textarea>
-                                                                            @if ($errors->has('introduce_company_vi') || $errors->has('introduce_company_en'))
-                                                                            <p class="help-block">{{ $errors->first('introduce_company_vi') }} {{ $errors->first('introduce_company_en') }}</p>
-                                                                            @endif
+                                                                                <textarea type="text" value="" rows="10" class="form-control border-corner title-slug" lang="{{ $lang->iso2 }}" id="{{ $introduceCompany }}}" name="{{ $introduceCompany }}" placeholder="">{{ isset($item->introduce_company) ? $item->introduce_company : old($introduceCompany) }}</textarea>
+                                                                                @if ($errors->has('introduce_company_vi') || $errors->has('introduce_company_en'))
+                                                                                    <p class="help-block">{{ $errors->first('introduce_company_vi') }} {{ $errors->first('introduce_company_en') }}</p>
+                                                                                @endif
                                                                             @endif
                                                                         </div>
                                                                     </div>

@@ -44,6 +44,7 @@
                                             @foreach($langs as $lang)
                                             <th>{{ trans('admin.personal_info.lb_introduce_company') }} ({{ $lang->name }})</th>
                                             @endforeach
+                                            <th>{{ trans('admin.personal_info.lb_status') }}</th>
                                             <th>{{ trans('admin.personal_info.btn_action') }}</th>
                                         </tr>
                                         </thead>
@@ -62,7 +63,17 @@
                                             <td>{{ $title }}</td>
                                             @endforeach
                                             <td>
+                                                @if ($personalInfo->status == 0)
+                                                <span class="label label-primary">{{ trans('admin.personal_info.lb_waiting_approve') }}</span>
+                                                @else
+                                                <span class="label label-success">{{ trans('admin.personal_info.lb_approved') }}</span>
+                                                @endif
+                                            </td>
+                                            <td>
                                                 <a href="{{ route('admin_user_personal_edit', ['id' => $personalInfo->user_id]) }}" class="btn btn-default btn-xs">{{ trans('admin.personal_info.btn_edit') }}</a>
+                                                @if ($personalInfo->status == 0)
+                                                <a href="{{ route('admin_user_personal_approved', ['id' => $personalInfo->id]) }}" class="btn btn-default btn-xs">Approve</a>
+                                                @endif
                                             </td>
                                         </tr>
                                         @endforeach

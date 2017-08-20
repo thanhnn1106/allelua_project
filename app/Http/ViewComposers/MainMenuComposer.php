@@ -34,6 +34,10 @@ class MainmenuComposer
                         'route' => 'admin_user',
                         'name'  => 'Users',
                     ),
+                    'user-deleted-list' => array(
+                        'route' => 'admin_user_deleted_list',
+                        'name'  => 'User deleted list',
+                    ),
                     'personal_info' => array(
                         'route' => 'admin_user_personal_list',
                         'name'  => 'Seller personal info',

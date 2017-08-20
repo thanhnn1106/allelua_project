@@ -2,7 +2,7 @@
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>Product
+        <h1>{{ trans('admin.product.lb_title_product') }}
             <small>{{ $title }}</small>
         </h1>
     </section>
@@ -23,8 +23,8 @@
                 <form role="form" action="{{ route('ajax_admin_product_save') }}" id="form_product" method="POST" enctype="multipart/form-data">
                     <div class="box-footer">
                         {{ csrf_field() }}
-                        <button type="button" id="save_product" class="btn btn-primary btn-sm">Submit</button>
-                        <a href="{{ route('admin_product_index') }}" class="btn btn-default btn-sm">Back</a>
+                        <button type="button" id="save_product" class="btn btn-primary btn-sm">{{ trans('admin.product.btn_submit') }}</button>
+                        <a href="{{ route('admin_product_index') }}" class="btn btn-default btn-sm">{{ trans('admin.product.btn_back') }}</a>
                     </div>
                     <!-- left -->
                     <div class="col-xs-6" style="padding-left: 0px; margin-top: 5px;">
@@ -38,7 +38,7 @@
                                     <input type="hidden" id="hide_style" value="{{ $product->style or null }}" />
                                     <input type="hidden" id="hide_material" value="{{ $product->material or null }}" />
                                     <input type="hidden" name="product_id" id="product_id" value="{{ $product->id or null }}" />
-                                    <label class="control-label">Categories</label>
+                                    <label class="control-label">{{ trans('admin.product.lb_categories') }}</label>
                                     <select name="categories" id="categories" url-cate="{{ route('ajax_product_load_cate') }}" class="form-control border-corner">
                                         <option value="">------</option>
                                         @foreach ($categories as $cate)
@@ -48,14 +48,14 @@
                                     <p class="help-block"></p>
                                 </div>
                                 <div class="form-group form-sub_categories">
-                                    <label class="control-label">Sub Categories</label>
+                                    <label class="control-label">{{ trans('admin.product.lb_sub_categories') }}</label>
                                     <select name="sub_categories" id="sub_categories" data-url="{{ route('ajax_product_load_style') }}" class="form-control border-corner">
                                         <option value="">------</option>
                                     </select>
                                     <p class="help-block"></p>
                                 </div>
                                 <div class="form-group form-status">
-                                    <label class="control-label">Status</label>
+                                    <label class="control-label">{{ trans('admin.product.lb_status') }}</label>
                                     <select name="status" id="status" class="form-control border-corner">
                                         @foreach ($listStatus as $keyStatus => $status)
                                         <option value="{{ $keyStatus }}" @if ((isset($product->status) ? $product->status : '') == $keyStatus) selected="selected" @endif>{{ trans($status) }}</option>
@@ -64,12 +64,12 @@
                                     <p class="help-block"></p>
                                 </div>
                                 <div class="form-group form-quantity">
-                                    <label class="control-label">Quantity</label>
+                                    <label class="control-label">{{ trans('admin.product.lb_quantity') }}</label>
                                     <input type="text" class="form-control border-corner" id="quantity" name="quantity" placeholder="Input ..." value="{{ isset($product->quantity) ? $product->quantity : '' }}" />
                                     <p class="help-block"></p>
                                 </div>
                                 <div class="form-group form-quantity_limit">
-                                    <label class="control-label">Quantity limit</label>
+                                    <label class="control-label">{{ trans('admin.product.lb_quantity_limit') }}</label>
                                     <input type="text" class="form-control border-corner" id="quantity_limit" name="quantity_limit" placeholder="Input ..." value="{{ isset($product->quantity_limit) ? $product->quantity_limit : '' }}" />
                                     <p class="help-block"></p>
                                 </div>
@@ -85,18 +85,18 @@
                         <div class="box box-success">
                             <div class="box-body">
                                 <div class="form-group form-seller_id">
-                                    <label class="control-label">Seller</label>
+                                    <label class="control-label">{{ trans('admin.product.lb_seller') }}</label>
                                     <input type="text" class="form-control border-corner" data-url="{{ route('ajax_load_seller') }}" name="seller" id="seller" placeholder="Input ..." value="{{ $company_name or null }}" />
                                     <input type="hidden" name="seller_id" id="seller_id" value="{{ isset($product->user_id) ? $product->user_id : '' }}" />
                                     <p class="help-block"></p>
                                 </div>
                                 <div class="form-group form-price">
-                                    <label class="control-label">Price</label>
+                                    <label class="control-label">{{ trans('admin.product.lb_price') }}</label>
                                     <input type="text" class="form-control border-corner" id="price" name="price" placeholder="Input ..." value="{{ isset($product->price) ? $product->price : '' }}" />
                                     <p class="help-block"></p>
                                 </div>
                                 <div class="form-group form-payment_method">
-                                    <label class="control-label">Payment method</label>
+                                    <label class="control-label">{{ trans('admin.product.lb_payment_method') }}</label>
                                     <select name="payment_method" id="payment_method" class="form-control border-corner">
                                         <option value="">------</option>
                                         @foreach($listPaymentMethod as $keyPay => $payMethod)
@@ -106,7 +106,7 @@
                                     <p class="help-block"></p>
                                 </div>
                                 <div class="form-group form-shipping_method">
-                                    <label class="control-label">Shipping method</label>
+                                    <label class="control-label">{{ trans('admin.product.lb_shipping_method') }}</label>
                                     <select name="shipping_method" id="shipping_method" class="form-control border-corner">
                                         <option value="">------</option>
                                         @foreach ($listShippingMethod as $keyShip => $shipMethod)
@@ -116,7 +116,7 @@
                                     <p class="help-block"></p>
                                 </div>
                                 <div class="form-group form-upload form-image_thumb">
-                                    <label class="control-label">Image thumb</label>
+                                    <label class="control-label">{{ trans('admin.product.lb_quantity_limit') }}{{ trans('admin.product.lb_image_thumb') }}</label>
                                     <input type="file" accept="image/*" name="image_thumb" id="image_thumb" class="img-value" />
                                     <p class="help-block-default">(Max: 2MB - *.jpg, *.jpeg, *.png, *.gif)</p>
                                     <div class="col-sm-10 control-but">
@@ -136,7 +136,7 @@
                     <div class="col-xs-12" style="padding-left: 0px; margin-top: 5px; padding-right: 0px;">
                         <div class="box box-success">
                             <div class="box-header with-border">
-                                <h3 class="box-title">Image detail</h3>
+                                <h3 class="box-title">{{ trans('admin.product.lb_image_detail') }}</h3>
                                 <p class="help-block-default">(Max: 2MB - *.jpg, *.jpeg, *.png, *.gif)</p>
                                 <div class="form-group form-total_image_detail">
                                     <p class="help-block"></p>

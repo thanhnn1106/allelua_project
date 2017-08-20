@@ -2,8 +2,8 @@
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>General
-            <small>Edit</small>
+        <h1>{{ trans('admin.general.lb_title_page') }}
+            <small>{{ trans('admin.general.btn_edit') }}</small>
         </h1>
     </section>
 
@@ -16,7 +16,7 @@
                     <div class="box-footer">
                         {{ csrf_field() }}
                         <input type="file" name="data" />
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">{{ trans('admin.general.btn_submit') }}</button>
                     </div>
                     <ul class="nav nav-tabs">
                         @foreach ($languages as $lang)

@@ -8,8 +8,8 @@
 </style>
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>Category
-            <small>Sub</small>
+        <h1>{{ trans('admin.category.lb_title_page') }}
+            <small>{{ trans('admin.category.lb_title_sub_page') }}</small>
         </h1>
     </section>
 
@@ -22,8 +22,8 @@
                     <div class="box-header with-border">
                         {{ csrf_field() }}
                         <input type="hidden" name="parent_id" value="{{ $parent_id or null }}" />
-                        <a href="javascript:void(0);" onclick="updateSort();" class="btn btn-primary btn-sm">Sort</a>
-                        <a href="{{ route('admin_category_main') }}" class="btn btn-default btn-sm">Back</a>
+                        <a href="javascript:void(0);" onclick="updateSort();" class="btn btn-primary btn-sm">{{ trans('admin.category.lb_sort') }}</a>
+                        <a href="{{ route('admin_category_main') }}" class="btn btn-default btn-sm">{{ trans('admin.category.btn_back') }}</a>
                     </div>
                     <div class="box-body">
                         <div class="dataTables_wrapper form-inline dt-bootstrap">
@@ -37,11 +37,11 @@
                                         <tr>
                                             <th>#ID</th>
                                             @foreach($langs as $lang)
-                                            <th>Title ({{ $lang->name }})</th>
+                                            <th>{{ trans('admin.category.lb_title') }} ({{ $lang->name }})</th>
                                             @endforeach
-                                            <th>Sort</th>
-                                            <th>Create date</th>
-                                            <th>Action</th>
+                                            <th>{{ trans('admin.category.lb_sort') }}</th>
+                                            <th>{{ trans('admin.category.lb_created_date') }}</th>
+                                            <th>{{ trans('admin.category.lb_action') }}</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -61,7 +61,9 @@
                                             <td>{{ $category->sort }}</td>
                                             <td>{{ $category->created_at }}</td>
                                             <td>
-                                                <a href="{{ route('admin_category_edit', ['id' => $category->id, 'parent_id' => $parent_id or null]) }}" class="btn btn-default btn-xs">Edit</a>
+                                                <a href="{{ route('admin_category_edit', ['id' => $category->id, 'parent_id' => $parent_id or null]) }}" class="btn btn-default btn-xs">
+                                                    {{ trans('admin.category.btn_edit') }}
+                                                </a>
                                             </td>
                                         </tr>
                                         @endforeach

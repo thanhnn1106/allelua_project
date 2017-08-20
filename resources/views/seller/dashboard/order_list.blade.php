@@ -82,7 +82,7 @@ $draftStatus = config('product.product_seller_status.value.draft');
 
     <div class="sizebar-left col-ex-2 col-lg-3 col-md-4 col-sm-12 col-xs-12 col-ex-pull-10 col-lg-pull-9 col-md-pull-8 col-sm-pull-0" data-align-height="right" data-bottom="20">
         <div class="inner-sizebar clearfix">
-            @include('user.information')
+            @include('seller.information')
         </div>
     </div>
 </div>

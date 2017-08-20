@@ -69,7 +69,7 @@ class User extends Authenticatable
                 ->leftJoin('countries AS t3', 't3.id', '=', 't1.country_id')
                 ->leftJoin('personal as t4', 't1.id', '=', 't4.user_id')
                 ->whereNull('t1.deleted_at');
-      
+
         self::query_params($query, $params);
 
         $query->orderBy('t1.created_at', 'DESC');
@@ -97,7 +97,7 @@ class User extends Authenticatable
     public static function getUserPersonalInfo()
     {
         $result = DB::table('users as u')
-            ->select('u.id as user_id', 'u.company_name', 'p.id', 'p.tax_code', 'p.license_business', 'pb.account_bank', 'pb.name_bank', 'pb.address_bank', \DB::raw('GROUP_CONCAT(pt.introduce_company separator "|===|") as introduce_company'), \DB::raw('GROUP_CONCAT(pt.language_code separator "|===|") as langs'))
+            ->select('u.id as user_id', 'u.company_name', 'p.id', 'p.status', 'p.tax_code', 'p.license_business', 'pb.account_bank', 'pb.name_bank', 'pb.address_bank', \DB::raw('GROUP_CONCAT(pt.introduce_company separator "|===|") as introduce_company'), \DB::raw('GROUP_CONCAT(pt.language_code separator "|===|") as langs'))
             ->join('personal as p', 'u.id', '=', 'p.user_id')
             ->join('personal_bank as pb', 'p.id', '=', 'pb.personal_id')
             ->join('personal_translate as pt', 'p.id', '=', 'pt.personal_id')
@@ -116,5 +116,50 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new sendEmailResetPassword($token));
+    }
+
+    public static function getListUserDeleted() {
+        $query = \DB::table('users AS t1')
+                ->select('t1.*', 't2.role', 't3.name as country_name', 't4.id as personal_id')
+                ->leftJoin('roles AS t2', 't2.id', '=', 't1.role_id')
+                ->leftJoin('countries AS t3', 't3.id', '=', 't1.country_id')
+                ->leftJoin('personal as t4', 't1.id', '=', 't4.user_id')
+                ->whereNotNull('t1.deleted_at');
+
+
+        $query->orderBy('t1.deleted_at', 'DESC');
+
+        $result = $query->paginate(LIMIT_ROW);
+        return $result;
+    }
+
+    public static function getUserDeletedInfo($id) {
+        $query = \DB::table('users')
+                ->select('*')
+                ->where('id', $id)
+                ->whereNotNull('deleted_at');
+
+
+        $result = $query->first();
+        return $result;
+    }
+
+    public static function restoreDeletedUser($id)
+    {
+        $result = DB::table('users')
+            ->where('id', '=', $id)
+            ->update(array(
+                'deleted_at' => NULL,
+                'updated_at' => date('Y-m-d H:i:s'),
+        ));
+        return $result;
+    }
+
+    public static function forceDeletedUser($id)
+    {
+        $result = DB::table('users')
+            ->where('id', '=', $id)
+            ->delete();
+        return $result;
     }
 }

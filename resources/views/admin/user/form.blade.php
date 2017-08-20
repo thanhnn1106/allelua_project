@@ -2,8 +2,8 @@
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>Users
-            <small>Add new</small>
+        <h1>{{ trans('admin.user.lb_user') }}
+            <small>{{ trans('admin.user.lb_add_new') }}</small>
         </h1>
     </section>
 
@@ -16,17 +16,17 @@
             <form role="form" action="{{ $action }}" id="form-user" method="post">
             <div class="box-footer">
                 {{ csrf_field() }}
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">{{ trans('admin.user.btn_submit') }}</button>
             </div>
             <div class="col-xs-12">
                 @include('notifications')
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">General</h3>
+                        <h3 class="box-title">{{ trans('admin.user.lb_general') }}</h3>
                     </div>
                     <div class="box-body">
                         <div class="form-group input-group-sm @if ($errors->has('email')) has-error @endif">
-                            <label class="control-label">Email</label>
+                            <label class="control-label">{{ trans('admin.user.lb_email') }}</label>
                             <input type="text" class="form-control" id="email" name="email" maxlength="255" 
                                    value="{{ old('email', isset($user->email) ? $user->email : '') }}" @if(isset($user) && $user->id) disabled="disabled" @endif />
                             @if ($errors->has('email'))
@@ -35,7 +35,7 @@
                         </div>
 
                         <div class="form-group input-group-sm @if ($errors->has('password')) has-error @endif">
-                            <label class="control-label">Password</label>
+                            <label class="control-label">{{ trans('admin.user.lb_password') }}</label>
                             <input type="password" class="form-control" id="password" name="password" maxlength="255" value="" />
                             @if ($errors->has('password'))
                             <p class="help-block">{{ $errors->first('password') }}</p>
@@ -43,7 +43,7 @@
                         </div>
 
                         <div class="form-group input-group-sm @if ($errors->has('confirm_password')) has-error @endif">
-                            <label class="control-label">Confirm password</label>
+                            <label class="control-label">{{ trans('admin.user.lb_confirm_password') }}</label>
                             <input type="password" class="form-control" id="confirm_password" name="confirm_password" maxlength="255" value="" />
                             @if ($errors->has('confirm_password'))
                             <p class="help-block">{{ $errors->first('confirm_password') }}</p>
@@ -51,7 +51,7 @@
                         </div>
 
                         <div class="form-group input-group-sm @if ($errors->has('roles')) has-error @endif">
-                            <label class="control-label">Roles</label>
+                            <label class="control-label">{{ trans('admin.user.lb_role') }}</label>
                             <select name="roles" id="roles" class="form-control">
                                 <option value="">------</option>
                             @foreach ($roles as $role)
@@ -65,10 +65,10 @@
 
                         <div class="form-group @if ($errors->has('status')) has-error @endif">
                             <input type="radio" name="status" id="status_1" value="{{ $const['active'] }}" @if (old('status', isset($user->status) ? $user->status : '') == 1) checked="checked" @endif />
-                            <label for="status_1">Active</label>
+                            <label for="status_1">{{ trans('admin.user.lb_active') }}</label>
 
                             <input type="radio" name="status" id="status_0" value="{{ $const['inactive'] }}" @if (old('status', isset($user->status) ? $user->status : '') != 1) checked="checked" @endif />
-                            <label for="status_0">Inactive</label>
+                            <label for="status_0">{{ trans('admin.user.lb_inactive') }}</label>
                             @if ($errors->has('type_available'))
                             <p class="help-block">{{ $errors->first('type_available') }}</p>
                             @endif
@@ -79,11 +79,11 @@
                 <div class="col-xs-6">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Seller Information</h3>
+                            <h3 class="box-title">{{ trans('admin.user.lb_seller_information') }}</h3>
                         </div>
                         <div class="box-body">
                             <div class="form-group input-group-sm @if ($errors->has('company_name')) has-error @endif">
-                                <label class="control-label">Company name</label>
+                                <label class="control-label">{{ trans('admin.user.lb_company_name') }}</label>
                                 <input type="text" class="form-control" id="company_name" name="company_name" 
                                        maxlength="255" value="{{ old('company_name', isset($user->company_name) ? $user->company_name : '') }}" />
                                 @if ($errors->has('company_name'))
@@ -91,7 +91,7 @@
                                 @endif
                             </div>
                             <div class="form-group input-group-sm @if ($errors->has('phone_number')) has-error @endif">
-                                <label class="control-label">Phone number</label>
+                                <label class="control-label">{{ trans('admin.user.lb_phone') }}</label>
                                 <input type="text" class="form-control" id="company_name" name="phone_number" 
                                        maxlength="255" value="{{ old('phone_number', isset($user->phone_number) ? $user->phone_number : '') }}" />
                                 @if ($errors->has('phone_number'))
@@ -99,7 +99,7 @@
                                 @endif
                             </div>
                             <div class="form-group input-group-sm @if ($errors->has('country')) has-error @endif">
-                                <label class="control-label">Country</label>
+                                <label class="control-label">{{ trans('admin.user.lb_country') }}</label>
                                 <select name="country" id="country" class="form-control">
                                     <option value="">------</option>
                                 @foreach ($countries as $country)
@@ -117,11 +117,11 @@
                 <div class="col-xs-6">
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">User Information</h3>
+                            <h3 class="box-title">{{ trans('admin.user.lb_user_information') }}</h3>
                         </div>
                         <div class="box-body">
                             <div class="form-group input-group-sm @if ($errors->has('full_name')) has-error @endif">
-                                <label class="control-label">Full name</label>
+                                <label class="control-label">{{ trans('admin.user.lb_full_name') }}</label>
                                 <input type="text" class="form-control" id="full_name" name="full_name" 
                                        maxlength="255" value="{{ old('full_name', isset($user->full_name) ? $user->full_name : '') }}" />
                                 @if ($errors->has('full_name'))

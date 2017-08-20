@@ -2,11 +2,11 @@
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>Category
+        <h1>{{ trans('admin.category.lb_title_page') }}
             @if(empty($parent_id))
-            <small>Edit Main</small>
+            <small>{{ trans('admin.category.lb_title_edit_main') }}</small>
             @else
-            <small>Edit Sub</small>
+            <small>{{ trans('admin.category.lb_title_edit_sub') }}</small>
             @endif
         </h1>
     </section>
@@ -19,11 +19,15 @@
                 <div class="nav-tabs-custom">
                     <div class="box-footer">
                         {{ csrf_field() }}
-                        <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+                        <button type="submit" class="btn btn-primary btn-sm">{{ trans('admin.category.btn_submit') }}</button>
                         @if(empty($parent_id))
-                        <a href="{{ route('admin_category_main') }}" class="btn btn-default btn-sm">Back</a>
+                        <a href="{{ route('admin_category_main') }}" class="btn btn-default btn-sm">
+                            {{ trans('admin.category.btn_back') }}
+                        </a>
                         @else
-                        <a href="{{ route('admin_category_sub', ['id' => $parent_id]) }}" class="btn btn-default btn-sm">Back</a>
+                        <a href="{{ route('admin_category_sub', ['id' => $parent_id]) }}" class="btn btn-default btn-sm">
+                            {{ trans('admin.category.btn_back') }}
+                        </a>
                         @endif
                     </div>
                     @if(empty($parent_id))
