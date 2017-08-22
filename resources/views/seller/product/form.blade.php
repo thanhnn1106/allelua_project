@@ -32,7 +32,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                     <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12"  >
                                         <div class="wrap-form clearfix" >
                                             <h1 class="title-form text-xs-center" >
-                                                Thông tin sản phẩm đăng lên
+                                                {{ trans('front.product.lb_title_product_info') }}
                                             </h1>
                                             <div class="content-form" >
                                                 @include('notifications')
@@ -64,7 +64,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                     <div class="form-group" >
                                                         <div class="row form-categories" >
                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
-                                                                <label class="lbl-form-control" >{{ trans('front.product.category') }}</label>
+                                                                <label class="lbl-form-control" >{{ trans('front.product.category') }}<span class="required-field"> (*)</span></label>
                                                             </div>
                                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                                 <select name="categories" id="categories" url-cate="{{ route('ajax_product_load_cate') }}" class="form-control input-select2">
@@ -81,7 +81,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                     <div class="form-group" >
                                                         <div class="row form-sub_categories" >
                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
-                                                                <label class="lbl-form-control" >{{ trans('front.product.sub_category') }}</label>
+                                                                <label class="lbl-form-control" >{{ trans('front.product.sub_category') }}<span class="required-field"> (*)</span></label>
                                                             </div>
                                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                                 <select name="sub_categories" id="sub_categories" data-url="{{ route('ajax_product_load_style') }}" class="form-control input-select2">
@@ -114,7 +114,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                     <div class="form-group" >
                                                         <div class="row form-quantity">
                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
-                                                                <label class="lbl-form-control" >{{ trans('front.product.quantity') }}</label>
+                                                                <label class="lbl-form-control" >{{ trans('front.product.quantity') }}<span class="required-field"> (*)</span></label>
                                                             </div>
                                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                                 <input type="text" class="form-control form-control-md" id="quantity" name="quantity" value="{{ isset($product->quantity) ? $product->quantity : '' }}" />
@@ -126,7 +126,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                     <div class="form-group" >
                                                         <div class="row form-quantity_limit" >
                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
-                                                                <label class="lbl-form-control" >{{ trans('front.product.quantity_limit') }}</label>
+                                                                <label class="lbl-form-control" >{{ trans('front.product.quantity_limit') }}<span class="required-field"> (*)</span></label>
                                                             </div>
                                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                                 <input type="text" class="form-control form-control-md" id="quantity_limit" name="quantity_limit" value="{{ isset($product->quantity_limit) ? $product->quantity_limit : '' }}" />
@@ -138,7 +138,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                     <div class="form-group" >
                                                         <div class="row form-price" >
                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
-                                                                <label class="lbl-form-control" >{{ trans('front.product.price') }}</label>
+                                                                <label class="lbl-form-control" >{{ trans('front.product.price') }}<span class="required-field"> (*)</span></label>
                                                             </div>
                                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                                 <input type="text" class="form-control form-control-md" id="price" name="price" value="{{ isset($product->price) ? $product->price : '' }}" />
@@ -150,7 +150,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                     <div class="form-group" >
                                                         <div class="row form-payment_method" >
                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
-                                                                <label class="lbl-form-control" >{{ trans('front.product.payment_method') }}</label>
+                                                                <label class="lbl-form-control" >{{ trans('front.product.payment_method') }}<span class="required-field"> (*)</span></label>
                                                             </div>
                                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                                 <select name="payment_method" id="payment_method" class="form-control input-select2">
@@ -167,7 +167,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                     <div class="form-group" >
                                                         <div class="row form-shipping_method">
                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
-                                                                <label class="lbl-form-control" >{{ trans('front.product.shipping_method') }}</label>
+                                                                <label class="lbl-form-control" >{{ trans('front.product.shipping_method') }}<span class="required-field"> (*)</span></label>
                                                             </div>
                                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                                 <select name="shipping_method" id="shipping_method" class="form-control input-select2">
@@ -185,7 +185,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                         <div class="row form-image_thumb form-upload" >
                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                                                 <label class="lbl-form-control" >
-                                                                    {{ trans('front.product.image_thumb') }}<br/>
+                                                                    {{ trans('front.product.image_thumb') }} <span class="required-field"> (*)</span><br/>
                                                                     <span class="note-red">(Max: 2MB - *.jpg, *.jpeg, *.png, *.gif)</span>
                                                                 </label>
                                                             </div>
@@ -208,7 +208,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                         <div class="row form-total_image_detail" >
                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                                                 <label class="lbl-form-control" >
-                                                                    {{ trans('front.product.image_detail') }}t<br />
+                                                                    {{ trans('front.product.image_detail') }}<span class="required-field"> (*)</span><br />
                                                                     <span class="note-red">(Max: 2MB - *.jpg, *.jpeg, *.png, *.gif)</span>
                                                                 </label>
                                                             </div>
@@ -427,13 +427,13 @@ $listShippingMethod = config('product.shipping_method.label');
     <!-- END BEST PRICE -->
 </div>
 
-<!-- BEGIN BEST PRICE -->
-@include('front.partial.favorite')
-<!-- END BEST PRICE -->
-
 <!-- BEGIN RELATED PRODUCT -->
 @include('front.partial.related')
 <!-- END RELATED PRODUCT -->
+
+<!-- BEGIN BEST PRICE -->
+@include('front.partial.favorite')
+<!-- END BEST PRICE -->
 
 <!-- BEGIN COUNTRY AND SERVICE -->
 @include('front.partial.country_service')

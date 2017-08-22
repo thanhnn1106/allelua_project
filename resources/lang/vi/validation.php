@@ -128,6 +128,59 @@ return [
         'introduce_company_vi' => [
             'required' => ':attribute không được rỗng.',
         ],
+        // Seller đăng tin
+        'categories' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'sub_categories' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'quantity' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'quantity_limit' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'price' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'payment_method' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'shipping_method' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'image_thumb' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'total_image_detail' => [
+            'required' => ':attribute không được rỗng.',
+            'min' => ':attribute không được nhỏ hơn 3.',
+        ],
+        'title_vi' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'title_en' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'brand_vi' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'brand_en' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'source_vi' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'source_en' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'delivery_location_vi' => [
+            'required' => ':attribute không được rỗng.',
+        ],
+        'delivery_location_en' => [
+            'required' => ':attribute không được rỗng.',
+        ],
     ],
     /*
     |--------------------------------------------------------------------------
@@ -149,6 +202,24 @@ return [
         'bank_address' => 'Địa chỉ ngân hàng',
         'introduce_company_en' => 'Thông tin công ty (tiếng Anh)',
         'introduce_company_vi' => 'Thông tin công ty (tiếng Việt)',
+        // Seller đăng tin
+        'categories' => 'Danh mục sản phẫm',
+        'sub_categories' => 'Danh mục con',
+        'quantity' => 'Số lượng',
+        'quantity_limit' => 'Số lượng giới hạn',
+        'price' => 'Giá',
+        'payment_method' => 'Hình thức thanh toán',
+        'shipping_method' => 'Hình thức giao hàng',
+        'image_thumb' => 'Hình ảnh',
+        'total_image_detail' => 'Tổng hình ảnh chi tiết',
+        'title_vi' => 'Tiêu đề tiếng Việt',
+        'title_en' => 'Tiêu đề tiếng Anh',
+        'brand_vi' => 'Thương hiệu (tiếng Việt)',
+        'brand_en' => 'Thương hiệu (tiếng Anh)',
+        'source_vi' => 'Xuất sứ (tiếng Nhật)',
+        'source_en' => 'Xuất sứ (tiếng Anh)',
+        'delivery_location_en' => 'Nơi giao hàng',
+        'delivery_location_vi' => 'Delivery location',
     ],
 
 ];

@@ -52,7 +52,7 @@
                                                 </thead>
                                                 <tbody>
                                                     @if (count($products)==0)
-                                                    <tr><td colspan="9" align="center">Data not found</td></tr>
+                                                    <tr><td colspan="11" align="center">Data not found</td></tr>
                                                     @else
                                                     @foreach($products as $product)
                                                     <tr>

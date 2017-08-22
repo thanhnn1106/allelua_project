@@ -143,6 +143,7 @@ return [
         ),
     ),
     'product' => array(
+        'lb_title_product_info' => 'Thông tin sản phẩm đăng lên',
         'list_product' => 'Danh sách sản phẩm',
         'published' => 'Sản phẩm đã tạo',
         'make_product' => 'Đăng sản phầm',
