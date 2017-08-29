@@ -76,6 +76,7 @@
                     </div>
                 </div>
 
+                @if(isUser())
                 <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" >
                     <div class="action-detail clearfix" >
                         <div class="form-product">
@@ -137,6 +138,7 @@
 
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </div>

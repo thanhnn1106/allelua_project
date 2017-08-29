@@ -142,7 +142,6 @@ class ProductController extends BaseController
 
         } catch (\Exception $e) {
             DB::rollback();
-            var_dump($e->getMessage());exit;
 
             $this->deleteImageThumb($imageThumb);
             $this->deleteImageDetail($imageDetail);

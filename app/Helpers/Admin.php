@@ -30,6 +30,22 @@ function isAdmin($role)
     }
     return FALSE;
 }
+function isSeller()
+{
+    $roleSeller = config('allelua.roles.seller');
+    if(\Auth::user()->role_id == $roleSeller) {
+        return true;
+    }
+    return false;
+}
+function isUser()
+{
+    $roleUser = config('allelua.roles.user');
+    if(\Auth::user()->role_id == $roleUser) {
+        return true;
+    }
+    return false;
+}
 /*=========END USER===================*/
 
 /*=========BEGIN CATEGORY - PRODUCT===================*/

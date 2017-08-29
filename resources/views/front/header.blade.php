@@ -23,7 +23,7 @@
                         @if(Auth::user())
                             @if (Auth::user()->role_id === config('allelua.roles.administrator'))
                                 @include('front.partial.header_admin')
-                            @elseif (Auth::user()->role_id === config('allelua.roles.seller'))
+                            @elseif (isSeller())
                                 @include('front.partial.header_seller')
                             @else
                                 @include('front.partial.header_user')
@@ -49,6 +49,7 @@
                             </div>
                         </div>
                         @endif
+                        @if(isUser())
                         <a href="{{ route('cart_list') }}" class="link-menu-top" >
                             <span class="ic i-cart" >
                                 <span>                     
@@ -57,6 +58,7 @@
                             </span>
                             <span class="hidden-md-down" >Giỏ hàng</span>
                         </a>
+                        @endif
                         <a href="/" class="link-menu-top hidden-sm-down" >
                             <i class="ic i-phone" ></i>
                             (08) 8888 8888

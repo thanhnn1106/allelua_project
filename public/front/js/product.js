@@ -25,13 +25,13 @@ $(document).ready(function() {
         loadStyleCategory(cateId, subCateId);
     }
 
-    $('#image_thumb_preview').click(function () {
+    $('#image_thumb_preview').click(function (event) {
+        event.preventDefault();
         $('#image_thumb').trigger("click");
     });
 
     // Review image thumb
     $('#image_thumb').change(function (event) {
-        event.preventDefault();
         $(this).closest('.form-group').find('.input-error').html('').hide();
         var message = validateImage(this);
         if (message !== '') {

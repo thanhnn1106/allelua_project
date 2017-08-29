@@ -53,6 +53,10 @@ class Controller extends BaseController
 
     protected function uploadImage($file, $path)
     {
+        if ( ! is_dir(public_path(). $path)) {
+            mkdir(public_path(). $path, 0777, true);
+        }
+
         $extension = $file->getClientOriginalExtension();
         $fileName = uniqid().'.'.$extension;
         $file->move(public_path().$path, $fileName);
