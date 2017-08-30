@@ -93,6 +93,14 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php
+                                    $isCheckOut = (isset($totalCart) && $totalCart > 0) ? 'display:block' : 'display:none';
+                                ?>
+                                <div id="butCheckout" class="product-form-group" style="{{ $isCheckOut }}">
+                                    <button type="button" onclick="window.location.href='{{ route('user_checkout_shipping') }}';" class="btn btn-block btn-style btn-cart add_to_cart" title="Cho vào giỏ hàng" >
+                                        <span>Mua ngay</span>
+                                    </button>
+                                </div>
                                 <div class="product-form-group">
                                     <input type="hidden" value="{{ $product->id or null }}" name="product_id" />
                                     <button type="button" id="cart_add_ajax_button" class="btn btn-block btn-style btn-cart add_to_cart" title="Cho vào giỏ hàng" >

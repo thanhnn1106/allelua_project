@@ -23,6 +23,19 @@ class ProductController extends AdminBaseController
         ]);
     }
 
+    /**
+     * Setting config as: rate and social
+     * @param Request $request
+     * @return type
+     */
+    public function listDeleted(Request $request)
+    {
+        $products = Product::getList(array('deleted_at_not_null' => true));
+        return view('admin.product.list_deleted', [
+            'products'      => $products,
+        ]);
+    }
+
     public function add(Request $request)
     {
         $langs = \App\Languages::getResults();
@@ -146,6 +159,63 @@ class ProductController extends AdminBaseController
         $request->session()->flash('success', trans('common.delete_success'));
         
         return redirect(route('admin_product_index'));
+    }
+
+    /**
+     * Delete user with soft delete
+     * 
+     * @param Request $request
+     * @param Integer $id user id
+     * @todo delete file of product
+     * @return type
+     */
+    public function restore(Request $request, $id) {
+        $product = Product::onlyTrashed()->where('id', $id)->first();
+        if ($product == null) {
+            $request->session()->flash('error', trans('common.data_not_found'));
+            return redirect(route('admin_product_deleted_index'));
+        }
+
+        $product->restore();
+
+        $request->session()->flash('success', trans('common.restore_success'));
+        
+        return redirect(route('admin_product_deleted_index'));
+    }
+
+    /**
+     * Delete user with soft delete
+     * 
+     * @param Request $request
+     * @param Integer $id user id
+     * @todo delete file of product
+     * @return type
+     */
+    public function deleteForce(Request $request, $id) {
+        $product = Product::onlyTrashed()->where('id', $id)->first();
+        if ($product == null) {
+            $request->session()->flash('error', trans('common.data_not_found'));
+            return redirect(route('admin_product_deleted_index'));
+        }
+
+        // remove image before thumb
+        $this->deleteImageThumb(array('image_rand' => $product->image_rand));
+
+        // remove image detail
+        $images = $product->productImages();
+        if($images !== NULL) {
+            $imagedetails = array();
+            foreach($images as $image) {
+                $imagedetails[] = array('image_rand' => $image->image_rand);
+            }
+            $this->deleteImageDetail($imagedetails);
+        }
+
+        $product->forceDelete();
+
+        $request->session()->flash('success', trans('common.delete_force_success'));
+        
+        return redirect(route('admin_product_deleted_index'));
     }
 
     private function _saveProduct($request, $imageThumb, $product)

@@ -60,6 +60,10 @@ class MainmenuComposer
                         'route' => 'admin_product_index',
                         'name'  => 'Product',
                     ),
+                    'product_deleted' => array(
+                        'route' => 'admin_product_deleted_index',
+                        'name'  => 'Product deleted',
+                    ),
                 ),
             ),
             'setting' => array(

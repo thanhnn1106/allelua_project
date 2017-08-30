@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         @endif
-                        @if(isUser())
+                        @if(isUser() || ! Auth::user())
                         <a href="{{ route('cart_list') }}" class="link-menu-top" >
                             <span class="ic i-cart" >
                                 <span>                     

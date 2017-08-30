@@ -33,7 +33,8 @@ function isAdmin($role)
 function isSeller()
 {
     $roleSeller = config('allelua.roles.seller');
-    if(\Auth::user()->role_id == $roleSeller) {
+    $user = \Auth::user();
+    if(isset($user->role_id) && $user->role_id == $roleSeller) {
         return true;
     }
     return false;
@@ -41,7 +42,8 @@ function isSeller()
 function isUser()
 {
     $roleUser = config('allelua.roles.user');
-    if(\Auth::user()->role_id == $roleUser) {
+    $user = \Auth::user();
+    if(isset($user->role_id) && $user->role_id == $roleUser) {
         return true;
     }
     return false;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Front\BaseController;
+use Cart;
 
 class ProductController extends BaseController
 {
@@ -127,11 +128,14 @@ class ProductController extends BaseController
             $objProduct->save();
         }
 
+        $cartCollection = Cart::getContent();
+
         return view('front.product.detail', [
             'product' => $product,
             'productImages' => $productImages,
             'personal' => $personal,
             'productWatched' => $this->loadProductWatched(),
+            'totalCart' => $cartCollection->count(),
         ]);
     }
 }

@@ -164,12 +164,13 @@ class ProductController extends BaseController
             $request->session()->flash('error', trans('common.data_not_found'));
             return redirect(route('seller_product_index'));
         }
+        /*
         if((int)$product->status !== config('product.product_seller_status.value.draft')) {
             $request->session()->flash('error', trans('front.product.not_permit_delete'));
             return redirect(route('seller_product_index'));
-        }
+        }*/
 
-        $product->soft_delete();
+        $product->delete();
         $request->session()->flash('success', trans('common.delete_success'));
         
         return redirect(route('seller_product_index'));

@@ -58,10 +58,10 @@
                                                     <tr>
                                                         <td class="text-right text-xs-center" width="20">{{ $product->id }}</td>
                                                         <td class="text-right" width="100">
-                                                            @if(isset($product->image_rand) && isset($product->image_real))
                                                             <?php $imageThumb = getImage($product->image_rand, $product->image_real); ?>
+                                                            @if( ! empty($imageThumb['href']))
                                                             <a href="{{ $imageThumb['href'] }}" target="_blank" >
-                                                                <img src="{{ $imageThumb['img_src'] }}" class="img-fluid">
+                                                                <img src="{{ $imageThumb['href'] }}" width="100px" height="100px">
                                                             </a>
                                                             @endif
                                                         </td>
@@ -76,8 +76,8 @@
                                                         <td>
                                                             @if((int) $product->status === $draftStatus)
                                                             <a href="{{ route('seller_product_edit', ['id' => $product->id]) }}" title="{{ trans('common.event.edit') }}" class="allelua-btn allelua-btn-active">{{ trans('common.event.edit') }}</a>
-                                                            <a href="javascript:void(0);" data-url="{{ route('seller_product_delete', ['id' => $product->id]) }} " onclick="fncDeleteProduct(this);" title="{{ trans('common.event.delete') }}" class="allelua-btn allelua-btn-active">{{ trans('common.event.delete') }}</a>
                                                             @endif
+                                                            <a href="javascript:void(0);" data-url="{{ route('seller_product_delete', ['id' => $product->id]) }} " onclick="fncDeleteProduct(this);" title="{{ trans('common.event.delete') }}" class="allelua-btn allelua-btn-active">{{ trans('common.event.delete') }}</a>
                                                         </td>
                                                     </tr>
                                                     @endforeach

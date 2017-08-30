@@ -91,9 +91,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'auth.admin']], func
 
     // Product
     Route::get('product', 'Admin\ProductController@index')->name('admin_product_index');
+    Route::get('product/deleted', 'Admin\ProductController@listDeleted')->name('admin_product_deleted_index');
     Route::get('product/add', 'Admin\ProductController@add')->name('admin_product_add');
     Route::get('product/edit/{id}', 'Admin\ProductController@edit')->name('admin_product_edit');
     Route::get('product/delete/{id}', 'Admin\ProductController@delete')->name('admin_product_delete');
+    Route::get('product/restore/{id}', 'Admin\ProductController@restore')->name('admin_product_restore');
+    Route::get('product/delete_force/{id}', 'Admin\ProductController@deleteForce')->name('admin_product_delete_force');
     Route::post('product/save', 'Admin\ProductController@save')->name('ajax_admin_product_save');
 
     // Static Page

@@ -36,6 +36,7 @@ $(document).ready(function() {
         var form = $('#form-add-cart');
 
         var data = form.serializeArray();
+        $('#butCheckout').hide();
 
         $.ajax({
             url: form.attr('action'),
@@ -45,6 +46,9 @@ $(document).ready(function() {
             success: function (data) {
                 if (data.error === 0) {
                     $('.cartCount').html(data.result);
+                    if(data.result > 0) {
+                        $('#butCheckout').show();
+                    }
                 } else {
                     $('.alert').show().find('p').html(data.result);
                 }

@@ -194,7 +194,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                                     <div id="image_thumb_preview" class="img-prevew-upload btn-upload" style="cursor: pointer;">
                                                                         @if(isset($product->image_rand) && isset($product->image_real))
                                                                         <?php $imageThumb = getImage($product->image_rand, $product->image_real); ?>
-                                                                        <a href="{{ $imageThumb['href'] }}" target="_blank"><img src="{{ $imageThumb['img_src'] }}" width="100px" height="100px" /></a><br/>
+                                                                        <a href="{{ $imageThumb['href'] }}" target="_blank"><img src="{{ $imageThumb['href'] }}" width="100px" height="100px" /></a><br/>
                                                                         @endif
                                                                     </div>
                                                                     <input type="file" accept="image/*" name="image_thumb" id="image_thumb" class="img-value" style="display: none;" />

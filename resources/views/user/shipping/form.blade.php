@@ -81,6 +81,14 @@
 
                                 </form>
                             </div>
+
+                            <div style="border: 1px solid red;">
+                                <h3>Thông tin tài khoản của Seller</h3>
+                                <p>Tên ngân hàng: </p>
+                                <p>Tài khoản ngân hàng: </p>
+                                <p>Địa chỉ: </p>
+                            </div>
+
                         </div>
                     </div>
                 </div>

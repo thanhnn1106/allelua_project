@@ -58,13 +58,13 @@ class Product extends Model
                     if( ! empty($params['language_code'])) {
                         $join->where('t3.language_code', $params['language_code']);
                     }
-                });
+                })->whereNull('t1.deleted_at');
 
         self::query_params($query, $params);
 
         $query->orderBy('t1.created_at', 'DESC');
 
-        $result = $query->paginate(LIMIT_ROW);
+        $result = $query->paginate(1);
         return $result;
     }
 
@@ -83,7 +83,13 @@ class Product extends Model
                 ->select('t1.*', 't3.company_name', \DB::raw('GROUP_CONCAT(t2.title separator "|===|") as category_names'))
                 ->leftJoin('categories_translate AS t2', 't2.category_id', '=', 't1.category_id')
                 ->leftJoin('users AS t3', 't3.id', '=', 't1.user_id');
-     
+
+        $deletedAtNotNull = isset($params['deleted_at_not_null']) ? $params['deleted_at_not_null'] : false;
+        if($deletedAtNotNull === true) {
+            $query->whereNotNull('t1.deleted_at');
+        } else if ($deletedAtNotNull === false) {
+            $query->whereNull('t1.deleted_at');
+        }
 
         $query->groupBy('t1.id')
                 ->orderBy('t1.created_at', 'DESC');
