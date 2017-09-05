@@ -47,7 +47,7 @@
                                             <td>{{ getPaymentMethod($product->payment_method) }}</td>
                                             <td>{{ getShippingMethod($product->shipping_method) }}</td>
                                             <td>
-                                                <a href="javascript:void(0);" onclick="fncUpdateStatus();">
+                                                <a href="javascript:void(0);" data-url="{{ route('admin_product_change', ['id' => $product->id]) }}" onclick="fncUpdateStatus(this);">
                                                     <span class="label {{ getProductStatusIcon($product->status) }}">{{ getProductStatus($product->status) }}</span>
                                                 </a>
                                             </td>
@@ -87,8 +87,9 @@
 
 @section('footer_script')
 <script>
-function fncUpdateStatus(url)
+function fncUpdateStatus(obj)
 {
+    var url = $(obj).attr('data-url');
     if (!confirm('Are you sure active or inactive this product ?')) {
         return false;
     }

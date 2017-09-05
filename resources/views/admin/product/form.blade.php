@@ -122,7 +122,7 @@
                                     <div class="col-sm-10 control-but">
                                         @if(isset($product->image_rand) && isset($product->image_real))
                                         <?php $imageThumb = getImage($product->image_rand, $product->image_real); ?>
-                                        <a href="{{ $imageThumb['href'] }}" target="_blank"><img src="{{ $imageThumb['img_src'] }}" width="60px" height="60px" /></a><br/>
+                                        <a href="{{ $imageThumb['href'] }}" target="_blank"><img src="{{ $imageThumb['href'] }}" width="60px" height="60px" /></a><br/>
                                         @endif
                                     </div>
                                     <div style="clear: both"></div>

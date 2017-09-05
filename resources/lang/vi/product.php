@@ -4,6 +4,7 @@ return [
     'product_status' => array(
         'draft'   => 'Nháp',
         'publish' => 'Đăng sản phẩm',
+        'pending' => 'Chờ approve',
     ),
     'product_seller_status' => array(
         'draft'   => 'Nháp',

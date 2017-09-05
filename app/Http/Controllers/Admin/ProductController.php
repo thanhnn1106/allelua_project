@@ -77,7 +77,7 @@ class ProductController extends AdminBaseController
             'productTrans' => $groupProTrans,
             'languages' => $langs,
             'categories' => $categories,
-            'company_name' => $row->user()->first()->company_name,
+            'company_name' => $row->user()->first()->company_name . ' (' . $row->user()->first()->email . ')',
         ]);
     }
 
@@ -157,6 +157,24 @@ class ProductController extends AdminBaseController
 
         $product->delete();
         $request->session()->flash('success', trans('common.delete_success'));
+        
+        return redirect(route('admin_product_index'));
+    }
+
+    public function change(Request $request, $id) {
+        $product = Product::find($id);
+        if ($product == null) {
+            $request->session()->flash('error', trans('common.data_not_found'));
+            return redirect(route('admin_product_index'));
+        }
+
+        if($product->status == 0) {
+            $product->status = 1;
+        } else {
+            $product->status = 0;
+        }
+        $product->save();
+        $request->session()->flash('success', trans('common.save_success'));
         
         return redirect(route('admin_product_index'));
     }

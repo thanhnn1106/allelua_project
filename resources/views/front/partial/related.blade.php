@@ -12,7 +12,7 @@
                 <div class="in-product clearfix" >
                     <div class="thumb-product text-xs-center" >
                         <a href="{{ makeSlug($proWat->slug, $proWat->id) }}" title="" class="link-product" >
-                            <img src="{{ $imageInfo['img_src'] }}" alt="{{ $imageInfo['base_name'] }}" class="img-fluid" >
+                            <img src="{{ $imageInfo['href'] }}" alt="{{ $imageInfo['base_name'] }}" class="img-fluid" >
                         </a>
                     </div>
                     <h3 class="name-product" >

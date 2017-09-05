@@ -10,10 +10,12 @@ return [
         'label' => array(
             0 => 'product.product_status.draft',
             1 => 'product.product_status.publish',
+            2 => 'product.product_status.pending',
         ),
         'value' => array(
             'draft'   => 0,
             'publish' => 1,
+            'pending' => 2,
         ),
     ),
     'product_seller_status' => array(

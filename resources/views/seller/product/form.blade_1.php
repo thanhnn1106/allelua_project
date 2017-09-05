@@ -184,7 +184,7 @@
                                                     <div class="img-prevew-upload btn-upload" >
                                                         @if(isset($product->image_rand) && isset($product->image_real))
                                                         <?php $imageThumb = getImage($product->image_rand, $product->image_real); ?>
-                                                        <a href="{{ $imageThumb['href'] }}" target="_blank"><img src="{{ $imageThumb['img_src'] }}" width="60px" height="60px" /></a><br/>
+                                                        <a href="{{ $imageThumb['href'] }}" target="_blank"><img src="{{ $imageThumb['href'] }}" width="60px" height="60px" /></a><br/>
                                                         @endif
                                                     </div>
                                                     <input type="file" accept="image/*" name="image_thumb" id="image_thumb" class="img-value" />
