@@ -85,6 +85,68 @@ class ProductController extends BaseController
         ]);
     }
 
+    public function copy(Request $request, $id)
+    {
+        $product = Product::find($id);
+        if($product === NULL) {
+            return redirect(route('seller_product_index'));
+        }
+
+        DB::beginTransaction();
+
+        try {
+
+            $product->load('productTranslates');
+            $newProduct = $product->replicate();
+            $newProduct->status = 0;
+            $newProduct->push();
+
+            //reset relations on EXISTING MODEL (this way you can control which ones will be loaded
+            $product->relations = [];
+            //load relations on EXISTING MODEL
+            $product->load('productTranslates', 'productImages');
+            //re-sync the child relationships
+            $relations = $product->getRelations();
+            foreach ($relations as $relation) {
+                foreach ($relation as $relationRecord) {
+                    $newRelationship = $relationRecord->replicate();
+                    $newRelationship->product_id = $newProduct->id;
+                    $newRelationship->push();
+                }
+            }
+
+            // clone *foreign* relations (BelongsToMany / MorphToMany)
+//            $newProduct->productImages()->attach($product->productImages);
+//            $newProduct->productTranslates()->attach($product->productTranslates);
+
+
+            // Upload image thumb and details
+//            $imageThumb = NULL;
+//            if ($request->hasFile('image_thumb')) {
+//                $imageThumb = $this->uploadImage($request->file('image_thumb'), config('allelua.product_image.path_upload_thumb'));
+//            }
+//            $imageDetail = array();
+//            if ($request->hasFile('files')) {
+//                $files = $request->file('files');
+//                foreach ($files as $file) {
+//                    $imageDetail[] = $this->uploadImage($file, config('allelua.product_image.path_upload_detail'));
+//                }
+//            }
+
+            DB::commit();
+
+            $request->session()->flash('success', trans('common.save_success'));
+            return redirect(route('seller_product_index'));
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            var_dump($e->getMessage());exit;
+
+            $request->session()->flash('error', trans('common.error_transaction'));
+            return redirect(route('seller_product_index'));
+        }
+    }
+
     public function save(Request $request)
     {
         if (!$request->isMethod('post')) {
@@ -220,7 +282,7 @@ class ProductController extends BaseController
                 $data = $data_default;
             } else {
                 $title = $request->get('title_'.$lang->iso2);
-                $slug = formatSlug($request->get('title_'.$lang->iso2));
+                $slug = str_slug($request->get('title_'.$lang->iso2));
                 $color = $request->get('color_'.$lang->iso2);
                 $branch = $request->get('brand_'.$lang->iso2);
                 $infoTech = $request->get('info_tech_'.$lang->iso2);
@@ -261,7 +323,7 @@ class ProductController extends BaseController
             'product_id'           => $product->id,
             'language_code'        => $this->lang,
             'title'                => $request->get('title_'.$this->lang),
-            'slug'                 => formatSlug($request->get('title_'.$this->lang)),
+            'slug'                 => str_slug($request->get('title_'.$this->lang)),
             'color'                => $request->get('color_'.$this->lang),
             'brand'                => $request->get('brand_'.$this->lang),
             'info_tech'            => $request->get('info_tech_'.$this->lang),

@@ -19,6 +19,7 @@
                 <div class="row" >
                     <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12"  >
                         <div class="wrap-form clearfix" >
+                            @if(isset($totalCart) && $totalCart)
                             <h1 class="title-form text-xs-center">
                                 Thông tin giao hàng
                             </h1>
@@ -80,15 +81,44 @@
                                     </div>
 
                                 </form>
+                                <h1 class="title-form text-xs-center">
+                                    Thông tin sản phẩm
+                                </h1>
+                                <div>
+                                    <table>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Image</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Giá</th>
+                                            <th>Số lượng</th>
+                                            <th>Thành tiền</th>
+                                        </tr>
+                                        <?php $index = 0; ?>
+                                        @foreach($cartList as $cart)
+                                        <?php $index++; ?>
+                                        <tr>
+                                            <td>{{ $index }}</td>
+                                            <?php $imageInfo = getImage($cart->attributes->image_rand, $cart->attributes->image_real); ?>
+                                            <td>
+                                                <a href="{{ makeSlug($cart->attributes->slug, $cart->id) }}" title="{{ $cart->name }}" class="link-product" >
+                                                    <img src="{{ $imageInfo['href'] }}" alt="{{ $imageInfo['base_name'] }}" class="img-fluid" >
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="{{ makeSlug($cart->attributes->slug, $cart->id) }}" title="{{ $cart->name }}">{{ $cart->name }}</a>
+                                            </td>
+                                            <td>{{ formatPrice($cart->price) }}</td>
+                                            <td>{{ formatNumber($cart->quantity) }}</td>
+                                            <td>{{ formatNumber($cart->quantity * $cart->price) }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </table>
+                                </div>
                             </div>
-
-                            <div style="border: 1px solid red;">
-                                <h3>Thông tin tài khoản của Seller</h3>
-                                <p>Tên ngân hàng: </p>
-                                <p>Tài khoản ngân hàng: </p>
-                                <p>Địa chỉ: </p>
-                            </div>
-
+                            @else
+                            No product to payment
+                            @endif
                         </div>
                     </div>
                 </div>

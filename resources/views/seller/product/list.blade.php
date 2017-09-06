@@ -74,6 +74,7 @@
                                                         <td class="text-right">{{ getPaymentMethod($product->payment_method) }}</td>
                                                         <td class="text-right">{{ getShippingMethod($product->shipping_method) }}</td>
                                                         <td>
+                                                            <a href="{{ route('seller_product_clone', ['id' => $product->id]) }}" title="{{ trans('common.event.clone') }}" class="allelua-btn allelua-btn-active">{{ trans('common.event.clone') }}</a>
                                                             @if((int) $product->status === $draftStatus)
                                                             <a href="{{ route('seller_product_edit', ['id' => $product->id]) }}" title="{{ trans('common.event.edit') }}" class="allelua-btn allelua-btn-active">{{ trans('common.event.edit') }}</a>
                                                             @endif

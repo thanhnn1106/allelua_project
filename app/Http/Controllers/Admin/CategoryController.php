@@ -76,7 +76,7 @@ class CategoryController extends AdminBaseController
             }
             foreach ($langs as $lang) {
                 $title       = $request->get('title_'.$lang->iso2);
-                $slug        = formatSlug($title);
+                $slug        = str_slug($title);
 
                 $row = CategoriesTranslate::where('category_id', $id)->where('language_code', $lang->iso2)->first();
                 if ($row !== null) {

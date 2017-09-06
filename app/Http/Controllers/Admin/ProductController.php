@@ -278,7 +278,7 @@ class ProductController extends AdminBaseController
                 'product_id'           => $product->id,
                 'language_code'        => $lang->iso2,
                 'title'                => $request->get('title_'.$lang->iso2),
-                'slug'                 => formatSlug($request->get('title_'.$lang->iso2)),
+                'slug'                 => str_slug($request->get('title_'.$lang->iso2)),
                 'color'                => $request->get('color_'.$lang->iso2),
                 'brand'                => $request->get('brand_'.$lang->iso2),
                 'info_tech'            => $request->get('info_tech_'.$lang->iso2),

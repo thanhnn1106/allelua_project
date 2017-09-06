@@ -28,6 +28,7 @@ class CheckoutController extends BaseController
 
         $productBestPrice = $this->loadProductBestPrice();
         $cartCollection = Cart::getContent();
+
         $customerInfo = \App\CustomerShipping::orderBy('is_default', 'DESC')->first();
         $data = array(
             'languages' => $langs,
@@ -44,12 +45,14 @@ class CheckoutController extends BaseController
 
         if ($request->isMethod('post')) {
 
+            if($cartCollection->count() === 0) {
+                $request->session()->flash('error', trans('front.product.no_product_to_payment'));
+                    return redirect(route('user_checkout_shipping'));
+            }
+
             $customerShippingId = $request->get('customer_shipping_id');
             $rules = array(
                 'full_name' => 'required|max:255',
-//                'city' => 'required',
-//                'district' => 'required',
-//                'ward' => 'required',
                 'address' => 'required|max:255',
                 'phone' => 'required|max:255',
             );
@@ -119,7 +122,7 @@ class CheckoutController extends BaseController
                 }
 
                 $request->session()->flash('success', trans('front.product.buy_success_sale_group_will_contact_later'));
-                return redirect(route('user_checkout_shipping'));
+                return redirect(route('user_order_history'));
 
             } catch (\Exception $e) {
                 DB::rollback();
@@ -131,5 +134,10 @@ class CheckoutController extends BaseController
         }
 
         return view('user.shipping.form', $data);
+    }
+
+    public function done(Request $request)
+    {
+        echo 111;exit;
     }
 }
