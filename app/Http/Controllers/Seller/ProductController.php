@@ -96,8 +96,11 @@ class ProductController extends BaseController
 
         try {
 
-            $product->load('productTranslates');
             $newProduct = $product->replicate();
+            $urlImage = $this->copyImage($newProduct->image_rand);
+            if($urlImage !== false) {
+                $newProduct->image_rand = $urlImage;
+            }
             $newProduct->status = 0;
             $newProduct->push();
 
@@ -111,27 +114,13 @@ class ProductController extends BaseController
                 foreach ($relation as $relationRecord) {
                     $newRelationship = $relationRecord->replicate();
                     $newRelationship->product_id = $newProduct->id;
+                    $urlImgDetail = $this->copyImage($newRelationship->image_rand);
+                    if($urlImgDetail !== false) {
+                        $newRelationship->image_rand = $urlImgDetail;
+                    }
                     $newRelationship->push();
                 }
             }
-
-            // clone *foreign* relations (BelongsToMany / MorphToMany)
-//            $newProduct->productImages()->attach($product->productImages);
-//            $newProduct->productTranslates()->attach($product->productTranslates);
-
-
-            // Upload image thumb and details
-//            $imageThumb = NULL;
-//            if ($request->hasFile('image_thumb')) {
-//                $imageThumb = $this->uploadImage($request->file('image_thumb'), config('allelua.product_image.path_upload_thumb'));
-//            }
-//            $imageDetail = array();
-//            if ($request->hasFile('files')) {
-//                $files = $request->file('files');
-//                foreach ($files as $file) {
-//                    $imageDetail[] = $this->uploadImage($file, config('allelua.product_image.path_upload_detail'));
-//                }
-//            }
 
             DB::commit();
 
@@ -140,8 +129,6 @@ class ProductController extends BaseController
 
         } catch (\Exception $e) {
             DB::rollback();
-            var_dump($e->getMessage());exit;
-
             $request->session()->flash('error', trans('common.error_transaction'));
             return redirect(route('seller_product_index'));
         }

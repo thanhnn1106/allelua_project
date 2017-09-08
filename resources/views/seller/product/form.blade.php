@@ -398,7 +398,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                     
                                                     <div class="form-group" >
                                                         <div class="row" >
-                                                            <div class="col-sm-offset-4" >
+                                                            <div>
                                                                 <button type="button" onclick="window.location.href ='{{ route('seller_product_index') }}';" class="btn btn-style btn-heart" title="{{ trans('front.product.destroy_product') }}" >
                                                                     <span>{{ trans('front.product.destroy_product') }}</span>
                                                                 </button>
