@@ -79,7 +79,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="form-group input-group-sm @if ($errors->has('country')) has-error @endif">
+                                        <div class="form-group input-group-sm @if ($errors->has('dob_day')) has-error @endif">
                                             <div class="col-xs-4">
                                                 <label class="control-label">{{ trans('front.register_page.dob.day') }}</label>
                                                 <select name="dob_day" id="dob_day" class="form-control">
