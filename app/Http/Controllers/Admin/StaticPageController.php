@@ -56,11 +56,11 @@ class StaticPageController extends AdminBaseController
             $updateStaticsTranslate = \App\StaticsTranslate::updateStaticsTranslate($postData);
             if ($updateStaticsTranslate) {
                 return redirect()->route('admin_edit_static_page', ['page_id' => $pageId])
-                        ->with('success', trans('common.update_success'));
+                        ->with('success', trans('common.msg_update_success'));
             }
 
             return redirect()->route('admin_edit_static_page', ['page_id' => $pageId])
-                            ->with('error', trans('common.update_failed'))
+                            ->with('error', trans('common.msg_update_failed'))
                             ->withInput();
         }
 

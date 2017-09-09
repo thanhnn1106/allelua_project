@@ -36,7 +36,7 @@ class CategoryController extends AdminBaseController
     {
         $row = Categories::find($id);
         if ($row === NULL) {
-            $request->session()->flash('error', trans('common.data_not_found'));
+            $request->session()->flash('error', trans('common.msg_data_not_found'));
             if (empty($parent_id)) {
                 return redirect(route('admin_category_main'));
             }
@@ -44,7 +44,7 @@ class CategoryController extends AdminBaseController
         }
         $rows = CategoriesTranslate::where('category_id', $id)->get();
         if ($rows === NULL) {
-            $request->session()->flash('error', trans('common.data_not_found'));
+            $request->session()->flash('error', trans('common.msg_data_not_found'));
             if (empty($parent_id)) {
                 return redirect(route('admin_category_main'));
             }
@@ -86,7 +86,7 @@ class CategoryController extends AdminBaseController
                 }
             }
 
-            $request->session()->flash('success', trans('common.update_success'));
+            $request->session()->flash('success', trans('common.msg_update_success'));
             if (empty($parent_id)) {
                 return redirect(route('admin_category_main'));
             }
@@ -130,7 +130,7 @@ class CategoryController extends AdminBaseController
                     $row->save();
                 }
             }
-            $request->session()->flash('success', trans('common.update_success'));
+            $request->session()->flash('success', trans('common.msg_update_success'));
         }
         if (empty($parentId)) {
             return redirect(route('admin_category_main'));

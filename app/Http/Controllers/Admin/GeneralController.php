@@ -70,7 +70,7 @@ class GeneralController extends AdminBaseController
                 }
             }
 
-            $request->session()->flash('success', trans('common.update_success'));
+            $request->session()->flash('success', trans('common.msg_update_success'));
             return redirect(route('admin_setting_general'));
         }
 

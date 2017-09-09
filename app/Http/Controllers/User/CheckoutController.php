@@ -9,6 +9,8 @@ use Validator;
 use Cart;
 use Auth;
 use Illuminate\Support\Facades\DB;
+use App\Mail\ConfirmOrderMail;
+use Mail;
 
 class CheckoutController extends BaseController
 {
@@ -121,6 +123,14 @@ class CheckoutController extends BaseController
                     }
                 }
 
+                // Send mail confirm order
+                $emailContentData = array(
+                    'toEmail'      => Auth::user()->email,
+                    'customerName' => Auth::user()->full_name,
+                    'cartList'     => $cartCollection,
+                );
+//                echo "<pre>"; print_r($emailContentData);exit;
+                Mail::to($emailContentData['toEmail'])->send(new ConfirmOrderMail($emailContentData));
                 $request->session()->flash('success', trans('front.product.buy_success_sale_group_will_contact_later'));
                 return redirect(route('user_order_history'));
 

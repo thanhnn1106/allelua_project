@@ -89,7 +89,7 @@ class SettingController extends AdminBaseController
                     }
                 }
 
-                $request->session()->flash('success', trans('common.update_success'));
+                $request->session()->flash('success', trans('common.msg_update_success'));
             } else {
                 $request->session()->flash('success', trans('common.not_data_update'));
             }

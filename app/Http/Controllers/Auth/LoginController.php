@@ -223,7 +223,7 @@ class LoginController extends Controller
     {
         try {
             if ( ! $request->isMethod('POST')) {
-                return response()->json(array('error' => 1, 'result' => trans('common.error_exception_ajax')));
+                return response()->json(array('error' => 1, 'result' => trans('common.msg_error_exception_ajax')));
             }
 
             // validate the info, create rules for the inputs
@@ -233,17 +233,17 @@ class LoginController extends Controller
             );
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
-                return response()->json(array('error' => 1, 'result' => trans('common.please_check_form_below'), 'messages' => $validator->errors()), 422);
+                return response()->json(array('error' => 1, 'result' => trans('common.msg_please_check_form_below'), 'messages' => $validator->errors()), 422);
             }
 
             $const = config('allelua.user_status.value');
             $loginUser = User::where('email', $request->get('email'))->first();
             if ($loginUser === NULL) {
-                return response()->json(array('error' => 1, 'result' => trans('common.please_check_form_below'), 'messages' => trans('auth.login_failed')));
+                return response()->json(array('error' => 1, 'result' => trans('common.msg_please_check_form_below'), 'messages' => trans('auth.login_failed')));
             }
 
             if ($loginUser->status == $const['inactive']) {
-                return response()->json(array('error' => 1, 'result' => trans('common.please_check_form_below'), 'messages' => trans('auth.login_failed')));
+                return response()->json(array('error' => 1, 'result' => trans('common.msg_please_check_form_below'), 'messages' => trans('auth.login_failed')));
             }
 
             // create our user data for the authentication
@@ -257,10 +257,10 @@ class LoginController extends Controller
             if (Auth::attempt($userData)) {
                  return response()->json(array('error' => 0, 'result' => '', 'urlRedirect' => $request->get('urlBefore')));
             }
-            return response()->json(array('error' => 1, 'result' => trans('common.please_check_form_below'), 'messages' => trans('auth.login_failed')));
+            return response()->json(array('error' => 1, 'result' => trans('common.msg_please_check_form_below'), 'messages' => trans('auth.login_failed')));
 
         } catch (Exception $e) {
-            return response()->json(array('error' => 1, 'result' => trans('common.error_exception_ajax')));
+            return response()->json(array('error' => 1, 'result' => trans('common.msg_error_exception_ajax')));
         }
     }
 

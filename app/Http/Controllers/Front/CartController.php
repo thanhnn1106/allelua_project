@@ -25,7 +25,7 @@ class CartController extends BaseController
             $productId = $request->get('product_id');
             $product = Product::where('id', $productId)->where('status', config('product.product_status.value.publish'))->first();
             if($product === NULL) {
-                return response()->json(array('error' => 1, 'result' => trans('common.data_not_found')));
+                return response()->json(array('error' => 1, 'result' => trans('common.msg_data_not_found')));
             }
 
             // validate the info, create rules for the inputs
@@ -48,7 +48,7 @@ class CartController extends BaseController
             });
 
             if ($validator->fails()) {
-                return response()->json(array('error' => 1, 'result' => trans('common.please_check_form_below'), 'messages' => $validator->errors()), 422);
+                return response()->json(array('error' => 1, 'result' => trans('common.msg_please_check_form_below'), 'messages' => $validator->errors()), 422);
             }
             $productTrans = $product->productTranslates()->where('language_code', $this->lang)->first();
             $name = ($productTrans !== NULL) ? $productTrans->title : NULL;
@@ -74,7 +74,7 @@ class CartController extends BaseController
             return response()->json(array('error' => 0, 'result' => $quantitySub));
 
         } catch (Exception $e) {
-            return response()->json(array('error' => 1, 'result' => trans('common.error_exception_ajax')));
+            return response()->json(array('error' => 1, 'result' => trans('common.msg_error_exception_ajax')));
         }
     }
 
@@ -93,7 +93,7 @@ class CartController extends BaseController
 
         Cart::remove($id);
 
-        $request->session()->flash('success', trans('common.update_success'));
+        $request->session()->flash('success', trans('common.msg_update_success'));
         return redirect(route('cart_list'));
     }
 
@@ -137,7 +137,7 @@ class CartController extends BaseController
                 $n++;
             }
         }
-        $request->session()->flash('success', sprintf(trans('common.num_update_success'), $n));
+        $request->session()->flash('success', sprintf(trans('common.msg_num_update_success'), $n));
         return redirect(route('cart_list'));
     }
 

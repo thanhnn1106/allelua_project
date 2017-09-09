@@ -22,7 +22,7 @@ class FavoriteController extends BaseController
             $productId = $request->get('product_id');
             $product = Product::where('id', $productId)->where('status', config('product.product_status.value.publish'))->first();
             if($product === NULL) {
-                return response()->json(array('error' => 1, 'result' => trans('common.data_not_found')));
+                return response()->json(array('error' => 1, 'result' => trans('common.msg_data_not_found')));
             }
 
             $productLikes = $product->productLikes()->where('product_id', $productId)->where('user_id', $userId)->first();
@@ -38,7 +38,7 @@ class FavoriteController extends BaseController
 
             return response()->json(array('error' => 0, 'result' => trans('product.favorite_item_add_success')));
         } catch (Exception $e) {
-            return response()->json(array('error' => 1, 'result' => trans('common.error_exception_ajax')));
+            return response()->json(array('error' => 1, 'result' => trans('common.msg_error_exception_ajax')));
         }
     }
 

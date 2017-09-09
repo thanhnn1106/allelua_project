@@ -95,7 +95,7 @@
 
         </div>
         @else
-        <div class="row">{{ trans('common.data_not_found') }}</div>
+        <div class="row">{{ trans('common.msg_data_not_found') }}</div>
         @endif
     </div>
 
