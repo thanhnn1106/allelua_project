@@ -73,6 +73,9 @@ $( document ).ready(function() {
                     $('[data-place="valueRangerTo"]').html(data.to);
                 },
                 onFinish: function (data) {
+                    alert('Fillter nha');
+                    var form_ = $ionRangeSlider.parents('form').eq(0);
+                    form_.submit();
                 },
                 onUpdate: function (data) {}
             });
