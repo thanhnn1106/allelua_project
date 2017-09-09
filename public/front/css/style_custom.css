@@ -1667,6 +1667,9 @@ table.allelua-table-cart, table.allelua-table {
     padding: 10px;
     font-size: 13px;
 }
+.allelua-table-cart .no-wrap {
+    white-space: nowrap;
+}
 .user-heading {
     margin-bottom: 15px;
 }
