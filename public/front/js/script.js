@@ -298,6 +298,16 @@ $( document ).ready(function() {
         return flag;
     });
 
+    $(document).on('click', '[data-btn="moreMenu"]', function(e){
+        if( $('.categories-home').hasClass('full') ){
+            $('.categories-home').removeClass('full');
+            $(this).html('Xem tất cả >');
+        }else{
+            $('.categories-home').addClass('full');
+            $(this).html('Thu ngắn >');
+        }
+    });
+
     updateScrollBarHome();
     $('[data-place="scrollbarMenuMobile"]').scrollbar();
     alignHeight();
@@ -306,6 +316,9 @@ $( window ).resize( function(){
     updateScrollBarHome();
     alignHeight();
 });
+window.onload = function(){
+    alignHeight();
+};
 $( window ).scroll( function(){
     if( !$('[data-place="detectLoadMore"]').hasClass('active') && $('[data-place="detectLoadMore"]').length >0 ){
         var nt = $('[data-place="detectLoadMore"]').eq(0).offset().top;
