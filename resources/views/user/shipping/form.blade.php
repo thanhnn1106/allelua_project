@@ -101,14 +101,14 @@
                                         @foreach($cartList as $cart)
                                         <?php
                                             $index++;
-                                            $totalAmount += formatNumber($cart->quantity * $cart->price);
+                                            $totalAmount += formatNumber($cart->quantity) * $cart->price;
                                         ?>
                                         <tr>
                                             <td>{{ $index }}</td>
                                             <?php $imageInfo = getImage($cart->attributes->image_rand, $cart->attributes->image_real); ?>
                                             <td>
                                                 <a href="{{ makeSlug($cart->attributes->slug, $cart->id) }}" title="{{ $cart->name }}" class="link-product" >
-                                                    <img src="{{ $imageInfo['href'] }}" alt="{{ $imageInfo['base_name'] }}" class="img-fluid" >
+                                                    <img style="width:50px; height: 50px;" src="{{ $imageInfo['href'] }}" alt="{{ $imageInfo['base_name'] }}" class="img-fluid" >
                                                 </a>
                                             </td>
                                             <td>
@@ -116,7 +116,7 @@
                                             </td>
                                             <td>{{ formatPrice($cart->price) }}</td>
                                             <td>{{ formatNumber($cart->quantity) }}</td>
-                                            <td>{{ formatPrice(formatNumber($cart->quantity * $cart->price)) }}</td>
+                                            <td>{{ formatPrice(formatNumber($cart->quantity) * $cart->price) }}</td>
                                         </tr>
                                         @endforeach
                                         <tr>

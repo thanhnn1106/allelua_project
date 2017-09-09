@@ -18,7 +18,7 @@
                                 <div class="col-sm-12">
                                     <table class="table table-bordered table-striped dataTable table-hover">
                                       @if (count($products)==0)
-                                        <tr><td colspan="9" align="center">Data not found</td></tr>
+                                        <tr><td colspan="9" align="center">{{ trans('common.msg_data_not_found') }}</td></tr>
                                       @else
                                         <tr>
                                             <th>#ID</th>
@@ -51,10 +51,10 @@
                                             <td>{{ $product->created_at }}</td>
                                             <td>
                                                 <a href="{{ route('admin_product_restore', ['id' => $product->id]) }}" class="btn btn-default btn-xs">
-                                                    {{ trans('admin.product.btn_restore') }}
+                                                    {{ trans('admin.product.btn_restore_product') }}
                                                 </a>
                                                 <a href="javascript:void(0);" onclick="fncDelete('{{ route('admin_product_delete_force', array('id' => $product->id)) }}');" class="btn btn-danger btn-xs">
-                                                    {{ trans('admin.product.btn_delete_force') }}
+                                                    {{ trans('admin.product.btn_force_delete_product') }}
                                                 </a>
                                             </td>
                                         </tr>

@@ -84,7 +84,7 @@ class CheckoutController extends BaseController
                 // Push information to order
                 $order = new \App\Order();
                 $order->user_id = Auth::user()->id;
-                $order->status = 1; // success
+                $order->status = config('allelua.order_status_value.waiting_process'); // pending
                 $order->full_name = $customerInfo->full_name;
                 $order->address = $customerInfo->address;
                 $order->phone = $customerInfo->phone;
@@ -129,15 +129,14 @@ class CheckoutController extends BaseController
                     'customerName' => Auth::user()->full_name,
                     'cartList'     => $cartCollection,
                 );
-//                echo "<pre>"; print_r($emailContentData);exit;
                 Mail::to($emailContentData['toEmail'])->send(new ConfirmOrderMail($emailContentData));
                 $request->session()->flash('success', trans('front.product.buy_success_sale_group_will_contact_later'));
-                return redirect(route('user_order_history'));
 
+                return redirect(route('user_order_history'));
             } catch (\Exception $e) {
                 DB::rollback();
+                $request->session()->flash('error', trans('common.msg_error_transaction'));
 
-                $request->session()->flash('error', trans('common.fail'));
                 return redirect(route('user_checkout_shipping'));
             }
 

@@ -24,7 +24,7 @@
             <p></p>
         </div>
         <div class="details-product clearfix" >
-            @include('front.product.partial.detail_info');
+            @include('front.product.partial.detail_info')
         </div>
     </div>
 

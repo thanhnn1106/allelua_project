@@ -43,7 +43,7 @@ class CartController extends BaseController
 
             $validator->after(function ($validator) use ($request, $quantitySub, $product) {
                 if ($quantitySub > $product->quantity_limit) {
-                    $validator->errors()->add('quantity', sprintf('The quantity can not more than %d', $product->quantity_limit));
+                    $validator->errors()->add('quantity', trans('front.product.msg_cannot_over_limit', ['QUANTITY' => $product->quantity_limit]));
                 }
             });
 

@@ -51,10 +51,10 @@ $draftStatus = config('product.product_seller_status.value.draft');
                                                 <td>{{ $item->order_id }}</td>
                                                 <td>{{ $item->company_name }}</td>
                                                 <td>{{ $item->product_name }}</td>
-                                                <td>{{ $item->price }}</td>
+                                                <td>{{ formatPrice($item->price) }}</td>
                                                 <td>{{ $item->quantity }}</td>
-                                                <td>{{ $item->price*$item->quantity }}</td>
-                                                <td>{{ $item->status }}</td>
+                                                <td>{{ formatPrice($item->price * formatNumber($item->quantity)) }}</td>
+                                                <td>{{ config('allelua.order_status_name.' . $item->status) }}</td>
                                                 <td>{{ $item->created_at }}</td>
                                             </tr>
                                             @endforeach

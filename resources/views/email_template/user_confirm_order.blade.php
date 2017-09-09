@@ -18,7 +18,7 @@
     @foreach($emailContentData['cartList'] as $cart)
     <?php
         $index++;
-        $totalAmount += formatNumber($cart->quantity * $cart->price);
+        $totalAmount += formatNumber($cart->quantity) * $cart->price;
     ?>
     <tr>
         <td style="border: 1px solid #ddd;padding: 10px;font-size: 13px;">{{ $index }}</td>
@@ -33,7 +33,7 @@
         </td>
         <td style="border: 1px solid #ddd;padding: 10px;font-size: 13px;">{{ formatPrice($cart->price) }}</td>
         <td style="border: 1px solid #ddd;padding: 10px;font-size: 13px;">{{ formatNumber($cart->quantity) }}</td>
-        <td style="border: 1px solid #ddd;padding: 10px;font-size: 13px;">{{ formatPrice(formatNumber($cart->quantity * $cart->price)) }}</td>
+        <td style="border: 1px solid #ddd;padding: 10px;font-size: 13px;">{{ formatPrice(formatNumber($cart->quantity) * $cart->price) }}</td>
     </tr>
     @endforeach
     <tr>

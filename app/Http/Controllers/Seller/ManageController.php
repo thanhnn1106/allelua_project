@@ -68,9 +68,15 @@ class ManageController extends BaseController
         return view('seller.dashboard.order_list', ['orderList' => $orderList]);
     }
 
-    public function newPost(Request $request)
+    public function updateOrderStatus(Request $request, $orderId)
     {
-        return view('seller.dashboard.new_post');
+        $updateResult = Order::updateOrderStatus($orderId);
+        if ($updateResult) {
+
+            return redirect()->route('seller_manange_order')->with('success', trans('common.seller.msg_update_order_status_success'));
+        }
+
+        return redirect()->route('seller_manange_order')->with('errror', trans('common.seller.msg_update_order_status_failed'));
     }
 
     public function postManagement(Request $request)

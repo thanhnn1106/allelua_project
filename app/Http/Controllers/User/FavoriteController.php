@@ -36,7 +36,7 @@ class FavoriteController extends BaseController
             $productLikes->created_at = date('Y-m-d H:i:s');
             $productLikes->save();
 
-            return response()->json(array('error' => 0, 'result' => trans('product.favorite_item_add_success')));
+            return response()->json(array('error' => 0, 'result' => trans('front.product.msg_favorite_item_add_success')));
         } catch (Exception $e) {
             return response()->json(array('error' => 1, 'result' => trans('common.msg_error_exception_ajax')));
         }
