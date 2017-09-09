@@ -9,18 +9,49 @@
                     <span class="pull-xs-left" >
                         {{ trans('front.menu.index') }}
                     </span>    
-                    <a href="/" class="pull-xs-right hidden-md-down" >
+                    <a href="javascript:void(0);" data-btn="moreMenu" class="pull-xs-right hidden-md-down" >
                         {{ trans('front.menu.view_all') }} >
                     </a>
                 </h2>
             </div>
+
+            <!-- BEGIN MEGAMENU -->
+            <div class="megamenu hidden-md-down" >
+                <div class="inner-megamenu" >
+                    @if(isset($categories))
+                    <ul class="nav-mmega clearfix" >
+                        @foreach($categories as $id => $items)
+                        <li>
+                            <a href="{{ makeSlug($items['slug']) }}" title="{{ $items['title'] }}" >{{ $items['title'] }}</a>
+                            @if(isset($items['childs']))
+                            <ul class="ch-nav-mmega" >
+                                @foreach($items['childs'] as $sub)
+                                <li>
+                                    <a href="{{ makeSlug($sub['slug'], $sub['id'], false) }}" title="{{ $sub['title'] }}" >{{ $sub['title'] }}</a>
+                                </li>
+                                @endforeach
+                            </ul>
+                            @endif
+                        </li>
+                        @endforeach
+                    </ul>
+                    @endif;
+                </div>
+            </div>
+            <!-- END MEGAMENU -->
+
             <div class="aside-content" >
                 <div id="cssScrollBarHome" ></div>
                 <div class="clearfix scrollbar scrollbar-dynamic" data-place="scrollbarHome" >
                     <nav class="nav-category navbar-toggleable-lg collapse in" id="navMiniCategory" >
                         @if(isset($categories))
                         <ul class="nav navbar-pills">
+                            <?php $indexC = 0; ?>
                             @foreach($categories as $id => $items)
+                            <?php 
+                            $indexC += 1;
+                            if($indexC > 13) { break; }
+                            ?>
                             <li class="nav-item" >
                                 <a href="{{ makeSlug($items['slug']) }}" title="{{ $items['title'] }}" class="nav-link"><span>{{ $items['title'] }}</span></a>
                                 <span class="nav-icon-direct" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >

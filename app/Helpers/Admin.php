@@ -39,6 +39,15 @@ function isSeller()
     }
     return false;
 }
+function isAdminLogin()
+{
+    $roleAdmin = config('allelua.roles.administrator');
+    $user = \Auth::user();
+    if(isset($user->role_id) && $user->role_id == $roleAdmin) {
+        return true;
+    }
+    return false;
+}
 function isUser()
 {
     $roleUser = config('allelua.roles.user');

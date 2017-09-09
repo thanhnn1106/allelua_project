@@ -135,9 +135,4 @@ class CheckoutController extends BaseController
 
         return view('user.shipping.form', $data);
     }
-
-    public function done(Request $request)
-    {
-        echo 111;exit;
-    }
 }

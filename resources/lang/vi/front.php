@@ -23,7 +23,7 @@ return [
     'partial' => array(
         'watched_title' => 'SẢN PHẨM BẠN ĐÃ XEM',
         'related_title' => 'SẢN PHẨM LIÊN QUAN',
-        'best_price_title' => 'SẢN PHẨM <br />GIÁ TỐT',
+        'best_price_title' => 'SẢN PHẨM GIÁ TỐT',
         'product_detail' => array(
             'short_des' => 'Mô tả ngắn',
             'source' => 'Xuất xứ',

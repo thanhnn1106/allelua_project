@@ -32,9 +32,7 @@
 
             <!--BEGIN CONTENT-->
             <div class="page-main clearfix">
-                <div class="container">
-                    @yield('content')
-                </div>
+                @yield('content')
             </div>
             <!--END CONTENT-->
 
