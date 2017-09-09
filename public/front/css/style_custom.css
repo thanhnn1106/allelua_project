@@ -122,10 +122,16 @@ button.btn-search:hover{
 }
 .navbar-pills li a {
     position: relative;
-    padding: 5px 15px;
+    padding: 10px 15px;
     display: block;
     color: #969696;
     border-left: 4px solid #FFF;
+}
+.navbar-pills li a>img{
+    width: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px
 }
 .navbar-pills li> .dropdown-menu{
     top: 0;
@@ -313,13 +319,14 @@ item-product .name-product {
 .title-cm {
     background: #FFF;
     color: #333;
-    padding: 15px 15px;
+    padding: 0 15px;
     margin-bottom: 0;
     text-transform: uppercase;
+    border-bottom: 1px solid #f2f2f2;
 }
 .title-cm .txt-title-cm{
     display: inline-block;
-    padding-bottom: 10px;
+    padding: 10px 0;
     border-bottom: 2px solid #f8320d
 }
 .content-cm {
@@ -1711,6 +1718,13 @@ table.allelua-table-cart, table.allelua-table {
     background-image: -ms-linear-gradient(top,#4d90fe,#4787ed);
     background-image: -o-linear-gradient(top,#4d90fe,#4787ed);
     background-image: linear-gradient(top,#4d90fe,#4787ed);
+}
+a.allelua-btn:hover{
+    line-height: 23px
+}
+a.allelua-btn:hover{
+    text-decoration: none;
+    color: #FFF
 }
 .profile-dasboad-navi {
     margin-bottom: 15px;
