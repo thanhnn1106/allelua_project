@@ -8,17 +8,17 @@
                             <h2 class="title-footer" >{{ trans('front.menu_footer.lb_allelua_information') }}</h2>
                             <ul class="nav-footer" >
                                 <li>
-                                    <a href="page/{{ $staticPage['type_1']['slug'] }}" title="" >
+                                    <a href="/page/{{ $staticPage['type_1']['slug'] }}" title="" >
                                         {{ $staticPage['type_1']['title'] }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="page/{{ $staticPage['type_2']['slug'] }}" title="" >
+                                    <a href="/page/{{ $staticPage['type_2']['slug'] }}" title="" >
                                         {{ $staticPage['type_2']['title'] }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="page/{{ $staticPage['type_3']['slug'] }}" title="" >
+                                    <a href="/page/{{ $staticPage['type_3']['slug'] }}" title="" >
                                          {{ $staticPage['type_3']['title'] }}
                                     </a>
                                 </li>
@@ -31,32 +31,32 @@
                             <h2 class="title-footer" >{{ trans('front.menu_footer.lb_customer_support') }}</h2>
                             <ul class="nav-footer" >
                                 <li>
-                                    <a href="page/{{ $staticPage['type_4']['slug'] }}" title="" >
+                                    <a href="/page/{{ $staticPage['type_4']['slug'] }}" title="" >
                                         {{ $staticPage['type_4']['title'] }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="page/{{ $staticPage['type_5']['slug'] }}" title="" >
+                                    <a href="/page/{{ $staticPage['type_5']['slug'] }}" title="" >
                                         {{ $staticPage['type_5']['title'] }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="page/{{ $staticPage['type_6']['slug'] }}" title="" >
+                                    <a href="/page/{{ $staticPage['type_6']['slug'] }}" title="" >
                                         {{ $staticPage['type_6']['title'] }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="page/{{ $staticPage['type_7']['slug'] }}" title="" >
+                                    <a href="/page/{{ $staticPage['type_7']['slug'] }}" title="" >
                                         {{ $staticPage['type_7']['title'] }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="page/{{ $staticPage['type_8']['slug'] }}" title="" >
+                                    <a href="/page/{{ $staticPage['type_8']['slug'] }}" title="" >
                                         {{ $staticPage['type_8']['title'] }}
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="page/{{ $staticPage['type_9']['slug'] }}" title="" >
+                                    <a href="/page/{{ $staticPage['type_9']['slug'] }}" title="" >
                                         {{ $staticPage['type_9']['title'] }}
                                     </a>
                                 </li>

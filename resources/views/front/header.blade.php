@@ -14,6 +14,7 @@
                                 <span class="mini-logo hidden-sm-down" >
                                     <img src="{{ asset_front('images/logo-gray.png') }}" alt="" class="img-fluid" >
                                 </span>
+                                Doanh nghiệp & doanh nghiệp
                             </a>
                         </span>
                     </div>
