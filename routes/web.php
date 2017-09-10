@@ -129,11 +129,13 @@ Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], fu
     Route::get('product/list', 'Seller\ProductController@index')->name('seller_product_index');
     Route::get('product/create', 'Seller\ProductController@add')->name('seller_product_create');
     Route::get('product/edit/{id}', 'Seller\ProductController@edit')->name('seller_product_edit');
+    Route::post('product/clone/{id}', 'Seller\ProductController@copy')->name('seller_product_clone');
     Route::post('product/save', 'Seller\ProductController@save')->name('seller_product_save');
     Route::get('product/delete/{id}', 'Seller\ProductController@delete')->name('seller_product_delete');
 
     Route::post('favorite', 'Seller\FavoriteController@index')->name('seller_product_favorite');
     Route::get('favorite/lists', 'Seller\FavoriteController@lists')->name('seller_product_favorite_lists');
+    Route::get('update-order-status/{orderId}', 'Seller\ManageController@updateOrderStatus')->name('seller_update_order_status');
 });
 Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'auth.user']], function () {
     Route::get('dashboard', 'User\DashBoardController@index')->name('user_dashboard');

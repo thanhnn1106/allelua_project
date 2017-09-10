@@ -76,7 +76,7 @@
                     </div>
                 </div>
 
-                @if(isUser())
+                @if( ! isSeller() && ! isAdminLogin())
                 <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" >
                     <div class="action-detail clearfix" >
                         <div class="form-product">
@@ -97,7 +97,7 @@
                                     $isCheckOut = (isset($totalCart) && $totalCart > 0) ? 'display:block' : 'display:none';
                                 ?>
                                 <div id="butCheckout" class="product-form-group" style="{{ $isCheckOut }}">
-                                    <button type="button" onclick="window.location.href='{{ route('user_checkout_shipping') }}';" class="btn btn-block btn-style btn-cart add_to_cart" title="Cho vào giỏ hàng" >
+                                    <button type="button" onclick="window.location.href='{{ route('user_checkout_shipping') }}'" class="btn btn-block btn-style btn-cart add_to_cart" title="Cho vào giỏ hàng" >
                                         <span>Mua ngay</span>
                                     </button>
                                 </div>

@@ -44,7 +44,7 @@ class ContactController extends BaseController
                 $postData['image'] = $input['imagename'];
             }
             $saveRequest = Contacts::saveContact($postData);
-            return redirect()->route('contact')->with('success', trans('common.update_success'));;
+            return redirect()->route('contact')->with('success', trans('common.msg_update_success'));;
         }
         return view('front.home.contact');
     }

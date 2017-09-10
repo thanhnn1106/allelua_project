@@ -8,25 +8,25 @@
             <div class="allelua-card-info">
                 <div class="allelua-card-title">
                     <a href="/profile">
-                        admin team                            
+                        {{ Auth::user()->full_name }}
                     </a>
                 </div>
                 <div class="allelua-card-desc">
-                    updating                        
+                    {{ config('allelua.user_status.label.' . Auth::user()->status) }}
                 </div>
-                <div class="allelua-card-desc">test@yahoo.com.vn</div>
+                <div class="allelua-card-desc">{{ Auth::user()->email }}</div>
                 <div class="allelua-card-desc">
                     0 Điểm                        
                 </div>
             </div>
             <div class="allelua-card-bottom">
-                <a class="btn allelua-card-btn btn-primary btn-twitter btn-sm" href="">
+                <a class="btn allelua-card-btn btn-primary btn-twitter btn-sm" href="#">
                     <i class="fa fa-twitter"></i>
                 </a>
-                <a class="btn allelua-card-btn btn-danger btn-sm" rel="publisher" href="">
+                <a class="btn allelua-card-btn btn-danger btn-sm" rel="publisher" href="#">
                     <i class="fa fa-google-plus"></i>
                 </a>
-                <a class="btn allelua-card-btn btn-primary btn-sm" rel="publisher" href="">
+                <a class="btn allelua-card-btn btn-primary btn-sm" rel="publisher" href="#">
                     <i class="fa fa-facebook"></i>
                 </a>
             </div>
@@ -45,7 +45,7 @@
                         </a>
                     </li>
                     <li class="nav-item" >
-                        <a href="{{ route('user_product_favorite_lists') }}" title="Áo Thun" class="nav-link" >
+                        <a href="{{ route('user_product_favorite_lists') }}" class="nav-link" >
                             <span>
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                 {{ trans('front.menu_user.lb_favorite_product') }}

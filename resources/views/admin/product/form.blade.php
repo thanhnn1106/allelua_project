@@ -299,7 +299,7 @@ var initialPreviewImg = initialPreviewConfigImg = [];
 <script src="{{ asset('/plugins/bootstrap-fileinput/js/plugins/purify.min.js') }}"></script>
 <script src="{{ asset('/plugins/bootstrap-fileinput/js/fileinput.min.js') }}"></script>
 <!--<script src="{{ asset_admin('/plugins/bootstrap-fileinput/themes/fa/theme.js') }}"></script>-->
-<script src="{{ asset('/plugins/bootstrap-fileinput/js/locales/lang.js') }}"></script>
+<script src="{{ asset('/plugins/bootstrap-fileinput/js/locales/LANG.js') }}"></script>
 <script src="{{ asset('/plugins/bootstrap-fileinput/themes/explorer/theme.js') }}"></script>
 <script src="{{ asset_admin('js/product.js') }}"></script>
 

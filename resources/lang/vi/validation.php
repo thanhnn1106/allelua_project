@@ -218,8 +218,8 @@ return [
         'brand_en' => 'Thương hiệu (tiếng Anh)',
         'source_vi' => 'Xuất sứ (tiếng Nhật)',
         'source_en' => 'Xuất sứ (tiếng Anh)',
-        'delivery_location_en' => 'Nơi giao hàng',
-        'delivery_location_vi' => 'Delivery location',
+        'delivery_location_en' => 'Delivery location',
+        'delivery_location_vi' => 'Nơi giao hàng',
     ],
 
 ];

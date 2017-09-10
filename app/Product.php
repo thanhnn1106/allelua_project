@@ -64,7 +64,7 @@ class Product extends Model
 
         $query->orderBy('t1.created_at', 'DESC');
 
-        $result = $query->paginate(1);
+        $result = $query->paginate(LIMIT_ROW);
         return $result;
     }
 

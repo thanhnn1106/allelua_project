@@ -51,7 +51,7 @@ class Order extends Model
     public static function getOrderList($userId)
     {
         $orderList = \DB::table('orders AS o')
-                ->select('o.status', 'oi.*', 'u.full_name', 'u.email')
+                ->select('o.status', 'oi.*', 'u.full_name', 'u.email', 'u.phone_number')
                 ->join('order_items AS oi', 'oi.order_id', '=', 'o.id')
                 ->join('users AS u', 'o.user_id', '=', 'u.id')
                 ->where('oi.seller_id', '=', $userId)
@@ -75,6 +75,20 @@ class Order extends Model
                 ->join('users AS u1', 'u1.id', '=', 'o.user_id')
                 ->orderBy('o.created_at', 'desc');
         $result = $orderList->paginate(LIMIT_ROW);
+        return $result;
+    }
+
+    /**
+     * Seller update order status.
+     *
+     * @var object array
+     * @author Nguyễn Ngọc Thanh <thanh.nn1106@gmail.com>
+     */
+    public static function updateOrderStatus($orderId)
+    {
+        $orderInfo = Order::find($orderId);
+        $orderInfo->status = config('allelua.order_status_value.processed');
+        $result = $orderInfo->save();
         return $result;
     }
 }

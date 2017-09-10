@@ -47,7 +47,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                                 <button type="button" onclick="window.location.href ='{{ route('seller_product_index') }}';" class="btn btn-style btn-heart" title="{{ trans('front.product.destroy_product') }}" >
                                                                     <span>{{ trans('front.product.destroy_product') }}</span>
                                                                 </button>
-                                                                <button id="save_product" type="button" class="btn btn-style" title="{{ trans('front.product.make_product') }}" >
+                                                                <button type="button" class="btn btn-style save_product" title="{{ trans('front.product.make_product') }}" >
                                                                     <span>{{ trans('front.product.make_product') }}</span>
                                                                 </button>
                                                                 <input type="hidden" id="hide_category_id" value="{{ $product->category_id or null }}" />
@@ -257,7 +257,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                            <input type="text" class="form-control form-control-md" lang="{{ $lang->iso2 }}" name="{{ $title }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->title : '' }}" />
+                                                                            <input type="text" class="form-control form-control-md title-slug" lang="{{ $lang->iso2 }}" name="{{ $title }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->title : '' }}" />
                                                                             <div class="input-error"></div>
                                                                         </div>
                                                                     </div>
@@ -395,6 +395,19 @@ $listShippingMethod = config('product.shipping_method.label');
                                                             @endforeach
                                                         </div>
                                                     </div>
+                                                    
+                                                    <div class="form-group" >
+                                                        <div class="row" >
+                                                            <div>
+                                                                <button type="button" onclick="window.location.href ='{{ route('seller_product_index') }}';" class="btn btn-style btn-heart" title="{{ trans('front.product.destroy_product') }}" >
+                                                                    <span>{{ trans('front.product.destroy_product') }}</span>
+                                                                </button>
+                                                                <button type="button" class="btn btn-style save_product" title="{{ trans('front.product.make_product') }}" >
+                                                                    <span>{{ trans('front.product.make_product') }}</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
                                                 </form>
                                             </div>
@@ -466,7 +479,8 @@ $initPreviewConfig = isset($productImages['initialPreviewConfig']) ? json_encode
 <script src="{{ asset('/plugins/bootstrap-fileinput/js/plugins/purify.min.js') }}"></script>
 <script src="{{ asset('/plugins/bootstrap-fileinput/js/fileinput.min.js') }}"></script>
 <!--<script src="{{ asset_admin('/plugins/bootstrap-fileinput/themes/fa/theme.js') }}"></script>-->
-<script src="{{ asset('/plugins/bootstrap-fileinput/js/locales/lang.js') }}"></script>
+<script src="{{ asset('/plugins/bootstrap-fileinput/js/locales/LANG.js') }}"></script>
 <script src="{{ asset('/plugins/bootstrap-fileinput/themes/explorer/theme.js') }}"></script>
+<script src="{{ asset_admin('js/common.js') }}"></script>
 <script src="{{ asset_front('js/product.js') }}"></script>
 @endsection

@@ -68,6 +68,24 @@ class Controller extends BaseController
         );
     }
 
+    protected function copyImage($oldImage)
+    {
+        if(empty($oldImage) || ! file_exists(public_path() . $oldImage)) {
+            return false;
+        }
+
+        $extension = \File::extension($oldImage);
+        $fileName = uniqid().'.'.$extension;
+        $newFilePath = pathinfo($oldImage)['dirname'] . DIRECTORY_SEPARATOR . $fileName;
+
+        $oldPath = public_path() . $oldImage;
+        $newPathWithName = public_path() . $newFilePath;
+        if (\File::copy($oldPath , $newPathWithName)) {
+            return $newFilePath;
+        }
+        return false;
+    }
+
     protected function returnFormatFile($urlDelete, $arrFile)
     {
         $p1 = $p2 = $realPath = $randPath = array();

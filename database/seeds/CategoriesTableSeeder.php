@@ -800,7 +800,7 @@ class CategoriesTableSeeder extends Seeder
 
     private function _setCategoryTrans($langs, $categoryId, $title)
     {
-        $slug = formatSlug($title);
+        $slug = str_slug($title);
         foreach ($langs as $lang) {
             $rowSub = CategoriesTranslate::where('category_id', $categoryId)->where('language_code', $lang->iso2)->where('slug', $slug)->first();
             if ($rowSub === NULL) {

@@ -76,7 +76,7 @@ class PersonalInfoController extends BaseController
             $addPersonal = \App\Personal::addPersonal($params);
             if ($addPersonal == false) {
                 return redirect()->route('seller_account_management')
-                                ->with('error', trans('common.create_failed'))
+                                ->with('error', trans('common.seller.msg_update_personal_info_failed'))
                                 ->withInput();
             }
 
@@ -87,16 +87,16 @@ class PersonalInfoController extends BaseController
 
                 DB::commit();
                 return redirect()->route('seller_account_management')
-                                ->with('success', trans('common.create_success'));
+                                ->with('success', trans('common.seller.msg_update_personal_info_success'));
             }
             DB::rollback();
             return redirect()->route('seller_account_management')
-                            ->with('error', trans('common.create_failed'))
+                            ->with('error', trans('common.seller.msg_update_personal_info_failed'))
                             ->withInput();
         } catch (Exception $ex) {
             DB::rollback();
             return redirect()->route('seller_account_management')
-                            ->with('error', trans('common.create_failed'))
+                            ->with('error', trans('common.seller.msg_update_personal_info_failed'))
                             ->withInput();
         }
     }
@@ -132,16 +132,16 @@ class PersonalInfoController extends BaseController
 
                 DB::commit();
                 return redirect()->route('seller_account_management')
-                                ->with('success', trans('common.update_success'));
+                                ->with('success', trans('common.seller.msg_update_personal_info_success'));
             }
             DB::rollback();
             return redirect()->route('seller_account_management')
-                            ->with('error', trans('common.update_failed'))
+                            ->with('error', trans('common.seller.msg_update_personal_info_failed'))
                             ->withInput();
         } catch (Exception $ex) {
             DB::rollback();
             return redirect()->route('seller_account_management')
-                            ->with('error', trans('common.update_failed'))
+                            ->with('error', trans('common.seller.msg_update_personal_info_failed'))
                             ->withInput();
         }
     }

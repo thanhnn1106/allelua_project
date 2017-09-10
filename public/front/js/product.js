@@ -47,7 +47,7 @@ $(document).ready(function() {
     });
 
     // Save action
-    $('#save_product').click(function (event) {
+    $('.save_product').click(function (event) {
         $('.alert').hide().find('p').html('');
         $('.input-error').html('');
 
@@ -132,7 +132,7 @@ function createSlugLink(obj) {
     var lang = $(obj).attr('lang');
     var str = $(obj).val();
     var slug = formatSlug(str);
-    $(obj).closest('.box-body').find('.slug-'+lang).html(slug);
+    $(obj).closest('.tab-pane').find('.slug-'+lang).html(slug);
 }
 
 function fncDelImg(obj, event)

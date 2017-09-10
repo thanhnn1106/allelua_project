@@ -34,6 +34,7 @@
                                         </p>
 
                                         <div class="table-responsive">
+                                            <form id="form_product" name="form_product" class="clearfix" action="" method="POST" >
                                             <table class="allelua-table-cart">
                                                 <thead>
                                                     <tr>
@@ -68,12 +69,13 @@
                                                         <td class="text-right">{{ $product->category_title }}</td>
                                                         <td class="text-right">{{ $product->title }}</td>
                                                         <td class="text-right text-xs-center" >{{ formatPrice($product->price) }}</td>
-                                                        <td class="text-right">{{ formatNumber($product->quantity) }}</td>
-                                                        <td class="text-right">{{ formatNumber($product->quantity_limit) }}</td>
+                                                        <td class="text-right">{{ $product->quantity }}</td>
+                                                        <td class="text-right">{{ $product->quantity_limit }}</td>
                                                         <td class="text-right">{{ getProductStatus($product->status) }}</td>
                                                         <td class="text-right">{{ getPaymentMethod($product->payment_method) }}</td>
                                                         <td class="text-right">{{ getShippingMethod($product->shipping_method) }}</td>
                                                         <td>
+                                                            <a href="javascript:void(0);" data-url="{{ route('seller_product_clone', ['id' => $product->id]) }}" onclick="fncCopy(this);" title="{{ trans('common.event.clone') }}" class="allelua-btn allelua-btn-active">{{ trans('front.product.btn_copy_product') }}</a>
                                                             @if((int) $product->status === $draftStatus)
                                                             <a href="{{ route('seller_product_edit', ['id' => $product->id]) }}" title="{{ trans('common.event.edit') }}" class="allelua-btn allelua-btn-active">{{ trans('common.event.edit') }}</a>
                                                             @endif
@@ -84,6 +86,8 @@
                                                     @endif
                                                 </tbody>
                                             </table>
+                                            {{ csrf_field() }}
+                                            </form>
                                         </div>
 
                                         <div class="nav-paging clearfix" >
@@ -127,6 +131,16 @@ function fncDeleteProduct(obj)
         return false;
     }
     window.location.href = $(obj).attr('data-url');
+}
+
+function fncCopy(obj)
+{
+    if( ! confirm('Are you sure clone product ! ')) {
+        return false;
+    }
+    var url = $(obj).attr('data-url');
+    $('#form_product').attr('action', url);
+    $('#form_product').submit();
 }
 </script>
 @endsection

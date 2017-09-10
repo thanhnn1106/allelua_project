@@ -9,6 +9,8 @@ use Validator;
 use Cart;
 use Auth;
 use Illuminate\Support\Facades\DB;
+use App\Mail\ConfirmOrderMail;
+use Mail;
 
 class CheckoutController extends BaseController
 {
@@ -28,6 +30,7 @@ class CheckoutController extends BaseController
 
         $productBestPrice = $this->loadProductBestPrice();
         $cartCollection = Cart::getContent();
+
         $customerInfo = \App\CustomerShipping::orderBy('is_default', 'DESC')->first();
         $data = array(
             'languages' => $langs,
@@ -44,12 +47,14 @@ class CheckoutController extends BaseController
 
         if ($request->isMethod('post')) {
 
+            if($cartCollection->count() === 0) {
+                $request->session()->flash('error', trans('front.product.no_product_to_payment'));
+                    return redirect(route('user_checkout_shipping'));
+            }
+
             $customerShippingId = $request->get('customer_shipping_id');
             $rules = array(
                 'full_name' => 'required|max:255',
-//                'city' => 'required',
-//                'district' => 'required',
-//                'ward' => 'required',
                 'address' => 'required|max:255',
                 'phone' => 'required|max:255',
             );
@@ -79,7 +84,7 @@ class CheckoutController extends BaseController
                 // Push information to order
                 $order = new \App\Order();
                 $order->user_id = Auth::user()->id;
-                $order->status = 1; // success
+                $order->status = config('allelua.order_status_value.waiting_process'); // pending
                 $order->full_name = $customerInfo->full_name;
                 $order->address = $customerInfo->address;
                 $order->phone = $customerInfo->phone;
@@ -118,13 +123,20 @@ class CheckoutController extends BaseController
                     }
                 }
 
+                // Send mail confirm order
+                $emailContentData = array(
+                    'toEmail'      => Auth::user()->email,
+                    'customerName' => Auth::user()->full_name,
+                    'cartList'     => $cartCollection,
+                );
+                Mail::to($emailContentData['toEmail'])->send(new ConfirmOrderMail($emailContentData));
                 $request->session()->flash('success', trans('front.product.buy_success_sale_group_will_contact_later'));
-                return redirect(route('user_checkout_shipping'));
 
+                return redirect(route('user_order_history'));
             } catch (\Exception $e) {
                 DB::rollback();
+                $request->session()->flash('error', trans('common.msg_error_transaction'));
 
-                $request->session()->flash('error', trans('common.fail'));
                 return redirect(route('user_checkout_shipping'));
             }
 
