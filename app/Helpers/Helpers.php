@@ -205,26 +205,44 @@ function formatRouteSearch($params)
     $price = request()->get('price');
     $size = request()->get('size');
 
-    if ( ! empty($brand)) {
-        $params['brand'] = $brand;
+    if( ! empty(request()->get('q'))) {
+        $params['q'] = request()->get('q');
     }
-    if ( ! empty($positionUse)) {
-        $params['pos'] = $positionUse;
+
+    if( ! isset($params['brand'])) {
+        if ( ! empty($brand)) {
+            $params['brand'] = $brand;
+        }
     }
-    if ( ! empty($color)) {
-        $params['color'] = $color;
+    if( ! isset($param['pos'])) {
+        if ( ! empty($positionUse)) {
+            $params['pos'] = $positionUse;
+        }
     }
-    if ( ! empty($kind)) {
-        $params['kind'] = $kind;
+    if( ! isset($params['color'])) {
+        if ( ! empty($color)) {
+            $params['color'] = $color;
+        }
     }
-    if ( ! empty($material)) {
-        $params['material'] = $material;
+    if( ! isset($params['kind'])) {
+        if ( ! empty($kind)) {
+            $params['kind'] = $kind;
+        }
     }
-    if ( ! empty($price)) {
-        $params['price'] = $price;
+    if( ! isset($params['material'])) {
+        if ( ! empty($material)) {
+            $params['material'] = $material;
+        }
     }
-    if ( ! empty($size)) {
-        $params['size'] = $size;
+    if( ! isset($params['price'])) {
+        if ( ! empty($price)) {
+            $params['price'] = $price;
+        }
+    }
+    if( ! isset($params['size'])) {
+        if ( ! empty($size)) {
+            $params['size'] = $size;
+        }
     }
 
     $currentRoute = \Route::currentRouteName();

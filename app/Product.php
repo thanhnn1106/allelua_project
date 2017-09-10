@@ -316,7 +316,7 @@ class Product extends Model
             $query->where('t2.brand', $params['search_brand']);
         }
         if( ! empty($params['search_position_use'])) {
-            $query->where('t1.position', $params['search_position_use']);
+            $query->where('t1.position_use', $params['search_position_use']);
         }
         if( ! empty($params['search_size'])) {
             $query->where('t1.size', $params['search_size']);

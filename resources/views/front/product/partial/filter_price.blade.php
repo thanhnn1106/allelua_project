@@ -14,7 +14,7 @@
     </div>
     <div class="body-item-fillter clearfix" data-place="itemBodyFillter" data-id="price" >
         <div class="clearfix wrap-ranger-price" >
-            <input type="text" data-neo="ionRangeSlider"  data-min="{{ $minPrice }}" data-max="" data-grid="true" value="" name="{{ $maxPrice }}" data-input="price" />
+            <input type="text" data-neo="ionRangeSlider"  data-min="{{ $minPrice }}" data-max="{{ $maxPrice }}" data-grid="true" value="min_max_price" name="" data-input="price" />
         </div>
         <div class="price-from-to" >
             {{ trans('front.partial.filter.from_price') }}: 

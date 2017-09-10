@@ -106,7 +106,7 @@
                     </div>
                     <div class="form-search" >
                         <div class="inner-form-search clearfix" >
-                            <form class="fsearch clearfix" action="{{ route('search_page') }}">
+                            <form class="fsearch clearfix" action="{{ route('search_page') }}" method="GET">
                                 <div class="inner-fsearch" >
                                     <input type="text" name="q" class="input-search" value="{{ app('request')->input('q') }}" >
                                     <button class="btn-search" >

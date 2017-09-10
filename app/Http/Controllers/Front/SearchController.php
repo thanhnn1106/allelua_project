@@ -27,6 +27,8 @@ class SearchController extends BaseController
         $isFinalProduct = false;
         $subCate        = null;
         $slug           = null;
+        $loadStyles = NULL;
+        $attrs = array();
 
         $products = $this->loadProductSearch($request);
         if($products->count() === $products->total()) {

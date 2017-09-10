@@ -19,7 +19,7 @@
                 </div>
                 -->
                 <div class="coz-lable-check" >
-                    <a href="{{ formatRouteSearch(array('brand' => $brand->brand)) }}">
+                    <a href="{{ formatRouteSearch(array('brand' => $brand->brand)) }}"}}">
                         <span class="coz-label-check-inner">{{ $brand->brand }}</span>
                         <span class="coz-sum-check" >({{ formatNumber($brand->total) }})</span>
                     </a>

@@ -23,6 +23,8 @@ class BaseController extends Controller
             'language_code' => $this->lang,
             'keyword' => $request->get('q'),
         );
+        $params = $this->getParamSearch($request, $params);
+
         return \App\Product::getProductFilter($params);
     }
 
