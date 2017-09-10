@@ -1,7 +1,7 @@
 @extends('front.layout')
 
 @section('content')
-
+<div class="container">
 <div class="clearfix">
     <ul class="breadcrumbs">
         <li class="home">
@@ -451,6 +451,7 @@ $listShippingMethod = config('product.shipping_method.label');
 <!-- BEGIN COUNTRY AND SERVICE -->
 @include('front.partial.country_service')
 <!-- END COUNTRY AND SERVICE -->
+</div>
 
 <?php
 $initPreviewImage = isset($productImages['initialPreview']) ? json_encode($productImages['initialPreview']) : NULL;

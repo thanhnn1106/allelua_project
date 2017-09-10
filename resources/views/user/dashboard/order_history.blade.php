@@ -5,6 +5,7 @@
 <?php
 $draftStatus = config('product.product_seller_status.value.draft');
 ?>
+<div class="container">
 <div class="clearfix">
     <ul class="breadcrumbs">
         <li class="home">
@@ -85,7 +86,7 @@ $draftStatus = config('product.product_seller_status.value.draft');
     </div>
 </div>
 </div>
-
+</div>
 @endsection
 @section('footer_script')
 <script>

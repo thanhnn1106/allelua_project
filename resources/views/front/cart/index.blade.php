@@ -1,5 +1,6 @@
 @extends('front.layout')
 @section('content')
+<div class="container">
     <div class="clearfix" >
         <ul class="breadcrumbs" >
             <li class="home" ><a href="{{ route('home') }}" >{{ trans('front.bread_crum.home') }}</a></li>
@@ -98,7 +99,7 @@
         <div class="row">{{ trans('common.msg_data_not_found') }}</div>
         @endif
     </div>
-
+</div>
 @endsection
 
 @section('footer_script')

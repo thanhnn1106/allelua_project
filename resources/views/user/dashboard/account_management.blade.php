@@ -1,6 +1,7 @@
 @extends('front.layout')
 
 @section('content')
+<div class="container">
 <div class="clearfix">
     <ul class="breadcrumbs">
         <li class="home">
@@ -118,6 +119,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection
 @section('footer_script')

@@ -1,5 +1,6 @@
 @extends('front.layout')
 @section('content')
+<div class="container">
     <div class="clearfix" >
         <ul class="breadcrumbs" >
             <li class="home" ><a href="{{ route('home') }}" >{{ trans('front.bread_crum.home') }}</a></li>
@@ -69,7 +70,7 @@
     <!-- BEGIN COUNTRY AND SERVICE -->
     @include('front.partial.country_service')
     <!-- END COUNTRY AND SERVICE -->
-
+</div>
 @endsection
 
 @section('footer_script')

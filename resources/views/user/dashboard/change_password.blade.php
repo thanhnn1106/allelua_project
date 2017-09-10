@@ -1,6 +1,7 @@
 @extends('front.layout')
 
 @section('content')
+<div class="container">
 <div class="clearfix">
     <ul class="breadcrumbs">
         <li class="home">
@@ -65,6 +66,7 @@
             @include('user.information');
         </div>
     </div>
+</div>
 </div>
 </div>
 @endsection

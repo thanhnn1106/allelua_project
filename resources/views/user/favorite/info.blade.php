@@ -1,6 +1,6 @@
 @extends('front.layout')
 @section('content')
-
+<div class="container">
     <div class="inner-page-main" data-align-height="wrap">
         <div class="row" >
             <!-- FAVORITE LISTS -->
@@ -30,7 +30,7 @@
     <!-- BEGIN COUNTRY AND SERVICE -->
     @include('front.partial.country_service')
     <!-- END COUNTRY AND SERVICE -->
-
+</div>
 @endsection
 
 @section('footer_script')

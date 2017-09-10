@@ -5,6 +5,7 @@
 <?php 
     $draftStatus = config('product.product_seller_status.value.draft');
 ?>
+<div class="container">
 <div class="clearfix">
     <ul class="breadcrumbs">
         <li class="home">
@@ -74,7 +75,7 @@
                                                         <td class="text-right">{{ getProductStatus($product->status) }}</td>
                                                         <td class="text-right">{{ getPaymentMethod($product->payment_method) }}</td>
                                                         <td class="text-right">{{ getShippingMethod($product->shipping_method) }}</td>
-                                                        <td>
+                                                        <td class="no-wrap">
                                                             <a href="javascript:void(0);" data-url="{{ route('seller_product_clone', ['id' => $product->id]) }}" onclick="fncCopy(this);" title="{{ trans('common.event.clone') }}" class="allelua-btn allelua-btn-active">{{ trans('front.product.btn_copy_product') }}</a>
                                                             @if((int) $product->status === $draftStatus)
                                                             <a href="{{ route('seller_product_edit', ['id' => $product->id]) }}" title="{{ trans('common.event.edit') }}" class="allelua-btn allelua-btn-active">{{ trans('common.event.edit') }}</a>
@@ -120,6 +121,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 @endsection

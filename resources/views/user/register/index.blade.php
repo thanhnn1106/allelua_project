@@ -5,6 +5,7 @@
     $sex = config('allelua.sex.value');
 ?>
 
+<div class="container">
 <form action="{{ route('user_register', ['redirect' => $url_redirect]) }}" method="post">
 <div class="row" >
     <div class="col-sm-12" >
@@ -132,6 +133,7 @@
     </div>
 </div>
 </form>
+</div>
 @endsection
 
 @section('footer_script')

@@ -53,7 +53,10 @@
                             if($indexC > 13) { break; }
                             ?>
                             <li class="nav-item" >
-                                <a href="{{ makeSlug($items['slug']) }}" title="{{ $items['title'] }}" class="nav-link"><span>{{ $items['title'] }}</span></a>
+                                <a href="{{ makeSlug($items['slug']) }}" title="{{ $items['title'] }}" class="nav-link">
+                                    <img src="https://vcdn.tikicdn.com/desktop/img/nav-icon/ic-book.svg" />
+                                    <span>{{ $items['title'] }}</span>
+                                </a>
                                 <span class="nav-icon-direct" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >
                                     <i class="fa fa-angle-right" ></i>
                                 </span>
