@@ -68,7 +68,7 @@ class UserPersonalController extends AdminBaseController
                 $addPersonal          = \App\Personal::addPersonal($params);
                 if ($addPersonal == false) {
                     return redirect()->route('admin_user_personal_add')
-                            ->with('error', trans('common.create_failed'))
+                            ->with('error', trans('common.msg_create_failed'))
                             ->withInput();
                 }
 
@@ -79,16 +79,16 @@ class UserPersonalController extends AdminBaseController
 
                     DB::commit();
                     return redirect()->route('admin_user_personal_list')
-                        ->with('success', trans('common.create_success'));
+                        ->with('success', trans('common.msg_create_success'));
                 }
                 return redirect()->route('admin_user_personal_add')
-                            ->with('error', trans('common.create_failed'))
+                            ->with('error', trans('common.msg_create_failed'))
                             ->withInput();
 
             } catch (Exception $ex) {
                 DB::rollback();
                 return redirect()->route('admin_user_personal_add')
-                            ->with('error', trans('common.create_failed'))
+                            ->with('error', trans('common.msg_create_failed'))
                             ->withInput();
             }
         }
@@ -141,7 +141,7 @@ class UserPersonalController extends AdminBaseController
                 $updatePersonal          = \App\Personal::updatePersonal($params);
                 if ($updatePersonal == false) {
                     return redirect()->route('admin_user_personal_edit', ['id' => $userId])
-                            ->with('error', trans('common.update_failed'))
+                            ->with('error', trans('common.msg_update_failed'))
                             ->withInput();
                 }
 
@@ -152,16 +152,16 @@ class UserPersonalController extends AdminBaseController
 
                     DB::commit();
                     return redirect()->route('admin_user_personal_list')
-                        ->with('success', trans('common.update_success'));
+                        ->with('success', trans('common.msg_update_success'));
                 }
                 return redirect()->route('admin_user_personal_edit', ['id' => $userId])
-                            ->with('error', trans('common.update_failed'))
+                            ->with('error', trans('common.msg_update_failed'))
                             ->withInput();
 
             } catch (Exception $ex) {
                 DB::rollback();
                 return redirect()->route('admin_user_personal_edit', ['id' => $userId])
-                            ->with('error', trans('common.update_failed'))
+                            ->with('error', trans('common.msg_update_failed'))
                             ->withInput();
             }
         }
@@ -184,7 +184,7 @@ class UserPersonalController extends AdminBaseController
             'userTranslateInfo' => $userTranslateInfo,
         );
 
-        return view('admin/user_personal_info/form_edit', $returnData);
+        return view('admin/user_personal_info/form', $returnData);
     }
 
     /**
@@ -201,10 +201,10 @@ class UserPersonalController extends AdminBaseController
         $approvedResult = $personalInfo->save();
         if ($approvedResult) {
             return redirect()->route('admin_user_personal_list')
-                        ->with('success', trans('common.update_success'));
+                        ->with('success', trans('common.msg_update_success'));
         }
         return redirect()->route('admin_user_personal_list')
-                            ->with('error', trans('common.update_failed'))
+                            ->with('error', trans('common.msg_update_failed'))
                             ->withInput();
     }
 }

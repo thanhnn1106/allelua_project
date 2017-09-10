@@ -1,7 +1,7 @@
 @if (count($errors->all()) > 0)
 <div class="alert alert-danger alert-block">
 	<button type="button" class="close" data-dismiss="alert">&times;</button>
-	{{ trans('common.please_check_form_below') }}
+	{{ trans('common.msg_please_check_form_below') }}
 </div>
 @endif 
 

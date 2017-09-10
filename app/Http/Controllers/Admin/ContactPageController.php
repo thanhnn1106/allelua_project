@@ -42,19 +42,19 @@ class ContactPageController extends AdminBaseController
             if ($validator->fails()) {
 
                 return redirect()->route('admin_view_contacts', ['contact_id' => $contactId])
-                        ->with('error', trans('common.update_failed'))
+                        ->with('error', trans('common.msg_update_failed'))
                         ->withInput();
             } 
             $updateResult = Contacts::updateContact($postData);
             if (!$updateResult) {
 
                 return redirect()->route('admin_view_contacts', ['contact_id' => $contactId])
-                        ->with('error', trans('common.update_failed'))
+                        ->with('error', trans('common.msg_update_failed'))
                         ->withInput();
             } else {
 
                 return redirect()->route('admin_manage_contacts')
-                        ->with('success', trans('common.update_success'));
+                        ->with('success', trans('common.msg_update_success'));
             }
         }
 

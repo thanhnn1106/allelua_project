@@ -69,13 +69,13 @@
                                                         <td class="text-right">{{ $product->category_title }}</td>
                                                         <td class="text-right">{{ $product->title }}</td>
                                                         <td class="text-right text-xs-center" >{{ formatPrice($product->price) }}</td>
-                                                        <td class="text-right">{{ formatNumber($product->quantity) }}</td>
-                                                        <td class="text-right">{{ formatNumber($product->quantity_limit) }}</td>
+                                                        <td class="text-right">{{ $product->quantity }}</td>
+                                                        <td class="text-right">{{ $product->quantity_limit }}</td>
                                                         <td class="text-right">{{ getProductStatus($product->status) }}</td>
                                                         <td class="text-right">{{ getPaymentMethod($product->payment_method) }}</td>
                                                         <td class="text-right">{{ getShippingMethod($product->shipping_method) }}</td>
                                                         <td>
-                                                            <a href="javascript:void(0);" data-url="{{ route('seller_product_clone', ['id' => $product->id]) }}" onclick="fncCopy(this);" title="{{ trans('common.event.clone') }}" class="allelua-btn allelua-btn-active">{{ trans('common.event.clone') }}</a>
+                                                            <a href="javascript:void(0);" data-url="{{ route('seller_product_clone', ['id' => $product->id]) }}" onclick="fncCopy(this);" title="{{ trans('common.event.clone') }}" class="allelua-btn allelua-btn-active">{{ trans('front.product.btn_copy_product') }}</a>
                                                             @if((int) $product->status === $draftStatus)
                                                             <a href="{{ route('seller_product_edit', ['id' => $product->id]) }}" title="{{ trans('common.event.edit') }}" class="allelua-btn allelua-btn-active">{{ trans('common.event.edit') }}</a>
                                                             @endif

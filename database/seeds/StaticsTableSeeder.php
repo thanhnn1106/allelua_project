@@ -73,13 +73,13 @@ class StaticsTableSeeder extends Seeder
                 'translate' => array(
                     array(
                         'language_code' => 'vi',
-                        'title' => 'Quy trình giải quyết tranh chap',
-                        'slug' => 'qui-trinh-giai-quyet-tranh-chap',
+                        'title' => 'Quy trình giải quyết tranh chấp',
+                        'slug' => 'quy-trinh-giai-quyet-tranh-chap',
                     ),
                     array(
                         'language_code' => 'en',
                         'title' => 'Quy trình giải quyết tranh chap',
-                        'slug' => 'qui-trinh-giai-quyet-tranh-chap',
+                        'slug' => 'quy-trinh-giai-quyet-tranh-chap',
                     ),
                 ),
             ),
@@ -91,12 +91,12 @@ class StaticsTableSeeder extends Seeder
                     array(
                         'language_code' => 'vi',
                         'title' => 'Chính sách bảo hành',
-                        'slug' => 'chinh-sach-bao-hang',
+                        'slug' => 'chinh-sach-bao-hanh',
                     ),
                     array(
                         'language_code' => 'en',
                         'title' => 'Chính sách bảo hành',
-                        'slug' => 'chinh-sach-bao-hang',
+                        'slug' => 'chinh-sach-bao-hanh',
                     ),
                 ),
             ),
@@ -108,12 +108,12 @@ class StaticsTableSeeder extends Seeder
                     array(
                         'language_code' => 'vi',
                         'title' => 'Quy định và hình thức thanh toán',
-                        'slug' => 'qui-dinh-va-hinh-thuc-thanh-toan',
+                        'slug' => 'quy-dinh-va-hinh-thuc-thanh-toan',
                     ),
                     array(
                         'language_code' => 'en',
                         'title' => 'Quy định và hình thức thanh toán',
-                        'slug' => 'qui-dinh-va-hinh-thuc-thanh-toan',
+                        'slug' => 'quy-dinh-va-hinh-thuc-thanh-toan',
                     ),
                 ),
             ),
@@ -159,12 +159,12 @@ class StaticsTableSeeder extends Seeder
                     array(
                         'language_code' => 'vi',
                         'title' => 'Quy chế hoạt động',
-                        'slug' => 'qui-che-hoat-dong',
+                        'slug' => 'quy-che-hoat-dong',
                     ),
                     array(
                         'language_code' => 'en',
                         'title' => 'Quy chế hoạt động',
-                        'slug' => 'qui-che-hoat-dong',
+                        'slug' => 'quy-che-hoat-dong',
                     ),
                 ),
             ),

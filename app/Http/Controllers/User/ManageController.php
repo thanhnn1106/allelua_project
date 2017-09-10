@@ -98,11 +98,11 @@ class ManageController extends BaseController
             $saveResult = $userInfo->save();
             if ($saveResult) {
                 return redirect()->route('user_account_management')
-                            ->with('success', trans('update_success'))
+                            ->with('success', trans('common.msg_update_success'))
                             ->withInput();
             }
             return redirect()->route('user_account_management')
-                            ->with('error', trans('update_failed'))
+                            ->with('error', trans('common.msg_update_failed'))
                             ->withInput();
         }
 

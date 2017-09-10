@@ -84,7 +84,7 @@ class ProductController extends AdminBaseController
     public function save(Request $request)
     {
         if (!$request->isMethod('post')) {
-            return response()->json(array('error' => 1, 'result' => trans('common.error_exception_ajax')));
+            return response()->json(array('error' => 1, 'result' => trans('common.msg_error_exception_ajax')));
         }
         $productId = $request->get('product_id', NULL);
 
@@ -92,7 +92,7 @@ class ProductController extends AdminBaseController
         if(!empty($productId)) {
             $product = Product::find($productId);
             if($product === NULL) {
-                return response()->json(array('error' => 1, 'result' => trans('common.data_not_found')));
+                return response()->json(array('error' => 1, 'result' => trans('common.msg_data_not_found')));
             }
         }
 
@@ -100,7 +100,7 @@ class ProductController extends AdminBaseController
         $rules = $this->setRules($request);
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
-            return response()->json(array('error' => 1, 'result' => trans('common.please_check_form_below'), 'messages' => $validator->errors()), 422);
+            return response()->json(array('error' => 1, 'result' => trans('common.msg_please_check_form_below'), 'messages' => $validator->errors()), 422);
         }
 
         // Upload image thumb and details
@@ -127,7 +127,7 @@ class ProductController extends AdminBaseController
 
             DB::commit();
 
-            $request->session()->flash('success', trans('common.save_success'));
+            $request->session()->flash('success', trans('common.msg_save_success'));
             return response()->json(array('error' => 0, 'result' => route('admin_product_index')));
 
         } catch (\Exception $e) {
@@ -136,7 +136,7 @@ class ProductController extends AdminBaseController
             $this->deleteImageThumb($imageThumb);
             $this->deleteImageDetail($imageDetail);
 
-            return response()->json(array('error' => 1, 'result' => trans('common.error_transaction')));
+            return response()->json(array('error' => 1, 'result' => trans('common.msg_error_transaction')));
         }
     }
 
@@ -151,12 +151,12 @@ class ProductController extends AdminBaseController
     public function delete(Request $request, $id) {
         $product = Product::find($id);
         if ($product == null) {
-            $request->session()->flash('error', trans('common.data_not_found'));
+            $request->session()->flash('error', trans('common.msg_data_not_found'));
             return redirect(route('admin_product_index'));
         }
 
         $product->delete();
-        $request->session()->flash('success', trans('common.delete_success'));
+        $request->session()->flash('success', trans('common.msg_delete_success'));
         
         return redirect(route('admin_product_index'));
     }
@@ -164,7 +164,7 @@ class ProductController extends AdminBaseController
     public function change(Request $request, $id) {
         $product = Product::find($id);
         if ($product == null) {
-            $request->session()->flash('error', trans('common.data_not_found'));
+            $request->session()->flash('error', trans('common.msg_data_not_found'));
             return redirect(route('admin_product_index'));
         }
 
@@ -174,7 +174,7 @@ class ProductController extends AdminBaseController
             $product->status = 0;
         }
         $product->save();
-        $request->session()->flash('success', trans('common.save_success'));
+        $request->session()->flash('success', trans('common.msg_save_success'));
         
         return redirect(route('admin_product_index'));
     }
@@ -190,7 +190,7 @@ class ProductController extends AdminBaseController
     public function restore(Request $request, $id) {
         $product = Product::onlyTrashed()->where('id', $id)->first();
         if ($product == null) {
-            $request->session()->flash('error', trans('common.data_not_found'));
+            $request->session()->flash('error', trans('common.msg_data_not_found'));
             return redirect(route('admin_product_deleted_index'));
         }
 
@@ -212,7 +212,7 @@ class ProductController extends AdminBaseController
     public function deleteForce(Request $request, $id) {
         $product = Product::onlyTrashed()->where('id', $id)->first();
         if ($product == null) {
-            $request->session()->flash('error', trans('common.data_not_found'));
+            $request->session()->flash('error', trans('common.msg_data_not_found'));
             return redirect(route('admin_product_deleted_index'));
         }
 

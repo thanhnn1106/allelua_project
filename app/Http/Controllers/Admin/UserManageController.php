@@ -98,7 +98,7 @@ class UserManageController extends AdminBaseController
             $user->status         = $request->get('status');
             $user->save();
 
-            $request->session()->flash('success', trans('create_success'));
+            $request->session()->flash('success', trans('common.msg_create_success'));
             return redirect()->route('admin_user');
         }
 
@@ -173,7 +173,7 @@ class UserManageController extends AdminBaseController
                 $fullName = $request->get('company_name');
                 Mail::to($toEmail)->send(new SellerActiveNotiEmail($fullName));
             }
-            $request->session()->flash('success', trans('update_success'));
+            $request->session()->flash('success', trans('common.msg_update_success'));
             return redirect()->route('admin_user');
         }
 

@@ -39,7 +39,7 @@ class ProductController extends AjaxBaseController
 
             return response()->json(array('error' => 0, 'result' => $html));
         } catch (Exception $e) {
-            return response()->json(array('error' => 1, 'result' => trans('common.error_exception_ajax')));
+            return response()->json(array('error' => 1, 'result' => trans('common.msg_error_exception_ajax')));
         }
     }
 
@@ -76,7 +76,7 @@ class ProductController extends AjaxBaseController
 
             return response()->json(array('error' => 0, 'result' => $html));
         } catch (Exception $e) {
-            return response()->json(array('error' => 1, 'result' => trans('common.error_exception_ajax')));
+            return response()->json(array('error' => 1, 'result' => trans('common.msg_error_exception_ajax')));
         }
     }
 
@@ -84,7 +84,7 @@ class ProductController extends AjaxBaseController
     {
         try {
             if ($this->user === NULL) {
-                return response()->json(array('error' => 1, 'result' => trans('freelancer.data_not_found')));
+                return response()->json(array('error' => 1, 'result' => trans('freelancer.msg_data_not_found')));
             }
 
             $userId = $this->user->id;
@@ -152,7 +152,7 @@ class ProductController extends AjaxBaseController
 
             return response()->json($arrReturn);
         } catch (Exception $e) {
-            return response()->json(array('error' => trans('freelancer.error_exception_ajax')));
+            return response()->json(array('error' => trans('common.msg_error_exception_ajax')));
         }
     }
 
@@ -174,7 +174,7 @@ class ProductController extends AjaxBaseController
 
             return response()->json(array());
         } catch (Exception $e) {
-            return response()->json(array('error' => trans('freelancer.error_exception_ajax')));
+            return response()->json(array('error' => trans('common.msg_error_exception_ajax')));
         }
     }
 }

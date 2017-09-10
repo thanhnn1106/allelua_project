@@ -39,10 +39,10 @@
                                             <td>{{ $item->customer_full_name }}</td>
                                             <td>{{ $item->customer_email }}</td>
                                             <td>{{ $item->product_name }}</td>
-                                            <td>{{ $item->price }}</td>
+                                            <td>{{ formatPrice($item->price) }}</td>
                                             <td>{{ $item->quantity }}</td>
-                                            <td>{{ $item->price*$item->quantity }}</td>
-                                            <td>{{ $item->status }}</td>
+                                            <td>{{ formatPrice($item->price * $item->quantity) }}</td>
+                                            <td>{{ config('allelua.order_status_name.' . $item->status) }}</td>
                                             <td>{{ $item->created_at }}</td>
                                         </tr>
                                         @endforeach

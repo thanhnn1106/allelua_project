@@ -54,7 +54,7 @@ class ProductController extends BaseController
             return redirect(route('seller_product_index'));
         }
         if((int)$row->status !== config('product.product_seller_status.value.draft')) {
-            $request->session()->flash('error', trans('front.product.not_permit_delete'));
+            $request->session()->flash('error', trans('common.seller.msg_not_permit_delete'));
             return redirect(route('seller_product_index'));
         }
 
@@ -124,12 +124,12 @@ class ProductController extends BaseController
 
             DB::commit();
 
-            $request->session()->flash('success', trans('common.save_success'));
+            $request->session()->flash('success', trans('common.seller.msg_post_product_success'));
             return redirect(route('seller_product_index'));
 
         } catch (\Exception $e) {
             DB::rollback();
-            $request->session()->flash('error', trans('common.error_transaction'));
+            $request->session()->flash('error', trans('common.msg_error_transaction'));
             return redirect(route('seller_product_index'));
         }
     }
@@ -137,7 +137,7 @@ class ProductController extends BaseController
     public function save(Request $request)
     {
         if (!$request->isMethod('post')) {
-            return response()->json(array('error' => 1, 'result' => trans('common.error_exception_ajax')));
+            return response()->json(array('error' => 1, 'result' => trans('common.msg_error_transaction')));
         }
         $productId = $request->get('product_id', NULL);
 
@@ -145,21 +145,21 @@ class ProductController extends BaseController
         if(!empty($productId)) {
             $product = Product::find($productId);
             if($product === NULL) {
-                return response()->json(array('error' => 1, 'result' => trans('common.data_not_found')));
+                return response()->json(array('error' => 1, 'result' => trans('common.msg_data_not_found')));
             }
         }
 
         // Check only post product when admin approve
         $personal = \App\Personal::where('user_id', Auth::user()->id)->where('status', 1)->first();
         if($personal === NULL) {
-            return response()->json(array('error' => 1, 'result' => trans('common.you_have_to_add_personal_info_before_post_product')));
+            return response()->json(array('error' => 1, 'result' => trans('common.msg_you_have_to_add_personal_info_before_post_product')));
         }
 
         // Set rules
         $rules = $this->setRules($request);
         $validator = Validator::make($request->all(), $rules);
         if ($validator->fails()) {
-            return response()->json(array('error' => 1, 'result' => trans('common.please_check_form_below'), 'messages' => $validator->errors()), 422);
+            return response()->json(array('error' => 1, 'result' => trans('common.msg_please_check_form_below'), 'messages' => $validator->errors()), 422);
         }
 
         // Upload image thumb and details
@@ -186,7 +186,7 @@ class ProductController extends BaseController
 
             DB::commit();
 
-            $request->session()->flash('success', trans('common.save_success'));
+            $request->session()->flash('success', trans('common.seller.msg_post_product_success'));
             return response()->json(array('error' => 0, 'result' => route('seller_product_index')));
 
         } catch (\Exception $e) {
@@ -195,7 +195,7 @@ class ProductController extends BaseController
             $this->deleteImageThumb($imageThumb);
             $this->deleteImageDetail($imageDetail);
 
-            return response()->json(array('error' => 1, 'result' => trans('common.error_transaction')));
+            return response()->json(array('error' => 1, 'result' => trans('common.msg_error_transaction')));
         }
     }
 
@@ -210,7 +210,8 @@ class ProductController extends BaseController
     public function delete(Request $request, $id) {
         $product = Product::where('id', $id)->where('user_id', Auth::user()->id)->first();
         if ($product == null) {
-            $request->session()->flash('error', trans('common.data_not_found'));
+            $request->session()->flash('error', trans('common.msg_data_not_found'));
+
             return redirect(route('seller_product_index'));
         }
         /*
@@ -220,8 +221,8 @@ class ProductController extends BaseController
         }*/
 
         $product->delete();
-        $request->session()->flash('success', trans('common.delete_success'));
-        
+        $request->session()->flash('success', trans('common.msg_delete_success'));
+
         return redirect(route('seller_product_index'));
     }
 

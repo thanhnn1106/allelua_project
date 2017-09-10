@@ -135,6 +135,7 @@ Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], fu
 
     Route::post('favorite', 'Seller\FavoriteController@index')->name('seller_product_favorite');
     Route::get('favorite/lists', 'Seller\FavoriteController@lists')->name('seller_product_favorite_lists');
+    Route::get('update-order-status/{orderId}', 'Seller\ManageController@updateOrderStatus')->name('seller_update_order_status');
 });
 Route::group(['prefix' => 'customer', 'middleware' => ['auth', 'auth.user']], function () {
     Route::get('dashboard', 'User\DashBoardController@index')->name('user_dashboard');

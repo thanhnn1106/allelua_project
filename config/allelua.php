@@ -50,4 +50,12 @@ return [
         'pending'  => 0,
         'approved' => 1,
     ),
+    'order_status_name' => array(
+        '0' => 'Chưa xử lý',
+        '1' => 'Đã xử lý',
+    ),
+    'order_status_value' => array(
+        'waiting_process' => 0,
+        'processed'       => 1,
+    ),
 ];

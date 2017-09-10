@@ -38,6 +38,7 @@ $draftStatus = config('product.product_seller_status.value.draft');
                                                     <th>{{ trans('front.seller_order_list.lb_order_id') }}</th>
                                                     <th>{{ trans('front.seller_order_list.lb_customer_name') }}</th>
                                                     <th>{{ trans('front.seller_order_list.lb_customer_email') }}</th>
+                                                    <th>{{ trans('front.seller_order_list.lb_customer_phone') }}</th>
                                                     <th>{{ trans('front.seller_order_list.lb_product_name') }}</th>
                                                     <th>{{ trans('front.seller_order_list.lb_price') }}</th>
                                                     <th>{{ trans('front.seller_order_list.lb_quantity') }}</th>
@@ -52,11 +53,22 @@ $draftStatus = config('product.product_seller_status.value.draft');
                                                 <td>{{ $item->order_id }}</td>
                                                 <td>{{ $item->full_name }}</td>
                                                 <td>{{ $item->email }}</td>
+                                                <td>{{ $item->phone_number }}</td>
                                                 <td>{{ $item->product_name }}</td>
-                                                <td>{{ $item->price }}</td>
+                                                <td>{{ formatPrice($item->price) }}</td>
                                                 <td>{{ $item->quantity }}</td>
-                                                <td>{{ $item->price*$item->quantity }}</td>
-                                                <td>{{ $item->status }}</td>
+                                                <td>{{ formatPrice($item->price * $item->quantity) }}</td>
+                                                <td>
+                                                    @if ($item->status == 0)
+                                                    <a href="{{ route('seller_update_order_status', ['orderId' => $item->order_id]) }}" class="btn btn-success">
+                                                        {{ config('allelua.order_status_name.' . $item->status) }}
+                                                    </a>
+                                                    @else
+                                                    <span class="btn btn-default">
+                                                        {{ config('allelua.order_status_name.' . $item->status) }}
+                                                    </span>
+                                                    @endif
+                                                </td>
                                                 <td>{{ $item->created_at }}</td>
                                             </tr>
                                             @endforeach
