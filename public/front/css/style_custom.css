@@ -408,7 +408,7 @@ img.img-feature {
 }
 .bar-fillter {
     background: #FFF;
-    padding: 30px 15px;
+    padding: 0 15px;
 }
 .fillter-toogle {
     display: block;
@@ -1105,7 +1105,7 @@ img.img-feature {
 
 .breadcrumbs {
     margin: 0;
-    padding: 15px 0;
+    padding: 0 0 15px 0;
 }
 .breadcrumbs li {
     display: inline;
@@ -1240,13 +1240,13 @@ img.img-feature {
 .btn-style {
     background-color: #f8320d;
     border: 1px solid #f8320d;
-    padding: 0 30px;
+    padding: 0 20px;
     min-width: 100px;
     color: #FFF;
     border-radius: 0;
-    font-size: 14px;
-    min-height: 38px;
-    line-height: 38px;
+    font-size: 12px;
+    min-height: 32px;
+    line-height: 32px;
     transition: All .3s ease;
     -webkit-transition: All .3s ease;
     -moz-transition: All .3s ease;
@@ -1891,8 +1891,6 @@ textarea.input-payment {
 .item-action-cart {
     color: #23517f;
     display: inline-block;
-    padding: 5px 10px;
-    border: 1px solid #dedede;
 }
 .item-action-cart + .item-action-cart {
     margin-left: 10px
