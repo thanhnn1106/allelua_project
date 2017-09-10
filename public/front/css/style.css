@@ -432,7 +432,7 @@ img.img-feature {
 }
 .bar-fillter {
     background: #FFF;
-    padding: 30px 15px;
+    padding: 0 15px;
 }
 .fillter-toogle {
     display: block;
@@ -1268,13 +1268,13 @@ img.img-feature {
 .btn-style {
     background-color: #f8320d;
     border: 1px solid #f8320d;
-    padding: 0 30px;
+    padding: 0 20px;
     min-width: 100px;
     color: #FFF;
     border-radius: 0;
-    font-size: 14px;
-    min-height: 38px;
-    line-height: 38px;
+    font-size: 12px;
+    min-height: 32px;
+    line-height: 32px;
     transition: All .3s ease;
     -webkit-transition: All .3s ease;
     -moz-transition: All .3s ease;
@@ -2102,6 +2102,21 @@ input.has-error {
 .categories-home.full .navbar-pills li:hover>.dropdown-menu
 {
     display: none !important;
+}
+.pagination li {
+    display: inline-block;
+    vertical-align: middle;
+}
+.pagination li>* {
+    display: block;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    border: 1px solid #f1f1f1;
+    text-align: center;
+    line-height: 30px;
+    color: #333;
+    font-size: 10px;
 }
 @media (min-width: 544px){
     .container {
