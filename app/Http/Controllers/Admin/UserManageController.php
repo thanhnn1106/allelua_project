@@ -68,6 +68,14 @@ class UserManageController extends AdminBaseController
 
             // run the validation rules on the inputs from the form
             $validator = Validator::make($request->all(), $rules);
+            if($request->get('roles') == config('allelua.roles.user')) {
+                $validator->after(function ($validator) use ($request) {
+                    if ( ! checkdate($request->get('dob_month'), $request->get('dob_day'), $request->get('dob_year'))) {
+                        $validator->errors()->add('dob_month', 'The birthday field is not valid');
+                    }
+                });
+            }
+
             if ($validator->fails()) {
                 return redirect()->route('admin_user_add')
                             ->withErrors($validator)
@@ -131,6 +139,13 @@ class UserManageController extends AdminBaseController
 
             // run the validation rules on the inputs from the form
             $validator = Validator::make($request->all(), $rules);
+            if($request->get('roles') == config('allelua.roles.user')) {
+                $validator->after(function ($validator) use ($request) {
+                    if ( ! checkdate($request->get('dob_month'), $request->get('dob_day'), $request->get('dob_year'))) {
+                        $validator->errors()->add('dob_month', 'The birthday field is not valid');
+                    }
+                });
+            }
             if ($validator->fails()) {
                 return redirect()->route('admin_user_edit', array('id' => $user->id))
                             ->withErrors($validator)

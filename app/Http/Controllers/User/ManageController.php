@@ -79,6 +79,13 @@ class ManageController extends BaseController
             );
             // run the validation rules on the inputs from the form
             $validator = Validator::make($params, $rules);
+
+            $validator->after(function ($validator) use ($request) {
+                if ( ! checkdate($request->get('dob_month'), $request->get('dob_day'), $request->get('dob_year'))) {
+                    $validator->errors()->add('dob_month', 'The birthday field is not valid');
+                }
+            });
+
             if ($validator->fails()) {
                 return redirect()->route('user_account_management')
                             ->withErrors($validator)

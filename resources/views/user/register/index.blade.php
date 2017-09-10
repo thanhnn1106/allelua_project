@@ -82,7 +82,7 @@
                                         <div class="form-group input-group-sm @if ($errors->has('dob_day')) has-error @endif">
                                             <div class="col-xs-4">
                                                 <label class="control-label">{{ trans('front.register_page.dob.day') }}</label>
-                                                <select name="dob_day" id="dob_day" class="form-control">
+                                                <select name="dob_day" id="birthday_day" class="form-control">
                                                 @foreach ($dob['day'] as $day)
                                                 <option value="{{ $day }}"  @if (old('dob_day', isset($user->dob) ? getBirthDay($user->dob) : '') == $day) selected="selected" @endif>{{ $day }}</option>
                                                 @endforeach
@@ -93,7 +93,7 @@
                                             </div>
                                             <div class="col-xs-4">
                                                 <label class="control-label">{{ trans('front.register_page.dob.month') }}</label>
-                                                <select name="dob_month" id="dob_month" class="form-control">
+                                                <select name="dob_month" id="birthday_month" class="form-control">
                                                 @foreach ($dob['month'] as $month)
                                                 <option value="{{ $month }}"  @if (old('dob_month', isset($user->dob) ? getBirthDay($user->dob, 'm') : '') == $month) selected="selected" @endif>{{ $month }}</option>
                                                 @endforeach
@@ -104,7 +104,7 @@
                                             </div>
                                             <div class="col-xs-4">
                                                 <label class="control-label">{{ trans('front.register_page.dob.year') }}</label>
-                                                <select name="dob_year" id="dob_year" class="form-control">
+                                                <select name="dob_year" id="birthday_year" class="form-control">
                                                 @foreach ($dob['year'] as $year)
                                                 <option value="{{ $year }}"  @if (old('dob_year', isset($user->dob) ? getBirthDay($user->dob) : '') == $year) selected="selected" @endif>{{ $year }}</option>
                                                 @endforeach
@@ -133,3 +133,10 @@
 </div>
 </form>
 @endsection
+
+@section('footer_script')
+
+<script src="{{ asset_front('js/common.js') }}"></script>
+
+@endsection
+
