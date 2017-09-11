@@ -80,7 +80,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" >
                     <div class="action-detail clearfix" >
                         <div class="form-product">
-                            <form id="form-add-cart" action="{{ route('cart_add') }}" method="POST" class="form-inline" >
+                            <form id="form-add-cart" action="{{ route('cart_add') }}" method="POST" class="form-inline clearfix" >
 
                                 <div class="product-form-group">
                                     <div class="row form-quantity">

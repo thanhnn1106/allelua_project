@@ -22,7 +22,7 @@
                     @endif
                 </div>
                 <div class="action-item-cart clearfix">
-                    <a href="{{ route('cart_remove', ['id' => $cart->id]) }}" class="item-action-cart">
+                    <a href="{{ route('cart_remove', ['id' => $cart->id]) }}" class="item-action-cart item-action-del">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </a>
                     <!--
