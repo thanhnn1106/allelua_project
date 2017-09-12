@@ -106,6 +106,7 @@ class BaseController extends Controller
                 $required = 'required|';
             }
             $rules['title_'.$lang->iso2] = $required.'max:255';
+            $rules['tag_image_'.$lang->iso2] = $required;
             $rules['color_'.$lang->iso2]  = 'max:255';
             $rules['brand_'.$lang->iso2]  = $required.'max:255';
             $rules['info_tech_'.$lang->iso2]  = 'max:255';

@@ -86,6 +86,33 @@ class Controller extends BaseController
         return false;
     }
 
+    protected function setTagImage($request, $product)
+    {
+        if ($product === NULL) {
+            return;
+        }
+
+        $randName = $product->image_rand;
+
+        $extension = \File::extension($randName);
+        $imagick = new \Imagick(public_path() . $randName);
+        $langs = \App\Languages::getResults();
+        $langDefault = \App::getLocale();
+
+        $tagImageDefault = $request->get('tag_image_'.$langDefault);
+        $imagick->setImageProperty('Exif:tag_image_'.$langDefault, $tagImageDefault);
+
+        foreach ($langs as $lang) {
+            if($lang->iso2 !== $langDefault) {
+                $temp = $request->get('tag_image_' . $lang->iso2);
+                $tagImage = ( ! empty($temp)) ? $temp : $tagImageDefault;
+                $imagick->setImageProperty('Exif:tag_image_'.$lang->iso2, $tagImage);
+            }
+        }
+        $imagick->setFormat($extension);
+        $imagick->writeImage(public_path() . $randName);
+    }
+
     protected function returnFormatFile($urlDelete, $arrFile)
     {
         $p1 = $p2 = $realPath = $randPath = array();

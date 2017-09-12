@@ -162,6 +162,7 @@
                                     $title       = 'title_'.$lang->iso2;
                                     $slug        = 'slug_'.$lang->iso2;
                                     $color       = 'color_'.$lang->iso2;
+                                    $tagImage       = 'tag_image_'.$lang->iso2;
                                     $brand       = 'brand_'.$lang->iso2;
                                     $infoTech    = 'info_tech_'.$lang->iso2;
                                     $featureHighlight = 'feature_highlight_'.$lang->iso2;
@@ -185,6 +186,12 @@
                                             <div class="form-group">
                                                 <label class="control-label">{{ trans('admin.product.'.$slug) }}</label>
                                                 <p class="help-block-default slug-{{ $lang->iso2 }}">{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->slug : '' }}</p>
+                                            </div>
+
+                                            <div class="form-group form-{{ $tagImage }}">
+                                                <label class="control-label">{{ trans('admin.product.'.$tagImage) }}</label>
+                                                <input type="text" class="form-control border-corner" name="{{ $tagImage }}" placeholder="Input ..." value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->tag_image : '' }}" />
+                                                  <p class="help-block"></p>
                                             </div>
 
                                             <div class="form-group form-{{ $color }}">

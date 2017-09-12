@@ -238,6 +238,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                             <?php
                                                             $title = 'title_' . $lang->iso2;
                                                             $slug = 'slug_' . $lang->iso2;
+                                                            $tagImage = 'tag_image_' . $lang->iso2;
                                                             $color = 'color_' . $lang->iso2;
                                                             $brand = 'brand_' . $lang->iso2;
                                                             $infoTech = 'info_tech_' . $lang->iso2;
@@ -271,6 +272,19 @@ $listShippingMethod = config('product.shipping_method.label');
                                                                         </div>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                                             <p class="help-block-default slug-{{ $lang->iso2 }}">{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->slug : '' }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="row form-{{ $tagImage }}">
+                                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                                            <label class="lbl-form-control">
+                                                                                {{ trans('admin.product.'.$tagImage) }}
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                                            <input type="text" class="form-control form-control-md" name="{{ $tagImage }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->tag_image : '' }}" />
+                                                                            <div class="input-error"></div>
                                                                         </div>
                                                                     </div>
                                                                 </div>

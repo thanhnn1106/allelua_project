@@ -180,6 +180,9 @@ class ProductController extends BaseController
 
             $rowProduct = $this->_saveProduct($request, $imageThumb, $product);
 
+            // Write tag into image for search engine
+            $this->setTagImage($request, $rowProduct);
+
             $this->_saveProductTrans($request, $rowProduct);
 
             $this->_saveProductImages($request, $imageDetail, $rowProduct);
@@ -191,6 +194,7 @@ class ProductController extends BaseController
 
         } catch (\Exception $e) {
             DB::rollback();
+            var_dump($e->getMessage());exit;
 
             $this->deleteImageThumb($imageThumb);
             $this->deleteImageDetail($imageDetail);
@@ -271,6 +275,7 @@ class ProductController extends BaseController
             } else {
                 $title = $request->get('title_'.$lang->iso2);
                 $slug = str_slug($request->get('title_'.$lang->iso2));
+                $tagImage = $request->get('tag_image_'.$lang->iso2);
                 $color = $request->get('color_'.$lang->iso2);
                 $branch = $request->get('brand_'.$lang->iso2);
                 $infoTech = $request->get('info_tech_'.$lang->iso2);
@@ -286,6 +291,7 @@ class ProductController extends BaseController
                     'language_code'        => $lang->iso2,
                     'title'                => ( ! empty($title)) ? $title : $data_default['title'],
                     'slug'                 => ( ! empty($slug)) ? $slug : $data_default['slug'],
+                    'tag_image'            => ( ! empty($tagImage)) ? $tagImage : $data_default['tag_image'],
                     'color'                => ( ! empty($color)) ? $color : $data_default['color'],
                     'brand'                => ( ! empty($branch)) ? $branch : $data_default['brand'],
                     'info_tech'            => ( ! empty($infoTech)) ? $infoTech : $data_default['info_tech'],
@@ -312,6 +318,7 @@ class ProductController extends BaseController
             'language_code'        => $this->lang,
             'title'                => $request->get('title_'.$this->lang),
             'slug'                 => str_slug($request->get('title_'.$this->lang)),
+            'tag_image'                => $request->get('tag_image_'.$this->lang),
             'color'                => $request->get('color_'.$this->lang),
             'brand'                => $request->get('brand_'.$this->lang),
             'info_tech'            => $request->get('info_tech_'.$this->lang),

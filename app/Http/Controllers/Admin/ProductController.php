@@ -121,6 +121,9 @@ class ProductController extends AdminBaseController
 
             $rowProduct = $this->_saveProduct($request, $imageThumb, $product);
 
+            // Write tag into image for search engine
+            $this->setTagImage($request, $rowProduct);
+
             $this->_saveProductTrans($request, $rowProduct);
 
             $this->_saveProductImages($request, $imageDetail, $rowProduct);
@@ -279,6 +282,7 @@ class ProductController extends AdminBaseController
                 'language_code'        => $lang->iso2,
                 'title'                => $request->get('title_'.$lang->iso2),
                 'slug'                 => str_slug($request->get('title_'.$lang->iso2)),
+                'tag_image'            => $request->get('tag_image_'.$lang->iso2),
                 'color'                => $request->get('color_'.$lang->iso2),
                 'brand'                => $request->get('brand_'.$lang->iso2),
                 'info_tech'            => $request->get('info_tech_'.$lang->iso2),

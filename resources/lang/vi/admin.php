@@ -30,6 +30,7 @@ return [
     'product' => array(
         'title_en'             => 'Title',
         'slug_en'              => 'Slug',
+        'tag_image_en'         => 'Tag image',
         'color_en'             => 'Color',
         'brand_en'             => 'Brand',
         'material_en'          => 'Material',
@@ -42,6 +43,7 @@ return [
         'form_product_en'      => 'Form product',
         'title_vi'             => 'Tên sản phẩm',
         'slug_vi'              => 'Tên SEO',
+        'tag_image_vi'         => 'Tag image',
         'color_vi'             => 'Màu',
         'brand_vi'             => 'Thương hiệu',
         'material_vi'          => 'Chất liệu',
