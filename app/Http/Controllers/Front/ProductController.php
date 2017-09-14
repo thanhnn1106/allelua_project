@@ -35,16 +35,13 @@ class ProductController extends BaseController
                 $subCate = \App\Categories::getRowByLang($this->lang, $cateObj->id);
             }
 
-            $products = $this->loadProductCateFilter($request, $cateObj->id);
+            $params = $this->loadProductCateFilter($request, $cateObj->id);
+            $products = \App\Product::getProductFilter($params);
             if($products->count() === $products->total()) {
                 $isFinalProduct = true;
             }
             $loadStyles = $this->getStyle($cateObj->type);
             $loadStyles = $this->getPrice($loadStyles, $cateObj->type);
-            $params = array(
-                'language_code' => $this->lang,
-                'category_id' => $cateObj->id,
-            );
             $attrs = $this->loadFilterAttr($loadStyles, $params);
         }
 
@@ -78,17 +75,13 @@ class ProductController extends BaseController
             $arrCateId = (array) $cateObj->id;
             $productBestPrice = $this->loadProductBestPrice($arrCateId);
 
-            $products = $this->loadProductSubCateFilter($request, $cateObj->id);
+            $params = $this->loadProductSubCateFilter($request, $cateObj->id);
+            $products = \App\Product::getProductFilter($params);
             if($products->count() === $products->total()) {
                 $isFinalProduct = true;
             }
             $loadStyles = $this->getStyle($cateObj->cate_type, $cateObj->type);
             $loadStyles = $this->getPrice($loadStyles, $cateObj->cate_type, $cateObj->type);
-
-            $params = array(
-                'language_code' => $this->lang,
-                'sub_category_id' => $cateObj->id,
-            );
             $attrs = $this->loadFilterAttr($loadStyles, $params);
         }
 

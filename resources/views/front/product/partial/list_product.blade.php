@@ -21,4 +21,6 @@
     </div><!-- end item-product -->
     @endforeach
 </div>
+@else
+<p>Data not found</p>
 @endif

@@ -107,14 +107,14 @@
                     </div>
                     <div class="form-search" >
                         <div class="inner-form-search clearfix" >
-                            <form class="fsearch clearfix" action="{{ route('search_page') }}" method="GET">
+                            <form id="front-search" class="fsearch clearfix" action="{{ route('search_page') }}" method="GET">
                                 <div class="inner-fsearch" >
                                     <input type="text" name="q" class="input-search" value="{{ app('request')->input('q') }}" >
                                     <button class="btn-search" >
                                         <i class="fa fa-search" aria-hidden="true"></i>
                                     </button>
                                 </div>
-                                <a href="javascript:void(0);" class="btn-capture" >
+                                <a href="javascript:void(0);" onclick="fncSearchImage();" class="btn-capture">
                                     <i class="fa fa-camera" aria-hidden="true"></i>
                                 </a>
                             </form>

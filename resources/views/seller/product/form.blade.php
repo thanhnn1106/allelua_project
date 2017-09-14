@@ -283,7 +283,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                            <input type="text" class="form-control form-control-md" name="{{ $tagImage }}" value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->tag_image : '' }}" />
+                                                                            <input type="text" class="form-control form-control-md" name="{{ $tagImage }}" data-role="tagsinput"  value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->tag_image : '' }}" />
                                                                             <div class="input-error"></div>
                                                                         </div>
                                                                     </div>
@@ -489,6 +489,7 @@ $initPreviewConfig = isset($productImages['initialPreviewConfig']) ? json_encode
 <!-- bootstrap multiple upload -->
 <link rel="stylesheet" href="{{ asset('plugins/bootstrap-fileinput/css/fileinput.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/bootstrap-fileinput/themes/explorer/theme.css') }}">
+<link href="{{ asset('plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" rel="stylesheet"/>
 <script src="{{ asset('plugins/bootstrap-fileinput/js/plugins/piexif.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap-fileinput/js/plugins/sortable.min.js') }}"></script>
 <script src="{{ asset('/plugins/bootstrap-fileinput/js/plugins/purify.min.js') }}"></script>
@@ -496,6 +497,7 @@ $initPreviewConfig = isset($productImages['initialPreviewConfig']) ? json_encode
 <!--<script src="{{ asset_admin('/plugins/bootstrap-fileinput/themes/fa/theme.js') }}"></script>-->
 <script src="{{ asset('/plugins/bootstrap-fileinput/js/locales/LANG.js') }}"></script>
 <script src="{{ asset('/plugins/bootstrap-fileinput/themes/explorer/theme.js') }}"></script>
+<script src="{{ asset('plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
 <script src="{{ asset_admin('js/common.js') }}"></script>
 <script src="{{ asset_front('js/product.js') }}"></script>
 @endsection

@@ -9,10 +9,13 @@
             </li>
         </ul>
     </div>
+    @if ($errors->has('search_image'))
+    <p class="help-block">{{ $errors->first('search_image') }}</p>
+    @endif
 
     <div class="inner-page-main" data-align-height="wrap">
         <div class="row" >
-            @if($products->total())
+            @if($products !== null && $products->total())
                 <div class="clearfix save-marle col-ex-10 col-lg-9 col-md-9 col-sm-12 col-xs-12 col-ex-push-2 col-lg-push-3 col-md-push-3 col-sm-push-0" data-align-height="right"  data-bottom="20" >
                     <div class="page-right clearfix" >
                         <div class="row" >

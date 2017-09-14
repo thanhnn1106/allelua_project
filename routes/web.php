@@ -12,7 +12,7 @@
 */
 
 // Static page
-Route::get('search', 'Front\SearchController@index')->name('search_page');
+Route::match(['get', 'post'], 'search', 'Front\SearchController@index')->name('search_page');
 Route::get('page/{slug}', 'Front\StaticPageController@index')->name('static_page');
 Route::get('/', 'Front\HomeController@index')->name('home');
 

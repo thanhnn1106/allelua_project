@@ -333,8 +333,12 @@ class Product extends Model
         if( ! empty($params['search_material'])) {
             $query->where('t1.material', $params['search_material']);
         }
+
         if( ! empty($params['keyword'])) {
             $query->where('t2.title', 'LIKE', "%{$params['keyword']}%");
+        }
+        if( ! empty($params['tag_image'])) {
+            $query->where('t2.tag_image', 'REGEXP', $params['tag_image']);
         }
     }
 
