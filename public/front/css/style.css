@@ -1305,8 +1305,8 @@ img.img-feature {
     color: #f8320d;
     border: 1px solid #f8320d;
 }
-.product-form-group+.product-form-group {
-    margin-top: 15px;
+.product-form-group{
+    margin-bottom: 15px;
 }
 .tag_article, .social-media {
     float: left;

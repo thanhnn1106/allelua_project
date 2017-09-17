@@ -332,6 +332,25 @@ $( window ).scroll( function(){
         if( nt <= (parseInt($(window).scrollTop()) + parseInt($(window).height())) ){
             $('[data-place="detectLoadMore"]').addClass('active');
             console.log('load more');
+            alert('load more ? tìm data-place="detectLoadMore" tren dom nha');
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: '/feed/more',
+                data: null,
+                success: function (data) {
+                    if (data.constructor === String) {
+                        data = JSON.parse(data);
+                    }
+                    //xong nho dung lenh nay nha
+                    //$('[data-place="detectLoadMore"]').removeClass('active');
+                },
+                error : function(){
+                    alert('oOo loi roi');
+                    //xong nho dung lenh nay nha
+                    //$('[data-place="detectLoadMore"]').removeClass('active');
+                }
+            });
         }
     }
 });

@@ -1263,9 +1263,6 @@ img.img-feature {
     background: transparent;
     color: #23517f;
 }
-.product-form-group+.product-form-group {
-    margin-top: 15px;
-}
 .tag_article, .social-media {
     float: left;
     font-size: 14px;
