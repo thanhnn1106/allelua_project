@@ -1,6 +1,9 @@
 console.log('v1.0');
 scrollbarHome = $('[data-place="scrollbarHome"]');
 updateScrollBarHome = function(){
+    h = $('.megamenu').height();
+    h = Math.max(h, 50);
+    $('#cssScrollBarMega').html('<style>.inner-megamenu{min-height:'+h+'px}</style>');
     /*h = $('[data-place="groupBannerHome"]').height();
     h = h - $('.categories-home .aside-heading').eq(0).height()-50;
     h = Math.max(h, 50);
@@ -313,6 +316,7 @@ $( document ).ready(function() {
 
     updateScrollBarHome();
     $('[data-place="scrollbarMenuMobile"]').scrollbar();
+    $('.inner-megamenu').scrollbar();
     alignHeight();
 });
 $( window ).resize( function(){

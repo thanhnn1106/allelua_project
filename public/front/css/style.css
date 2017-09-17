@@ -2049,8 +2049,6 @@ input.has-error {
     border-width: 1px;
     border-style: solid;
     box-shadow: -2px 0 8px 0 rgba(0,0,0,.06);
-}
-.inner-megamenu {
     padding: 35px 15px 15px 20px;
 }
 .nav-mmega{
