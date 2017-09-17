@@ -45,9 +45,6 @@ h1, h2, h3, h4, h5, h6{font-family: 'Roboto', sans-serif;font-size: 13px;color:#
     padding: 15px 0;
     background: #FFF;
 }
-.page-home .middle-header {
-    padding: 120px 0;
-}
 .logo-top {
     margin-bottom: 30px;
 }
@@ -371,8 +368,6 @@ img.img-feature {
     text-transform: uppercase;
 }
 .content-center {
-    max-width: 1600px;
-    margin: 0 auto;
 }
 .btn-togle-mm {
     display: none;
