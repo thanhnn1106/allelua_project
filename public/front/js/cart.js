@@ -96,6 +96,7 @@ function fncFavorite(event, obj)
                 // Change button status
                 $('.alert-success').find('p').html(data.result);
                 $('.alert-success').show();
+                $(obj).addClass('active');
             }
         },
         error: function (xhr, textStatus) {

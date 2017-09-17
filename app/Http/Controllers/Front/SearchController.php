@@ -25,7 +25,7 @@ class SearchController extends BaseController
 
             // Set rules
             $rules = array(
-                'search_image' => 'max:2048|mimes:'.config('product.file_accept_types'),
+                'search_image' => 'required|max:2048|mimes:'.config('product.file_accept_types'),
             );
             $validator = \Validator::make($request->all(), $rules);
             if ($validator->fails()) {
