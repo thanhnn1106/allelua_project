@@ -1,6 +1,9 @@
 console.log('v1.0');
 scrollbarHome = $('[data-place="scrollbarHome"]');
 updateScrollBarHome = function(){
+    h = $('.megamenu').height();
+    h = Math.max(h, 50);
+    $('#cssScrollBarMega').html('<style>.inner-megamenu{min-height:'+h+'px}</style>');
     /*h = $('[data-place="groupBannerHome"]').height();
     h = h - $('.categories-home .aside-heading').eq(0).height()-50;
     h = Math.max(h, 50);
@@ -313,6 +316,7 @@ $( document ).ready(function() {
 
     updateScrollBarHome();
     $('[data-place="scrollbarMenuMobile"]').scrollbar();
+    $('.inner-megamenu').scrollbar();
     alignHeight();
 });
 $( window ).resize( function(){
@@ -328,6 +332,25 @@ $( window ).scroll( function(){
         if( nt <= (parseInt($(window).scrollTop()) + parseInt($(window).height())) ){
             $('[data-place="detectLoadMore"]').addClass('active');
             console.log('load more');
+            alert('load more ? tìm data-place="detectLoadMore" tren dom nha');
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: '/feed/more',
+                data: null,
+                success: function (data) {
+                    if (data.constructor === String) {
+                        data = JSON.parse(data);
+                    }
+                    //xong nho dung lenh nay nha
+                    //$('[data-place="detectLoadMore"]').removeClass('active');
+                },
+                error : function(){
+                    alert('oOo loi roi');
+                    //xong nho dung lenh nay nha
+                    //$('[data-place="detectLoadMore"]').removeClass('active');
+                }
+            });
         }
     }
 });

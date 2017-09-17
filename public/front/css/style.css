@@ -395,8 +395,6 @@ img.img-feature {
     vertical-align: middle;
 }
 .content-center {
-    max-width: 1600px;
-    margin: 0 auto;
 }
 .btn-togle-mm {
     display: none;
@@ -1307,8 +1305,8 @@ img.img-feature {
     color: #f8320d;
     border: 1px solid #f8320d;
 }
-.product-form-group+.product-form-group {
-    margin-top: 15px;
+.product-form-group{
+    margin-bottom: 15px;
 }
 .tag_article, .social-media {
     float: left;
@@ -2051,8 +2049,6 @@ input.has-error {
     border-width: 1px;
     border-style: solid;
     box-shadow: -2px 0 8px 0 rgba(0,0,0,.06);
-}
-.inner-megamenu {
     padding: 35px 15px 15px 20px;
 }
 .nav-mmega{
