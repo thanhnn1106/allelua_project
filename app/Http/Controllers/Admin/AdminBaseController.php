@@ -85,7 +85,7 @@ class AdminBaseController extends Controller
 
     protected function setUploadRules($request, $rules)
     {
-        $fileTypes = config('product.file_accept_types');
+        $fileTypes = config('product.file_accept_search_types');
         $maxImageDetail = config('product.max_image_detail');
         $minImageDetail = config('product.min_image_detail');
 

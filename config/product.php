@@ -2,6 +2,7 @@
 return [
     'min_image_detail' => 3,
     'max_image_detail' => 5,
+    'file_accept_search_types' => 'png',
     'file_accept_types' => 'jpeg,jpg,gif,png',
     'cate_not_child' => array(
         'may_cong_nghiep', 'vat_lieu_moi'

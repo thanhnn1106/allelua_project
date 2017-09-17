@@ -93,6 +93,11 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    $('#search-button').click(function () {
+        if($.trim($('#keyword').val()) === '') {
+            return false;
+        }
+    });
     var dialogSearch;
     function fncSearchImage()
     {

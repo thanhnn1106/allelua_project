@@ -48,30 +48,27 @@ class SearchController extends BaseController
         $subCate        = null;
         $slug           = null;
         $loadStyles     = NULL;
+        $products       = NULL;
         $attrs = array();
 
         $params   = $this->loadProductSearch($request, $tagImage);
-        if(empty($params['keyword']) && empty($params['tag_image'])) {
-            if ($request->session()->has('tag_image')) {
-                $request->session()->forget('tag_image');
+        if( ! empty($params['keyword']) || ! empty($params['tag_image'])) {
+
+            $products = \App\Product::getProductFilter($params);
+            if($products->count() === $products->total()) {
+                $isFinalProduct = true;
             }
-            return redirect()->route('home');
-        }
+            if ($products->total()) {
+                $cateMatching = \App\Product::getCategoryMatchingSearch($params);
+                if ($cateMatching !== NULL) {
+                    $slug = $cateMatching->slug;
+                    $subCate = \App\Categories::getRowByLang($this->lang, $cateMatching->category_id);
 
-        $products = \App\Product::getProductFilter($params);
-        if($products->count() === $products->total()) {
-            $isFinalProduct = true;
-        }
-        if ($products->total()) {
-            $cateMatching = \App\Product::getCategoryMatchingSearch($params);
-            if ($cateMatching !== NULL) {
-                $slug = $cateMatching->slug;
-                $subCate = \App\Categories::getRowByLang($this->lang, $cateMatching->category_id);
-
-                $loadStyles = $this->getStyle($cateMatching->type);
-                $loadStyles = $this->getPrice($loadStyles, $cateMatching->type);
-                $params['category_id'] = $cateMatching->category_id;
-                $attrs = $this->loadFilterAttr($loadStyles, $params);
+                    $loadStyles = $this->getStyle($cateMatching->type);
+                    $loadStyles = $this->getPrice($loadStyles, $cateMatching->type);
+                    $params['category_id'] = $cateMatching->category_id;
+                    $attrs = $this->loadFilterAttr($loadStyles, $params);
+                }
             }
         }
 

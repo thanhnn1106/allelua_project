@@ -118,7 +118,7 @@
                                 <div class="form-group form-upload form-image_thumb">
                                     <label class="control-label">{{ trans('admin.product.lb_quantity_limit') }}{{ trans('admin.product.lb_image_thumb') }}</label>
                                     <input type="file" accept="image/*" name="image_thumb" id="image_thumb" class="img-value" />
-                                    <p class="help-block-default">(Max: 2MB - *.jpg, *.jpeg, *.png, *.gif)</p>
+                                    <p class="help-block-default">(Max: 2MB - *.png)</p>
                                     <div class="col-sm-10 control-but">
                                         @if(isset($product->image_rand) && isset($product->image_real))
                                         <?php $imageThumb = getImage($product->image_rand, $product->image_real); ?>

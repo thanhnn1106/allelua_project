@@ -4,9 +4,11 @@
     <div class="clearfix" >
         <ul class="breadcrumbs" >
             <li class="home" ><a href="{{ route('home') }}" >{{ trans('front.bread_crum.home') }}</a></li>
+            @if(app('request')->input('q'))
             <li>
                 <span>{{ app('request')->input('q') }}</span>
             </li>
+            @endif
         </ul>
     </div>
     @if ($errors->has('search_image'))

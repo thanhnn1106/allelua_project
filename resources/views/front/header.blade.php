@@ -109,8 +109,8 @@
                         <div class="inner-form-search clearfix" >
                             <form id="front-search" class="fsearch clearfix" action="{{ route('search_page') }}" method="GET">
                                 <div class="inner-fsearch" >
-                                    <input type="text" name="q" class="input-search" value="{{ app('request')->input('q') }}" >
-                                    <button class="btn-search" >
+                                    <input type="text" id="keyword" name="q" class="input-search" value="{{ app('request')->input('q') }}" >
+                                    <button class="btn-search" id="search-button">
                                         <i class="fa fa-search" aria-hidden="true"></i>
                                     </button>
                                 </div>
