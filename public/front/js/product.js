@@ -74,12 +74,16 @@ $(document).ready(function() {
                 }
             },
             error: function (data) {
-                Object.keys(data.responseJSON.messages).forEach(function(key) {
-                    classElement = '.form-'+key;
-//                    $(classElement).addClass('has-error');
-                    $(classElement).find('.input-error').html(data.responseJSON.messages[key][0]);
-                });
-                $('.alert').show().find('p').html(data.responseJSON.result);
+                if(data.responseText.indexOf('file_large') > -1) {
+                    $('.alert').show().find('p').html('File upload had mazximize size');
+                } else {
+                    Object.keys(data.responseJSON.messages).forEach(function(key) {
+                        classElement = '.form-'+key;
+    //                    $(classElement).addClass('has-error');
+                        $(classElement).find('.input-error').html(data.responseJSON.messages[key][0]);
+                    });
+                    $('.alert').show().find('p').html(data.responseJSON.result);
+                }
             }
         });
     });
@@ -105,8 +109,9 @@ $(document).ready(function() {
         initialPreviewConfig: initialPreviewConfigImg,
 //        minFileCount: 3,
         maxFileCount: 5,
+        maxFileSize: 2048,
         validateInitialCount: true,
-        allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif']
+        allowedFileExtensions: ['jpg', 'jpeg', 'png']
     })
     .on('fileclear', function(event) {
         

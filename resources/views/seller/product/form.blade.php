@@ -186,7 +186,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                                                 <label class="lbl-form-control" >
                                                                     {{ trans('front.product.image_thumb') }} <span class="required-field"> (*)</span><br/>
-                                                                    <span class="note-red">(Max: 2MB - *.png)</span>
+                                                                    <span class="note-red">(Max: 2MB - *.jpg, *.jpeg, *.png)</span>
                                                                 </label>
                                                             </div>
                                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12" >

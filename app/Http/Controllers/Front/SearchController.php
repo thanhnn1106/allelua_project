@@ -36,8 +36,12 @@ class SearchController extends BaseController
 
             $imagick = new \Imagick($request->file('search_image')->getPathname());
             $langDefault = \App::getLocale();
-            $tagImage = $imagick->getImageProperty('Exif:tag_image_'.$langDefault);
-            $request->session()->put('tag_image', $tagImage);
+            $comments = $imagick->getImageProperty('comment');
+            if( ! empty($comments)) {
+                $comments = json_decode($comments, true);
+                $tagImage = isset($comments[$langDefault]) ? $comments[$langDefault] : NULL;
+                $request->session()->put('tag_image', $tagImage);
+            }
         } else {
             if ($q !== NULL && $request->session()->has('tag_image')) {
                 $request->session()->forget('tag_image');

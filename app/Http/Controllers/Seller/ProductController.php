@@ -18,6 +18,19 @@ class ProductController extends BaseController
      */
     public function index(Request $request)
     {
+//            $imagick = new \Imagick(public_path() . '/uploads/product/thumb/aaa.png');
+//            $xxx = array('vi' => 'This is viet nam png', 'en' => 'This is english png');
+//            $imagick->commentImage(json_encode($xxx));
+////            $imagick->setImageProperty('Exif:tag_image_en', 'This is test sdgdsgsdg');
+//            $imagick->writeImage(public_path() . '/uploads/product/thumb/aaa.png');
+
+            $imagick1 = new \Imagick(public_path() . '/uploads/product/thumb/59c14b2da2aae.jpg');
+            $aaa = $imagick1->getImageProperty('comment');
+//            $xxx = $imagick1->getImageProperty('Exif:tag_image_en');
+            var_dump(json_decode($aaa, true));
+//            var_dump($xxx);
+//            exit;
+
         $params = array(
             'language_code' => $this->lang,
             'user_id' => Auth::user()->id,
