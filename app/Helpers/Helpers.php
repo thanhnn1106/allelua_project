@@ -27,8 +27,11 @@ function getImage($fileRandPath, $fileRealPath)
         'base_name' => NULL,
     );
     if(!empty($fileRandPath) && file_exists(public_path().$fileRandPath)) {
+        $baseName = sprintf(config('allelua.product_image.resize_image'), basename($fileRandPath));
+        $paths = pathinfo($fileRandPath);
+        $filePath = $paths['dirname'] . DIRECTORY_SEPARATOR . $baseName;
         $result = array(
-            'img_src' => $fileRandPath,
+            'img_src' => url($filePath),
             'href'    => url($fileRandPath),
             'base_name' => basename($fileRealPath),
         );

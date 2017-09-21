@@ -5,7 +5,7 @@
         <div class="col-xs-2">
             <div class="thumb-item-cart">
                 <a href="{{ makeSlug($cart->attributes->slug, $cart->id) }}" title="{{ $cart->name }}" class="link-product" >
-                    <img src="{{ $imageInfo['href'] }}" alt="{{ $imageInfo['base_name'] }}" class="img-fluid" >
+                    <img src="{{ $imageInfo['img_src'] }}" alt="{{ $imageInfo['base_name'] }}" class="img-fluid" >
                 </a>
             </div>
         </div>

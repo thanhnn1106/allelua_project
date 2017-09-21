@@ -26,9 +26,13 @@
                                     <ul class="list-sly" >
                                         <?php $arrDetailImg = $productImages['initialPreviewConfig']; ?>
                                         @foreach($imagePreviews as $index => $image)
+                                        <?php 
+                                            $extra    = $arrDetailImg[$index]['extra'];
+                                            $imgThumb = getImage($extra['rand_name'], $extra['real_name']);
+                                        ?>
                                         <li class="product-thumb item-sly" >
                                             <a href="javascript:void(0);" title="@if(isset($arrDetailImg[$index])) {{ $arrDetailImg[$index]['caption'] }} @endif" data-image="{{ $image }}" data-zoom-image="{{ $image }}" rel="nofollow" >
-                                                <img src="{{ $image }}" title="" alt="" data-image="{{ $image }}" data-zoom-image="{{ $image }}" />
+                                                <img src="{{ $imgThumb['img_src'] }}" title="" alt="" data-image="{{ $image }}" data-zoom-image="{{ $image }}" />
                                             </a>
                                         </li>
                                         @endforeach
@@ -88,7 +92,7 @@
                                             <label for="select-product-type" class="lbl-type-product" >Số lượng</label>
                                         </div>
                                         <div class="col-xs-12" >
-                                            <input type="number" class="quantity-product-dt" title="quantity" value="1" name="quantity" >
+                                            <input type="number" class="quantity-product-dt" title="quantity" value="{{ $totalQuantity }}" name="quantity" >
                                             <div class="input-error"></div>
                                         </div>
                                     </div>

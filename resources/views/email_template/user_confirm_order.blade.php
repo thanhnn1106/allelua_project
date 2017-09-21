@@ -25,7 +25,7 @@
         <?php $imageInfo = getImage($cart->attributes->image_rand, $cart->attributes->image_real); ?>
         <td style="border: 1px solid #ddd;padding: 10px;font-size: 13px;">
             <a href="{{ makeSlug($cart->attributes->slug, $cart->id) }}" title="{{ $cart->name }}" class="link-product" >
-                <img src="{{ $imageInfo['href'] }}" alt="{{ $imageInfo['base_name'] }}" class="img-fluid" >
+                <img src="{{ $imageInfo['img_src'] }}" alt="{{ $imageInfo['base_name'] }}" class="img-fluid" >
             </a>
         </td>
         <td style="border: 1px solid #ddd;padding: 10px;font-size: 13px;">

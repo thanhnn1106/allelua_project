@@ -38,13 +38,14 @@ $(document).ready(function() {
         var data = form.serializeArray();
         $('#butCheckout').hide();
 
+        $('#form-add-cart .form-quantity').find('.input-error').html('').hide();
         $.ajax({
             url: form.attr('action'),
             type: 'POST',
             dataType: 'JSON',
             data: data,
             success: function (data) {
-                if (data.error === 0) {
+                if (data.error == 0) {
                     $('.cartCount').html(data.result);
                     if(data.result > 0) {
                         $('#butCheckout').show();
@@ -56,7 +57,7 @@ $(document).ready(function() {
             error: function (data) {
                 Object.keys(data.responseJSON.messages).forEach(function(key) {
                     classElement = '.form-'+key;
-                    $('#form-add-cart '+classElement).find('.input-error').html(data.responseJSON.messages[key][0]);
+                    $('#form-add-cart '+classElement).find('.input-error').html(data.responseJSON.messages[key][0]).show();
                 });
                 $('.alert').show().find('p').html(data.responseJSON.result);
             }

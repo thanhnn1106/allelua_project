@@ -122,6 +122,7 @@ class ProductController extends BaseController
         }
 
         $cartCollection = Cart::getContent();
+        $totalQuantity = Cart::getTotalQuantity();
 
         return view('front.product.detail', [
             'product' => $product,
@@ -129,6 +130,7 @@ class ProductController extends BaseController
             'personal' => $personal,
             'productWatched' => $this->loadProductWatched(),
             'totalCart' => $cartCollection->count(),
+            'totalQuantity' => ($totalQuantity > 0) ? $totalQuantity : 1,
         ]);
     }
 }

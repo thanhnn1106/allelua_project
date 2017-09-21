@@ -42,6 +42,9 @@
             </footer>
             <!--END FOOTER-->
         </div>
+
+        <div class="modal-loading"></div>
+
         <div id="dialog-search-form" title="Search image">
             <form id="front-search-image" class="fsearch clearfix" action="{{ route('search_page') }}" enctype="multipart/form-data" method="POST">
               <fieldset>

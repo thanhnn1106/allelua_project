@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Languages;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class Controller extends BaseController
 {
@@ -18,6 +19,41 @@ class Controller extends BaseController
         $langs = array_column($langs->toArray(), 'iso2');
 
         return $langs;
+    }
+
+    protected function randFolerProduct()
+    {
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        $length = 6;
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    protected function resizeImage($random, $path)
+    {
+        $destPath = dirname($path);
+        $ogImage  = public_path() . $path;
+
+        list($width, $height) = getimagesize($ogImage);
+
+        $info = pathinfo($ogImage);
+        $baseName = basename($ogImage);
+
+        $widthDefine = config('allelua.product_image.resize_width');
+        $heightDefine = config('allelua.product_image.resize_height');
+
+        if($width < $widthDefine && $height < $heightDefine) {
+            return $path;
+        }
+
+        $fileName = sprintf(config('allelua.product_image.resize_image'), $baseName);
+        Image::make($ogImage)->resize($widthDefine, $heightDefine)->save(public_path() . $destPath . DIRECTORY_SEPARATOR . $fileName);
+
+        return $destPath . DIRECTORY_SEPARATOR . $fileName;
     }
 
     protected function loadMenuFront()
