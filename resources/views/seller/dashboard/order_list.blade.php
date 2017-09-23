@@ -40,6 +40,7 @@ $draftStatus = config('product.product_seller_status.value.draft');
                                                     <th>{{ trans('front.seller_order_list.lb_customer_name') }}</th>
                                                     <th>{{ trans('front.seller_order_list.lb_customer_email') }}</th>
                                                     <th>{{ trans('front.seller_order_list.lb_customer_phone') }}</th>
+                                                    <th>{{ trans('front.seller_order_list.lb_shipping_address') }}</th>
                                                     <th>{{ trans('front.seller_order_list.lb_product_name') }}</th>
                                                     <th>{{ trans('front.seller_order_list.lb_price') }}</th>
                                                     <th>{{ trans('front.seller_order_list.lb_quantity') }}</th>
@@ -55,6 +56,7 @@ $draftStatus = config('product.product_seller_status.value.draft');
                                                 <td>{{ $item->full_name }}</td>
                                                 <td>{{ $item->email }}</td>
                                                 <td>{{ $item->phone_number }}</td>
+                                                <td>{{ $item->address }}</td>
                                                 <td>{{ $item->product_name }}</td>
                                                 <td>{{ formatPrice($item->price) }}</td>
                                                 <td>{{ $item->quantity }}</td>
