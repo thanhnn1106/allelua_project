@@ -390,7 +390,7 @@ class Product extends Model
         $query = \DB::table('products AS t1')
                 ->select('t1.id', 't1.category_id', 't1.sub_category_id', 't1.price', 't1.image_rand', 't1.image_real', 't1.payment_method', 't1.shipping_method', 't1.user_id',
                         't2.title', 't2.slug', 't2.brand', 't2.source', 't2.guarantee', 't2.delivery_location', 't2.detail',
-                        't5.slug AS cate_slug', 't5.title AS cate_title', 't6.slug AS sub_cate_slug', 't6.title AS sub_cate_title')
+                        't5.slug AS cate_slug', 't5.title AS cate_title', 't6.slug AS sub_cate_slug', 't6.title AS sub_cate_title', 't1.quantity_limit AS product_quantity_limit' , 't1.quantity AS product_quantity')
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->leftJoin('categories AS t3', 't3.id', '=', 't1.category_id')
                 ->leftJoin('categories AS t4', 't4.id', '=', 't1.sub_category_id')

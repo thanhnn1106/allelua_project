@@ -71,6 +71,8 @@
                                 <p>{{ trans('front.partial.product_detail.delivery_location') }}: {{ $product->delivery_location }}</p>
                                 <p>{{ trans('front.partial.product_detail.shipping_method') }}: {{ getShippingMethod($product->shipping_method) }}</p>
                                 <p>{{ trans('front.partial.product_detail.payment_method') }}: {{ getPaymentMethod($product->payment_method) }}</p>
+                                <p>{{ trans('front.partial.product_detail.quantity_limit') }}: {{ $product->product_quantity_limit }}</p>
+                                <p>{{ trans('front.partial.product_detail.quantity') }}: {{ $product->product_quantity }}</p>
                             </div>
                         </div>
                     </div>
@@ -173,6 +175,8 @@
             </div>
 
             <div class="tab-pane fade in" id="products_longdescription" role="tabpanel" >
+                <div class="clearfix">{{ trans('front.partial.product_detail.company_name') }}: {{ $personal->company_name }}</div>
+                <div class="clearfix">{{ trans('front.partial.product_detail.company_phone') }}: {{ $personal->company_phone }}</div>
                 <div class="clearfix">@if(isset($personal)) {!! $personal->introduce_company !!} @endif</div>
             </div>
         </div>
