@@ -47,22 +47,33 @@ $(document).ready(function() {
     });
 
     // Save action
+    var fileDetail = {};
     $('.save_product').click(function (event) {
         $('.alert').hide().find('p').html('');
         $('.input-error').html('');
 
         event.preventDefault();
         var url = $('#form_product').attr('action');
-        var data = new FormData(jQuery('form')[1]);
+
+        var formData = new FormData();
+        var model_data = $("#form_product").serializeArray();
+        $.each(model_data,function(key, input){
+            formData.append(input.name, input.value);
+        });
+        formData.append('image_thumb', $('#image_thumb')[0].files[0]);
+
         var total_image_detail = $('#form_product .kv-preview-thumb').find('img').length;
-        data.append('total_image_detail', total_image_detail);
-        data.append('sortDetail', sortDetail);
+        formData.append('total_image_detail', total_image_detail);
+        formData.append('sortDetail', sortDetail);
+        for(var i in fileDetail) {
+            formData.append('files[]', fileDetail[i]);
+        }
 
         $.ajax({
             url: url,
             type: 'POST',
             dataType: 'JSON',
-            data: data,
+            data: formData,
             cache: false,
             processData: false, // Don't process the files
             contentType: false, // Set content type to false as jQuery will tell the server its a query string request
@@ -128,6 +139,12 @@ $(document).ready(function() {
         var stacks = params.stack;
         for(index in stacks) {
             sortDetail[index] = stacks[index].extra.rand_name;
+        }
+    }).on("fileloaded", function(event, file, previewId, index, reader) {
+        fileDetail[previewId] = file;
+    }).on("fileremoved", function(event, id, index) {
+        if(fileDetail[id] !== undefined) {
+            delete fileDetail[id];
         }
     });
 

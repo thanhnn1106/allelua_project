@@ -332,7 +332,7 @@ $( window ).scroll( function(){
         if( nt <= (parseInt($(window).scrollTop()) + parseInt($(window).height())) ){
             $('[data-place="detectLoadMore"]').addClass('active');
             console.log('load more');
-            alert('load more ? tìm data-place="detectLoadMore" tren dom nha');
+            //alert('load more ? tìm data-place="detectLoadMore" tren dom nha');
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
@@ -346,7 +346,7 @@ $( window ).scroll( function(){
                     //$('[data-place="detectLoadMore"]').removeClass('active');
                 },
                 error : function(){
-                    alert('oOo loi roi');
+//                    alert('oOo loi roi');
                     //xong nho dung lenh nay nha
                     //$('[data-place="detectLoadMore"]').removeClass('active');
                 }

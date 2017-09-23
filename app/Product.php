@@ -102,7 +102,8 @@ class Product extends Model
         $query = \DB::table('products AS t1')
                 ->select('t1.id', 't1.price', 't1.image_rand', 't1.image_real', 't2.title', 't2.slug', 't1.category_id')
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
-                ->where('t1.status', 1);
+                ->where('t1.status', 1)
+                ->whereNull('t1.deleted_at');
 
         self::_query_param($query, $params);
 

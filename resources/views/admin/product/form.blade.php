@@ -38,6 +38,7 @@
                                     <input type="hidden" id="hide_style" value="{{ $product->style or null }}" />
                                     <input type="hidden" id="hide_material" value="{{ $product->material or null }}" />
                                     <input type="hidden" name="product_id" id="product_id" value="{{ $product->id or null }}" />
+                                    <input type="hidden" name="image_thumb_hidden" value="{{ isset($product->image_rand) ? $product->image_rand : '' }}" />
                                     <label class="control-label">{{ trans('admin.product.lb_categories') }}</label>
                                     <select name="categories" id="categories" url-cate="{{ route('ajax_product_load_cate') }}" class="form-control border-corner">
                                         <option value="">------</option>
@@ -122,7 +123,7 @@
                                     <div class="col-sm-10 control-but">
                                         @if(isset($product->image_rand) && isset($product->image_real))
                                         <?php $imageThumb = getImage($product->image_rand, $product->image_real); ?>
-                                        <a href="{{ $imageThumb['href'] }}" target="_blank"><img src="{{ $imageThumb['href'] }}" width="60px" height="60px" /></a><br/>
+                                        <a href="{{ $imageThumb['href'] }}" target="_blank"><img src="{{ $imageThumb['img_src'] }}" /></a><br/>
                                         @endif
                                     </div>
                                     <div style="clear: both"></div>

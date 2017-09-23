@@ -180,7 +180,7 @@ return [
         'buy_success_sale_group_will_contact_later' => 'Đặt hàng thành công. Chúng tôi sẽ liên lạc với bạn trong thời gian sớm nhất.',
         'no_product_to_payment'                     => 'Không tìm thấy sản phẩm để thanh toán.',
         'btn_copy_product'      => 'Copy',
-        'msg_cannot_over_limit' => 'Số lượng không được vượt quá: :QUANTITY',
+        'msg_cannot_over_limit' => 'Số lượng phải nằm trong khoảng [%d, %d]',
         'msg_favorite_item_add_success' => 'Thêm vào danh sách yêu thích thành công.',
     ),
     'cart' => array(

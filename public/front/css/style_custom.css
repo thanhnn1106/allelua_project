@@ -1,3 +1,26 @@
+body.loading {
+    overflow: hidden;
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modal-loading {
+    display: block;
+}
+.modal-loading {
+     display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('../images/loading.gif') 
+                50% 50% 
+                no-repeat;
+}
+
 html{overflow-x:hidden;font-family: 'Roboto', sans-serif;font-size: 13px;background: #f0f0f0}
 body{font-family: 'Roboto', sans-serif;font-size: 13px;color:#333;background: #f0f0f0;overflow: hidden;}
 a{color: #333;font-size: 13px}

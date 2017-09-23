@@ -88,12 +88,15 @@ class ProductController extends AdminBaseController
         }
         $productId = $request->get('product_id', NULL);
 
+        $randomStr = $this->randFolerProduct();
         $product = new Product();
         if(!empty($productId)) {
             $product = Product::find($productId);
             if($product === NULL) {
                 return response()->json(array('error' => 1, 'result' => trans('common.msg_data_not_found')));
             }
+            preg_match('/[A-Z|0-9]{6,}/', $product->image_rand, $matches);
+            $randomStr = isset($matches[0]) ? $matches[0] : NULL;
         }
 
         // Set rules
@@ -106,13 +109,16 @@ class ProductController extends AdminBaseController
         // Upload image thumb and details
         $imageThumb = NULL;
         if ($request->hasFile('image_thumb')) {
-            $imageThumb = $this->uploadImage($request->file('image_thumb'), config('allelua.product_image.path_upload_thumb'));
+            $imageThumb = $this->uploadImage($request->file('image_thumb'), sprintf(config('allelua.product_image.path_upload_thumb'), $randomStr));
+            $this->resizeImage($randomStr, $imageThumb['rand_name']);
         }
         $imageDetail = array();
         if ($request->hasFile('files')) {
             $files = $request->file('files');
             foreach ($files as $file) {
-                $imageDetail[] = $this->uploadImage($file, config('allelua.product_image.path_upload_detail'));
+                $detail = $this->uploadImage($file, sprintf(config('allelua.product_image.path_upload_detail'), $randomStr));
+                $imageDetail[] = $detail;
+                $this->resizeImage($randomStr, $detail['rand_name']);
             }
         }
 
