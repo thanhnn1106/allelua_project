@@ -158,9 +158,10 @@ function formatPriceQuery($price)
         return str_replace('less_', ' <= ', $price);
     } else if (preg_match('/^great_/', $price)) {
         return str_replace('great_', ' >= ', $price);
-    } else {
+    } else if(preg_match('/[0-9]\_[0-9]/', $price)){
         return ' BETWEEN '.str_replace('_', ' AND ', $price);
     }
+    return '';
 }
 
 function formatPriceLang($price)

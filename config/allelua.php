@@ -46,8 +46,7 @@ return [
         'resize_width' => 176,
         'resize_height' => 117,
         'resize_image' => 'w176-%s',
-        'path_upload_thumb' => '/uploads/product/%s/thumb',
-        'path_upload_detail' => '/uploads/product/%s',
+        'path_upload' => '/uploads/product/%s',
     ),
     'seller_personal_info_status' => array(
         'pending'  => 0,

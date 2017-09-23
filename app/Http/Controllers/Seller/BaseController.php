@@ -149,20 +149,4 @@ class BaseController extends Controller
 
         return $return;
     }
-
-    protected function deleteImageThumb($imageThumb)
-    {
-        $filePath = isset($imageThumb['rand_name']) ?$imageThumb['rand_name'] : NULL;
-        $this->removeFile($filePath);
-    }
-
-    protected function deleteImageDetail($imagedetails)
-    {
-        if(count($imagedetails)) {
-            foreach ($imagedetails as $item) {
-                $filePath = isset($item['rand_name']) ? $item['rand_name'] : NULL;
-                $this->removeFile($filePath);
-            }
-        }
-    }
 }

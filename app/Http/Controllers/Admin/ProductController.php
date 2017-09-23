@@ -87,6 +87,8 @@ class ProductController extends AdminBaseController
             return response()->json(array('error' => 1, 'result' => trans('common.msg_error_exception_ajax')));
         }
         $productId = $request->get('product_id', NULL);
+        $isEdit    = false;
+        $imageRand = NULL;
 
         $randomStr = $this->randFolerProduct();
         $product = new Product();
@@ -97,6 +99,8 @@ class ProductController extends AdminBaseController
             }
             preg_match('/[A-Z|0-9]{6,}/', $product->image_rand, $matches);
             $randomStr = isset($matches[0]) ? $matches[0] : NULL;
+            $isEdit = true;
+            $imageRand = $product->image_rand;
         }
 
         // Set rules
@@ -106,19 +110,22 @@ class ProductController extends AdminBaseController
             return response()->json(array('error' => 1, 'result' => trans('common.msg_please_check_form_below'), 'messages' => $validator->errors()), 422);
         }
 
+        // Make path random
+        $pathRand = $this->makePath(config('allelua.product_image.path_upload'), $randomStr, $isEdit);
+
         // Upload image thumb and details
         $imageThumb = NULL;
         if ($request->hasFile('image_thumb')) {
-            $imageThumb = $this->uploadImage($request->file('image_thumb'), sprintf(config('allelua.product_image.path_upload_thumb'), $randomStr));
-            $this->resizeImage($randomStr, $imageThumb['rand_name']);
+            $imageThumb = $this->uploadImage($request->file('image_thumb'), $pathRand . DIRECTORY_SEPARATOR . 'thumb');
+            $this->resizeImage($imageThumb['rand_name']);
         }
         $imageDetail = array();
         if ($request->hasFile('files')) {
             $files = $request->file('files');
             foreach ($files as $file) {
-                $detail = $this->uploadImage($file, sprintf(config('allelua.product_image.path_upload_detail'), $randomStr));
+                $detail = $this->uploadImage($file, $pathRand);
                 $imageDetail[] = $detail;
-                $this->resizeImage($randomStr, $detail['rand_name']);
+                $this->resizeImage($detail['rand_name']);
             }
         }
 
@@ -136,14 +143,18 @@ class ProductController extends AdminBaseController
 
             DB::commit();
 
+            if($imageRand !== NULL && $imageThumb !== NULL) {
+                $this->deleteImage(array('rand_name' => $imageRand));
+            }
+
             $request->session()->flash('success', trans('common.msg_save_success'));
             return response()->json(array('error' => 0, 'result' => route('admin_product_index')));
 
         } catch (\Exception $e) {
             DB::rollback();
 
-            $this->deleteImageThumb($imageThumb);
-            $this->deleteImageDetail($imageDetail);
+            $this->deleteImage($imageThumb);
+            $this->deleteImages($imageDetail);
 
             return response()->json(array('error' => 1, 'result' => trans('common.msg_error_transaction')));
         }
@@ -226,7 +237,7 @@ class ProductController extends AdminBaseController
         }
 
         // remove image before thumb
-        $this->deleteImageThumb(array('image_rand' => $product->image_rand));
+        $this->deleteImage(array('image_rand' => $product->image_rand));
 
         // remove image detail
         $images = $product->productImages();
@@ -235,7 +246,7 @@ class ProductController extends AdminBaseController
             foreach($images as $image) {
                 $imagedetails[] = array('image_rand' => $image->image_rand);
             }
-            $this->deleteImageDetail($imagedetails);
+            $this->deleteImages($imagedetails);
         }
 
         $product->forceDelete();

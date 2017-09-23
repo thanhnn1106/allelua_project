@@ -93,7 +93,9 @@ $(document).ready(function() {
         $.each(model_data,function(key, input){
             formData.append(input.name, input.value);
         });
-        formData.append('image_thumb', $('#image_thumb')[0].files[0]);
+        if($('#image_thumb')[0].files[0] !== undefined) {
+            formData.append('image_thumb', $('#image_thumb')[0].files[0]);
+        }
 
         var total_image_detail = $('#form_product .kv-preview-thumb').find('img').length;
         formData.append('total_image_detail', total_image_detail);

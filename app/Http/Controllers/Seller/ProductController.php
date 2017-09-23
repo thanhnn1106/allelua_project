@@ -95,10 +95,13 @@ class ProductController extends BaseController
         DB::beginTransaction();
 
         try {
-
             $newProduct = $product->replicate();
-            $urlImage = $this->copyImage($newProduct->image_rand);
+            $randomStr = $this->randFolerProduct();
+            $newPath   = $this->makePath(config('allelua.product_image.path_upload'), $randomStr, false);
+
+            $urlImage = $this->copyImage($newProduct->image_rand, $newPath . DIRECTORY_SEPARATOR . 'thumb');
             if($urlImage !== false) {
+                $this->resizeImage($urlImage);
                 $newProduct->image_rand = $urlImage;
             }
             $newProduct->status = 0;
@@ -114,8 +117,9 @@ class ProductController extends BaseController
                 foreach ($relation as $relationRecord) {
                     $newRelationship = $relationRecord->replicate();
                     $newRelationship->product_id = $newProduct->id;
-                    $urlImgDetail = $this->copyImage($newRelationship->image_rand);
+                    $urlImgDetail = $this->copyImage($newRelationship->image_rand, $newPath);
                     if($urlImgDetail !== false) {
+                        $this->resizeImage($urlImgDetail);
                         $newRelationship->image_rand = $urlImgDetail;
                     }
                     $newRelationship->push();
@@ -128,6 +132,7 @@ class ProductController extends BaseController
             return redirect(route('seller_product_index'));
 
         } catch (\Exception $e) {
+            var_dump($e->getMessage());exit;
             DB::rollback();
             $request->session()->flash('error', trans('common.msg_error_transaction'));
             return redirect(route('seller_product_index'));
@@ -140,6 +145,8 @@ class ProductController extends BaseController
             return response()->json(array('error' => 1, 'result' => trans('common.msg_error_transaction')));
         }
         $productId = $request->get('product_id', NULL);
+        $isEdit    = false;
+        $imageRand = NULL;
 
         $randomStr = $this->randFolerProduct();
         $product = new Product();
@@ -150,6 +157,8 @@ class ProductController extends BaseController
             }
             preg_match('/[A-Z|0-9]{6,}/', $product->image_rand, $matches);
             $randomStr = isset($matches[0]) ? $matches[0] : NULL;
+            $isEdit = true;
+            $imageRand = $product->image_rand;
         }
 
         // Check only post product when admin approve
@@ -165,19 +174,22 @@ class ProductController extends BaseController
             return response()->json(array('error' => 1, 'result' => trans('common.msg_please_check_form_below'), 'messages' => $validator->errors()), 422);
         }
 
+        // Make path random
+        $pathRand = $this->makePath(config('allelua.product_image.path_upload'), $randomStr, $isEdit);
+
         // Upload image thumb and details
         $imageThumb = NULL;
         if ($request->hasFile('image_thumb')) {
-            $imageThumb = $this->uploadImage($request->file('image_thumb'), sprintf(config('allelua.product_image.path_upload_thumb'), $randomStr));
-            $this->resizeImage($randomStr, $imageThumb['rand_name']);
+            $imageThumb = $this->uploadImage($request->file('image_thumb'), $pathRand . DIRECTORY_SEPARATOR . 'thumb');
+            $this->resizeImage($imageThumb['rand_name']);
         }
         $imageDetail = array();
         if ($request->hasFile('files')) {
             $files = $request->file('files');
             foreach ($files as $file) {
-                $detail = $this->uploadImage($file, sprintf(config('allelua.product_image.path_upload_detail'), $randomStr));
+                $detail = $this->uploadImage($file, $pathRand);
                 $imageDetail[] = $detail;
-                $this->resizeImage($randomStr, $detail['rand_name']);
+                $this->resizeImage($detail['rand_name']);
             }
         }
 
@@ -195,15 +207,18 @@ class ProductController extends BaseController
 
             DB::commit();
 
+            if($imageRand !== NULL && $imageThumb !== NULL) {
+                $this->deleteImage(array('rand_name' => $imageRand));
+            }
+
             $request->session()->flash('success', trans('common.seller.msg_post_product_success'));
             return response()->json(array('error' => 0, 'result' => route('seller_product_index')));
 
         } catch (\Exception $e) {
             DB::rollback();
-            var_dump($e->getMessage());exit;
 
-            $this->deleteImageThumb($imageThumb);
-            $this->deleteImageDetail($imageDetail);
+            $this->deleteImage($imageThumb);
+            $this->deleteImages($imageDetail);
 
             return response()->json(array('error' => 1, 'result' => trans('common.msg_error_transaction')));
         }

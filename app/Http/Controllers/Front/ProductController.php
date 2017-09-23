@@ -74,7 +74,6 @@ class ProductController extends BaseController
         if ($cateObj !== NULL) {
             $arrCateId = (array) $cateObj->id;
             $productBestPrice = $this->loadProductBestPrice($arrCateId);
-
             $params = $this->loadProductSubCateFilter($request, $cateObj->id);
             $products = \App\Product::getProductFilter($params);
             if($products->count() === $products->total()) {
@@ -115,10 +114,8 @@ class ProductController extends BaseController
             $personal = \App\Personal::getPersonalInfo($this->lang, $product->user_id);
             $productImages = $this->loadImageDetails($product);
 
-            // Update view number of product
-            $objProduct = \App\Product::find($product->id);
-            $objProduct->view_number = $objProduct->view_number + 1;
-            $objProduct->save();
+            // add product watched
+            $this->addProductWatched($product);
         }
 
         $cartCollection = Cart::getContent();
@@ -129,6 +126,7 @@ class ProductController extends BaseController
             'productImages' => $productImages,
             'personal' => $personal,
             'productWatched' => $this->loadProductWatched(),
+            'productRelated' => $this->loadProductRelated($id, $product->sub_category_id),
             'totalCart' => $cartCollection->count(),
             'totalQuantity' => ($totalQuantity > 0) ? $totalQuantity : 1,
         ]);

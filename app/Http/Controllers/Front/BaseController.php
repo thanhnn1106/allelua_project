@@ -102,6 +102,7 @@ class BaseController extends Controller
             });
         }
         $colors = \App\Product::getColorFilter($params);
+
         return array(
             'brands' => $brands,
             'positionUses' => $positionUses,
