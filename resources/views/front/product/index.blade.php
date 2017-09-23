@@ -6,9 +6,9 @@
             <li class="home" ><a href="{{ route('home') }}" >{{ trans('front.bread_crum.home') }}</a></li>
             @if(isset($cateObj))
             <li>
-                @if(!empty($cateObj->parent_id))
+                @if(!empty($cateObj->cate_slug))
                 <a href="{{ makeSlug($cateObj->cate_slug) }}" >{{ $cateObj->cate_title }}</a>
-                @else
+                @elseif(empty($cateObj->parent_id))
                 <span>{{ $cateObj->title }}</span>
                 @endif
             </li>
@@ -31,13 +31,13 @@
                             <div class="col-sm-12" >
                                 <div class="content-center" >
                                     <div class="inner-content-center clearfix" >
-                                        <div class="list-product clearfix" data-total="@if(isset($products)) {{ $products->total() }} @endif" data-start="@if(isset($products)) {{ $products->currentPage() }} @endif">
+                                        <div id="productList" class="list-product clearfix" data-total="@if(isset($products)) {{ $products->total() }} @endif" data-start="@if(isset($products)){{ $products->count() }}@endif">
                                             <!-- BEGIN PRODUCT LISTS -->
                                             @include('front.product.partial.list_product')
                                             <!-- END PRODUCT LISTS -->
                                         </div>
                                         @if(isset($isFinalProduct) && $isFinalProduct === false)
-                                        <div class="text-xs-center clearfix load-scroll" data-place="detectLoadMore" >[LOAD MORE]</div>
+                                        <div class="text-xs-center clearfix load-scroll" data-url="{{ $urlLoadMore }}" data-place="detectLoadMore" style="display:none;"></div>
                                         @endif
                                     </div>
                                 </div>
@@ -77,4 +77,5 @@
 <script>
 
 </script>
+<script src="{{ asset_admin('js/common.js') }}"></script>
 @endsection

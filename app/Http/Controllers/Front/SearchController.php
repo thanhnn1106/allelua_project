@@ -86,7 +86,8 @@ class SearchController extends BaseController
             'productWatched' => $this->loadProductWatched(),
             'isFinalProduct' => $isFinalProduct,
             'loadStyles' => $loadStyles,
-            'urlSearch' => route('product_load_cate', array('slug' => $slug))
+            'urlSearch' => route('product_load_cate', array('slug' => $slug)),
+            'urlLoadMore' => route('product_load_more', array('slug' => $slug)),
         );
         $dataView = array_merge($dataView, $attrs);
 

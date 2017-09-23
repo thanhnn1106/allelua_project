@@ -54,7 +54,8 @@ class ProductController extends BaseController
             'products' => $products,
             'isFinalProduct' => $isFinalProduct,
             'loadStyles' => $loadStyles,
-            'urlSearch' => route('product_load_cate', array('slug' => $slug))
+            'urlSearch' => route('product_load_cate', array('slug' => $slug)),
+            'urlLoadMore' => route('product_load_more', array('slug' => $slug))
         ];
         $dataView = array_merge($dataView, $attrs);
 
@@ -92,7 +93,8 @@ class ProductController extends BaseController
             'products' => $products,
             'isFinalProduct' => $isFinalProduct,
             'loadStyles' => $loadStyles,
-            'urlSearch' => route('product_load_sub_cate', array('slug' => $slug, 'id' => $id))
+            'urlSearch' => route('product_load_sub_cate', array('slug' => $slug, 'id' => $id)),
+            'urlLoadMore' => route('product_load_more', array('slug' => $slug, 'id' => $id)),
         ];
         $dataView = array_merge($dataView, $attrs);
 
@@ -130,5 +132,48 @@ class ProductController extends BaseController
             'totalCart' => $cartCollection->count(),
             'totalQuantity' => ($totalQuantity > 0) ? $totalQuantity : 1,
         ]);
+    }
+
+    public function feed(Request $request)
+    {
+        try {
+            $slug  = $request->get('slug');
+            $id    = $request->get('id');
+            $start = $request->get('start', 1);
+
+            $cateObj = \App\Categories::getCateSubCate($this->lang, $slug, $id);
+
+            $subCate = NULL;
+            $products = NULL;
+            $isFinalProduct = false;
+
+            if ($cateObj !== NULL) {
+
+                if( ! empty($id)) {
+                    $params = $this->loadProductSubCateFilter($request, $cateObj->id);
+                } else {
+                    $params = $this->loadProductCateFilter($request, $cateObj->id);
+                }
+                $products = \App\Product::getProductFilter($params);
+
+                if($start > 0) {
+                    $start += $products->count();
+                }
+                if($start >= $products->total()) {
+                    $isFinalProduct = true;
+                }
+            }
+
+            $dataView = [
+                'subCate' => $subCate,
+                'products' => $products,
+            ];
+
+            $html = \View::make('front.product.partial.list_product', $dataView)->render();
+
+            return response()->json(array('error' => 0, 'result' => $html, 'isFinalProduct' => $isFinalProduct, 'start'    => $start));
+        } catch (Exception $e) {
+            return response()->json(array('error' => 1, 'result' => trans('common.msg_error_exception_ajax')));
+        }
     }
 }

@@ -24,13 +24,13 @@
                             <div class="col-sm-12" >
                                 <div class="content-center" >
                                     <div class="inner-content-center clearfix" >
-                                        <div class="list-product clearfix" data-total="@if(isset($products)) {{ $products->total() }} @endif" data-start="@if(isset($products)) {{ $products->currentPage() }} @endif">
+                                        <div id="productList" class="list-product clearfix" data-total="@if(isset($products)) {{ $products->total() }} @endif" data-start="@if(isset($products)) {{ $products->currentPage() }} @endif">
                                             <!-- BEGIN PRODUCT LISTS -->
                                             @include('front.product.partial.list_product')
                                             <!-- END PRODUCT LISTS -->
                                         </div>
                                         @if(isset($isFinalProduct) && $isFinalProduct === false)
-                                        <div class="text-xs-center clearfix load-scroll" data-place="detectLoadMore" >[LOAD MORE]</div>
+                                        <div class="text-xs-center clearfix load-scroll" data-url="{{ $urlLoadMore }}" data-place="detectLoadMore" >[LOAD MORE]</div>
                                         @endif
                                     </div>
                                 </div>
