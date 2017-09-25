@@ -37,7 +37,7 @@
                                             <!-- END PRODUCT LISTS -->
                                         </div>
                                         @if(isset($isFinalProduct) && $isFinalProduct === false)
-                                        <div class="text-xs-center clearfix load-scroll" data-url="{{ $urlLoadMore }}" data-place="detectLoadMore" style="display:none;"></div>
+                                        <div class="text-xs-center clearfix load-scroll" data-url="{{ $urlLoadMore }}" data-place="detectLoadMore" style=""></div>
                                         @endif
                                     </div>
                                 </div>

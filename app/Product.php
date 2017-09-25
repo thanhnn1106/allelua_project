@@ -113,7 +113,7 @@ class Product extends Model
 
         self::_query_param($query, $params);
 
-        $result = $query->paginate(4);
+        $result = $query->paginate(LIMIT_ROW);
 
         return $result;
     }

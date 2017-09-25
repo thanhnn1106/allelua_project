@@ -330,37 +330,35 @@ var isFinalProduct = false;
 var loading        = false;
 $( window ).scroll( function() {
 //    if( ! $('[data-place="detectLoadMore"]').hasClass('active') && $('[data-place="detectLoadMore"]').length >0 ) {
-    if($('[data-place="detectLoadMore"]').length > 0 ) {
+    if($('[data-place="detectLoadMore"]').length > 0 && loading == false) {
+        loading = true;
         var nt = $('[data-place="detectLoadMore"]').eq(0).offset().top;
-        if( nt <= (parseInt($(window).scrollTop()) + parseInt($(window).height())) ){
+        if( nt >= (parseInt($(window).scrollTop()) + parseInt($(window).height())) ){
 //            $('[data-place="detectLoadMore"]').addClass('active');
             var url = $('[data-place="detectLoadMore"]').attr('data-url');
             var start = $('#productList').attr('data-start');
 
-            if(loading == false && isFinalProduct == false) {
-//                loading = true;
-                $.ajax({
-                    type: 'GET',
-                    dataType: 'json',
-                    url: url,
-                    data: {start: start},
-                    success: function (data) {
-                        if(data.error == 0) {
-                            isFinalProduct = data.isFinalProduct;
-                            loading = false;
-                            if(isFinalProduct == true) {
-                                loading = true;
-                            }
-
-                            $('#productList').attr('data-start', data.start);
-                            $('#productList .row').append(data.result);
-                        } else {
-                            isFinalProduct = true;
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: url,
+                data: {start: start},
+                success: function (data) {
+                    if(data.error == 0) {
+                        isFinalProduct = data.isFinalProduct;
+                        loading = false;
+                        if(isFinalProduct == true) {
                             loading = true;
                         }
+
+                        $('#productList').attr('data-start', data.start);
+                        $('#productList .row').append(data.result);
+                    } else {
+                        isFinalProduct = true;
+                        loading = true;
                     }
-                });
-            }
+                }
+            });
         }
     }
 });
