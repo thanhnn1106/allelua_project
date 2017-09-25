@@ -34,7 +34,7 @@ class Controller extends BaseController
         return $randomString;
     }
 
-    protected function resizeImage($path)
+    protected function resizeImage($path, $type = 'thumb')
     {
         $destPath = dirname($path);
         $ogImage  = public_path() . $path;
@@ -43,8 +43,13 @@ class Controller extends BaseController
 
         $baseName = basename($ogImage);
 
-        $widthDefine = config('allelua.product_image.resize_width');
-        $heightDefine = config('allelua.product_image.resize_height');
+        if($type === 'detail') {
+            $widthDefine = config('allelua.product_image.resize_detail_width');
+            $heightDefine = config('allelua.product_image.resize_detail_height');
+        } else {
+            $widthDefine = config('allelua.product_image.resize_width');
+            $heightDefine = config('allelua.product_image.resize_height');
+        }
 
         if($width < $widthDefine && $height < $heightDefine) {
             return $path;
@@ -142,8 +147,12 @@ class Controller extends BaseController
         }
 
         $randName = $product->image_rand;
+        $path = dirname($randName);
+        $baseName = basename($randName);
+        $fileName = sprintf(config('allelua.product_image.resize_image'), $baseName);
+        $filePath = $path . DIRECTORY_SEPARATOR . $fileName;
 
-        $imagick = new \Imagick(public_path() . $randName);
+        $imagick = new \Imagick(public_path() . $filePath);
         $langs = \App\Languages::getResults();
         $langDefault = \App::getLocale();
 
@@ -158,7 +167,7 @@ class Controller extends BaseController
             }
         }
         $imagick->commentimage(json_encode($arrData));
-        $imagick->writeImage(public_path() . $randName);
+        $imagick->writeImage(public_path() . $filePath);
     }
 
     protected function returnFormatFile($urlDelete, $arrFile)

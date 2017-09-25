@@ -23,15 +23,7 @@
                         @foreach($categories as $id => $items)
                         <li>
                             <a href="{{ makeSlug($items['slug']) }}" title="{{ $items['title'] }}" >{{ $items['title'] }}</a>
-                            @if(isset($items['childs']))
-                            <ul class="ch-nav-mmega" >
-                                @foreach($items['childs'] as $sub)
-                                <li>
-                                    <a href="{{ makeSlug($sub['slug'], $sub['id'], false) }}" title="{{ $sub['title'] }}" >{{ $sub['title'] }}</a>
-                                </li>
-                                @endforeach
-                            </ul>
-                            @endif
+                            
                         </li>
                         @endforeach
                     </ul>

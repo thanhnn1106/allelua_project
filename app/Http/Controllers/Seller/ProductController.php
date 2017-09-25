@@ -119,7 +119,7 @@ class ProductController extends BaseController
                     $newRelationship->product_id = $newProduct->id;
                     $urlImgDetail = $this->copyImage($newRelationship->image_rand, $newPath);
                     if($urlImgDetail !== false) {
-                        $this->resizeImage($urlImgDetail);
+                        $this->resizeImage($urlImgDetail, 'detail');
                         $newRelationship->image_rand = $urlImgDetail;
                     }
                     $newRelationship->push();
@@ -189,7 +189,7 @@ class ProductController extends BaseController
             foreach ($files as $file) {
                 $detail = $this->uploadImage($file, $pathRand);
                 $imageDetail[] = $detail;
-                $this->resizeImage($detail['rand_name']);
+                $this->resizeImage($detail['rand_name'], 'detail');
             }
         }
 

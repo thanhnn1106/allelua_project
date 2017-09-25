@@ -125,7 +125,7 @@ class ProductController extends AdminBaseController
             foreach ($files as $file) {
                 $detail = $this->uploadImage($file, $pathRand);
                 $imageDetail[] = $detail;
-                $this->resizeImage($detail['rand_name']);
+                $this->resizeImage($detail['rand_name'], 'detail');
             }
         }
 

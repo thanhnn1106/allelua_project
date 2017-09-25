@@ -271,7 +271,8 @@ button.btn-snews-letter {
     z-index: 9
 }
 .item-product .thumb-product {
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
+    margin-bottom: 12px;
 }
 .item-product .thumb-product  img{display: inline-block;}
 item-product .name-product {

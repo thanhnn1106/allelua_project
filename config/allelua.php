@@ -43,9 +43,11 @@ return [
         'path_upload_logo' => '/uploads/logo',
     ),
     'product_image' => array(
-        'resize_width' => 176,
-        'resize_height' => 117,
-        'resize_image' => 'w176-%s',
+        'resize_width' => 210,
+        'resize_height' => 210,
+        'resize_detail_width' => 83,
+        'resize_detail_height' => 105,
+        'resize_image' => 'w-resize-%s',
         'path_upload' => '/uploads/product/%s',
     ),
     'seller_personal_info_status' => array(
