@@ -285,14 +285,14 @@ button.btn-snews-letter {
 .item-product .thumb-product {
     margin-bottom: 30px;
     margin-bottom: 30px;
-    height: 176px;
+    height: 220px;
     position: relative;
     overflow: hidden;
 }
 .item-product .thumb-product  img{
     display: inline-block;
-    max-height: 176px;
-    max-width: 176px;
+    max-height: 100%;
+    max-width: 100%;
     position: absolute;
     top: 50%;
     left: 50%;
