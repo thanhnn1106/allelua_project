@@ -327,28 +327,40 @@ window.onload = function(){
     alignHeight();
 };
 $( window ).scroll( function(){
-    if( !$('[data-place="detectLoadMore"]').hasClass('active') && $('[data-place="detectLoadMore"]').length >0 ){
+    if( $('[data-place="detectLoadMore"]').length >0 
+        && !$('[data-place="detectLoadMore"]').hasClass('active') ){
         var nt = $('[data-place="detectLoadMore"]').eq(0).offset().top;
         if( nt <= (parseInt($(window).scrollTop()) + parseInt($(window).height())) ){
             $('[data-place="detectLoadMore"]').addClass('active');
             console.log('load more');
-            alert('load more ? tìm data-place="detectLoadMore" tren dom nha');
+            var url = $('[data-place="detectLoadMore"]').attr('data-url');
+            var start = $('#productList').attr('data-start');
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
-                url: '/feed/more',
-                data: null,
+                url: url,
+                data: {start: start},
                 success: function (data) {
-                    if (data.constructor === String) {
-                        data = JSON.parse(data);
+                    $('[data-place="detectLoadMore"]').removeClass('active');
+                    if(data.error == 0) {
+                        isFinalProduct = data.isFinalProduct;
+                        if( isFinalProduct == true || isFinalProduct == 'true' ) {
+                            $('[data-place="detectLoadMore"]').eq(0).remove();
+                        }
+                        $('#productList').attr('data-start', data.start);
+                        var rsel = $('<div class="tml-el" >'+data.result+'</div>');
+                        var rselHtml = rsel.html();
+                        if( rsel.find('.row').length > 0 ){
+                            rselHtml = rsel.find('.row').eq(0).html();
+                        }
+                        $('#productList>.row').eq(0).append(rselHtml);
+                    }else{
+                        $('[data-place="detectLoadMore"]').eq(0).remove();
                     }
-                    //xong nho dung lenh nay nha
-                    //$('[data-place="detectLoadMore"]').removeClass('active');
                 },
-                error : function(){
-                    alert('oOo loi roi');
-                    //xong nho dung lenh nay nha
-                    //$('[data-place="detectLoadMore"]').removeClass('active');
+                error: function(e){
+                    console.log(e);
+                    $('[data-place="detectLoadMore"]').removeClass('active');
                 }
             });
         }
