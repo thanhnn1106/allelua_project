@@ -9,7 +9,7 @@
     <head>
         <title>alletula</title>
         <meta content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=0" name="viewport">
-        <meta name="csrf-token" content="p5o8mtEuy9SrC1sf04TpIZA3A5iVDykNiv0X0Zmk" />
+        <meta name="csrf-token" content="MospJo7uAuA7DIbM0Ht3QKKegTg38f226MnsEHna" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,700italic,400italic,300italic,300&subset=vietnamese&coz=20170520090756">
         <link href="http://allelua.com/front/js/bootstrap/4.0.0-alpha.2/css/bootstrap.css" media="all" rel="stylesheet" type="text/css">
         <link href="http://allelua.com/front/js/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" >
@@ -72,7 +72,7 @@
                                                                         <a href="http://allelua.com/cart/list" class="link-menu-top" >
                             <span class="ic i-cart" >
                                 <span>                     
-                                    <span class="cartCount">1</span>
+                                    <span class="cartCount">0</span>
                                 </span>
                             </span>
                             <span class="hidden-md-down" >Giỏ hàng</span>
@@ -130,14 +130,14 @@
                     </div>
                     <div class="form-search" >
                         <div class="inner-form-search clearfix" >
-                            <form class="fsearch clearfix" action="http://allelua.com/search" method="GET">
+                            <form id="front-search" class="fsearch clearfix" action="http://allelua.com/search" method="GET">
                                 <div class="inner-fsearch" >
-                                    <input type="text" name="q" class="input-search" value="" >
-                                    <button class="btn-search" >
+                                    <input type="text" id="keyword" name="q" class="input-search" value="" >
+                                    <button class="btn-search" id="search-button">
                                         <i class="fa fa-search" aria-hidden="true"></i>
                                     </button>
                                 </div>
-                                <a href="javascript:void(0);" class="btn-capture" >
+                                <a href="javascript:void(0);" onclick="fncSearchImage();" class="btn-capture">
                                     <i class="fa fa-camera" aria-hidden="true"></i>
                                 </a>
                             </form>
@@ -171,22 +171,22 @@
                             <div class="col-sm-12" >
                                 <div class="content-center" >
                                     <div class="inner-content-center clearfix" >
-                                        <div class="list-product clearfix" data-total=" 4 " data-start=" 1 ">
+                                        <div id="productList" class="list-product clearfix" data-total=" 50 " data-start="10">
                                             <!-- BEGIN PRODUCT LISTS -->
                                             <div class="row" >
             <div class="col-ex-2 col-lg-3 col-md-4 col-sm-4 col-xs-6" >
         <div class="item-product" >
             <div class="in-product clearfix" >
                 <div class="thumb-product text-xs-center" >
-                    <a href="http://allelua.com/products/detail/ljhkhkjhk-1" title="ljhkhkjhk" class="link-product" >
-                        <img src="http://allelua.com/uploads/product/thumb/59ad76e03d052.PNG" alt="1.PNG" class="img-fluid" >
+                    <a href="http://allelua.com/products/detail/prano-206" title="Prano" class="link-product" >
+                        <img src="http://allelua.com/uploads/product/VV5GH9/thumb/w-resize-59ca46e5b7489.jpg" alt="image.jpg" class="img-fluid" >
                     </a>
                 </div>
                 <h3 class="name-product" >
-                    <a href="http://allelua.com/products/detail/ljhkhkjhk-1" title="ljhkhkjhk" class="link-product" >ljhkhkjhk</a>
+                    <a href="http://allelua.com/products/detail/prano-206" title="Prano" class="link-product" >Prano</a>
                 </h3>
                 <div class="price-product clearfix" >
-                    <span class="price-sale-product" >1,000 đ</span>
+                    <span class="price-sale-product" >180,000 đ</span>
                 </div>
             </div>
         </div>
@@ -195,15 +195,15 @@
         <div class="item-product" >
             <div class="in-product clearfix" >
                 <div class="thumb-product text-xs-center" >
-                    <a href="http://allelua.com/products/detail/lklkjl-2" title="lklkjl" class="link-product" >
-                        <img src="http://allelua.com/uploads/product/thumb/59ad78a27e8fe.PNG" alt="2.PNG" class="img-fluid" >
+                    <a href="http://allelua.com/products/detail/prano-205" title="Prano" class="link-product" >
+                        <img src="http://allelua.com/uploads/product/4NEY5L/thumb/w-resize-59c9da676049b.png" alt="20106513_1234727229986513_5344264929332698941_n.png" class="img-fluid" >
                     </a>
                 </div>
                 <h3 class="name-product" >
-                    <a href="http://allelua.com/products/detail/lklkjl-2" title="lklkjl" class="link-product" >lklkjl</a>
+                    <a href="http://allelua.com/products/detail/prano-205" title="Prano" class="link-product" >Prano</a>
                 </h3>
                 <div class="price-product clearfix" >
-                    <span class="price-sale-product" >10,000 đ</span>
+                    <span class="price-sale-product" >180,000 đ</span>
                 </div>
             </div>
         </div>
@@ -212,15 +212,15 @@
         <div class="item-product" >
             <div class="in-product clearfix" >
                 <div class="thumb-product text-xs-center" >
-                    <a href="http://allelua.com/products/detail/rgo-3" title="rgo" class="link-product" >
-                        <img src="http://allelua.com/uploads/product/thumb/59ad7b6e94116.jpg" alt="14591681_1948270975443784_5345092803188744312_n.jpg" class="img-fluid" >
+                    <a href="http://allelua.com/products/detail/ngoi-lop-lama-203" title="Ngói Lợp Lama" class="link-product" >
+                        <img src="http://allelua.com/uploads/product/6GNBWB/thumb/w-resize-59c9cbe4989b9.jpg" alt="image.jpg" class="img-fluid" >
                     </a>
                 </div>
                 <h3 class="name-product" >
-                    <a href="http://allelua.com/products/detail/rgo-3" title="rgo" class="link-product" >rgo</a>
+                    <a href="http://allelua.com/products/detail/ngoi-lop-lama-203" title="Ngói Lợp Lama" class="link-product" >Ngói Lợp Lama</a>
                 </h3>
                 <div class="price-product clearfix" >
-                    <span class="price-sale-product" >1,412 đ</span>
+                    <span class="price-sale-product" >10,800 đ</span>
                 </div>
             </div>
         </div>
@@ -229,15 +229,117 @@
         <div class="item-product" >
             <div class="in-product clearfix" >
                 <div class="thumb-product text-xs-center" >
-                    <a href="http://allelua.com/products/detail/gjlgh-4" title="GJLGH" class="link-product" >
-                        <img src="http://allelua.com/uploads/product/thumb/59ad7c917278a.jpg" alt="14591681_1948270975443784_5345092803188744312_n.jpg" class="img-fluid" >
+                    <a href="http://allelua.com/products/detail/prano-202" title="Prano" class="link-product" >
+                        <img src="http://allelua.com/uploads/product/X7EH85/thumb/w-resize-59c9c2f00c6da.png" alt="z769832607002_f3ce335fc45dafd9f6f384bdff6ba116.png" class="img-fluid" >
                     </a>
                 </div>
                 <h3 class="name-product" >
-                    <a href="http://allelua.com/products/detail/gjlgh-4" title="GJLGH" class="link-product" >GJLGH</a>
+                    <a href="http://allelua.com/products/detail/prano-202" title="Prano" class="link-product" >Prano</a>
                 </h3>
                 <div class="price-product clearfix" >
-                    <span class="price-sale-product" >111 đ</span>
+                    <span class="price-sale-product" >180,000 đ</span>
+                </div>
+            </div>
+        </div>
+    </div><!-- end item-product -->
+            <div class="col-ex-2 col-lg-3 col-md-4 col-sm-4 col-xs-6" >
+        <div class="item-product" >
+            <div class="in-product clearfix" >
+                <div class="thumb-product text-xs-center" >
+                    <a href="http://allelua.com/products/detail/gach-prime-bong-kieng-80x80-201" title="gạch Prime bóng kiếng 80x80" class="link-product" >
+                        <img src="http://allelua.com/uploads/product/60KAJ9/thumb/w-resize-59c9c2a6c07cb.png" alt="z775133095133_b879f8811dc48681bc76468ba559681c.png" class="img-fluid" >
+                    </a>
+                </div>
+                <h3 class="name-product" >
+                    <a href="http://allelua.com/products/detail/gach-prime-bong-kieng-80x80-201" title="gạch Prime bóng kiếng 80x80" class="link-product" >gạch Prime bóng kiếng 80x80</a>
+                </h3>
+                <div class="price-product clearfix" >
+                    <span class="price-sale-product" >180,000 đ</span>
+                </div>
+            </div>
+        </div>
+    </div><!-- end item-product -->
+            <div class="col-ex-2 col-lg-3 col-md-4 col-sm-4 col-xs-6" >
+        <div class="item-product" >
+            <div class="in-product clearfix" >
+                <div class="thumb-product text-xs-center" >
+                    <a href="http://allelua.com/products/detail/ngoi-lama-188" title="Ngói Lama" class="link-product" >
+                        <img src="http://allelua.com/uploads/product/ACA1DL/thumb/w-resize-59c92df0a4827.png" alt="w-resize-59c92c015ffdd.png" class="img-fluid" >
+                    </a>
+                </div>
+                <h3 class="name-product" >
+                    <a href="http://allelua.com/products/detail/ngoi-lama-188" title="Ngói Lama" class="link-product" >Ngói Lama</a>
+                </h3>
+                <div class="price-product clearfix" >
+                    <span class="price-sale-product" >12 đ</span>
+                </div>
+            </div>
+        </div>
+    </div><!-- end item-product -->
+            <div class="col-ex-2 col-lg-3 col-md-4 col-sm-4 col-xs-6" >
+        <div class="item-product" >
+            <div class="in-product clearfix" >
+                <div class="thumb-product text-xs-center" >
+                    <a href="http://allelua.com/products/detail/ngoi-lama-187" title="Ngói Lama" class="link-product" >
+                        <img src="http://allelua.com/uploads/product/K97EWV/thumb/w-resize-59c92c015ffdd.png" alt="18.04.2017-099.png" class="img-fluid" >
+                    </a>
+                </div>
+                <h3 class="name-product" >
+                    <a href="http://allelua.com/products/detail/ngoi-lama-187" title="Ngói Lama" class="link-product" >Ngói Lama</a>
+                </h3>
+                <div class="price-product clearfix" >
+                    <span class="price-sale-product" >12 đ</span>
+                </div>
+            </div>
+        </div>
+    </div><!-- end item-product -->
+            <div class="col-ex-2 col-lg-3 col-md-4 col-sm-4 col-xs-6" >
+        <div class="item-product" >
+            <div class="in-product clearfix" >
+                <div class="thumb-product text-xs-center" >
+                    <a href="http://allelua.com/products/detail/ngoi-lama-186" title="Ngói Lama" class="link-product" >
+                        <img src="http://allelua.com/uploads/product/2Y8BI0/thumb/w-resize-59c92bbe32716.png" alt="18.04.2017-099.png" class="img-fluid" >
+                    </a>
+                </div>
+                <h3 class="name-product" >
+                    <a href="http://allelua.com/products/detail/ngoi-lama-186" title="Ngói Lama" class="link-product" >Ngói Lama</a>
+                </h3>
+                <div class="price-product clearfix" >
+                    <span class="price-sale-product" >12 đ</span>
+                </div>
+            </div>
+        </div>
+    </div><!-- end item-product -->
+            <div class="col-ex-2 col-lg-3 col-md-4 col-sm-4 col-xs-6" >
+        <div class="item-product" >
+            <div class="in-product clearfix" >
+                <div class="thumb-product text-xs-center" >
+                    <a href="http://allelua.com/products/detail/ngoi-lama-185" title="Ngói Lama" class="link-product" >
+                        <img src="http://allelua.com/uploads/product/P91JNO/thumb/w-resize-59c92a14f3a2f.png" alt="18.04.2017-099.png" class="img-fluid" >
+                    </a>
+                </div>
+                <h3 class="name-product" >
+                    <a href="http://allelua.com/products/detail/ngoi-lama-185" title="Ngói Lama" class="link-product" >Ngói Lama</a>
+                </h3>
+                <div class="price-product clearfix" >
+                    <span class="price-sale-product" >12 đ</span>
+                </div>
+            </div>
+        </div>
+    </div><!-- end item-product -->
+            <div class="col-ex-2 col-lg-3 col-md-4 col-sm-4 col-xs-6" >
+        <div class="item-product" >
+            <div class="in-product clearfix" >
+                <div class="thumb-product text-xs-center" >
+                    <a href="http://allelua.com/products/detail/ngoi-lama-184" title="Ngoi lama" class="link-product" >
+                        <img src="http://allelua.com/uploads/product/YE7EFK/thumb/w-resize-59c924fd702d5.png" alt="18.04.2017-099.png" class="img-fluid" >
+                    </a>
+                </div>
+                <h3 class="name-product" >
+                    <a href="http://allelua.com/products/detail/ngoi-lama-184" title="Ngoi lama" class="link-product" >Ngoi lama</a>
+                </h3>
+                <div class="price-product clearfix" >
+                    <span class="price-sale-product" >12 đ</span>
                 </div>
             </div>
         </div>
@@ -245,8 +347,7 @@
     </div>
                                             <!-- END PRODUCT LISTS -->
                                         </div>
-
-                                        <div class="text-xs-center clearfix load-scroll" data-place="detectLoadMore" ></div>
+                                                                                <div class="text-xs-center clearfix load-scroll" data-url="http://allelua.com/products/feed?slug=gach-men" data-place="detectLoadMore" style=""></div>
                                                                             </div>
                                 </div>
                             </div>
@@ -268,7 +369,7 @@
             </div>
 
             <!-- BEGIN SUB CATEGORY -->
-            <div class="mini-box"  >
+            <div class="mini-box">
     <div class="mini-box-content" >
         <ul class="nav-hots clearfix" >
                         <li>
@@ -319,8 +420,88 @@
                 </div>
                 -->
                 <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?brand=cf"}}">
+                        <span class="coz-label-check-inner">cf</span>
+                        <span class="coz-sum-check" >(4)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx">
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="brand[]" value="0" style="display: none" data-id="" data-input="brand" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?brand=Hehe"}}">
+                        <span class="coz-label-check-inner">Hehe</span>
+                        <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx">
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="brand[]" value="0" style="display: none" data-id="" data-input="brand" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?brand=hkhj"}}">
+                        <span class="coz-label-check-inner">hkhj</span>
+                        <span class="coz-sum-check" >(2)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx">
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="brand[]" value="0" style="display: none" data-id="" data-input="brand" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?brand=hl"}}">
+                        <span class="coz-label-check-inner">hl</span>
+                        <span class="coz-sum-check" >(2)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx">
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="brand[]" value="0" style="display: none" data-id="" data-input="brand" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
                     <a href="http://allelua.com/products/gach-men?brand=hlah"}}">
                         <span class="coz-label-check-inner">hlah</span>
+                        <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx">
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="brand[]" value="0" style="display: none" data-id="" data-input="brand" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?brand=jlll"}}">
+                        <span class="coz-label-check-inner">jlll</span>
                         <span class="coz-sum-check" >(1)</span>
                     </a>
                 </div>
@@ -367,9 +548,121 @@
                 </div>
                 -->
                 <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?brand=Lama"}}">
+                        <span class="coz-label-check-inner">Lama</span>
+                        <span class="coz-sum-check" >(15)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx">
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="brand[]" value="0" style="display: none" data-id="" data-input="brand" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
                     <a href="http://allelua.com/products/gach-men?brand=LHJL"}}">
                         <span class="coz-label-check-inner">LHJL</span>
                         <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx">
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="brand[]" value="0" style="display: none" data-id="" data-input="brand" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?brand=lk"}}">
+                        <span class="coz-label-check-inner">lk</span>
+                        <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx">
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="brand[]" value="0" style="display: none" data-id="" data-input="brand" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?brand=Prano"}}">
+                        <span class="coz-label-check-inner">Prano</span>
+                        <span class="coz-sum-check" >(3)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx">
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="brand[]" value="0" style="display: none" data-id="" data-input="brand" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?brand=Prime"}}">
+                        <span class="coz-label-check-inner">Prime</span>
+                        <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx">
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="brand[]" value="0" style="display: none" data-id="" data-input="brand" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?brand=shjl"}}">
+                        <span class="coz-label-check-inner">shjl</span>
+                        <span class="coz-sum-check" >(2)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx">
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="brand[]" value="0" style="display: none" data-id="" data-input="brand" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?brand=Thanh%2BTest"}}">
+                        <span class="coz-label-check-inner">Thanh Test</span>
+                        <span class="coz-sum-check" >(2)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx">
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="brand[]" value="0" style="display: none" data-id="" data-input="brand" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?brand=VITTO"}}">
+                        <span class="coz-label-check-inner">VITTO</span>
+                        <span class="coz-sum-check" >(12)</span>
                     </a>
                 </div>
             </div>
@@ -400,7 +693,7 @@
                 <div class="coz-lable-check" >
                     <a href="http://allelua.com/products/gach-men?pos=bed_room">
                         <span class="coz-label-check-inner">Phòng ngủ </span>
-                        <span class="coz-sum-check" >(1)</span>
+                        <span class="coz-sum-check" >(11)</span>
                     </a>
                 </div>
             </div>
@@ -416,7 +709,39 @@
                 <div class="coz-lable-check" >
                     <a href="http://allelua.com/products/gach-men?pos=living_room">
                         <span class="coz-label-check-inner">Phòng khách </span>
-                        <span class="coz-sum-check" >(3)</span>
+                        <span class="coz-sum-check" >(14)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="position_use[]" value="out_door" style="display: none" data-id="" data-input="position_use" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?pos=out_door">
+                        <span class="coz-label-check-inner">Ngoài trời </span>
+                        <span class="coz-sum-check" >(14)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="position_use[]" value="shower_room" style="display: none" data-id="" data-input="position_use" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?pos=shower_room">
+                        <span class="coz-label-check-inner">Phòng tắm </span>
+                        <span class="coz-sum-check" >(11)</span>
                     </a>
                 </div>
             </div>
@@ -457,6 +782,38 @@
                 <!--
                 <div class="coz-check-box" >
                     <span></span>
+                    <input type="checkbox" name="size[]" value="09_60" style="display: none" data-id="" data-input="size" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?size=09_60">
+                        <span class="coz-label-check-inner">09x60 </span>
+                        <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="size[]" value="10_30" style="display: none" data-id="" data-input="size" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?size=10_30">
+                        <span class="coz-label-check-inner">10x30 </span>
+                        <span class="coz-sum-check" >(2)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
                     <input type="checkbox" name="size[]" value="12_40" style="display: none" data-id="" data-input="size" >
                 </div>
                 -->
@@ -473,13 +830,77 @@
                 <!--
                 <div class="coz-check-box" >
                     <span></span>
+                    <input type="checkbox" name="size[]" value="12_50" style="display: none" data-id="" data-input="size" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?size=12_50">
+                        <span class="coz-label-check-inner">12x50 </span>
+                        <span class="coz-sum-check" >(9)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
                     <input type="checkbox" name="size[]" value="20_25" style="display: none" data-id="" data-input="size" >
                 </div>
                 -->
                 <div class="coz-lable-check" >
                     <a href="http://allelua.com/products/gach-men?size=20_25">
                         <span class="coz-label-check-inner">20x25 </span>
+                        <span class="coz-sum-check" >(3)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="size[]" value="25_25" style="display: none" data-id="" data-input="size" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?size=25_25">
+                        <span class="coz-label-check-inner">25x25 </span>
                         <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="size[]" value="25_40" style="display: none" data-id="" data-input="size" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?size=25_40">
+                        <span class="coz-label-check-inner">25x40 </span>
+                        <span class="coz-sum-check" >(3)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="size[]" value="30_30" style="display: none" data-id="" data-input="size" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?size=30_30">
+                        <span class="coz-label-check-inner">30x30 </span>
+                        <span class="coz-sum-check" >(7)</span>
                     </a>
                 </div>
             </div>
@@ -495,7 +916,55 @@
                 <div class="coz-lable-check" >
                     <a href="http://allelua.com/products/gach-men?size=30_45">
                         <span class="coz-label-check-inner">30x45 </span>
+                        <span class="coz-sum-check" >(14)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="size[]" value="30_60" style="display: none" data-id="" data-input="size" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?size=30_60">
+                        <span class="coz-label-check-inner">30x60 </span>
+                        <span class="coz-sum-check" >(3)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="size[]" value="40_40" style="display: none" data-id="" data-input="size" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?size=40_40">
+                        <span class="coz-label-check-inner">40x40 </span>
                         <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="size[]" value="orders" style="display: none" data-id="" data-input="size" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?size=orders">
+                        <span class="coz-label-check-inner">KHÁC </span>
+                        <span class="coz-sum-check" >(4)</span>
                     </a>
                 </div>
             </div>
@@ -524,8 +993,136 @@
                 </div>
                 -->
                 <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=Cam">
+                        <span class="coz-label-check-inner">Cam</span>
+                        <span class="coz-sum-check" >(6)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=%25C4%2591en">
+                        <span class="coz-label-check-inner">đen</span>
+                        <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=%25C4%2590EN%2BTR%25E1%25BA%25AENG">
+                        <span class="coz-label-check-inner">ĐEN TRẮNG</span>
+                        <span class="coz-sum-check" >(2)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=%25C4%2591%25E1%25BB%258F">
+                        <span class="coz-label-check-inner">đỏ</span>
+                        <span class="coz-sum-check" >(12)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=%25C4%2590%25E1%25BB%258F%2BCam">
+                        <span class="coz-label-check-inner">Đỏ Cam</span>
+                        <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=%25C4%2590%25E1%25BB%258F%2B%25C4%2590en">
+                        <span class="coz-label-check-inner">Đỏ Đen</span>
+                        <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
                     <a href="http://allelua.com/products/gach-men?color=glhglq">
                         <span class="coz-label-check-inner">glhglq</span>
+                        <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=h">
+                        <span class="coz-label-check-inner">h</span>
+                        <span class="coz-sum-check" >(2)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=Hehe">
+                        <span class="coz-label-check-inner">Hehe</span>
                         <span class="coz-sum-check" >(1)</span>
                     </a>
                 </div>
@@ -543,6 +1140,22 @@
                     <a href="http://allelua.com/products/gach-men?color=HLAGHJ">
                         <span class="coz-label-check-inner">HLAGHJ</span>
                         <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=hlkhlkh">
+                        <span class="coz-label-check-inner">hlkhlkh</span>
+                        <span class="coz-sum-check" >(2)</span>
                     </a>
                 </div>
             </div>
@@ -579,6 +1192,166 @@
                 </div>
             </div>
         </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=kjhkj">
+                        <span class="coz-label-check-inner">kjhkj</span>
+                        <span class="coz-sum-check" >(2)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=lkj">
+                        <span class="coz-label-check-inner">lkj</span>
+                        <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=N%25C3%25A2u%2B%25C4%2590%25E1%25BA%25ADm">
+                        <span class="coz-label-check-inner">Nâu Đậm</span>
+                        <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=N%25C3%25A2u%2BNh%25E1%25BA%25A1t">
+                        <span class="coz-label-check-inner">Nâu Nhạt</span>
+                        <span class="coz-sum-check" >(2)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=Thanh%2BTest">
+                        <span class="coz-label-check-inner">Thanh Test</span>
+                        <span class="coz-sum-check" >(2)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=Tr%25E1%25BA%25AFng%2Bx%25C3%25A0">
+                        <span class="coz-label-check-inner">Trắng xà</span>
+                        <span class="coz-sum-check" >(3)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=V%25C3%25A2n%2BG%25E1%25BB%2597">
+                        <span class="coz-label-check-inner">Vân Gỗ</span>
+                        <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=V%25C3%25A0ng">
+                        <span class="coz-label-check-inner">Vàng</span>
+                        <span class="coz-sum-check" >(4)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=Xanh">
+                        <span class="coz-label-check-inner">Xanh</span>
+                        <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="color[]" value="0" style="display: none" data-id="" data-input="color" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?color=Xanh%2Bl%25C3%25A1">
+                        <span class="coz-label-check-inner">Xanh lá</span>
+                        <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
             </div>
 </div>
 <!-- filter color -->
@@ -593,16 +1366,17 @@
             </span>
         </a>
     </div>
+    <!--
     <div class="body-item-fillter clearfix" data-place="itemBodyFillter" data-id="price" >
         <div class="clearfix wrap-ranger-price" >
-            <input type="text" data-neo="ionRangeSlider"  data-min="111" data-max="10000" data-grid="true" value="min_max_price" name="" data-input="price" />
+            <input type="text" data-neo="ionRangeSlider"  data-min="1" data-max="180000" data-grid="true" value="min_max_price" name="" data-input="price" />
         </div>
         <div class="price-from-to" >
             GIÁ TỪ: 
-            <span class="txt-ranger-from" data-place="valueRangerFrom" >111</span> - 
-            <span class="txt-ranger-to"  data-place="valueRangerTo" >10,000</span>
+            <span class="txt-ranger-from" data-place="valueRangerFrom" >1</span> - 
+            <span class="txt-ranger-to"  data-place="valueRangerTo" >180,000</span>
         </div>
-    </div>
+    </div>-->
 </div>
 
 <div class="fillter-item clearfix" data-place="itemFillter" data-id="" >
@@ -618,7 +1392,39 @@
                 <div class="coz-lable-check" >
                     <a href="http://allelua.com/products/gach-men?price=less_50000">
                         <span class="coz-label-check-inner">Dưới 50,000 đ</span>
+                        <span class="coz-sum-check" >(46)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="size[]" value="50000_100000" style="display: none" data-id="" data-input="size" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?price=50000_100000">
+                        <span class="coz-label-check-inner">50,000-100,000</span>
                         <span class="coz-sum-check" >(1)</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <div class="list-fillter-check clearfix" >
+            <div class="coz-item-check_xxx" data-id="" >
+                <!--
+                <div class="coz-check-box" >
+                    <span></span>
+                    <input type="checkbox" name="size[]" value="100000_300000" style="display: none" data-id="" data-input="size" >
+                </div>
+                -->
+                <div class="coz-lable-check" >
+                    <a href="http://allelua.com/products/gach-men?price=100000_300000">
+                        <span class="coz-label-check-inner">100,000-300,000</span>
+                        <span class="coz-sum-check" >(4)</span>
                     </a>
                 </div>
             </div>
@@ -653,188 +1459,36 @@
     </span>
 </h2>
 <div class="content-cm clearfix">
-    <div class="owl-pronews owl-carousel owl-theme coz-owl-nav" data-neo="owlCarousel" data-own-name="owlProductNew" data-wow-delay="0.2s" data-dots="false" data-loop="false" data-nav = "true" data-margin = "15" data-autoplayTimeout="1000" data-autoPlay="5000" data-autoplayHoverPause = "true" data-responsive='{"0":{"items":1}, "320":{"items":2}, "678":{"items":4}, "1200":{"items":5}, "1600":{"items":7}}' >
-                        <div class="product-owl clearfix" >
-            <div class="item-product" >
-                <div class="in-product clearfix" >
-                    <div class="thumb-product text-xs-center" >
-                        <a href="http://allelua.com/products/detail/ljhkhkjhk-1" title="ljhkhkjhk" class="link-product" >
-                            <img src="http://allelua.com/uploads/product/thumb/59ad76e03d052.PNG" alt="1.PNG" class="img-fluid" >
-                        </a>
-                    </div>
-                    <h3 class="name-product" >
-                        <a href="http://allelua.com/products/detail/ljhkhkjhk-1" title="ljhkhkjhk" class="link-product" >ljhkhkjhk</a>
-                    </h3>
-                    <div class="price-product clearfix" >
-                        <span class="price-sale-product" >1,000 đ</span>
+    <div class="list-product clearfix">
+        <div class="row">
+                                    <div class="col-ex-2 col-lg-3 col-md-4 col-sm-4 col-xs-6" >
+                <div class="item-product" >
+                    <div class="in-product clearfix" >
+                        <div class="thumb-product text-xs-center" >
+                            <a href="http://allelua.com/products/detail/ljhkhkjhk-1" title="ljhkhkjhk" class="link-product" >
+                                <img src="http://allelua.com/uploads/product/thumb/w-resize-59ad76e03d052.PNG" alt="1.PNG" class="img-fluid" >
+                            </a>
+                        </div>
+                        <h3 class="name-product" >
+                            <a href="http://allelua.com/products/detail/ljhkhkjhk-1" title="ljhkhkjhk" class="link-product" >ljhkhkjhk</a>
+                        </h3>
+                        <div class="price-product clearfix" >
+                            <span class="price-sale-product" >1,000 đ</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-            </div>
+                    </div>
+    </div>
 </div>
         <!-- END BEST PRICE -->
     </div>
 
     <!-- BEGIN BEST PRICE -->
-    <h2 class="title-cm">
-    <span class="txt-title-cm">
-        SẢN PHẨM BẠN ĐÃ XEM
-    </span>
-</h2>
-<div class="content-cm clearfix">
-    <div class="owl-pronews owl-carousel owl-theme coz-owl-nav" data-neo="owlCarousel" data-own-name="owlProductNew" data-wow-delay="0.2s" data-dots="false" data-loop="false" data-nav = "true" data-margin = "15" data-autoplayTimeout="1000" data-autoPlay="5000" data-autoplayHoverPause = "true" data-responsive='{"0":{"items":1}, "320":{"items":2}, "678":{"items":4}, "1200":{"items":5}, "1600":{"items":7}}' >
-                        <div class="product-owl clearfix" >
-            <div class="item-product" >
-                <div class="in-product clearfix" >
-                    <div class="thumb-product text-xs-center" >
-                        <a href="http://allelua.com/products/detail/rgo-3" title="rgo" class="link-product" >
-                            <img src="http://allelua.com/uploads/product/thumb/59ad7b6e94116.jpg" alt="14591681_1948270975443784_5345092803188744312_n.jpg" class="img-fluid" >
-                        </a>
-                    </div>
-                    <h3 class="name-product" >
-                        <a href="http://allelua.com/products/detail/rgo-3" title="rgo" class="link-product" >rgo</a>
-                    </h3>
-                    <div class="price-product clearfix" >
-                        <span class="price-sale-product" >1,412 đ</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-                        <div class="product-owl clearfix" >
-            <div class="item-product" >
-                <div class="in-product clearfix" >
-                    <div class="thumb-product text-xs-center" >
-                        <a href="http://allelua.com/products/detail/gjlgh-4" title="GJLGH" class="link-product" >
-                            <img src="http://allelua.com/uploads/product/thumb/59ad7c917278a.jpg" alt="14591681_1948270975443784_5345092803188744312_n.jpg" class="img-fluid" >
-                        </a>
-                    </div>
-                    <h3 class="name-product" >
-                        <a href="http://allelua.com/products/detail/gjlgh-4" title="GJLGH" class="link-product" >GJLGH</a>
-                    </h3>
-                    <div class="price-product clearfix" >
-                        <span class="price-sale-product" >111 đ</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-                        <div class="product-owl clearfix" >
-            <div class="item-product" >
-                <div class="in-product clearfix" >
-                    <div class="thumb-product text-xs-center" >
-                        <a href="http://allelua.com/products/detail/ljhkhkjhk-1" title="ljhkhkjhk" class="link-product" >
-                            <img src="http://allelua.com/uploads/product/thumb/59ad76e03d052.PNG" alt="1.PNG" class="img-fluid" >
-                        </a>
-                    </div>
-                    <h3 class="name-product" >
-                        <a href="http://allelua.com/products/detail/ljhkhkjhk-1" title="ljhkhkjhk" class="link-product" >ljhkhkjhk</a>
-                    </h3>
-                    <div class="price-product clearfix" >
-                        <span class="price-sale-product" >1,000 đ</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-                        <div class="product-owl clearfix" >
-            <div class="item-product" >
-                <div class="in-product clearfix" >
-                    <div class="thumb-product text-xs-center" >
-                        <a href="http://allelua.com/products/detail/lklkjl-2" title="lklkjl" class="link-product" >
-                            <img src="http://allelua.com/uploads/product/thumb/59ad78a27e8fe.PNG" alt="2.PNG" class="img-fluid" >
-                        </a>
-                    </div>
-                    <h3 class="name-product" >
-                        <a href="http://allelua.com/products/detail/lklkjl-2" title="lklkjl" class="link-product" >lklkjl</a>
-                    </h3>
-                    <div class="price-product clearfix" >
-                        <span class="price-sale-product" >10,000 đ</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-            </div>
-</div>
-    <!-- END BEST PRICE -->
+        <!-- END BEST PRICE -->
 
     <!-- BEGIN RELATED PRODUCT -->
-    <h2 class="title-cm">
-    <span class="txt-title-cm">
-        SẢN PHẨM LIÊN QUAN
-    </span>
-</h2>
-<div class="content-cm clearfix">
-    <div class="owl-pronews owl-carousel owl-theme coz-owl-nav" data-neo="owlCarousel" data-own-name="owlProductNew" data-wow-delay="0.2s" data-dots="false" data-loop="false" data-nav = "true" data-margin = "15" data-autoplayTimeout="1000" data-autoPlay="5000" data-autoplayHoverPause = "true" data-responsive='{"0":{"items":1}, "320":{"items":2}, "678":{"items":4}, "1200":{"items":5}, "1600":{"items":7}}' >
-                        <div class="product-owl clearfix" >
-            <div class="item-product" >
-                <div class="in-product clearfix" >
-                    <div class="thumb-product text-xs-center" >
-                        <a href="http://allelua.com/products/detail/rgo-3" title="rgo" class="link-product" >
-                            <img src="http://allelua.com/uploads/product/thumb/59ad7b6e94116.jpg" alt="14591681_1948270975443784_5345092803188744312_n.jpg" class="img-fluid" >
-                        </a>
-                    </div>
-                    <h3 class="name-product" >
-                        <a href="http://allelua.com/products/detail/rgo-3" title="rgo" class="link-product" >rgo</a>
-                    </h3>
-                    <div class="price-product clearfix" >
-                        <span class="price-sale-product" >1,412 đ</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-                        <div class="product-owl clearfix" >
-            <div class="item-product" >
-                <div class="in-product clearfix" >
-                    <div class="thumb-product text-xs-center" >
-                        <a href="http://allelua.com/products/detail/gjlgh-4" title="GJLGH" class="link-product" >
-                            <img src="http://allelua.com/uploads/product/thumb/59ad7c917278a.jpg" alt="14591681_1948270975443784_5345092803188744312_n.jpg" class="img-fluid" >
-                        </a>
-                    </div>
-                    <h3 class="name-product" >
-                        <a href="http://allelua.com/products/detail/gjlgh-4" title="GJLGH" class="link-product" >GJLGH</a>
-                    </h3>
-                    <div class="price-product clearfix" >
-                        <span class="price-sale-product" >111 đ</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-                        <div class="product-owl clearfix" >
-            <div class="item-product" >
-                <div class="in-product clearfix" >
-                    <div class="thumb-product text-xs-center" >
-                        <a href="http://allelua.com/products/detail/ljhkhkjhk-1" title="ljhkhkjhk" class="link-product" >
-                            <img src="http://allelua.com/uploads/product/thumb/59ad76e03d052.PNG" alt="1.PNG" class="img-fluid" >
-                        </a>
-                    </div>
-                    <h3 class="name-product" >
-                        <a href="http://allelua.com/products/detail/ljhkhkjhk-1" title="ljhkhkjhk" class="link-product" >ljhkhkjhk</a>
-                    </h3>
-                    <div class="price-product clearfix" >
-                        <span class="price-sale-product" >1,000 đ</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-                        <div class="product-owl clearfix" >
-            <div class="item-product" >
-                <div class="in-product clearfix" >
-                    <div class="thumb-product text-xs-center" >
-                        <a href="http://allelua.com/products/detail/lklkjl-2" title="lklkjl" class="link-product" >
-                            <img src="http://allelua.com/uploads/product/thumb/59ad78a27e8fe.PNG" alt="2.PNG" class="img-fluid" >
-                        </a>
-                    </div>
-                    <h3 class="name-product" >
-                        <a href="http://allelua.com/products/detail/lklkjl-2" title="lklkjl" class="link-product" >lklkjl</a>
-                    </h3>
-                    <div class="price-product clearfix" >
-                        <span class="price-sale-product" >10,000 đ</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-            </div>
-</div>
-    <!-- END RELATED PRODUCT -->
+        <!-- END RELATED PRODUCT -->
 
     <!-- BEGIN COUNTRY AND SERVICE -->
     <div class="row" >
@@ -1090,14 +1744,31 @@
             <!--END FOOTER-->
         </div>
 
+        <div class="modal-loading"></div>
+
+        <div id="dialog-search-form" title="Search image">
+            <form id="front-search-image" class="fsearch clearfix" action="http://allelua.com/search" enctype="multipart/form-data" method="POST">
+              <fieldset>
+                <label for="name">File</label>
+                <input type="file" name="search_image" id="search_image" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+
+                <br/><br/>
+                <button type="submit" class="btn btn-style btn-heart" title="Search" >
+                    <span>Search</span>
+                </button>
+                <input type="hidden" name="_token" value="MospJo7uAuA7DIbM0Ht3QKKegTg38f226MnsEHna">
+              </fieldset>
+            </form>
+        </div>
+
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
     <link rel="stylesheet" href="http://allelua.com/plugins/jQueryUI/jquery-ui.min.css">
-    <script src="http://allelua.com/admin/js/jquery-ui.min.js" type="text/javascript"></script>
 
     <script type="text/javascript" src="http://allelua.com/front/js/tether/dist/js/tether.min.js"></script>
     <script type="text/javascript" src="http://allelua.com/front/js/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://allelua.com/front/js/responsive-bootstrap-toolkit/src/bootstrap-toolkit.js"></script>
+    <script src="http://allelua.com/admin/js/jquery-ui.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="http://allelua.com/front/js/html5shiv/html5shiv.min.js"></script>
     <script type="text/javascript" src="http://allelua.com/front/js/jquery-migrate/jquery-migrate-1.2.0.min.js"></script>
     <script type="text/javascript" src="http://allelua.com/front/js/owl-carousel/owl.carousel.min.js"></script>
@@ -1108,17 +1779,6 @@
     <script type="text/javascript" src="http://allelua.com/front/js/select2/dist/js/select2.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 
-    <!--Embed from Zopim Live Chat Wordpress Plugin v1.4.3-->
-    <!--Start of Zopim Live Chat Script-->
-    <script type="text/javascript">
-    window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-    d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-    _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
-    $.src='http://v2.zopim.com/?3VhEhbO2nxa9L1z9byqjeegpUZaCo5xL';z.t=+new Date;$.
-    type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
-    </script><script>$zopim( function() {
-    })</script><!--End of Zopim Live Chat Script-->
-
     <script>
     // Add token when use ajax
     $.ajaxSetup({
@@ -1126,10 +1786,26 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    $('#search-button').click(function () {
+        if($.trim($('#keyword').val()) === '') {
+            return false;
+        }
+    });
+    var dialogSearch;
+    function fncSearchImage()
+    {
+        dialogSearch = $( "#dialog-search-form" ).dialog({
+            autoOpen: false,
+            width: 350,
+            modal: true
+        });
+        dialogSearch.dialog( "open" );
+    }
     </script>
 
     <script>
 
 </script>
+<script src="js/common.js"></script>
     </body>
 </html>

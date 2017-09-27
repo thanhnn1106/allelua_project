@@ -326,37 +326,41 @@ $( window ).resize( function(){
 window.onload = function(){
     alignHeight();
 };
-var isFinalProduct = false;
-var loading        = false;
-$( window ).scroll( function() {
-//    if( ! $('[data-place="detectLoadMore"]').hasClass('active') && $('[data-place="detectLoadMore"]').length >0 ) {
-    if($('[data-place="detectLoadMore"]').length > 0 && loading == false) {
-        loading = true;
+$( window ).scroll( function(){
+    if( $('[data-place="detectLoadMore"]').length >0 
+        && !$('[data-place="detectLoadMore"]').hasClass('active') ){
         var nt = $('[data-place="detectLoadMore"]').eq(0).offset().top;
-        if( nt >= (parseInt($(window).scrollTop()) + parseInt($(window).height())) ){
-//            $('[data-place="detectLoadMore"]').addClass('active');
+        if( nt <= (parseInt($(window).scrollTop()) + parseInt($(window).height())) ){
+            $('[data-place="detectLoadMore"]').addClass('active');
+            console.log('load more');
             var url = $('[data-place="detectLoadMore"]').attr('data-url');
             var start = $('#productList').attr('data-start');
-
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
                 url: url,
                 data: {start: start},
                 success: function (data) {
+                    $('[data-place="detectLoadMore"]').removeClass('active');
                     if(data.error == 0) {
                         isFinalProduct = data.isFinalProduct;
-                        loading = false;
-                        if(isFinalProduct == true) {
-                            loading = true;
+                        if( isFinalProduct == true || isFinalProduct == 'true' ) {
+                            $('[data-place="detectLoadMore"]').eq(0).remove();
                         }
-
                         $('#productList').attr('data-start', data.start);
-                        $('#productList .row').append(data.result);
-                    } else {
-                        isFinalProduct = true;
-                        loading = true;
+                        var rsel = $('<div class="tml-el" >'+data.result+'</div>');
+                        var rselHtml = rsel.html();
+                        if( rsel.find('.row').length > 0 ){
+                            rselHtml = rsel.find('.row').eq(0).html();
+                        }
+                        $('#productList>.row').eq(0).append(rselHtml);
+                    }else{
+                        $('[data-place="detectLoadMore"]').eq(0).remove();
                     }
+                },
+                error: function(e){
+                    console.log(e);
+                    $('[data-place="detectLoadMore"]').removeClass('active');
                 }
             });
         }
