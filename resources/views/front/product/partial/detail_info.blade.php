@@ -47,11 +47,11 @@
                     <div class="hidden-md-up" >
                         <div class="owl-sm-detail clearfix" >
                             <div id="owlSm" class="owl-carousel owl-theme slideshow" data-neo="owlCarousel" data-own-name="owlDetailSlider" data-wow-delay="0.2s" data-dots="false" data-loop="false" data-nav = "true" data-margin = "0" data-autoplayTimeout="1000" data-autoPlay="5000" data-autoplayHoverPause = "true" data-navTextLeft='<i class="fa fa-chevron-left" aria-hidden="true"></i>' data-navTextRight='<i class="fa fa-chevron-right" aria-hidden="true"></i>' data-responsive='{"0":{"items":1}}' >
+                                @foreach($imagePreviews as $index => $image)
                                 <div class="item" >
-                                    @if(isset($imagePreviews[0]))
-                                    <img src="{{ $imagePreviews[0] }}" title="" alt="" itemprop="image" />
-                                    @endif
+                                    <img src="{{ $image }}" title="" alt="" itemprop="image" />
                                 </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>

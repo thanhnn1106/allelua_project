@@ -23,7 +23,7 @@ class HomeController extends BaseController
         return view('front.home.index', [
             'langs' => \App\Languages::getResults(),
             'generals' => \App\Generals::getResultsByLang($this->lang),
-            'categories' => $categories,
+//            'categories' => $categories,
             'cateHomes' => $cateHomes,
             'productWatched' => $this->loadProductWatched(),
             'productBestPrice' => $productBestPrice,

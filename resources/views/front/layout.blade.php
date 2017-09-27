@@ -42,6 +42,8 @@
             </footer>
             <!--END FOOTER-->
         </div>
+        
+        @include('front.menu_sp')
 
         <div class="modal-loading"></div>
 
@@ -69,7 +71,7 @@
     <script type="text/javascript" src="{{ asset_front('js/responsive-bootstrap-toolkit/src/bootstrap-toolkit.js') }}"></script>
     <script src="{{ asset_admin('js/jquery-ui.min.js') }}" type="text/javascript"></script>
     <script type="text/javascript" src="{{ asset_front('js/html5shiv/html5shiv.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset_front('js/jquery-migrate/jquery-migrate-1.2.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset_front('js/jquery-migrate/jquery-migrate-1.4.1.js') }}"></script>
     <script type="text/javascript" src="{{ asset_front('js/owl-carousel/owl.carousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset_front('js/jquery.scrollbar/jquery.scrollbar.js') }}"></script>
     <script type="text/javascript" src="{{ asset_front('js/ion.rangeSlider/2.1.4/js/ion.rangeSlider.min.js') }}"></script>
