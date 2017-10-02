@@ -418,14 +418,14 @@ return [
     'thiet_bi_nganh_nuoc' => array(
         'ong_nuoc' => array(
             'style' => array(
-                'ong_nuoc_c0_56' => 'product.thiet_bi_nganh_nuoc.ong_nuoc.style.may_cham_cong_tay',
-                'ong_nuoc_c1_64' => 'product.thiet_bi_nganh_nuoc.ong_nuoc.style.may_cham_cong_the',
-                'ong_nuoc_c2_64' => 'product.thiet_bi_nganh_nuoc.ong_nuoc.style.may_cham_cong_the',
-                'ong_nuoc_c3_63' => 'product.thiet_bi_nganh_nuoc.ong_nuoc.style.may_cham_cong_the',
-                'ong_nuoc_c4_20' => 'product.thiet_bi_nganh_nuoc.ong_nuoc.style.may_cham_cong_the',
-                'ong_nuoc_c5_18' => 'product.thiet_bi_nganh_nuoc.ong_nuoc.style.may_cham_cong_the',
-                'ong_nuoc_c6_16' => 'product.thiet_bi_nganh_nuoc.ong_nuoc.style.may_cham_cong_the',
-                'ong_nuoc_c7_5' => 'product.thiet_bi_nganh_nuoc.ong_nuoc.style.may_cham_cong_the',
+                'ong_nuoc_c0_56' => 'product.thiet_bi_nganh_nuoc.ong_nuoc.style.ong_nuoc_c0_56',
+                'ong_nuoc_c1_64' => 'product.thiet_bi_nganh_nuoc.ong_nuoc.style.ong_nuoc_c1_64',
+                'ong_nuoc_c2_64' => 'product.thiet_bi_nganh_nuoc.ong_nuoc.style.ong_nuoc_c2_64',
+                'ong_nuoc_c3_63' => 'product.thiet_bi_nganh_nuoc.ong_nuoc.style.ong_nuoc_c3_63',
+                'ong_nuoc_c4_20' => 'product.thiet_bi_nganh_nuoc.ong_nuoc.style.ong_nuoc_c4_20',
+                'ong_nuoc_c5_18' => 'product.thiet_bi_nganh_nuoc.ong_nuoc.style.ong_nuoc_c5_18',
+                'ong_nuoc_c6_16' => 'product.thiet_bi_nganh_nuoc.ong_nuoc.style.ong_nuoc_c6_16',
+                'ong_nuoc_c7_5' => 'product.thiet_bi_nganh_nuoc.ong_nuoc.style.ong_nuoc_c7_5',
             )
         ),
         'phiu_kien_ong_nuoc' => array(

@@ -238,8 +238,7 @@ class Product extends Model
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->where('t1.status', 1)
                 ->where('t1.style', '<>', '')
-                ->whereNotNull('t1.style')
-                ->groupBy('t1.style');
+                ->whereNotNull('t1.style');
 
 
         self::_query_param($query, $params);
