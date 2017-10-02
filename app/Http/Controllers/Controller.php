@@ -51,11 +51,13 @@ class Controller extends BaseController
             $heightDefine = config('allelua.product_image.resize_height');
         }
 
+        $fileName = sprintf(config('allelua.product_image.resize_image'), $baseName);
+
         if($width < $widthDefine && $height < $heightDefine) {
+            Image::make($ogImage)->save(public_path() . $destPath . DIRECTORY_SEPARATOR . $fileName);
             return $path;
         }
 
-        $fileName = sprintf(config('allelua.product_image.resize_image'), $baseName);
         Image::make($ogImage)->resize($widthDefine, $heightDefine)->save(public_path() . $destPath . DIRECTORY_SEPARATOR . $fileName);
 
         return $destPath . DIRECTORY_SEPARATOR . $fileName;

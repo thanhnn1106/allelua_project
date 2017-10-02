@@ -32,7 +32,7 @@
                     <ul class="list-nav-mmobie" >
 
                         <li class="has-sub"  >
-                            <a href="" class="nav-item-mmobile has-ic-left" >
+                            <a href="javascript:void(0);" class="nav-item-mmobile has-ic-left" >
                                 <span class="mm-left-ic" >
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                 </span>
