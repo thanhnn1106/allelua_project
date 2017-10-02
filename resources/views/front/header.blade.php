@@ -14,7 +14,7 @@
                                 <span class="mini-logo hidden-sm-down" >
                                     <img src="{{ asset_front('images/logo-gray.png') }}" alt="" class="img-fluid" >
                                 </span>
-                                Doanh nghiệp & doanh nghiệp
+                                {{ trans('front.lb_b2b') }}
                             </a>
                         </span>
                     </div>
@@ -57,12 +57,12 @@
                                     <span class="cartCount">{{ $cartCount }}</span>
                                 </span>
                             </span>
-                            <span class="hidden-md-down" >Giỏ hàng</span>
+                            <span class="hidden-md-down" >{{ trans('front.lb_cart') }}</span>
                         </a>
                         @endif
-                        <a href="/" class="link-menu-top hidden-sm-down" >
+                        <a href="tel:0909693962" class="link-menu-top" >
                             <i class="ic i-phone" ></i>
-                            (08) 8888 8888
+                            {{ trans('front.lb_call_us') }}
                         </a>
                         <div class="link-menu-top lang-link" >
                             <a href="javascript:void(0);" class="text-lang" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >

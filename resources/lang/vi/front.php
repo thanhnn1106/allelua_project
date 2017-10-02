@@ -12,6 +12,9 @@ return [
     'seo_keyword_vi'  => 'SEO từ khóa',
     'logo_vi'         => 'Logo',
     'check_vi'        => 'Xóa logo',
+    'lb_call_us'      => 'Gọi chúng tôi',
+    'lb_cart'         => 'Giỏ hàng',
+    'lb_b2b'          => 'Doanh nghiệp & doanh nghiệp',
 
     'bread_crum' => [
         'home' => 'Trang chủ',
