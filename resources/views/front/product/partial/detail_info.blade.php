@@ -26,9 +26,13 @@
                                     <ul class="list-sly" >
                                         <?php $arrDetailImg = $productImages['initialPreviewConfig']; ?>
                                         @foreach($imagePreviews as $index => $image)
+                                        <?php 
+                                            $extra    = $arrDetailImg[$index]['extra'];
+                                            $imgThumb = getImage($extra['rand_name'], $extra['real_name']);
+                                        ?>
                                         <li class="product-thumb item-sly" >
                                             <a href="javascript:void(0);" title="@if(isset($arrDetailImg[$index])) {{ $arrDetailImg[$index]['caption'] }} @endif" data-image="{{ $image }}" data-zoom-image="{{ $image }}" rel="nofollow" >
-                                                <img src="{{ $image }}" title="" alt="" data-image="{{ $image }}" data-zoom-image="{{ $image }}" />
+                                                <img src="{{ $imgThumb['img_src'] }}" title="" alt="" data-image="{{ $image }}" data-zoom-image="{{ $image }}" />
                                             </a>
                                         </li>
                                         @endforeach
@@ -43,11 +47,11 @@
                     <div class="hidden-md-up" >
                         <div class="owl-sm-detail clearfix" >
                             <div id="owlSm" class="owl-carousel owl-theme slideshow" data-neo="owlCarousel" data-own-name="owlDetailSlider" data-wow-delay="0.2s" data-dots="false" data-loop="false" data-nav = "true" data-margin = "0" data-autoplayTimeout="1000" data-autoPlay="5000" data-autoplayHoverPause = "true" data-navTextLeft='<i class="fa fa-chevron-left" aria-hidden="true"></i>' data-navTextRight='<i class="fa fa-chevron-right" aria-hidden="true"></i>' data-responsive='{"0":{"items":1}}' >
+                                @foreach($imagePreviews as $index => $image)
                                 <div class="item" >
-                                    @if(isset($imagePreviews[0]))
-                                    <img src="{{ $imagePreviews[0] }}" title="" alt="" itemprop="image" />
-                                    @endif
+                                    <img src="{{ $image }}" title="" alt="" itemprop="image" />
                                 </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -71,6 +75,8 @@
                                 <p>{{ trans('front.partial.product_detail.delivery_location') }}: {{ $product->delivery_location }}</p>
                                 <p>{{ trans('front.partial.product_detail.shipping_method') }}: {{ getShippingMethod($product->shipping_method) }}</p>
                                 <p>{{ trans('front.partial.product_detail.payment_method') }}: {{ getPaymentMethod($product->payment_method) }}</p>
+                                <p>{{ trans('front.partial.product_detail.quantity_limit') }}: {{ $product->product_quantity_limit }}</p>
+                                <p>{{ trans('front.partial.product_detail.quantity') }}: {{ $product->product_quantity }}</p>
                             </div>
                         </div>
                     </div>
@@ -80,7 +86,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12" >
                     <div class="action-detail clearfix" >
                         <div class="form-product">
-                            <form id="form-add-cart" action="{{ route('cart_add') }}" method="POST" class="form-inline" >
+                            <form id="form-add-cart" action="{{ route('cart_add') }}" method="POST" class="form-inline clearfix" >
 
                                 <div class="product-form-group">
                                     <div class="row form-quantity">
@@ -88,7 +94,7 @@
                                             <label for="select-product-type" class="lbl-type-product" >Số lượng</label>
                                         </div>
                                         <div class="col-xs-12" >
-                                            <input type="number" class="quantity-product-dt" title="quantity" value="1" name="quantity" >
+                                            <input type="number" class="quantity-product-dt" title="quantity" value="{{ $totalQuantity }}" name="quantity" >
                                             <div class="input-error"></div>
                                         </div>
                                     </div>
@@ -173,6 +179,8 @@
             </div>
 
             <div class="tab-pane fade in" id="products_longdescription" role="tabpanel" >
+                <div class="clearfix">{{ trans('front.partial.product_detail.company_name') }}: {{ $personal->company_name }}</div>
+                <div class="clearfix">{{ trans('front.partial.product_detail.company_phone') }}: {{ $personal->company_phone }}</div>
                 <div class="clearfix">@if(isset($personal)) {!! $personal->introduce_company !!} @endif</div>
             </div>
         </div>

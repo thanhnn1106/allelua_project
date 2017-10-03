@@ -12,7 +12,7 @@
 */
 
 // Static page
-Route::get('search', 'Front\SearchController@index')->name('search_page');
+Route::match(['get', 'post'], 'search', 'Front\SearchController@index')->name('search_page');
 Route::get('page/{slug}', 'Front\StaticPageController@index')->name('static_page');
 Route::get('/', 'Front\HomeController@index')->name('home');
 
@@ -37,6 +37,7 @@ Route::get('contact/send-request', 'Front\ContactController@index')->name('conta
 Route::post('contact/send-request', 'Front\ContactController@index')->name('contact');
 
 // Product
+Route::get('products/feed', 'Front\ProductController@feed')->name('product_load_more');
 Route::get('products/{slug}', 'Front\ProductController@loadCate')->name('product_load_cate');
 Route::get('products/detail/{slug}', 'Front\ProductController@detail')->name('product_detail');
 Route::get('products/{slug}/{id}', 'Front\ProductController@loadSub')->name('product_load_sub_cate');

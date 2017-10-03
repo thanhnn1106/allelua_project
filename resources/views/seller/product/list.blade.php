@@ -63,7 +63,7 @@
                                                             <?php $imageThumb = getImage($product->image_rand, $product->image_real); ?>
                                                             @if( ! empty($imageThumb['href']))
                                                             <a href="{{ $imageThumb['href'] }}" target="_blank" >
-                                                                <img src="{{ $imageThumb['href'] }}" width="100px" height="100px">
+                                                                <img src="{{ $imageThumb['img_src'] }}" width="100px" height="100px">
                                                             </a>
                                                             @endif
                                                         </td>

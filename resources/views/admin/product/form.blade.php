@@ -38,6 +38,7 @@
                                     <input type="hidden" id="hide_style" value="{{ $product->style or null }}" />
                                     <input type="hidden" id="hide_material" value="{{ $product->material or null }}" />
                                     <input type="hidden" name="product_id" id="product_id" value="{{ $product->id or null }}" />
+                                    <input type="hidden" name="image_thumb_hidden" value="{{ isset($product->image_rand) ? $product->image_rand : '' }}" />
                                     <label class="control-label">{{ trans('admin.product.lb_categories') }}</label>
                                     <select name="categories" id="categories" url-cate="{{ route('ajax_product_load_cate') }}" class="form-control border-corner">
                                         <option value="">------</option>
@@ -118,11 +119,11 @@
                                 <div class="form-group form-upload form-image_thumb">
                                     <label class="control-label">{{ trans('admin.product.lb_quantity_limit') }}{{ trans('admin.product.lb_image_thumb') }}</label>
                                     <input type="file" accept="image/*" name="image_thumb" id="image_thumb" class="img-value" />
-                                    <p class="help-block-default">(Max: 2MB - *.jpg, *.jpeg, *.png, *.gif)</p>
+                                    <p class="help-block-default">(Max: 2MB - *.jpg, *.jpeg, *.png)</p>
                                     <div class="col-sm-10 control-but">
                                         @if(isset($product->image_rand) && isset($product->image_real))
                                         <?php $imageThumb = getImage($product->image_rand, $product->image_real); ?>
-                                        <a href="{{ $imageThumb['href'] }}" target="_blank"><img src="{{ $imageThumb['href'] }}" width="60px" height="60px" /></a><br/>
+                                        <a href="{{ $imageThumb['href'] }}" target="_blank"><img src="{{ $imageThumb['img_src'] }}" /></a><br/>
                                         @endif
                                     </div>
                                     <div style="clear: both"></div>
@@ -162,6 +163,7 @@
                                     $title       = 'title_'.$lang->iso2;
                                     $slug        = 'slug_'.$lang->iso2;
                                     $color       = 'color_'.$lang->iso2;
+                                    $tagImage       = 'tag_image_'.$lang->iso2;
                                     $brand       = 'brand_'.$lang->iso2;
                                     $infoTech    = 'info_tech_'.$lang->iso2;
                                     $featureHighlight = 'feature_highlight_'.$lang->iso2;
@@ -185,6 +187,12 @@
                                             <div class="form-group">
                                                 <label class="control-label">{{ trans('admin.product.'.$slug) }}</label>
                                                 <p class="help-block-default slug-{{ $lang->iso2 }}">{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->slug : '' }}</p>
+                                            </div>
+
+                                            <div class="form-group form-{{ $tagImage }}">
+                                                <label class="control-label">{{ trans('admin.product.'.$tagImage) }}</label>
+                                                <input type="text" class="form-control border-corner" name="{{ $tagImage }}" data-role="tagsinput" placeholder="Input ..." value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->tag_image : '' }}" />
+                                                  <p class="help-block"></p>
                                             </div>
 
                                             <div class="form-group form-{{ $color }}">
@@ -294,6 +302,7 @@ var initialPreviewImg = initialPreviewConfigImg = [];
 <!-- bootstrap multiple upload -->
 <link rel="stylesheet" href="{{ asset('plugins/bootstrap-fileinput/css/fileinput.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/bootstrap-fileinput/themes/explorer/theme.css') }}">
+<link href="{{ asset('plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" rel="stylesheet"/>
 <script src="{{ asset('plugins/bootstrap-fileinput/js/plugins/piexif.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap-fileinput/js/plugins/sortable.min.js') }}"></script>
 <script src="{{ asset('/plugins/bootstrap-fileinput/js/plugins/purify.min.js') }}"></script>
@@ -301,6 +310,7 @@ var initialPreviewImg = initialPreviewConfigImg = [];
 <!--<script src="{{ asset_admin('/plugins/bootstrap-fileinput/themes/fa/theme.js') }}"></script>-->
 <script src="{{ asset('/plugins/bootstrap-fileinput/js/locales/LANG.js') }}"></script>
 <script src="{{ asset('/plugins/bootstrap-fileinput/themes/explorer/theme.js') }}"></script>
+<script src="{{ asset('plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
 <script src="{{ asset_admin('js/product.js') }}"></script>
 
 @endsection

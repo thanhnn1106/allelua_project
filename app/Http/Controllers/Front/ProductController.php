@@ -35,16 +35,13 @@ class ProductController extends BaseController
                 $subCate = \App\Categories::getRowByLang($this->lang, $cateObj->id);
             }
 
-            $products = $this->loadProductCateFilter($request, $cateObj->id);
+            $params = $this->loadProductCateFilter($request, $cateObj->id);
+            $products = \App\Product::getProductFilter($params);
             if($products->count() === $products->total()) {
                 $isFinalProduct = true;
             }
             $loadStyles = $this->getStyle($cateObj->type);
             $loadStyles = $this->getPrice($loadStyles, $cateObj->type);
-            $params = array(
-                'language_code' => $this->lang,
-                'category_id' => $cateObj->id,
-            );
             $attrs = $this->loadFilterAttr($loadStyles, $params);
         }
 
@@ -57,7 +54,8 @@ class ProductController extends BaseController
             'products' => $products,
             'isFinalProduct' => $isFinalProduct,
             'loadStyles' => $loadStyles,
-            'urlSearch' => route('product_load_cate', array('slug' => $slug))
+            'urlSearch' => route('product_load_cate', array('slug' => $slug)),
+            'urlLoadMore' => route('product_load_more', array('slug' => $slug))
         ];
         $dataView = array_merge($dataView, $attrs);
 
@@ -77,18 +75,13 @@ class ProductController extends BaseController
         if ($cateObj !== NULL) {
             $arrCateId = (array) $cateObj->id;
             $productBestPrice = $this->loadProductBestPrice($arrCateId);
-
-            $products = $this->loadProductSubCateFilter($request, $cateObj->id);
+            $params = $this->loadProductSubCateFilter($request, $cateObj->id);
+            $products = \App\Product::getProductFilter($params);
             if($products->count() === $products->total()) {
                 $isFinalProduct = true;
             }
             $loadStyles = $this->getStyle($cateObj->cate_type, $cateObj->type);
             $loadStyles = $this->getPrice($loadStyles, $cateObj->cate_type, $cateObj->type);
-
-            $params = array(
-                'language_code' => $this->lang,
-                'sub_category_id' => $cateObj->id,
-            );
             $attrs = $this->loadFilterAttr($loadStyles, $params);
         }
 
@@ -100,7 +93,8 @@ class ProductController extends BaseController
             'products' => $products,
             'isFinalProduct' => $isFinalProduct,
             'loadStyles' => $loadStyles,
-            'urlSearch' => route('product_load_sub_cate', array('slug' => $slug, 'id' => $id))
+            'urlSearch' => route('product_load_sub_cate', array('slug' => $slug, 'id' => $id)),
+            'urlLoadMore' => route('product_load_more', array('slug' => $slug, 'id' => $id)),
         ];
         $dataView = array_merge($dataView, $attrs);
 
@@ -122,20 +116,64 @@ class ProductController extends BaseController
             $personal = \App\Personal::getPersonalInfo($this->lang, $product->user_id);
             $productImages = $this->loadImageDetails($product);
 
-            // Update view number of product
-            $objProduct = \App\Product::find($product->id);
-            $objProduct->view_number = $objProduct->view_number + 1;
-            $objProduct->save();
+            // add product watched
+            $this->addProductWatched($product);
         }
 
         $cartCollection = Cart::getContent();
+        $totalQuantity = Cart::getTotalQuantity();
 
         return view('front.product.detail', [
             'product' => $product,
             'productImages' => $productImages,
             'personal' => $personal,
             'productWatched' => $this->loadProductWatched(),
+            'productRelated' => $this->loadProductRelated($id, $product->sub_category_id),
             'totalCart' => $cartCollection->count(),
+            'totalQuantity' => ($totalQuantity > 0) ? $totalQuantity : 1,
         ]);
+    }
+
+    public function feed(Request $request)
+    {
+        try {
+            $slug  = $request->get('slug');
+            $id    = $request->get('id');
+            $start = $request->get('start', 1);
+
+            $cateObj = \App\Categories::getCateSubCate($this->lang, $slug, $id);
+
+            $subCate = NULL;
+            $products = NULL;
+            $isFinalProduct = false;
+
+            if ($cateObj !== NULL) {
+
+                if( ! empty($id)) {
+                    $params = $this->loadProductSubCateFilter($request, $cateObj->id);
+                } else {
+                    $params = $this->loadProductCateFilter($request, $cateObj->id);
+                }
+                $products = \App\Product::getProductFilter($params);
+
+                if($start > 0) {
+                    $start += $products->count();
+                }
+                if($start >= $products->total()) {
+                    $isFinalProduct = true;
+                }
+            }
+
+            $dataView = [
+                'subCate' => $subCate,
+                'products' => $products,
+            ];
+
+            $html = \View::make('front.product.partial.list_product', $dataView)->render();
+
+            return response()->json(array('error' => 0, 'result' => $html, 'isFinalProduct' => $isFinalProduct, 'start'    => $start));
+        } catch (Exception $e) {
+            return response()->json(array('error' => 1, 'result' => trans('common.msg_error_exception_ajax')));
+        }
     }
 }

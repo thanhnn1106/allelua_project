@@ -254,12 +254,15 @@ class UserManageController extends AdminBaseController
             $password = 'required|';
         }
 
-        $required_seller = $required_user = '';
+        $required_seller = $required_user = $user_bithday_day = $user_bithday_month = $user_bithday_year = '';
         if($request->get('roles') == config('allelua.roles.seller')) {
             $required_seller = 'required|';
         }
         if($request->get('roles') == config('allelua.roles.user')) {
             $required_user = 'required|';
+            $user_bithday_day = 'numeric|in:'.implode(',', $dob['day']);
+            $user_bithday_month = 'numeric|in:'.implode(',', $dob['month']);
+            $user_bithday_year = 'numeric|in:'.implode(',', $dob['year']);
         }
 
         $rules =  array(
@@ -273,9 +276,9 @@ class UserManageController extends AdminBaseController
             'country'          => $required_seller.'exists:countries,id',
             'full_name'        => $required_user.'max:255',
             'sex'              => $required_user.'in:' . implode(',', array_keys(config('allelua.sex.label'))),
-            'dob_day'          => $required_user.'numeric|in:'.implode(',', $dob['day']),
-            'dob_month'        => $required_user.'numeric|in:'.implode(',', $dob['month']),
-            'dob_year'         => $required_user.'numeric|in:'.implode(',', $dob['year']),
+            'dob_day'          => $required_user.$user_bithday_day,
+            'dob_month'        => $required_user.$user_bithday_month,
+            'dob_year'         => $required_user.$user_bithday_year,
         );
 
         return $rules;

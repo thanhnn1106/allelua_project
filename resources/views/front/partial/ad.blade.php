@@ -15,9 +15,9 @@
                                             <div class="row">
                                                 @foreach($cateHomes as $itemH)
                                                 <div class="col-xs-6">
-                                                    <div class="item-banner text-xs-center" >
+                                                    <div class="item-banner" >
                                                         <a href="{{ makeSlug($itemH->slug) }}" title="{{ $itemH->title }}" class="banner-link" >
-                                                            <img src="{{ asset_front('dataimages/'.$itemH->type.'.gif') }}" alt="{{ $itemH->title }}" class="img-fluid" >
+                                                            <img src="{{ asset_front('dataimages/'.$itemH->type.'.png') }}" alt="{{ $itemH->title }}" class="img-fluid" >
                                                         </a>
                                                     </div>
                                                 </div>
@@ -49,9 +49,9 @@
                                 </div>
                                 @endif
                                 <div class="col-sm-4 col-xs-12" >
-                                    <div class="item-banner text-xs-center" >
+                                    <div class="item-banner" >
                                         <a href="/" title="" class="banner-link" >
-                                            <img src="{{ asset_front('dataimages/ad1.gif') }}" alt="" class="img-fluid" >
+                                            <img src="{{ asset_front('dataimages/ad1.png') }}" alt="" class="img-fluid" >
                                         </a>
                                     </div>
                                 </div>

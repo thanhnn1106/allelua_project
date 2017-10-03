@@ -27,8 +27,11 @@ function getImage($fileRandPath, $fileRealPath)
         'base_name' => NULL,
     );
     if(!empty($fileRandPath) && file_exists(public_path().$fileRandPath)) {
+        $baseName = sprintf(config('allelua.product_image.resize_image'), basename($fileRandPath));
+        $paths = pathinfo($fileRandPath);
+        $filePath = $paths['dirname'] . DIRECTORY_SEPARATOR . $baseName;
         $result = array(
-            'img_src' => $fileRandPath,
+            'img_src' => url($filePath),
             'href'    => url($fileRandPath),
             'base_name' => basename($fileRealPath),
         );
@@ -155,9 +158,10 @@ function formatPriceQuery($price)
         return str_replace('less_', ' <= ', $price);
     } else if (preg_match('/^great_/', $price)) {
         return str_replace('great_', ' >= ', $price);
-    } else {
+    } else if(preg_match('/[0-9]\_[0-9]/', $price)){
         return ' BETWEEN '.str_replace('_', ' AND ', $price);
     }
+    return '';
 }
 
 function formatPriceLang($price)

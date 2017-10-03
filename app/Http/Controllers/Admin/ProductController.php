@@ -87,13 +87,20 @@ class ProductController extends AdminBaseController
             return response()->json(array('error' => 1, 'result' => trans('common.msg_error_exception_ajax')));
         }
         $productId = $request->get('product_id', NULL);
+        $isEdit    = false;
+        $imageRand = NULL;
 
+        $randomStr = $this->randFolerProduct();
         $product = new Product();
         if(!empty($productId)) {
             $product = Product::find($productId);
             if($product === NULL) {
                 return response()->json(array('error' => 1, 'result' => trans('common.msg_data_not_found')));
             }
+            preg_match('/[A-Z|0-9]{6,}/', $product->image_rand, $matches);
+            $randomStr = isset($matches[0]) ? $matches[0] : NULL;
+            $isEdit = true;
+            $imageRand = $product->image_rand;
         }
 
         // Set rules
@@ -103,16 +110,22 @@ class ProductController extends AdminBaseController
             return response()->json(array('error' => 1, 'result' => trans('common.msg_please_check_form_below'), 'messages' => $validator->errors()), 422);
         }
 
+        // Make path random
+        $pathRand = $this->makePath(config('allelua.product_image.path_upload'), $randomStr, $isEdit);
+
         // Upload image thumb and details
         $imageThumb = NULL;
         if ($request->hasFile('image_thumb')) {
-            $imageThumb = $this->uploadImage($request->file('image_thumb'), config('allelua.product_image.path_upload_thumb'));
+            $imageThumb = $this->uploadImage($request->file('image_thumb'), $pathRand . DIRECTORY_SEPARATOR . 'thumb');
+            $this->resizeImage($imageThumb['rand_name']);
         }
         $imageDetail = array();
         if ($request->hasFile('files')) {
             $files = $request->file('files');
             foreach ($files as $file) {
-                $imageDetail[] = $this->uploadImage($file, config('allelua.product_image.path_upload_detail'));
+                $detail = $this->uploadImage($file, $pathRand);
+                $imageDetail[] = $detail;
+                $this->resizeImage($detail['rand_name'], 'detail');
             }
         }
 
@@ -121,11 +134,18 @@ class ProductController extends AdminBaseController
 
             $rowProduct = $this->_saveProduct($request, $imageThumb, $product);
 
+            // Write tag into image for search engine
+            $this->setTagImage($request, $rowProduct);
+
             $this->_saveProductTrans($request, $rowProduct);
 
             $this->_saveProductImages($request, $imageDetail, $rowProduct);
 
             DB::commit();
+
+            if($imageRand !== NULL && $imageThumb !== NULL) {
+                $this->deleteImage(array('rand_name' => $imageRand));
+            }
 
             $request->session()->flash('success', trans('common.msg_save_success'));
             return response()->json(array('error' => 0, 'result' => route('admin_product_index')));
@@ -133,8 +153,8 @@ class ProductController extends AdminBaseController
         } catch (\Exception $e) {
             DB::rollback();
 
-            $this->deleteImageThumb($imageThumb);
-            $this->deleteImageDetail($imageDetail);
+            $this->deleteImage($imageThumb);
+            $this->deleteImages($imageDetail);
 
             return response()->json(array('error' => 1, 'result' => trans('common.msg_error_transaction')));
         }
@@ -217,7 +237,7 @@ class ProductController extends AdminBaseController
         }
 
         // remove image before thumb
-        $this->deleteImageThumb(array('image_rand' => $product->image_rand));
+        $this->deleteImage(array('image_rand' => $product->image_rand));
 
         // remove image detail
         $images = $product->productImages();
@@ -226,7 +246,7 @@ class ProductController extends AdminBaseController
             foreach($images as $image) {
                 $imagedetails[] = array('image_rand' => $image->image_rand);
             }
-            $this->deleteImageDetail($imagedetails);
+            $this->deleteImages($imagedetails);
         }
 
         $product->forceDelete();
@@ -279,6 +299,7 @@ class ProductController extends AdminBaseController
                 'language_code'        => $lang->iso2,
                 'title'                => $request->get('title_'.$lang->iso2),
                 'slug'                 => str_slug($request->get('title_'.$lang->iso2)),
+                'tag_image'            => $request->get('tag_image_'.$lang->iso2),
                 'color'                => $request->get('color_'.$lang->iso2),
                 'brand'                => $request->get('brand_'.$lang->iso2),
                 'info_tech'            => $request->get('info_tech_'.$lang->iso2),

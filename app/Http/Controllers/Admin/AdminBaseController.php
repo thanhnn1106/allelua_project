@@ -113,6 +113,7 @@ class AdminBaseController extends Controller
 
             $rules['title_'.$lang->iso2] = 'required|max:255';
             $rules['color_'.$lang->iso2]  = 'max:255';
+            $rules['tag_image_'.$lang->iso2]  = 'required|max:255';
             $rules['brand_'.$lang->iso2]  = 'required|max:255';
             $rules['info_tech_'.$lang->iso2]  = 'max:255';
             $rules['feature_highlight_'.$lang->iso2]  = 'max:255';
@@ -153,49 +154,5 @@ class AdminBaseController extends Controller
         $return = $this->returnFormatFile($urlDelete, $arrFile);
 
         return $return;
-    }
-
-    protected function deleteImageThumb($imageThumb)
-    {
-        $filePath = isset($imageThumb['rand_name']) ?$imageThumb['rand_name'] : NULL;
-        $this->removeFile($filePath);
-    }
-
-    protected function deleteImageDetail($imagedetails)
-    {
-        if(count($imagedetails)) {
-            foreach ($imagedetails as $item) {
-                $filePath = isset($item['rand_name']) ? $item['rand_name'] : NULL;
-                $this->removeFile($filePath);
-            }
-        }
-    }
-
-    protected function getBirthDay()
-    {
-        $day = array('' => trans('front.register_page.dob.day'));
-        for($i = 1; $i <= 31; $i++) {
-            $j = $i;
-            if($i < 10) {
-                $j = '0'.$i;
-            }
-            $day[$j] = $j;
-        }
-
-        $month = array('' => trans('front.register_page.dob.month'));
-        for($k = 1; $k <= 12; $k++) {
-            $month[$k] = $k;
-        }
-
-        $year = array('' => trans('front.register_page.dob.year'));
-        $currentYear = date('Y');
-        for($m = 1900; $m < $currentYear; $m++) {
-            $year[$m] = $m;
-        }
-        return array(
-            'day' => $day,
-            'month' => $month,
-            'year' => $year,
-        );
     }
 }

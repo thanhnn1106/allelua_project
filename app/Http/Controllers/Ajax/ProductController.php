@@ -170,7 +170,7 @@ class ProductController extends AjaxBaseController
             if ($productImage !== NULL) {
                 $productImage->delete();
             }
-            $this->removeFile($params['rand_name']);
+            $this->deleteImage($params);
 
             return response()->json(array());
         } catch (Exception $e) {

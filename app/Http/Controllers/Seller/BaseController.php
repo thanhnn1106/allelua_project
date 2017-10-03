@@ -8,6 +8,7 @@ class BaseController extends Controller
 {
     public function __construct() {
         $this->lang = \App::getLocale();
+        \View::share('sp_categories', $this->loadMenuFront());
     }
 
     public function setRules($request)
@@ -106,6 +107,7 @@ class BaseController extends Controller
                 $required = 'required|';
             }
             $rules['title_'.$lang->iso2] = $required.'max:255';
+            $rules['tag_image_'.$lang->iso2] = $required;
             $rules['color_'.$lang->iso2]  = 'max:255';
             $rules['brand_'.$lang->iso2]  = $required.'max:255';
             $rules['info_tech_'.$lang->iso2]  = 'max:255';
@@ -147,21 +149,5 @@ class BaseController extends Controller
         $return = $this->returnFormatFile($urlDelete, $arrFile);
 
         return $return;
-    }
-
-    protected function deleteImageThumb($imageThumb)
-    {
-        $filePath = isset($imageThumb['rand_name']) ?$imageThumb['rand_name'] : NULL;
-        $this->removeFile($filePath);
-    }
-
-    protected function deleteImageDetail($imagedetails)
-    {
-        if(count($imagedetails)) {
-            foreach ($imagedetails as $item) {
-                $filePath = isset($item['rand_name']) ? $item['rand_name'] : NULL;
-                $this->removeFile($filePath);
-            }
-        }
     }
 }

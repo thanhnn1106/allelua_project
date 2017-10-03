@@ -7,6 +7,8 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Languages;
+use Intervention\Image\ImageManagerStatic as Image;
+use Auth;
 
 class Controller extends BaseController
 {
@@ -18,6 +20,47 @@ class Controller extends BaseController
         $langs = array_column($langs->toArray(), 'iso2');
 
         return $langs;
+    }
+
+    protected function randFolerProduct()
+    {
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        $length = 6;
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
+    protected function resizeImage($path, $type = 'thumb')
+    {
+        $destPath = dirname($path);
+        $ogImage  = public_path() . $path;
+
+        list($width, $height) = getimagesize($ogImage);
+
+        $baseName = basename($ogImage);
+
+        if($type === 'detail') {
+            $widthDefine = config('allelua.product_image.resize_detail_width');
+            $heightDefine = config('allelua.product_image.resize_detail_height');
+        } else {
+            $widthDefine = config('allelua.product_image.resize_width');
+            $heightDefine = config('allelua.product_image.resize_height');
+        }
+
+        $fileName = sprintf(config('allelua.product_image.resize_image'), $baseName);
+
+        if($width < $widthDefine && $height < $heightDefine) {
+            Image::make($ogImage)->save(public_path() . $destPath . DIRECTORY_SEPARATOR . $fileName);
+            return $path;
+        }
+
+        Image::make($ogImage)->resize($widthDefine, $heightDefine)->save(public_path() . $destPath . DIRECTORY_SEPARATOR . $fileName);
+
+        return $destPath . DIRECTORY_SEPARATOR . $fileName;
     }
 
     protected function loadMenuFront()
@@ -51,6 +94,16 @@ class Controller extends BaseController
         return $categories;
     }
 
+    protected function makePath($path, $random, $isEdit = false)
+    {
+        $pathRand = sprintf($path, $random);
+        if (is_dir(public_path(). $pathRand) && $isEdit === false) {
+            $random = $this->randFolerProduct();
+            $this->makePath($path, $random, $isEdit);
+        }
+        return sprintf($path, $random);
+    }
+
     protected function uploadImage($file, $path)
     {
         if ( ! is_dir(public_path(). $path)) {
@@ -68,15 +121,18 @@ class Controller extends BaseController
         );
     }
 
-    protected function copyImage($oldImage)
+    protected function copyImage($oldImage, $newPath)
     {
         if(empty($oldImage) || ! file_exists(public_path() . $oldImage)) {
             return false;
         }
+        if ( ! is_dir(public_path(). $newPath)) {
+            mkdir(public_path(). $newPath, 0777, true);
+        }
 
         $extension = \File::extension($oldImage);
         $fileName = uniqid().'.'.$extension;
-        $newFilePath = pathinfo($oldImage)['dirname'] . DIRECTORY_SEPARATOR . $fileName;
+        $newFilePath = $newPath . DIRECTORY_SEPARATOR . $fileName;
 
         $oldPath = public_path() . $oldImage;
         $newPathWithName = public_path() . $newFilePath;
@@ -84,6 +140,36 @@ class Controller extends BaseController
             return $newFilePath;
         }
         return false;
+    }
+
+    protected function setTagImage($request, $product)
+    {
+        if ($product === NULL) {
+            return;
+        }
+
+        $randName = $product->image_rand;
+        $path = dirname($randName);
+        $baseName = basename($randName);
+        $fileName = sprintf(config('allelua.product_image.resize_image'), $baseName);
+        $filePath = $path . DIRECTORY_SEPARATOR . $fileName;
+
+        $imagick = new \Imagick(public_path() . $filePath);
+        $langs = \App\Languages::getResults();
+        $langDefault = \App::getLocale();
+
+        $tagImageDefault = $request->get('tag_image_'.$langDefault);
+        $arrData = array($langDefault => $tagImageDefault);
+
+        foreach ($langs as $lang) {
+            if($lang->iso2 !== $langDefault) {
+                $temp = $request->get('tag_image_' . $lang->iso2);
+                $tagImage = ( ! empty($temp)) ? $temp : $tagImageDefault;
+                $arrData[$lang->iso2] = $tagImage;
+            }
+        }
+        $imagick->commentimage(json_encode($arrData));
+        $imagick->writeImage(public_path() . $filePath);
     }
 
     protected function returnFormatFile($urlDelete, $arrFile)
@@ -172,9 +258,34 @@ class Controller extends BaseController
         return $data;
     }
 
-    protected function loadProductWatched()
+    protected function loadProductWatched($params = array())
     {
-        return \App\Product::getProductWatched($this->lang);
+        $params['language_code'] = $this->lang;
+        $userId = (Auth::check()) ? Auth::user()->id : NULL;
+        $params['user_id'] = $userId;
+
+        return \App\Product::getProductWatched($params);
+    }
+
+    protected function addProductWatched($product)
+    {
+        if($product === NULL || ! Auth::check()) {
+            return;
+        }
+
+        $row = \App\ProductWatched::where('product_id', $product->id)->where('user_id', Auth::user()->id)->first();
+        if($row === NULL) {
+            $productWatched = new \App\ProductWatched();
+            $productWatched->product_id = $product->id;
+            $productWatched->user_id = Auth::user()->id;
+            $productWatched->created_at = date('Y-m-d H:i:s');
+            $productWatched->save();
+        }
+    }
+
+    protected function loadProductRelated($id, $subCategoryId)
+    {
+        return \App\Product::getProductRelated($this->lang, $id, $subCategoryId);
     }
 
     protected function loadProductBestPrice($arrCateId = NULL)
@@ -223,6 +334,44 @@ class Controller extends BaseController
             'month' => $month,
             'year' => $year,
         );
+    }
+
+    protected function deleteImage($imageThumb)
+    {
+        $filePath = isset($imageThumb['rand_name']) ? $imageThumb['rand_name'] : NULL;
+
+        $path = dirname($imageThumb['rand_name']);
+        $baseName = sprintf(config('allelua.product_image.resize_image'), basename($imageThumb['rand_name']));
+
+        $this->removeFile($filePath);
+
+        // Remove file resize
+        $this->removeFile($path . DIRECTORY_SEPARATOR . $baseName);
+    }
+
+    protected function deleteImages($imagedetails)
+    {
+        if(count($imagedetails)) {
+            foreach ($imagedetails as $item) {
+                $filePath = isset($item['rand_name']) ? $item['rand_name'] : NULL;
+                $path = dirname($item['rand_name']);
+                $baseName = sprintf(config('allelua.product_image.resize_image'), basename($item['rand_name']));
+
+                $this->removeFile($filePath);
+
+                // Remove file resize
+                $this->removeFile($path . DIRECTORY_SEPARATOR . $baseName);
+            }
+        }
+    }
+
+    protected function removeDirectory($path) {
+ 	$files = glob(public_path() . $path . '/*');
+	foreach ($files as $file) {
+            is_dir($file) ? $this->removeDirectory($file) : unlink($file);
+	}
+	rmdir(public_path(). $path);
+ 	return;
     }
 
 }

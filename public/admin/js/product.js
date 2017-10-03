@@ -78,6 +78,8 @@ $(document).ready(function() {
     });
 
     // Save action
+    var fileDetail = {};
+
     $('#save_product').click(function (event) {
         $('.alert').hide().find('p').html('');
         $('.help-block').html('');
@@ -85,16 +87,28 @@ $(document).ready(function() {
 
         event.preventDefault();
         var url = $('#form_product').attr('action');
-        var data = new FormData(jQuery('form')[0]);
+
+        var formData = new FormData();
+        var model_data = $("#form_product").serializeArray();
+        $.each(model_data,function(key, input){
+            formData.append(input.name, input.value);
+        });
+        if($('#image_thumb')[0].files[0] !== undefined) {
+            formData.append('image_thumb', $('#image_thumb')[0].files[0]);
+        }
+
         var total_image_detail = $('#form_product .kv-preview-thumb').find('img').length;
-        data.append('total_image_detail', total_image_detail);
-        data.append('sortDetail', sortDetail);
+        formData.append('total_image_detail', total_image_detail);
+        formData.append('sortDetail', sortDetail);
+        for(var i in fileDetail) {
+            formData.append('files[]', fileDetail[i]);
+        }
 
         $.ajax({
             url: url,
             type: 'POST',
             dataType: 'JSON',
-            data: data,
+            data: formData,
             cache: false,
             processData: false, // Don't process the files
             contentType: false, // Set content type to false as jQuery will tell the server its a query string request
@@ -121,8 +135,8 @@ $(document).ready(function() {
     var sortDetail = [];
 
     imageDetail.fileinput({
-        'theme': 'explorer',
-        'uploadUrl': product_ajax_upload,
+        theme: 'explorer',
+        uploadUrl: product_ajax_upload,
         fileActionSettings: {
             showUpload: false // remove icon upload in each rows
         },
@@ -132,11 +146,12 @@ $(document).ready(function() {
         overwriteInitial: false,
         initialPreviewAsData: true,
         browseOnZoneClick: true,
-        removeFromPreviewOnError: true,
+//        removeFromPreviewOnError: true,
         initialPreview: initialPreviewImg,
         initialPreviewConfig: initialPreviewConfigImg,
         //minFileCount: 3,
         maxFileCount: 5,
+        resizeImage: true,
         validateInitialCount: true,
         allowedFileExtensions: ['jpg', 'jpeg', 'png', 'gif']
     })
@@ -156,8 +171,17 @@ $(document).ready(function() {
         for(index in stacks) {
             sortDetail[index] = stacks[index].extra.rand_name;
         }
+    }).on("fileloaded", function(event, file, previewId, index, reader) {
+        fileDetail[previewId] = file;
+    }).on("fileremoved", function(event, id, index) {
+        if(fileDetail[id] !== undefined) {
+            delete fileDetail[id];
+        }
     });
 
+});
+$(document).on('filebatchselected', '.btn-file :file', function(event, files) {
+    
 });
 
 function createSlugLink(obj) {

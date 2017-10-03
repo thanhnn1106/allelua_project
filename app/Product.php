@@ -43,6 +43,11 @@ class Product extends Model
         return $this->hasMany('App\ProductLike', 'product_id', 'id');
     }
 
+    public function productWatched()
+    {
+        return $this->hasMany('App\ProductWatched', 'product_id', 'id');
+    }
+
     public function productTranslates()
     {
         return $this->hasMany('App\ProductTranslate', 'product_id', 'id');
@@ -102,7 +107,9 @@ class Product extends Model
         $query = \DB::table('products AS t1')
                 ->select('t1.id', 't1.price', 't1.image_rand', 't1.image_real', 't2.title', 't2.slug', 't1.category_id')
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
-                ->where('t1.status', 1);
+                ->where('t1.status', 1)
+                ->whereNull('t1.deleted_at')
+                ->orderBy('t1.created_at', 'DESC');
 
         self::_query_param($query, $params);
 
@@ -206,8 +213,7 @@ class Product extends Model
         $query = \DB::table('products AS t1')
                 ->select(\DB::raw(implode(',', $select)))
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
-                ->where('t1.status', 1)
-                ->groupBy('t1.price');
+                ->where('t1.status', 1);
 
         self::_query_param($query, $params);
 
@@ -232,8 +238,7 @@ class Product extends Model
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->where('t1.status', 1)
                 ->where('t1.style', '<>', '')
-                ->whereNotNull('t1.style')
-                ->groupBy('t1.style');
+                ->whereNotNull('t1.style');
 
 
         self::_query_param($query, $params);
@@ -333,18 +338,38 @@ class Product extends Model
         if( ! empty($params['search_material'])) {
             $query->where('t1.material', $params['search_material']);
         }
+
         if( ! empty($params['keyword'])) {
             $query->where('t2.title', 'LIKE', "%{$params['keyword']}%");
         }
+        if( ! empty($params['tag_image'])) {
+            $query->where('t2.tag_image', 'REGEXP', $params['tag_image']);
+        }
     }
 
-    public static function getProductWatched($lang) {
+    public static function getProductWatched($params) {
+        $query = \DB::table('products AS t1')
+                ->select('t1.id', 't1.price', 't1.image_rand', 't1.image_real', 't2.title', 't2.slug', 't1.category_id')
+                ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
+                ->join('product_watched AS t3', 't3.product_id', '=', 't1.id')
+                ->where('t1.status', 1)
+                ->where('t2.language_code', $params['language_code'])
+                ->where('t3.user_id', $params['user_id']);
+
+        $result = $query->paginate(20);
+
+        return $result;
+    }
+
+    public static function getProductRelated($lang, $id, $subCategoryId) {
         $query = \DB::table('products AS t1')
                 ->select('t1.id', 't1.price', 't1.image_rand', 't1.image_real', 't2.title', 't2.slug')
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->where('t1.status', 1)
                 ->where('t2.language_code', $lang)
-                ->orderBy('t1.view_number', 'DESC')
+                ->where('t1.sub_category_id', $subCategoryId)
+                ->where('t1.id', '<>', $id)
+                ->orderBy(\DB::raw("RAND()"))
                 ->limit(20);
 
         return $query->get();
@@ -358,8 +383,7 @@ class Product extends Model
                 ->where('t1.status', 1)
                 ->where('t2.language_code', $lang)
                 ->groupBy('t1.category_id')
-                ->orderBy('t1.price', 'ASC')
-                ->limit(20);
+                ->orderBy('t1.price', 'ASC');
         if ( ! empty($arrCateId)) {
             $query->whereIn('t1.category_id', (array) $arrCateId);
         }
@@ -386,7 +410,7 @@ class Product extends Model
         $query = \DB::table('products AS t1')
                 ->select('t1.id', 't1.category_id', 't1.sub_category_id', 't1.price', 't1.image_rand', 't1.image_real', 't1.payment_method', 't1.shipping_method', 't1.user_id',
                         't2.title', 't2.slug', 't2.brand', 't2.source', 't2.guarantee', 't2.delivery_location', 't2.detail',
-                        't5.slug AS cate_slug', 't5.title AS cate_title', 't6.slug AS sub_cate_slug', 't6.title AS sub_cate_title')
+                        't5.slug AS cate_slug', 't5.title AS cate_title', 't6.slug AS sub_cate_slug', 't6.title AS sub_cate_title', 't1.quantity_limit AS product_quantity_limit' , 't1.quantity AS product_quantity')
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->leftJoin('categories AS t3', 't3.id', '=', 't1.category_id')
                 ->leftJoin('categories AS t4', 't4.id', '=', 't1.sub_category_id')

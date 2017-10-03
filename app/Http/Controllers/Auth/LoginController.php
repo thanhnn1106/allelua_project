@@ -33,7 +33,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -149,7 +149,7 @@ class LoginController extends Controller
                     if (Auth::attempt($userData)) {
                         if( ! empty($redirect)) {
                             $url = base64_decode($redirect);
-                            if( ! preg_match('/account\/login/', $url) && check_domain_name($url)) {
+                            if( ! preg_match('/account\/login/', $url) &&  ! preg_match('/auth\/login/', $url) && check_domain_name($url)) {
                                 return \Redirect::to($url);
                             }
                         }
@@ -205,7 +205,7 @@ class LoginController extends Controller
                     if (Auth::attempt($userData)) {
                         if( ! empty($redirect)) {
                             $url = base64_decode($redirect);
-                            if( ! preg_match('/auth\/login/', $url) && check_domain_name($url)) {
+                            if( ! preg_match('/account\/login/', $url) && ! preg_match('/auth\/login/', $url) && check_domain_name($url)) {
                                 return \Redirect::to($url);
                             }
                         }

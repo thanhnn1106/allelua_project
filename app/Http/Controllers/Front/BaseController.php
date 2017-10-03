@@ -15,17 +15,23 @@ class BaseController extends Controller
     public function __construct()
     {
         $this->lang = \App::getLocale();
+
+        \View::share('sp_categories', $this->loadMenuFront());
     }
 
-    protected function loadProductSearch($request)
+    protected function loadProductSearch($request, $tagImage = null)
     {
+        if ($request->session()->has('tag_image')) {
+            $tagImage = $request->session()->get('tag_image');
+        }
         $params = array(
             'language_code' => $this->lang,
-            'keyword' => $request->get('q'),
+            'keyword' => trim($request->get('q')),
+            'tag_image' => $tagImage,
         );
         $params = $this->getParamSearch($request, $params);
 
-        return \App\Product::getProductFilter($params);
+        return $params;
     }
 
     protected function loadProductCateFilter($request, $cateId)
@@ -34,7 +40,10 @@ class BaseController extends Controller
             'language_code' => $this->lang,
             'category_id' => $cateId,
         );
-        return \App\Product::getProductFilter($params);
+
+        $params = $this->getParamSearch($request, $params);
+
+        return $params;
     }
 
     protected function loadProductSubCateFilter($request, $subCateId)
@@ -46,7 +55,7 @@ class BaseController extends Controller
 
         $params = $this->getParamSearch($request, $params);
 
-        return \App\Product::getProductFilter($params);
+        return $params;
     }
 
     protected function loadFilterAttr($loadStyles, $params)
@@ -95,6 +104,7 @@ class BaseController extends Controller
             });
         }
         $colors = \App\Product::getColorFilter($params);
+
         return array(
             'brands' => $brands,
             'positionUses' => $positionUses,

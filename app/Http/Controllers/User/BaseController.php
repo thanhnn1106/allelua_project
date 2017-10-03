@@ -8,5 +8,7 @@ class BaseController extends Controller
 {
     public function __construct() {
         $this->lang = \App::getLocale();
+
+        \View::share('sp_categories', $this->loadMenuFront());
     }
 }

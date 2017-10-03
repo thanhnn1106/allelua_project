@@ -5,7 +5,7 @@
         <div class="col-xs-2">
             <div class="thumb-item-cart">
                 <a href="{{ makeSlug($cart->attributes->slug, $cart->id) }}" title="{{ $cart->name }}" class="link-product" >
-                    <img src="{{ $imageInfo['href'] }}" alt="{{ $imageInfo['base_name'] }}" class="img-fluid" >
+                    <img src="{{ $imageInfo['img_src'] }}" alt="{{ $imageInfo['base_name'] }}" class="img-fluid" >
                 </a>
             </div>
         </div>
@@ -22,7 +22,7 @@
                     @endif
                 </div>
                 <div class="action-item-cart clearfix">
-                    <a href="{{ route('cart_remove', ['id' => $cart->id]) }}" class="item-action-cart">
+                    <a href="{{ route('cart_remove', ['id' => $cart->id]) }}" class="item-action-cart item-action-del">
                         <i class="fa fa-trash-o" aria-hidden="true"></i>
                     </a>
                     <!--

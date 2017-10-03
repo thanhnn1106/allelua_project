@@ -30,7 +30,7 @@ class CartController extends BaseController
 
             // validate the info, create rules for the inputs
             $rules = array(
-                'quantity'    => 'required|integer',
+                'quantity'    => 'required|integer|min:'.$product->quantity_limit.'|max:'.$product->quantity,
             );
             $validator = Validator::make($request->all(), $rules);
 
@@ -42,8 +42,8 @@ class CartController extends BaseController
             }
 
             $validator->after(function ($validator) use ($request, $quantitySub, $product) {
-                if ($quantitySub > $product->quantity_limit) {
-                    $validator->errors()->add('quantity', trans('front.product.msg_cannot_over_limit', ['QUANTITY' => $product->quantity_limit]));
+                if ($quantitySub < $product->quantity_limit || $quantitySub > $product->quantity) {
+                    $validator->errors()->add('quantity', sprintf(trans('front.product.msg_cannot_over_limit'), $product->quantity_limit, $product->quantity));
                 }
             });
 
@@ -57,7 +57,7 @@ class CartController extends BaseController
                 Cart::update($productId, array('quantity' => $request->get('quantity')));
             } else {
                 $info = array(
-                    'id' => $productId, 
+                    'id' => $productId,
                     'name' => $name, 
                     'quantity' => $request->get('quantity'), 
                     'price' => $product->price,
@@ -116,7 +116,7 @@ class CartController extends BaseController
             $product = Product::find($cart->id);
             $max = '';
             if($product !== NULL) {
-                $max = '|max:' . $product->quantity_limit;
+                $max = '|min:'.$product->quantity_limit.'|max:' . $product->quantity;
             }
             $rules['quantity_'.$cart->id] = 'required|integer'.$max;
         }

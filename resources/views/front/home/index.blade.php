@@ -18,10 +18,6 @@
 @include('front.partial.best_price')
 <!-- END BEST PRICE -->
 
-<!-- BEGIN RELATED PRODUCT -->
-@include('front.partial.related')
-<!-- END RELATED PRODUCT -->
-
 <!-- BEGIN BEST PRICE -->
 @include('front.partial.favorite')
 <!-- END BEST PRICE -->

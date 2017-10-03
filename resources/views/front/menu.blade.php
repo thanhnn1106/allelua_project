@@ -17,21 +17,14 @@
 
             <!-- BEGIN MEGAMENU -->
             <div class="megamenu hidden-md-down" >
-                <div class="inner-megamenu" >
-                    @if(isset($categories))
+                <div id="cssScrollBarMega" ></div>
+                <div class="inner-megamenu scrollbar-dynamic" >
+                    @if(isset($sp_categories))
                     <ul class="nav-mmega clearfix" >
-                        @foreach($categories as $id => $items)
+                        @foreach($sp_categories as $id => $items)
                         <li>
                             <a href="{{ makeSlug($items['slug']) }}" title="{{ $items['title'] }}" >{{ $items['title'] }}</a>
-                            @if(isset($items['childs']))
-                            <ul class="ch-nav-mmega" >
-                                @foreach($items['childs'] as $sub)
-                                <li>
-                                    <a href="{{ makeSlug($sub['slug'], $sub['id'], false) }}" title="{{ $sub['title'] }}" >{{ $sub['title'] }}</a>
-                                </li>
-                                @endforeach
-                            </ul>
-                            @endif
+                            
                         </li>
                         @endforeach
                     </ul>
@@ -44,10 +37,10 @@
                 <div id="cssScrollBarHome" ></div>
                 <div class="clearfix scrollbar scrollbar-dynamic" data-place="scrollbarHome" >
                     <nav class="nav-category navbar-toggleable-lg collapse in" id="navMiniCategory" >
-                        @if(isset($categories))
+                        @if(isset($sp_categories))
                         <ul class="nav navbar-pills">
                             <?php $indexC = 0; ?>
-                            @foreach($categories as $id => $items)
+                            @foreach($sp_categories as $id => $items)
                             <?php 
                             $indexC += 1;
                             if($indexC > 13) { break; }
@@ -56,18 +49,24 @@
                                 <a href="{{ makeSlug($items['slug']) }}" title="{{ $items['title'] }}" class="nav-link">
                                     <img src="https://vcdn.tikicdn.com/desktop/img/nav-icon/ic-book.svg" />
                                     <span>{{ $items['title'] }}</span>
+                                    @if(isset($items['childs']))
+                                    <span class="nav-icon-direct" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >
+                                        <i class="fa fa-angle-right" ></i>
+                                    </span>
+                                    @endif
                                 </a>
-                                <span class="nav-icon-direct" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >
-                                    <i class="fa fa-angle-right" ></i>
-                                </span>
                                 @if(isset($items['childs']))
-                                <ul class="dropdown-menu">
-                                    @foreach($items['childs'] as $sub)
-                                    <li class="dropdown-submenu nav-item">
-                                        <a class="nav-link" href="{{ makeSlug($sub['slug'], $sub['id'], false) }}" title="{{ $items['title'] }}" >{{ $sub['title'] }}</a>
-                                    </li>
-                                    @endforeach
-                                </ul>
+                                <div class="megamenu hidden-md-down">
+                                    <div class="inner-megamenu scrollbar-dynamic">
+                                        <ul class="nav-mmega clearfix">
+                                            @foreach($items['childs'] as $sub)
+                                            <li>
+                                                <a class="nav-link" href="{{ makeSlug($sub['slug'], $sub['id'], false) }}" title="{{ $sub['title'] }}" >{{ $sub['title'] }}</a>
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
                                 @endif
                             </li>
                             @endforeach

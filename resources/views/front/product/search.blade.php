@@ -4,28 +4,33 @@
     <div class="clearfix" >
         <ul class="breadcrumbs" >
             <li class="home" ><a href="{{ route('home') }}" >{{ trans('front.bread_crum.home') }}</a></li>
+            @if(app('request')->input('q'))
             <li>
                 <span>{{ app('request')->input('q') }}</span>
             </li>
+            @endif
         </ul>
     </div>
+    @if ($errors->has('search_image'))
+    <p class="help-block">{{ $errors->first('search_image') }}</p>
+    @endif
 
     <div class="inner-page-main" data-align-height="wrap">
         <div class="row" >
-            @if($products->total())
+            @if($products !== null && $products->total())
                 <div class="clearfix save-marle col-ex-10 col-lg-9 col-md-9 col-sm-12 col-xs-12 col-ex-push-2 col-lg-push-3 col-md-push-3 col-sm-push-0" data-align-height="right"  data-bottom="20" >
                     <div class="page-right clearfix" >
                         <div class="row" >
                             <div class="col-sm-12" >
                                 <div class="content-center" >
                                     <div class="inner-content-center clearfix" >
-                                        <div class="list-product clearfix" data-total="@if(isset($products)) {{ $products->total() }} @endif" data-start="@if(isset($products)) {{ $products->currentPage() }} @endif">
+                                        <div id="productList" class="list-product clearfix" data-total="@if(isset($products)) {{ $products->total() }} @endif" data-start="@if(isset($products)) {{ $products->currentPage() }} @endif">
                                             <!-- BEGIN PRODUCT LISTS -->
                                             @include('front.product.partial.list_product')
                                             <!-- END PRODUCT LISTS -->
                                         </div>
                                         @if(isset($isFinalProduct) && $isFinalProduct === false)
-                                        <div class="text-xs-center clearfix load-scroll" data-place="detectLoadMore" >[LOAD MORE]</div>
+                                        <div class="text-xs-center clearfix load-scroll" data-url="{{ $urlLoadMore }}" data-place="detectLoadMore" ></div>
                                         @endif
                                     </div>
                                 </div>

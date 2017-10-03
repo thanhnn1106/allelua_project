@@ -348,7 +348,7 @@ $( window ).scroll( function(){
                             $('[data-place="detectLoadMore"]').eq(0).remove();
                         }
                         $('#productList').attr('data-start', data.start);
-                        var rsel = $('<div class="tml-el" >'+data.result+'</div>');
+                        var rsel = $('<div class="tml-el" >'+data.result.toString()+'</div>');
                         var rselHtml = rsel.html();
                         if( rsel.find('.row').length > 0 ){
                             rselHtml = rsel.find('.row').eq(0).html();

@@ -51,7 +51,7 @@ class Order extends Model
     public static function getOrderList($userId)
     {
         $orderList = \DB::table('orders AS o')
-                ->select('o.status', 'oi.*', 'u.full_name', 'u.email', 'u.phone_number')
+                ->select('o.status', 'oi.*', 'u.full_name', 'u.email', 'u.phone_number', 'o.address')
                 ->join('order_items AS oi', 'oi.order_id', '=', 'o.id')
                 ->join('users AS u', 'o.user_id', '=', 'u.id')
                 ->where('oi.seller_id', '=', $userId)

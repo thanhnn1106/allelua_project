@@ -73,8 +73,9 @@ class Personal extends Model
 
     public static function getPersonalInfo($lang, $userId) {
         $query = \DB::table('personal AS t1')
-                ->select('t1.*', 't2.introduce_company')
+                ->select('t1.*', 't2.introduce_company', 'u.company_name AS company_name', 'u.phone_number AS company_phone')
                 ->join('personal_translate AS t2', 't2.personal_id', '=', 't1.id')
+                ->join('users AS u', 'u.id', '=', 't1.user_id')
                 ->where('t1.user_id', $userId)
                 ->where('t2.language_code', $lang);
 

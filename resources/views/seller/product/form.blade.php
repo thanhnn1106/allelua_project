@@ -57,6 +57,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                                 <input type="hidden" id="hide_style" value="{{ $product->style or null }}" />
                                                                 <input type="hidden" id="hide_material" value="{{ $product->material or null }}" />
                                                                 <input type="hidden" name="product_id" id="product_id" value="{{ $product->id or null }}" />
+                                                                <input type="hidden" name="image_thumb_hidden" value="{{ isset($product->image_rand) ? $product->image_rand : '' }}" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -186,7 +187,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12" >
                                                                 <label class="lbl-form-control" >
                                                                     {{ trans('front.product.image_thumb') }} <span class="required-field"> (*)</span><br/>
-                                                                    <span class="note-red">(Max: 2MB - *.jpg, *.jpeg, *.png, *.gif)</span>
+                                                                    <span class="note-red">(Max: 2MB - *.jpg, *.jpeg, *.png)</span>
                                                                 </label>
                                                             </div>
                                                             <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12" >
@@ -194,7 +195,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                                     <div id="image_thumb_preview" class="img-prevew-upload btn-upload" style="cursor: pointer;">
                                                                         @if(isset($product->image_rand) && isset($product->image_real))
                                                                         <?php $imageThumb = getImage($product->image_rand, $product->image_real); ?>
-                                                                        <a href="{{ $imageThumb['href'] }}" target="_blank"><img src="{{ $imageThumb['href'] }}" width="100px" height="100px" /></a><br/>
+                                                                        <a href="{{ $imageThumb['href'] }}" target="_blank"><img src="{{ $imageThumb['img_src'] }}" width="100px" height="100px" /></a><br/>
                                                                         @endif
                                                                     </div>
                                                                     <input type="file" accept="image/*" name="image_thumb" id="image_thumb" class="img-value" style="display: none;" />
@@ -238,6 +239,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                             <?php
                                                             $title = 'title_' . $lang->iso2;
                                                             $slug = 'slug_' . $lang->iso2;
+                                                            $tagImage = 'tag_image_' . $lang->iso2;
                                                             $color = 'color_' . $lang->iso2;
                                                             $brand = 'brand_' . $lang->iso2;
                                                             $infoTech = 'info_tech_' . $lang->iso2;
@@ -271,6 +273,19 @@ $listShippingMethod = config('product.shipping_method.label');
                                                                         </div>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                                                                             <p class="help-block-default slug-{{ $lang->iso2 }}">{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->slug : '' }}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="row form-{{ $tagImage }}">
+                                                                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                                            <label class="lbl-form-control">
+                                                                                {{ trans('admin.product.'.$tagImage) }}
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+                                                                            <input type="text" class="form-control form-control-md" name="{{ $tagImage }}" data-role="tagsinput"  value="{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->tag_image : '' }}" />
+                                                                            <div class="input-error"></div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -475,6 +490,7 @@ $initPreviewConfig = isset($productImages['initialPreviewConfig']) ? json_encode
 <!-- bootstrap multiple upload -->
 <link rel="stylesheet" href="{{ asset('plugins/bootstrap-fileinput/css/fileinput.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/bootstrap-fileinput/themes/explorer/theme.css') }}">
+<link href="{{ asset('plugins/bootstrap-tagsinput/bootstrap-tagsinput.css') }}" rel="stylesheet"/>
 <script src="{{ asset('plugins/bootstrap-fileinput/js/plugins/piexif.min.js') }}"></script>
 <script src="{{ asset('plugins/bootstrap-fileinput/js/plugins/sortable.min.js') }}"></script>
 <script src="{{ asset('/plugins/bootstrap-fileinput/js/plugins/purify.min.js') }}"></script>
@@ -482,6 +498,7 @@ $initPreviewConfig = isset($productImages['initialPreviewConfig']) ? json_encode
 <!--<script src="{{ asset_admin('/plugins/bootstrap-fileinput/themes/fa/theme.js') }}"></script>-->
 <script src="{{ asset('/plugins/bootstrap-fileinput/js/locales/LANG.js') }}"></script>
 <script src="{{ asset('/plugins/bootstrap-fileinput/themes/explorer/theme.js') }}"></script>
+<script src="{{ asset('plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
 <script src="{{ asset_admin('js/common.js') }}"></script>
 <script src="{{ asset_front('js/product.js') }}"></script>
 @endsection

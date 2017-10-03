@@ -42,17 +42,36 @@
             </footer>
             <!--END FOOTER-->
         </div>
+        
+        @include('front.menu_sp')
+
+        <div class="modal-loading"></div>
+
+        <div id="dialog-search-form" title="Search image">
+            <form id="front-search-image" class="fsearch clearfix" action="{{ route('search_page') }}" enctype="multipart/form-data" method="POST">
+              <fieldset>
+                <label for="name">File</label>
+                <input type="file" name="search_image" id="search_image" value="Jane Smith" class="text ui-widget-content ui-corner-all">
+
+                <br/><br/>
+                <button type="submit" class="btn btn-style btn-heart" title="Search" >
+                    <span>Search</span>
+                </button>
+                {{ csrf_field() }}
+              </fieldset>
+            </form>
+        </div>
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
     <link rel="stylesheet" href="{{ asset('plugins/jQueryUI/jquery-ui.min.css') }}">
-    <script src="{{ asset_admin('js/jquery-ui.min.js') }}" type="text/javascript"></script>
 
     <script type="text/javascript" src="{{ asset_front('js/tether/dist/js/tether.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset_front('js/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset_front('js/responsive-bootstrap-toolkit/src/bootstrap-toolkit.js') }}"></script>
+    <script src="{{ asset_admin('js/jquery-ui.min.js') }}" type="text/javascript"></script>
     <script type="text/javascript" src="{{ asset_front('js/html5shiv/html5shiv.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset_front('js/jquery-migrate/jquery-migrate-1.2.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset_front('js/jquery-migrate/jquery-migrate-1.4.1.js') }}"></script>
     <script type="text/javascript" src="{{ asset_front('js/owl-carousel/owl.carousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset_front('js/jquery.scrollbar/jquery.scrollbar.js') }}"></script>
     <script type="text/javascript" src="{{ asset_front('js/ion.rangeSlider/2.1.4/js/ion.rangeSlider.min.js') }}"></script>
@@ -79,6 +98,21 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    $('#search-button').click(function () {
+        if($.trim($('#keyword').val()) === '') {
+            return false;
+        }
+    });
+    var dialogSearch;
+    function fncSearchImage()
+    {
+        dialogSearch = $( "#dialog-search-form" ).dialog({
+            autoOpen: false,
+            width: 350,
+            modal: true
+        });
+        dialogSearch.dialog( "open" );
+    }
     </script>
 
     @yield('footer_script')

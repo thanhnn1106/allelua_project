@@ -283,8 +283,7 @@ button.btn-snews-letter {
     z-index: 9
 }
 .item-product .thumb-product {
-    margin-bottom: 30px;
-    margin-bottom: 30px;
+    /*margin-bottom: 30px;*/
     height: 220px;
     position: relative;
     overflow: hidden;

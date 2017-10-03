@@ -12,6 +12,7 @@
             </span>
         </a>
     </div>
+    <!--
     <div class="body-item-fillter clearfix" data-place="itemBodyFillter" data-id="price" >
         <div class="clearfix wrap-ranger-price" >
             <input type="text" data-neo="ionRangeSlider"  data-min="{{ $minPrice }}" data-max="{{ $maxPrice }}" data-grid="true" value="min_max_price" name="" data-input="price" />
@@ -21,7 +22,7 @@
             <span class="txt-ranger-from" data-place="valueRangerFrom" >{{ formatNumber($minPrice) }}</span> - 
             <span class="txt-ranger-to"  data-place="valueRangerTo" >{{ formatNumber($maxPrice) }}</span>
         </div>
-    </div>
+    </div>-->
 </div>
 
 <div class="fillter-item clearfix" data-place="itemFillter" data-id="" >
