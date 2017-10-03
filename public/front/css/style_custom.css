@@ -2015,6 +2015,9 @@ textarea.input-payment {
 .mini-gan{
     color: #FFF
 }
+#dialog-search-form {
+    display: none;
+}
 @media (min-width: 544px){
     .container {
         max-width: 100% !important;
