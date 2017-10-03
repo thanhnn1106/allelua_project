@@ -60,7 +60,8 @@ class Controller extends BaseController
 
         Image::make($ogImage)->resize($widthDefine, $heightDefine)->save(public_path() . $destPath . DIRECTORY_SEPARATOR . $fileName);
 
-        return $destPath . DIRECTORY_SEPARATOR . $fileName;
+        return $path;
+        //return $destPath . DIRECTORY_SEPARATOR . $fileName;
     }
 
     protected function loadMenuFront()
@@ -155,6 +156,7 @@ class Controller extends BaseController
         $filePath = $path . DIRECTORY_SEPARATOR . $fileName;
 
         $imagick = new \Imagick(public_path() . $filePath);
+        $imagick1 = new \Imagick(public_path() . $randName);
         $langs = \App\Languages::getResults();
         $langDefault = \App::getLocale();
 
@@ -170,6 +172,8 @@ class Controller extends BaseController
         }
         $imagick->commentimage(json_encode($arrData));
         $imagick->writeImage(public_path() . $filePath);
+        $imagick1->commentimage(json_encode($arrData));
+        $imagick1->writeImage(public_path() . $randName);
     }
 
     protected function returnFormatFile($urlDelete, $arrFile)
