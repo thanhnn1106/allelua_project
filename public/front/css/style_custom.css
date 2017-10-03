@@ -284,7 +284,10 @@ item-product .name-product {
 }
 .item-product .name-product .link-product {
     font-size: 12px;
-    color: #969696
+    color: #969696;
+    display: block;
+    height: 50px;
+    overflow: hidden;
 }
 .item-product .price-sale-product {
     color: #cc0001;
