@@ -41,6 +41,8 @@ class SearchController extends BaseController
                 $comments = json_decode($comments, true);
                 $tagImage = isset($comments[$langDefault]) ? $comments[$langDefault] : NULL;
                 $request->session()->put('tag_image', $tagImage);
+            } else {
+                $request->session()->forget('tag_image');
             }
         } else {
             if ($q !== NULL && $request->session()->has('tag_image')) {
