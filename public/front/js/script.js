@@ -20,7 +20,6 @@ alignHeight = function(){
                 if( typeof bt == 'undefined' || parseInt(bt) <= 0 ){
                     bt = 0;
                 }
-                console.log(bt);
                 ha = Math.max(hl, hr);
                 $('[data-align-height="left"]', el).css({'min-height': (hr-bt)+'px'});
             }else{
@@ -29,6 +28,36 @@ alignHeight = function(){
         }
     });
 };
+timeDetactNav = null;
+detectBtnMoreNav = function(){
+    if( $(window).width() >= 992 ){
+        if( $('#categoriesHome').length >0 
+            && $('#listBannerHome').length >0
+            && !$('#categoriesHome #navMiniCategory>.navbar-pills').hasClass('all') ){
+            clearInterval(timeDetactNav);
+            clearTimeout(timeDetactNav);
+            timeDetactNav = setTimeout(function(){
+                suHe = 0;
+                $('[data-btn="moreMenuCategory"]').hide();
+                len = $('#categoriesHome #navMiniCategory .navbar-pills>li').length;
+                $('#categoriesHome #navMiniCategory .navbar-pills>li').each(function(i, el){
+                    heli = $(el).data('height');
+                    suHe += heli;
+                    if( suHe >= $('#listBannerHome').height()-60 ){
+                        $(this).addClass('hide');
+                        $(this).prev().addClass('hide');
+                        $('[data-btn="moreMenuCategory"]').css({display: 'block'});
+                    }else{
+                        $(this).removeClass('hide');
+                    }
+                    if( i >= len-1){
+                        alignHeight();
+                    }
+                });
+            }, 100);
+        }
+    }
+}
 $( document ).ready(function() {
     if( $('[data-neo="owlCarousel"]').length > 0 ){
         $('[data-neo="owlCarousel"]').each(function(index, el) {
@@ -314,14 +343,35 @@ $( document ).ready(function() {
         }
     });
 
+    $(document).on('click', '[data-btn="moreMenuCategory"]', function(e){
+        if( $('#categoriesHome #navMiniCategory>.navbar-pills').hasClass('all') ){
+            $('#categoriesHome #navMiniCategory>.navbar-pills').removeClass('all');
+            $(this).html('Xem thêm <i class="fa fa-chevron-down" aria-hidden="true"></i>');
+        }else{
+            $('#categoriesHome #navMiniCategory>.navbar-pills').addClass('all');
+            $(this).html('Thu ngắn <i class="fa fa-chevron-up" aria-hidden="true"></i>');
+        }
+    });
+
     updateScrollBarHome();
     $('[data-place="scrollbarMenuMobile"]').scrollbar();
     $('.inner-megamenu').scrollbar();
     alignHeight();
+    if( $('#categoriesHome').length >0 
+        && $('#listBannerHome').length >0 ){
+        len = $('#categoriesHome #navMiniCategory .navbar-pills>li').length;
+        $('#categoriesHome #navMiniCategory .navbar-pills>li').each(function(i, el){
+            $(el).data('height', $(el).height());
+            if(i >= len -1 ){
+                detectBtnMoreNav();
+            }
+        });
+    }
 });
 $( window ).resize( function(){
     updateScrollBarHome();
     alignHeight();
+    detectBtnMoreNav();
 });
 window.onload = function(){
     alignHeight();

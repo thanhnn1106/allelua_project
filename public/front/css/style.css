@@ -2148,6 +2148,17 @@ input.has-error {
     color: #333;
     font-size: 10px;
 }
+.btn-more-category {
+    display: block;
+    text-align: center;
+    border-top: 1px solid #efefef;
+    padding: 10px 0;
+    color: #969696;
+    display: none;
+}
+.navbar-pills.all>li.hide{
+    display: block !important;
+}
 @media (min-width: 544px){
     .container {
         max-width: 100% !important;
@@ -2231,6 +2242,12 @@ input.has-error {
     }
     .wrap-form{
         padding:15px;
+    }
+    .navbar-pills>li.hide{
+        display: block !important;
+    }
+    .btn-more-category {
+        display: none !important;
     }
 }
 @media (max-width: 767px){
