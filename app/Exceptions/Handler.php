@@ -48,14 +48,14 @@ class Handler extends ExceptionHandler
             if ($request->expectsJson()) {
                 return response()->json(['error' => 'Token not matches'], 400);
             }
-            if ($exception instanceof \Illuminate\Http\Exceptions\PostTooLargeException) {
-                if ($request->expectsJson()) {
-                    return response('file_large', 422);
-                }
-            }
-
             //redirect to a form. Here is an example of how I handle mine
             return redirect($request->fullUrl())->with('csrf_error',"Opps! Seems you couldn't submit form for a longtime. Please try again");
+        }
+
+        if ($exception instanceof \Illuminate\Http\Exceptions\PostTooLargeException) {
+            if ($request->expectsJson()) {
+                return response('file_large', 422);
+            }
         }
         return parent::render($request, $exception);
     }

@@ -10,7 +10,6 @@
                                 @if(count($cateHomes))
                                 <div class="col-sm-8" >
                                     <div class="row" >
-
                                         <div class="col-sm-12" >
                                             <div class="row">
                                                 @foreach($cateHomes as $itemH)
@@ -24,27 +23,6 @@
                                                 @endforeach
                                             </div>
                                         </div>
-
-                                        <!--
-                                        <div class="col-sm-12" >
-                                            <div class="row">
-                                                <div class="col-xs-6">
-                                                    <div class="item-banner text-xs-center" >
-                                                        <a href="/" title="" class="banner-link" >
-                                                            <img src="{{ asset_front('dataimages/bn3.jpg') }}" alt="" class="img-fluid" >
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xs-6">
-                                                    <div class="item-banner text-xs-center" >
-                                                        <a href="/" title="" class="banner-link" >
-                                                            <img src="{{ asset_front('dataimages/bn4.jpg') }}" alt="" class="img-fluid" >
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        -->
                                     </div>
                                 </div>
                                 @endif

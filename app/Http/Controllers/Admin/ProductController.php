@@ -237,14 +237,14 @@ class ProductController extends AdminBaseController
         }
 
         // remove image before thumb
-        $this->deleteImage(array('image_rand' => $product->image_rand));
+        $this->deleteImage(array('rand_name' => $product->image_rand));
 
         // remove image detail
         $images = $product->productImages();
         if($images !== NULL) {
             $imagedetails = array();
             foreach($images as $image) {
-                $imagedetails[] = array('image_rand' => $image->image_rand);
+                $imagedetails[] = array('rand_name' => $image->image_rand);
             }
             $this->deleteImages($imagedetails);
         }

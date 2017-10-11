@@ -376,17 +376,22 @@ class Product extends Model
     }
 
     public static function getProductBestPrice($lang, $arrCateId = NULL) {
-        $query = \DB::table('products AS t1')
-                ->select('t1.id', 't1.category_id', 't1.price', 't1.image_rand', 't1.image_real', 't2.title', 't2.slug', 't3.title AS cate_title', 't3.slug AS cate_slug')
+        $sub = \DB::table('products AS t1')
+                ->select('t1.id', 't1.category_id', \DB::raw('MIN(t1.price) AS price'), 't1.image_rand', 't1.image_real', 't2.title', 't2.slug', 't3.title AS cate_title', 't3.slug AS cate_slug')
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->leftJoin('categories_translate AS t3', 't3.id', '=', 't1.category_id')
                 ->where('t1.status', 1)
                 ->where('t2.language_code', $lang)
-                ->groupBy('t1.category_id')
+                ->groupBy('t2.product_id')
                 ->orderBy('t1.price', 'ASC');
+
         if ( ! empty($arrCateId)) {
-            $query->whereIn('t1.category_id', (array) $arrCateId);
+            $sub->whereIn('t1.category_id', (array) $arrCateId);
         }
+        $query = \DB::table(\DB::raw('(' . $sub->toSql() . ')  as temp'))
+            ->select('temp.*')
+            ->mergeBindings($sub)
+            ->groupBy('temp.category_id');
 
         return $query->get();
     }
