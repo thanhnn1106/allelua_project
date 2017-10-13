@@ -332,14 +332,13 @@ $( window ).scroll( function(){
         var nt = $('[data-place="detectLoadMore"]').eq(0).offset().top;
         if( nt <= (parseInt($(window).scrollTop()) + parseInt($(window).height())) ){
             $('[data-place="detectLoadMore"]').addClass('active');
-            console.log('load more');
             var url = $('[data-place="detectLoadMore"]').attr('data-url');
             var start = $('#productList').attr('data-start');
             $.ajax({
                 type: 'GET',
                 dataType: 'json',
-                url: url,
-                data: {start: start},
+                url: url + '&page='+start,
+                data: {},
                 success: function (data) {
                     $('[data-place="detectLoadMore"]').removeClass('active');
                     if(data.error == 0) {

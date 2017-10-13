@@ -113,7 +113,7 @@ class Product extends Model
 
         self::_query_param($query, $params);
 
-        $result = $query->paginate(LIMIT_ROW);
+        $result = $query->paginate(LIMIT_ROW_AJAX);
 
         return $result;
     }
@@ -413,8 +413,9 @@ class Product extends Model
 
     public static function getProductDetail($params) {
         $query = \DB::table('products AS t1')
-                ->select('t1.id', 't1.category_id', 't1.sub_category_id', 't1.price', 't1.image_rand', 't1.image_real', 't1.payment_method', 't1.shipping_method', 't1.user_id',
-                        't2.title', 't2.slug', 't2.brand', 't2.source', 't2.guarantee', 't2.delivery_location', 't2.detail',
+                ->select('t1.id', 't1.category_id', 't1.sub_category_id', 't1.price', 't1.image_rand', 't1.image_real', 't1.payment_method', 't1.shipping_method', 't1.user_id', 't1.position_use', 't1.size', 't1.style', 't1.material',
+                        't2.title', 't2.slug', 't2.brand', 't2.source', 't2.guarantee', 't2.delivery_location', 't2.detail', 't2.brand', 't2.info_tech', 't2.feature_highlight',
+                        't3.type as cate_type', 't4.type as subcate_type',
                         't5.slug AS cate_slug', 't5.title AS cate_title', 't6.slug AS sub_cate_slug', 't6.title AS sub_cate_title', 't1.quantity_limit AS product_quantity_limit' , 't1.quantity AS product_quantity')
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->leftJoin('categories AS t3', 't3.id', '=', 't1.category_id')

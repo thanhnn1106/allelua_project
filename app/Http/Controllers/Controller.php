@@ -60,8 +60,49 @@ class Controller extends BaseController
 
         Image::make($ogImage)->resize($widthDefine, $heightDefine)->save(public_path() . $destPath . DIRECTORY_SEPARATOR . $fileName);
 
+        $path = public_path() . $destPath . DIRECTORY_SEPARATOR . $fileName;
+        $this->autorotate($path);
+
         return $path;
         //return $destPath . DIRECTORY_SEPARATOR . $fileName;
+    }
+
+    protected function autorotate($path)
+    {
+        $image = new \Imagick($path);
+        switch ($image->getImageOrientation()) {
+        case \Imagick::ORIENTATION_TOPLEFT:
+            break;
+        case \Imagick::ORIENTATION_TOPRIGHT:
+            $image->flopImage();
+            break;
+        case \Imagick::ORIENTATION_BOTTOMRIGHT:
+            $image->rotateImage(new \ImagickPixel("#000"), 180);
+            break;
+        case \Imagick::ORIENTATION_BOTTOMLEFT:
+            $image->flopImage();
+            $image->rotateImage(new \ImagickPixel("#000"), 180);
+            break;
+        case \Imagick::ORIENTATION_LEFTTOP:
+            $image->flopImage();
+            $image->rotateImage(new \ImagickPixel("#000"), -90);
+            break;
+        case \Imagick::ORIENTATION_RIGHTTOP:
+            $image->rotateImage(new \ImagickPixel("#000"), 90);
+            break;
+        case \Imagick::ORIENTATION_RIGHTBOTTOM:
+            $image->flopImage();
+            $image->rotateImage(new \ImagickPixel("#000"), 90);
+            break;
+        case \Imagick::ORIENTATION_LEFTBOTTOM:
+            $image->rotateImage(new \ImagickPixel("#000"), -90);
+            break;
+        default: // Invalid orientation
+            break;
+        }
+        $image->setImageOrientation(\Imagick::ORIENTATION_TOPLEFT);
+        $image->writeImage();
+        return $image;
     }
 
     protected function loadMenuFront()

@@ -71,7 +71,11 @@
                             <p class="lbl-myn" >{{ trans('front.partial.product_detail.short_des') }}</p>
                             <div class="mini-product-description clearfix">
                                 <p>{{ trans('front.partial.product_detail.source') }}: {{ $product->source }}</p>
+                                <p>{{ trans('front.partial.product_detail.brand') }}: {{ $product->brand }}</p>
+                                @include('front.product.partial.style_detail')
                                 <p>{{ trans('front.partial.product_detail.guarantee') }}: {{ $product->guarantee }}</p>
+                                <p>{{ trans('front.partial.product_detail.info_tech') }}: {{ $product->info_tech }}</p>
+                                <p>{{ trans('front.partial.product_detail.feature_highlight') }}: {{ $product->feature_highlight }}</p>
                                 <p>{{ trans('front.partial.product_detail.delivery_location') }}: {{ $product->delivery_location }}</p>
                                 <p>{{ trans('front.partial.product_detail.shipping_method') }}: {{ getShippingMethod($product->shipping_method) }}</p>
                                 <p>{{ trans('front.partial.product_detail.payment_method') }}: {{ getPaymentMethod($product->payment_method) }}</p>

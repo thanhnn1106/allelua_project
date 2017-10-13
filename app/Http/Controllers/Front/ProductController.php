@@ -55,7 +55,7 @@ class ProductController extends BaseController
             'isFinalProduct' => $isFinalProduct,
             'loadStyles' => $loadStyles,
             'urlSearch' => route('product_load_cate', array('slug' => $slug)),
-            'urlLoadMore' => route('product_load_more', array('slug' => $slug))
+            'urlLoadMore' => route('product_load_more', array('slug' => $slug)),
         ];
         $dataView = array_merge($dataView, $attrs);
 
@@ -111,10 +111,13 @@ class ProductController extends BaseController
         $product = \App\Product::getProductDetail($params);
 
         $personal = NULL;
+        $loadStyles = NULL;
         $productImages = NULL;
         if ($product !== NULL) {
             $personal = \App\Personal::getPersonalInfo($this->lang, $product->user_id);
             $productImages = $this->loadImageDetails($product);
+
+            $loadStyles = $this->getStyle($product->cate_type, $product->subcate_type);
 
             // add product watched
             $this->addProductWatched($product);
@@ -131,6 +134,7 @@ class ProductController extends BaseController
             'productRelated' => $this->loadProductRelated($id, $product->sub_category_id),
             'totalCart' => $cartCollection->count(),
             'totalQuantity' => ($totalQuantity > 0) ? $totalQuantity : 1,
+            'loadStyles' => $loadStyles,
         ]);
     }
 
@@ -139,7 +143,11 @@ class ProductController extends BaseController
         try {
             $slug  = $request->get('slug');
             $id    = $request->get('id');
-            $start = $request->get('start', 1);
+            $start = $request->get('page', 1);
+
+            if($start > 0) {
+                $start = $start + LIMIT_ROW_AJAX;
+            }
 
             $cateObj = \App\Categories::getCateSubCate($this->lang, $slug, $id);
 
@@ -156,10 +164,7 @@ class ProductController extends BaseController
                 }
                 $products = \App\Product::getProductFilter($params);
 
-                if($start > 0) {
-                    $start += $products->count();
-                }
-                if($start >= $products->total()) {
+                if($start > $products->total()) {
                     $isFinalProduct = true;
                 }
             }
