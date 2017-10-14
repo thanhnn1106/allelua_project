@@ -24,7 +24,7 @@
                             <div class="col-sm-12" >
                                 <div class="content-center" >
                                     <div class="inner-content-center clearfix" >
-                                        <div id="productList" class="list-product clearfix" data-total="@if(isset($products)) {{ $products->total() }} @endif" data-start="@if(isset($products)) {{ $products->count()+1 }} @endif">
+                                        <div id="productList" class="list-product clearfix" data-total="@if(isset($products)) {{ $products->total() }} @endif" data-start="2">
                                             <!-- BEGIN PRODUCT LISTS -->
                                             @include('front.product.partial.list_product')
                                             <!-- END PRODUCT LISTS -->
