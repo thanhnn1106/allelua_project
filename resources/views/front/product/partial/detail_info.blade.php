@@ -70,17 +70,11 @@
                         <div class="product-description product_description" >
                             <p class="lbl-myn" >{{ trans('front.partial.product_detail.short_des') }}</p>
                             <div class="mini-product-description clearfix">
-                                <p>{{ trans('front.partial.product_detail.source') }}: {{ $product->source }}</p>
-                                <p>{{ trans('front.partial.product_detail.brand') }}: {{ $product->brand }}</p>
+                                <p><i>{{ trans('front.partial.product_detail.source') }}</i>: {{ $product->source }}</p>
+                                <p><i>{{ trans('front.partial.product_detail.brand') }}</i>: {{ $product->brand }}</p>
                                 @include('front.product.partial.style_detail')
-                                <p>{{ trans('front.partial.product_detail.guarantee') }}: {{ $product->guarantee }}</p>
-                                <p>{{ trans('front.partial.product_detail.info_tech') }}: {{ $product->info_tech }}</p>
-                                <p>{{ trans('front.partial.product_detail.feature_highlight') }}: {{ $product->feature_highlight }}</p>
-                                <p>{{ trans('front.partial.product_detail.delivery_location') }}: {{ $product->delivery_location }}</p>
-                                <p>{{ trans('front.partial.product_detail.shipping_method') }}: {{ getShippingMethod($product->shipping_method) }}</p>
-                                <p>{{ trans('front.partial.product_detail.payment_method') }}: {{ getPaymentMethod($product->payment_method) }}</p>
-                                <p>{{ trans('front.partial.product_detail.quantity_limit') }}: {{ $product->product_quantity_limit }}</p>
-                                <p>{{ trans('front.partial.product_detail.quantity') }}: {{ $product->product_quantity }}</p>
+                                <p><i>{{ trans('front.partial.product_detail.quantity_limit') }}</i>: {{ $product->product_quantity_limit }}</p>
+                                <p><i>{{ trans('front.partial.product_detail.quantity') }}</i>: {{ $product->product_quantity }}</p>
                             </div>
                         </div>
                     </div>
@@ -179,7 +173,17 @@
         <div class="tab-content tab-content-detailspro clearfix" >
 
             <div class="tab-pane fade in active" id="products_more" role="tabpanel" >
-                <div class="clearfix" >{!! $product->detail !!}</div>
+                <div class="clearfix" >
+                    <div class="mini-product-description clearfix">
+                        <p><i>{{ trans('front.partial.product_detail.guarantee') }}</i>: {{ $product->guarantee }}</p>
+                        <p><i>{{ trans('front.partial.product_detail.shipping_method') }}</i>: {{ getShippingMethod($product->shipping_method) }}</p>
+                        <p><i>{{ trans('front.partial.product_detail.payment_method') }}</i>: {{ getPaymentMethod($product->payment_method) }}</p>
+                        <p><i>{{ trans('front.partial.product_detail.info_tech') }}</i>: {{ $product->info_tech }}</p>
+                        <p><i>{{ trans('front.partial.product_detail.feature_highlight') }}</i>: {{ $product->feature_highlight }}</p>
+                        <p><i>{{ trans('front.partial.product_detail.delivery_location') }}</i>: {{ $product->delivery_location }}</p>
+                    </div>
+                    {!! $product->detail !!}
+                </div>
             </div>
 
             @if(isset($personal) && ! empty($personal))

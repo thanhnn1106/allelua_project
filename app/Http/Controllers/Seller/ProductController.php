@@ -18,7 +18,6 @@ class ProductController extends BaseController
      */
     public function index(Request $request)
     {
-        echo phpinfo();exit;
         $params = array(
             'language_code' => $this->lang,
             'user_id' => Auth::user()->id,

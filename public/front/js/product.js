@@ -243,7 +243,11 @@ function loadStyleCategory(cateId, subCateId)
         success: function (data) {
             if (data.error === 0) {
                 $('#load_style').html(data.result);
+                $('#load_style').show();
             }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            $('body').addClass("loading");
         }
     });
 }

@@ -71,8 +71,7 @@ class Controller extends BaseController
     {
         $image = new \Imagick($path);
         switch ($image->getImageOrientation()) {
-        case \Imagick::ORIENTATION_TOPLEFT:
-            break;
+
         case \Imagick::ORIENTATION_TOPRIGHT:
             $image->flopImage();
             break;
