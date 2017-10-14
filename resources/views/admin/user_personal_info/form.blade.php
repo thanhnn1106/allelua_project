@@ -91,7 +91,7 @@
                                                     <label class="control-label">{{ trans('admin.personal_info.lb_company_des_' . $lang->iso2) }}</label>
                                                     @foreach ($userTranslateInfo as $item)
                                                         @if ($item->language_code === $lang->iso2)
-                                                           <textarea type="text" value="" rows="10" class="form-control border-corner title-slug" lang="{{ $lang->iso2 }}" id="{{ $introduceCompany }}" name="{{ $introduceCompany }}" placeholder="Input ...">{{ $item->introduce_company }}</textarea>
+                                                           <textarea type="text" value="" rows="10" class="form-control border-corner title-slug editor-content" lang="{{ $lang->iso2 }}" id="{{ $introduceCompany }}" name="{{ $introduceCompany }}" placeholder="Input ...">{{ $item->introduce_company }}</textarea>
                                                            @if ($errors->has($introduceCompany))
                                                                 <p class="help-block">{{ $errors->first($introduceCompany) }}</p>
                                                            @endif
@@ -118,8 +118,23 @@
 @endsection
 
 @section('footer_script')
+<!-- TinyMCE -->
+<script type="text/javascript" src="{{ asset('/plugins/tinymce/tinymce.min.js') }}"></script>
 <script>
 $(function() {
+    tinymce.init({
+        selector: ".editor-content", 
+        theme: "modern", 
+        height: 400,
+        subfolder:"",
+        plugins: [ 
+        "advlist autolink link image lists charmap print preview hr anchor pagebreak", 
+        "searchreplace wordcount visualblocks visualchars code insertdatetime media nonbreaking", 
+        "table contextmenu directionality emoticons paste textcolor filemanager" 
+        ], 
+        image_advtab: true, 
+        toolbar: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect forecolor backcolor | link unlink anchor | image media | print preview code"
+    });
     $('.title-cate').bind('keyup change', function () {
        createSlugLink($(this));
     });

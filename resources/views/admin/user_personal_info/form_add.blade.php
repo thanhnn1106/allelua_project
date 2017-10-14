@@ -96,7 +96,7 @@
                                                 ?>
                                                 <div class="form-group @if ($errors->has($introduceCompany)) has-error @endif">
                                                     <label class="control-label">{{ trans('admin.personal_info.lb_company_des_' . $lang->iso2) }}</label>
-                                                    <textarea type="text" value="" rows="10" class="form-control border-corner title-slug" lang="{{ $lang->iso2 }}" id="{{ $introduceCompany }}}" name="{{ $introduceCompany }}" placeholder="Input ...">{{ old($introduceCompany) }}</textarea>
+                                                    <textarea type="text" value="" rows="10" class="form-control border-corner title-slug editor-content" lang="{{ $lang->iso2 }}" id="{{ $introduceCompany }}}" name="{{ $introduceCompany }}" placeholder="Input ...">{{ old($introduceCompany) }}</textarea>
                                                     @if ($errors->has($introduceCompany))
                                                         <p class="help-block">{{ $errors->first($introduceCompany) }}</p>
                                                     @endif
@@ -120,8 +120,23 @@
 @endsection
 
 @section('footer_script')
+<!-- TinyMCE -->
+<script type="text/javascript" src="{{ asset('/plugins/tinymce/tinymce.min.js') }}"></script>
 <script>
-$(function() {
+$(function () {
+    tinymce.init({
+        selector: ".editor-content", 
+        theme: "modern", 
+        height: 400,
+        subfolder:"",
+        plugins: [ 
+        "advlist autolink link image lists charmap print preview hr anchor pagebreak", 
+        "searchreplace wordcount visualblocks visualchars code insertdatetime media nonbreaking", 
+        "table contextmenu directionality emoticons paste textcolor filemanager" 
+        ], 
+        image_advtab: true, 
+        toolbar: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect forecolor backcolor | link unlink anchor | image media | print preview code"
+    });
     // Autocomplete postal code
     var urlSeller = $( "#seller" ).attr('data-url');
     $( "#seller" ).autocomplete({
