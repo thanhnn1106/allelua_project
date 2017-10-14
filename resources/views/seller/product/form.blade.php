@@ -388,7 +388,7 @@ $listShippingMethod = config('product.shipping_method.label');
                                                                             </label>
                                                                         </div>
                                                                         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
-                                                                            <textarea name="{{ $detail }}"  class="input-payment">{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->detail : '' }}</textarea>
+                                                                            <textarea name="{{ $detail }}"  class="input-payment editor-content">{{ isset($productTrans[$lang->iso2]) ? $productTrans[$lang->iso2]->detail : '' }}</textarea>
                                                                             <div class="input-error"></div>
                                                                         </div>
                                                                     </div>
@@ -474,6 +474,25 @@ $initPreviewConfig = isset($productImages['initialPreviewConfig']) ? json_encode
 ?>
 @endsection
 @section('footer_script')
+<!-- TinyMCE -->
+<script type="text/javascript" src="{{ asset('/plugins/tinymce/tinymce.min.js') }}"></script>
+<script>
+$(function() {
+    tinymce.init({
+        selector: ".editor-content", 
+        theme: "modern", 
+        height: 400,
+        subfolder:"",
+        plugins: [ 
+        "advlist autolink link image lists charmap print preview hr anchor pagebreak", 
+        "searchreplace wordcount visualblocks visualchars code insertdatetime media nonbreaking", 
+        "table contextmenu directionality emoticons paste textcolor filemanager" 
+        ], 
+        image_advtab: true, 
+        toolbar: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect forecolor backcolor | link unlink anchor | image media | print preview code"
+    });
+});
+</script>
 <script>
     var product_ajax_upload = '{{ route('ajax_product_upload_file') }}';
     var product_ajax_delete = '{{ route('ajax_product_delete_file') }}';
