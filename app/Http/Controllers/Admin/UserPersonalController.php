@@ -45,9 +45,9 @@ class UserPersonalController extends AdminBaseController
             $rules =  array(
                 'seller'               => 'required|exists:users,company_name',
                 'user_id'              => 'required|not_in:' . implode(',', $personalUserIdArray),
-                'tax_code'             => 'required|numeric|max:191',
+                'tax_code'             => 'required|numeric',
                 'license_business'     => 'required|max:255',
-                'bank_account'         => 'required|numeric|max:255',
+                'bank_account'         => 'required|numeric',
                 'bank_name'            => 'required|max:255',
                 'bank_address'         => 'required|max:255',
                 'introduce_company_en' => 'required',
