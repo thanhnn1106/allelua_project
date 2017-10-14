@@ -146,7 +146,8 @@ class ProductController extends BaseController
             $start = $request->get('page', 1);
 
             if($start > 0) {
-                $start = $start + LIMIT_ROW_AJAX;
+                //$start = $start + LIMIT_ROW_AJAX;
+                $start++;
             }
 
             $cateObj = \App\Categories::getCateSubCate($this->lang, $slug, $id);
@@ -164,7 +165,7 @@ class ProductController extends BaseController
                 }
                 $products = \App\Product::getProductFilter($params);
 
-                if($start > $products->total()) {
+                if(($start * LIMIT_ROW_AJAX) >= $products->total()) {
                     $isFinalProduct = true;
                 }
             }
