@@ -7,7 +7,6 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Languages;
-use Intervention\Image\ImageManagerStatic as Image;
 use Auth;
 
 class Controller extends BaseController
@@ -54,17 +53,23 @@ class Controller extends BaseController
         $fileName = sprintf(config('allelua.product_image.resize_image'), $baseName);
 
         if($width < $widthDefine && $height < $heightDefine) {
-            Image::make($ogImage)->save(public_path() . $destPath . DIRECTORY_SEPARATOR . $fileName);
+            $image = new \Imagick( public_path() . $path );
+            $image->writeImage(public_path() . $destPath . DIRECTORY_SEPARATOR . $fileName);
+            $image->destroy();
+
             return $path;
         }
 
-        Image::make($ogImage)->resize($widthDefine, $heightDefine)->save(public_path() . $destPath . DIRECTORY_SEPARATOR . $fileName);
+        $image = new \Imagick( public_path() . $path );
+        $image->resizeImage($widthDefine, $heightDefine, \Imagick::FILTER_LANCZOS, 0.9, true);
+        $image->writeImage(public_path() . $destPath . DIRECTORY_SEPARATOR . $fileName);
+        $image->destroy();
 
         $path = public_path() . $destPath . DIRECTORY_SEPARATOR . $fileName;
+
         $this->autorotate($path);
 
-        return $path;
-        //return $destPath . DIRECTORY_SEPARATOR . $fileName;
+        return $destPath . DIRECTORY_SEPARATOR . $fileName;
     }
 
     protected function autorotate($path)
@@ -101,6 +106,8 @@ class Controller extends BaseController
         }
         $image->setImageOrientation(\Imagick::ORIENTATION_TOPLEFT);
         $image->writeImage();
+        $image->destroy();
+
         return $image;
     }
 
@@ -154,6 +161,8 @@ class Controller extends BaseController
         $extension = $file->getClientOriginalExtension();
         $fileName = uniqid().'.'.$extension;
         $file->move(public_path().$path, $fileName);
+
+        $this->autorotate(public_path() . $path . DIRECTORY_SEPARATOR . $fileName);
 
         return array(
             'rand_name' => $path . '/' . $fileName,

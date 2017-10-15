@@ -3,8 +3,8 @@
     <div class="col-sm-12" >
         <div class="top-detail clearfix" >
             <div class="row" >
-                <?php 
-                    $imagePreviews = $productImages['initialPreview'];
+                <?php
+                $imagePreviews = $productImages['initialPreview'];
                 ?>
                 @if(isset($imagePreviews))
                 <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
@@ -26,9 +26,9 @@
                                     <ul class="list-sly" >
                                         <?php $arrDetailImg = $productImages['initialPreviewConfig']; ?>
                                         @foreach($imagePreviews as $index => $image)
-                                        <?php 
-                                            $extra    = $arrDetailImg[$index]['extra'];
-                                            $imgThumb = getImage($extra['rand_name'], $extra['real_name']);
+                                        <?php
+                                        $extra = $arrDetailImg[$index]['extra'];
+                                        $imgThumb = getImage($extra['rand_name'], $extra['real_name']);
                                         ?>
                                         <li class="product-thumb item-sly" >
                                             <a href="javascript:void(0);" title="@if(isset($arrDetailImg[$index])) {{ $arrDetailImg[$index]['caption'] }} @endif" data-image="{{ $image }}" data-zoom-image="{{ $image }}" rel="nofollow" >
@@ -70,11 +70,14 @@
                         <div class="product-description product_description" >
                             <p class="lbl-myn" >{{ trans('front.partial.product_detail.short_des') }}</p>
                             <div class="mini-product-description clearfix">
-                                <p><i>{{ trans('front.partial.product_detail.source') }}</i>: {{ $product->source }}</p>
                                 <p><i>{{ trans('front.partial.product_detail.brand') }}</i>: {{ $product->brand }}</p>
-                                @include('front.product.partial.style_detail')
+                                <p><i>{{ trans('front.partial.product_detail.color') }}</i>: {{ $product->color }}</p>
+                                <p><i>{{ trans('front.partial.product_detail.source') }}</i>: {{ $product->source }}</p>
+                                <p><i>{{ trans('front.partial.product_detail.guarantee') }}</i>: {{ $product->guarantee }}</p>
                                 <p><i>{{ trans('front.partial.product_detail.quantity_limit') }}</i>: {{ $product->product_quantity_limit }}</p>
                                 <p><i>{{ trans('front.partial.product_detail.quantity') }}</i>: {{ $product->product_quantity }}</p>
+                                <p><i>{{ trans('front.partial.product_detail.shipping_method') }}</i>: {{ getShippingMethod($product->shipping_method) }}</p>
+                                <p><i>{{ trans('front.partial.product_detail.payment_method') }}</i>: {{ getPaymentMethod($product->payment_method) }}</p>
                             </div>
                         </div>
                     </div>
@@ -98,10 +101,10 @@
                                     </div>
                                 </div>
                                 <?php
-                                    $isCheckOut = (isset($totalCart) && $totalCart > 0) ? 'display:block' : 'display:none';
+                                $isCheckOut = (isset($totalCart) && $totalCart > 0) ? 'display:block' : 'display:none';
                                 ?>
                                 <div id="butCheckout" class="product-form-group" style="{{ $isCheckOut }}">
-                                    <button type="button" onclick="window.location.href='{{ route('user_checkout_shipping') }}'" class="btn btn-block btn-style btn-cart add_to_cart" title="Cho vào giỏ hàng" >
+                                    <button type="button" onclick="window.location.href ='{{ route('user_checkout_shipping') }}'" class="btn btn-block btn-style btn-cart add_to_cart" title="Cho vào giỏ hàng" >
                                         <span>Mua ngay</span>
                                     </button>
                                 </div>
@@ -163,9 +166,11 @@
                     <a class="nav-link active" data-toggle="tab" href="#products_more" role="tab" rel="nofollow" >{{ trans('front.partial.product_detail.long_des') }}</a>
                 </li>
 
+                @if(isset($personal) && ! empty($personal))
                 <li class="nav-item" >
                     <a class="nav-link" data-toggle="tab" href="#products_longdescription" role="tab" rel="nofollow" >{{ trans('front.partial.product_detail.introduce_company') }}</a>
                 </li>
+                @endif
 
             </ul>
         </div>
@@ -175,12 +180,11 @@
             <div class="tab-pane fade in active" id="products_more" role="tabpanel" >
                 <div class="clearfix" >
                     <div class="mini-product-description clearfix">
-                        <p><i>{{ trans('front.partial.product_detail.guarantee') }}</i>: {{ $product->guarantee }}</p>
-                        <p><i>{{ trans('front.partial.product_detail.shipping_method') }}</i>: {{ getShippingMethod($product->shipping_method) }}</p>
-                        <p><i>{{ trans('front.partial.product_detail.payment_method') }}</i>: {{ getPaymentMethod($product->payment_method) }}</p>
+                        @include('front.product.partial.style_detail')
                         <p><i>{{ trans('front.partial.product_detail.info_tech') }}</i>: {{ $product->info_tech }}</p>
                         <p><i>{{ trans('front.partial.product_detail.feature_highlight') }}</i>: {{ $product->feature_highlight }}</p>
                         <p><i>{{ trans('front.partial.product_detail.delivery_location') }}</i>: {{ $product->delivery_location }}</p>
+                        <p><i>{{ trans('front.partial.product_detail.form_product') }}</i>: {{ $product->form_product }}</p>
                     </div>
                     {!! $product->detail !!}
                 </div>
