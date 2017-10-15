@@ -118,9 +118,9 @@ Route::group(['prefix' => 'seller', 'middleware' => ['auth', 'auth.seller']], fu
     // Change password page
     Route::match(['get', 'post'], 'doi-mat-khau', 'Seller\ManageController@changePasswordSeller')->name('seller_change_password');
     // Personal information page
-    Route::match(['get'], 'quan-ly-thong-tin-ca-nhan', 'Seller\PersonalInfoController@index')->name('seller_account_management');
-    Route::match(['post'], 'quan-ly-thong-tin-ca-nhan/add', 'Seller\PersonalInfoController@add')->name('seller_account_management_add');
-    Route::match(['post'], 'quan-ly-thong-tin-ca-nhan/update', 'Seller\PersonalInfoController@update')->name('seller_account_management_update');
+    Route::match(['get'], 'info/index', 'Seller\PersonalInfoController@index')->name('seller_account_management');
+    Route::match(['post'], 'info/add', 'Seller\PersonalInfoController@add')->name('seller_account_management_add');
+    Route::match(['post'], 'info/update', 'Seller\PersonalInfoController@update')->name('seller_account_management_update');
     // New post page
     Route::match(['get', 'post'], 'new-post', 'Seller\ManageController@newPost')->name('seller_new_post');
     Route::match(['get', 'post'], 'inbox', 'Seller\ManageController@inbox')->name('seller_inbox');

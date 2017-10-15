@@ -194,7 +194,7 @@
             <div class="tab-pane fade in" id="products_longdescription" role="tabpanel" >
                 <div class="clearfix">{{ trans('front.partial.product_detail.company_name') }}: {{ $personal->company_name }}</div>
                 <div class="clearfix">{{ trans('front.partial.product_detail.company_phone') }}: {{ $personal->company_phone }}</div>
-                <div class="clearfix">@if(isset($personal)) {!! $personal->introduce_company !!} @endif</div>
+                <div class="clearfix">{!! $personal->introduce_company !!}</div>
             </div>
             @endif
         </div>
