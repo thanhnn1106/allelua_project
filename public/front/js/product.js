@@ -53,6 +53,7 @@ $(document).ready(function() {
         $('.input-error').html('');
 
         event.preventDefault();
+        tinymce.triggerSave();
         var url = $('#form_product').attr('action');
 
         var formData = new FormData();

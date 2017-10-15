@@ -285,25 +285,7 @@
 @endsection
 
 @section('footer_script')
-<!-- TinyMCE -->
-<script type="text/javascript" src="{{ asset('/plugins/tinymce/tinymce.min.js') }}"></script>
-<script>
-$(function() {
-    tinymce.init({
-        selector: ".editor-content", 
-        theme: "modern", 
-        height: 400,
-        subfolder:"",
-        plugins: [ 
-        "advlist autolink link image lists charmap print preview hr anchor pagebreak", 
-        "searchreplace wordcount visualblocks visualchars code insertdatetime media nonbreaking", 
-        "table contextmenu directionality emoticons paste textcolor filemanager" 
-        ], 
-        image_advtab: true, 
-        toolbar: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect forecolor backcolor | link unlink anchor | image media | print preview code"
-    });
-});
-</script>
+
 <script>
 var product_ajax_upload = '{{ route('ajax_product_upload_file') }}';
 var product_ajax_delete = '{{ route('ajax_product_delete_file') }}';
@@ -332,4 +314,23 @@ var initialPreviewImg = initialPreviewConfigImg = [];
 <script src="{{ asset('plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js') }}"></script>
 <script src="{{ asset_admin('js/product.js') }}"></script>
 
+<!-- TinyMCE -->
+<script type="text/javascript" src="{{ asset('/plugins/tinymce/tinymce.min.js') }}"></script>
+<script>
+$(function() {
+    tinymce.init({
+        selector: ".editor-content", 
+        theme: "modern", 
+        height: 400,
+        subfolder:"",
+        plugins: [ 
+        "advlist autolink link image lists charmap print preview hr anchor pagebreak", 
+        "searchreplace wordcount visualblocks visualchars code insertdatetime media nonbreaking", 
+        "table contextmenu directionality emoticons paste textcolor filemanager" 
+        ], 
+        image_advtab: true, 
+        toolbar: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect forecolor backcolor | link unlink anchor | image media | print preview code"
+    });
+});
+</script>
 @endsection

@@ -86,6 +86,8 @@ $(document).ready(function() {
         $('#form_product').find('.has-error').removeClass('has-error');
 
         event.preventDefault();
+        tinymce.triggerSave();
+
         var url = $('#form_product').attr('action');
 
         var formData = new FormData();
