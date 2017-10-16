@@ -382,6 +382,7 @@ class Product extends Model
                 ->leftJoin('categories_translate AS t3', 't3.id', '=', 't1.category_id')
                 ->where('t1.status', 1)
                 ->where('t2.language_code', $lang)
+                ->whereNull('t1.deleted_at')
                 ->groupBy('t2.product_id')
                 ->orderBy('t1.price', 'ASC');
 
