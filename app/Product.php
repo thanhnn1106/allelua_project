@@ -354,7 +354,8 @@ class Product extends Model
                 ->join('product_watched AS t3', 't3.product_id', '=', 't1.id')
                 ->where('t1.status', 1)
                 ->where('t2.language_code', $params['language_code'])
-                ->where('t3.user_id', $params['user_id']);
+                ->where('t3.user_id', $params['user_id'])
+                ->whereNull('t1.deleted_at');
 
         $result = $query->paginate(20);
 
@@ -369,6 +370,7 @@ class Product extends Model
                 ->where('t2.language_code', $lang)
                 ->where('t1.sub_category_id', $subCategoryId)
                 ->where('t1.id', '<>', $id)
+                ->whereNull('t1.deleted_at')
                 ->orderBy(\DB::raw("RAND()"))
                 ->limit(20);
 
