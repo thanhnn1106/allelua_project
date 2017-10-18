@@ -40,6 +40,11 @@ return [
             'company_phone'     => 'Số điện thoại',
             'quantity_limit'    => 'Số lượng tối thiểu trong 1 giao dịch',
             'quantity'          => 'Số lượng còn lại',
+            'brand'             => 'Thương hiệu',
+            'color'             => 'Màu sắc',
+            'info_tech'         => 'Thông số kỹ thuật sản phẩm',
+            'feature_highlight' => 'Tính năng nổi bật sản phẩm',
+            'form_product'      => 'Hình thức sản phẩm',
         ),
         'filter' => array(
             'price_type'        => 'THEO GIÁ',
