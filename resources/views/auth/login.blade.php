@@ -11,7 +11,7 @@
                         <div class="page-sign" data-align-height="wrap" >
                             <div class="row" >
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" data-align-height="right"  data-bottom="20" >
-                                    <div class="well-sign clearfix">
+                                    <div class="clearfix">
                                         <div class="clearfix" id="login" >
                                             @if (session('success'))
                                             <div class="alert alert-success">

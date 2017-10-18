@@ -87,6 +87,7 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'uploaded'             => 'The :attribute failed to upload.',
     'url'                  => 'The :attribute format is invalid.',
+    'unique_with'          => 'The :attribute has already been taken.',
 
     /*
     |--------------------------------------------------------------------------
@@ -103,8 +104,84 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        // Seller personal information
+        'tax_code' => [
+            'required' => ':attribute cannot empty.',
+            'numeric'  => ':attribute must be number.',
+        ],
+        'license_business' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'bank_account' => [
+            'required' => ':attribute cannot empty.',
+            'numeric'  => ':attribute must be number.',
+        ],
+        'bank_name' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'bank_address' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'introduce_company_en' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'introduce_company_vi' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        // Seller đăng tin
+        'categories' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'sub_categories' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'quantity' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'quantity_limit' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'price' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'payment_method' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'shipping_method' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'image_thumb' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'total_image_detail' => [
+            'required' => ':attribute cannot empty.',
+            'min' => ':attribute cannot less than 3.',
+        ],
+        'title_vi' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'title_en' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'brand_vi' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'brand_en' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'source_vi' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'source_en' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'delivery_location_vi' => [
+            'required' => ':attribute cannot empty.',
+        ],
+        'delivery_location_en' => [
+            'required' => ':attribute cannot empty.',
+        ],
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -116,6 +193,33 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        // Seller personal information
+        'tax_code' => 'Tax code',
+        'license_business' => 'Business license',
+        'bank_account' => 'Bank account number',
+        'bank_name' => 'Bank name',
+        'bank_address' => 'Bank address',
+        'introduce_company_en' => 'Company information (tiếng Anh)',
+        'introduce_company_vi' => 'Thông tin công ty (tiếng Việt)',
+        // Seller đăng tin
+        'categories' => 'Categories',
+        'sub_categories' => 'Categories (sub)',
+        'quantity' => 'Quantity',
+        'quantity_limit' => 'Quantity limit',
+        'price' => 'Price',
+        'payment_method' => 'Payment method',
+        'shipping_method' => 'Shipping method',
+        'image_thumb' => 'Image',
+        'total_image_detail' => 'Total of image detail ',
+        'title_vi' => 'Tiêu đề',
+        'title_en' => 'Title',
+        'brand_vi' => 'Thương hiệu',
+        'brand_en' => 'Brand',
+        'source_vi' => 'Xuất sứ',
+        'source_en' => 'Made in',
+        'delivery_location_en' => 'Delivery location',
+        'delivery_location_vi' => 'Nơi giao hàng',
+    ],
 
 ];

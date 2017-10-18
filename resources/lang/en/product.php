@@ -3,33 +3,33 @@
 return [
     'product_status' => array(
         'draft'   => 'Draft',
-        'publish' => 'Publish',
-        'pending' => 'Pending',
+        'publish' => 'Post product',
+        'pending' => 'Waiting approve',
     ),
     'product_seller_status' => array(
-        'draft'   => 'Nháp',
-        'pending' => 'chờ approve',
+        'draft'   => 'Draft',
+        'pending' => 'Waiting approve',
     ),
     'payment_method' => array(
-        'type1' => 'Thanh toán khi nhận hàng',
-        'type2' => 'Thẻ tín dụng/ghi nợ',
-        'type3' => 'Thẻ ATM nội địa',
-        'type4' => 'Trả góp bằng thẻ tín dụng',
+        'type1' => 'Cash On Delivery',
+        'type2' => 'Credit/Debit',
+        'type3' => 'ATM',
+        'type4' => 'Installment by credit',
     ),
     'shipping_method' => array(
-        'type1' => 'Giao hàng tiết kiệm',
-        'type2' => 'Giao hàng tiêu chuẩn',
-        'type3' => 'Giao hàng hỏa tốc',
+        'type1' => 'Shipping save',
+        'type2' => 'Shipping standard',
+        'type3' => 'Shipping speed',
     ),
 
     'gach_men' => array(
         'position_use' => array(
-            'living_room' => 'Phòng khách',
-            'bed_room' => 'Phòng ngủ',
-            'kitchen_room' => 'Phòng nhà bếp',
-            'shower_room' => 'Phòng tắm',
-            'out_door' => 'Ngoài trời',
-            'orders' => 'Khác',
+            'living_room' => 'Living room',
+            'bed_room' => 'Bedroom',
+            'kitchen_room' => 'Kitchen',
+            'shower_room' => 'Bathroom',
+            'out_door' => 'Out door',
+            'orders' => 'Others',
         ),
         'size' => array(
             '06_24' => '06x24',
@@ -57,7 +57,7 @@ return [
             '60_120' => '60x120',
             '60_60' => '60x60',
             '60_80' => '60x80',
-            'orders' => 'Orders',
+            'orders' => 'KHÁC',
         )
     ),
     'thiet_bi_ve_sinh' => array(

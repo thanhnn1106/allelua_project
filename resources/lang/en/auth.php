@@ -15,4 +15,13 @@ return [
 
     'login_failed' => 'These credentials do not match our records.',
 
+    'register' => [
+        'lb_company_name'     => 'Company name',
+        'lb_phone_number'     => 'Phone number',
+        'lb_email'            => 'Email',
+        'lb_password'         => 'Password',
+        'lb_confirm_password' => 'Confirm password',
+        'lb_country'          => 'Country',
+        'btn_register'        => 'Register',
+    ],
 ];
