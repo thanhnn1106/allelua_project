@@ -447,5 +447,13 @@ return [
             )
         ),
     ),
+    'vat_lieu_xay_dung_tho' => array(
+        'ngoi' => array(
+            'style' => array(
+                'ngoi_song' => 'Ngói Sóng',
+                'ngoi_phang' => 'Ngói Phẳng',
+            )
+        ),
+    ),
 ];
 

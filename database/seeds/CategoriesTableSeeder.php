@@ -728,6 +728,11 @@ class CategoriesTableSeeder extends Seeder
                         'sort' => 10,
                         'created_at' => date('Y-m-d H:i:s'),
                     ),
+                    array(
+                        'label' => 'Ngói',
+                        'sort' => 11,
+                        'created_at' => date('Y-m-d H:i:s'),
+                    ),
                 ),
             ),
             array(

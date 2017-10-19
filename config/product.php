@@ -509,4 +509,12 @@ return [
             )
         ),
     ),
+    'vat_lieu_xay_dung_tho' => array(
+        'ngoi' => array(
+            'style' => array(
+                'ngoi_song' => 'product.vat_lieu_xay_dung_tho.ngoi.style.ngoi_song',
+                'ngoi_phang' => 'product.vat_lieu_xay_dung_tho.ngoi.style.ngoi_phang',
+            )
+        ),
+    ),
 ];
