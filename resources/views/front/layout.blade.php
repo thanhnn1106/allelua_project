@@ -6,7 +6,7 @@
 <html lang="en">
     <!--<![endif]-->
     <head>
-        <title>alletula</title>
+        <title>Allelua - Trang web thương mại điện tử về vật liệu ngành xây dựng</title>
         <meta content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=0" name="viewport">
         <meta name="csrf-token" content="{!! csrf_token() !!}" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,700italic,400italic,300italic,300&subset=vietnamese&coz=20170520090756">
@@ -20,6 +20,10 @@
         <link href="{{ asset_front('js/select2/dist/css/select2.css') }}" rel="stylesheet" >
         <link rel="stylesheet" type="text/css" href="{{ asset_front('css/style.css') }}" >
         <link rel="stylesheet" type="text/css" href="{{ asset_front('css/style_custom.css') }}" >
+<!--         Start of allelua Zendesk Widget script 
+        <script>/*<![CDATA[*/window.zEmbed||function(e,t){var n,o,d,i,s,a=[],r=document.createElement("iframe");window.zEmbed=function(){a.push(arguments)},window.zE=window.zE||window.zEmbed,r.src="javascript:false",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="display: none",d=document.getElementsByTagName("script"),d=d[d.length-1],d.parentNode.insertBefore(r,d),i=r.contentWindow,s=i.document;try{o=s}catch(e){n=document.domain,r.src='javascript:var d=document.open();d.domain="'+n+'";void(0);',o=s}o.open()._l=function(){var e=this.createElement("script");n&&(this.domain=n),e.id="js-iframe-async",e.src="https://assets.zendesk.com/embeddable_framework/main.js",this.t=+new Date,this.zendeskHost="allelua.zendesk.com",this.zEQueue=a,this.body.appendChild(e)},o.write('<body onload="document._l();">'),o.close()}();
+/*]]>*/</script>
+         End of allelua Zendesk Widget script -->
     </head>
     <body>
 
@@ -81,15 +85,15 @@
     <script type="text/javascript" src="{{ asset_front('js/script.js') }}"></script>
 
     <!--Embed from Zopim Live Chat Wordpress Plugin v1.4.3-->
-    <!--Start of Zopim Live Chat Script-->
+    <!--Start of Zendesk Chat Script-->
     <script type="text/javascript">
     window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
     d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-    _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
-    $.src='http://v2.zopim.com/?3VhEhbO2nxa9L1z9byqjeegpUZaCo5xL';z.t=+new Date;$.
-    type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
-    </script><script>$zopim( function() {
-    })</script><!--End of Zopim Live Chat Script-->
+    _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+    $.src="https://v2.zopim.com/?5CajIEZND33t4OQOpq05MFAeSud5s2dZ";z.t=+new Date;$.
+    type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+    </script>
+    <!--End of Zendesk Chat Script-->
 
     <script>
     // Add token when use ajax
