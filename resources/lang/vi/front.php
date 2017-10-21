@@ -2,19 +2,26 @@
 
 return [
 
-    'title_en'        => 'Title',
-    'description_en'  => 'Description',
-    'seo_keyword_en'  => 'SEO Keyword',
-    'logo_en'         => 'Logo',
-    'check_vi'        => 'Remove logo',
-    'title_vi'        => 'Tiêu đề',
-    'description_vi'  => 'Miêu tả',
-    'seo_keyword_vi'  => 'SEO từ khóa',
-    'logo_vi'         => 'Logo',
-    'check_vi'        => 'Xóa logo',
-    'lb_call_us'      => 'Gọi chúng tôi',
-    'lb_cart'         => 'Giỏ hàng',
-    'lb_b2b'          => 'Doanh nghiệp & doanh nghiệp',
+    'title_en'            => 'Title',
+    'description_en'      => 'Description',
+    'seo_keyword_en'      => 'SEO Keyword',
+    'logo_en'             => 'Logo',
+    'check_vi'            => 'Remove logo',
+    'title_vi'            => 'Tiêu đề',
+    'description_vi'      => 'Miêu tả',
+    'seo_keyword_vi'      => 'SEO từ khóa',
+    'logo_vi'             => 'Logo',
+    'check_vi'            => 'Xóa logo',
+    'lb_call_us'          => 'Gọi chúng tôi',
+    'lb_cart'             => 'Giỏ hàng',
+    'lb_b2b'              => 'Doanh nghiệp & doanh nghiệp',
+    'lb_find_country'     => 'Tìm nhà cung cấp theo quốc gia',
+    'lb_support_service'  => 'DỊCH VỤ HỖ TRỢ',
+    'lb_guaranteed_trade' => 'ĐẢM BẢO THƯƠNG MẠI',
+    'lb_customer_care'    => 'CHĂM SÓC KHÁCH HÀNG',
+    'lb_safe_payment'     => 'THANH TOÁN AN TOÀN',
+    'lb_check_service'    => 'DỊCH VỤ KIỂM TRA',
+    
 
     'bread_crum' => [
         'home' => 'Trang chủ',
@@ -190,6 +197,11 @@ return [
         'btn_copy_product'      => 'Copy',
         'msg_cannot_over_limit' => 'Số lượng phải nằm trong khoảng [%d, %d]',
         'msg_favorite_item_add_success' => 'Thêm vào danh sách yêu thích thành công.',
+        'lb_quantity'       => 'Số lượng',
+        'lb_buy_now'        => 'Mua ngay',
+        'lb_add_to_cart'    => 'Cho vào giỏ hàng',
+        'lb_favorite'       => 'Yêu thích',
+        'lb_share'          => 'Chia sẻ'
     ),
     'cart' => array(
         'badge'             => 'Giỏ hàng',

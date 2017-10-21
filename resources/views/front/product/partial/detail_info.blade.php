@@ -92,7 +92,7 @@
                                 <div class="product-form-group">
                                     <div class="row form-quantity">
                                         <div class="col-xs-12" >
-                                            <label for="select-product-type" class="lbl-type-product" >Số lượng</label>
+                                            <label for="select-product-type" class="lbl-type-product" >{{ trans('front.product.lb_quantity') }}</label>
                                         </div>
                                         <div class="col-xs-12" >
                                             <input type="number" class="quantity-product-dt" title="quantity" value="{{ $totalQuantity }}" name="quantity" >
@@ -105,13 +105,13 @@
                                 ?>
                                 <div id="butCheckout" class="product-form-group" style="{{ $isCheckOut }}">
                                     <button type="button" onclick="window.location.href ='{{ route('user_checkout_shipping') }}'" class="btn btn-block btn-style btn-cart add_to_cart" title="Cho vào giỏ hàng" >
-                                        <span>Mua ngay</span>
+                                        <span>{{ trans('front.product.lb_buy_now') }}</span>
                                     </button>
                                 </div>
                                 <div class="product-form-group">
                                     <input type="hidden" value="{{ $product->id or null }}" name="product_id" />
                                     <button type="button" id="cart_add_ajax_button" class="btn btn-block btn-style btn-cart add_to_cart" title="Cho vào giỏ hàng" >
-                                        <span>Cho vào giỏ hàng</span>
+                                        <span>{{ trans('front.product.lb_add_to_cart') }}</span>
                                     </button>
                                 </div>
                             </form>
@@ -119,14 +119,14 @@
                             <div class="product-form-group">
                                 <a href="javascript:void(0);" data-url-login="{{ route('user_login') }}" data-url="{{ route('user_product_favorite') }}" data-product-id="{{ $product->id }}" 
                                    onclick="fncFavorite(event, this)" class="btn btn-block btn-style btn-heart" rel="nofollow" >
-                                    <span>Yêu thích</span>
+                                    <span>{{ trans('front.product.lb_favorite') }}</span>
                                 </a>
                             </div>
 
                             <div class="product-form-group" >
                                 <div class="social-media text-xs-left">
                                     <h2 class="lb-action-share" >
-                                        Chia sẻ 
+                                        {{ trans('front.product.lb_share') }}
                                     </h2>                       
                                     <div class="bdy-share clearfix" >
                                         <ul class="nav nav-inline" >
