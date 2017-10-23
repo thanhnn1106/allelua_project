@@ -1,7 +1,7 @@
 <div class="row" >
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
         <h2 class="box-cp text-xs-center" >
-            TÌm nhà cung cấp theo quốc gia
+            {{ trans('front.lb_find_country') }}
         </h2>
         <div class="content-cp" >
             <ul class="list-nation text-xs-center" >
@@ -61,7 +61,7 @@
 
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
         <h2 class="box-cp text-xs-center" >
-            DỊCH VỤ HỖ TRỢ
+            {{ trans('front.lb_support_service') }}
         </h2>
         <div class="content-cp" >
             <div class="list-fearture" >
@@ -70,7 +70,7 @@
                         <div class="item-fearture" >
                             <img src="{{ asset_front('dataimages/ft.png') }}" class="img-feature" >
                             <span class="text-feature">
-                                ĐẢM BẢO THƯƠNG MẠI
+                                {{ trans('front.lb_guaranteed_trade') }}
                             </span>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                         <div class="item-fearture" >
                             <img src="{{ asset_front('dataimages/ft2.png') }}" class="img-feature" >
                             <span class="text-feature">
-                                DỊCH VỤ HẬU CẦN
+                                {{ trans('front.lb_customer_care') }}
                             </span>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                         <div class="item-fearture" >
                             <img src="{{ asset_front('dataimages/ft3.png') }}" class="img-feature" >
                             <span class="text-feature">
-                                THANH TOÁN AN TOÀN
+                                {{ trans('front.lb_safe_payment') }}
                             </span>
                         </div>
                     </div>
@@ -97,7 +97,7 @@
                         <div class="item-fearture" >
                             <img src="{{ asset_front('dataimages/ft4.png') }}" class="img-feature" >
                             <span class="text-feature">
-                                DỊCH VỤ KIỂM TRA
+                                {{ trans('front.lb_check_service') }}
                             </span>
                         </div>
                     </div>
