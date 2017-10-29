@@ -125,7 +125,7 @@ button.btn-search:hover{
     color: #FFF;
     margin: 0;
 }
-.title-aside a{color: #FFF;padding-top: 4px;font-size: 10px}
+.title-aside a{color: #FFF;padding-top: 4px;font-size: 84%}
 .title-aside button{
     background: transparent;
     border: none;
@@ -277,10 +277,9 @@ button.btn-snews-letter {
     margin-bottom: 15px;
 }
 .item-banner img{
-    /*display: inline-block;*/
     display: inline-block;
-    height: 281px;
-    width: 100%;
+    max-width: 100%;
+    height: auto;
 }
 .item-product {
     margin-bottom: 15px;

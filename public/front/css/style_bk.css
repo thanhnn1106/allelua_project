@@ -101,7 +101,7 @@ button.btn-search:hover{
     color: #FFF;
     margin: 0;
 }
-.title-aside a{color: #FFF;padding-top: 4px;font-size: 84%}
+.title-aside a{color: #FFF;padding-top: 4px;font-size: 10px}
 .title-aside button{
     background: transparent;
     border: none;

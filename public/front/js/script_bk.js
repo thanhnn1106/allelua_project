@@ -1,23 +1,13 @@
 console.log('v1.0');
-coz = {};
-coz.banner = {
-    width : 428
-}
 scrollbarHome = $('[data-place="scrollbarHome"]');
 updateScrollBarHome = function(){
-    try{
-        h = $('.megamenu').height();
-        h = Math.max(h, 50);
-        var cw = $('[data-place="groupBannerHome"] .item-banner').eq(0).width();
-        rw = Math.min(cw, 428)/428;
-        _style = '.aside-heading{padding: '+(15*rw)+'px}';
-        _style += '.aside-heading .title-aside{font-size: '+(100*rw)+'%}';
-        _style += '.nav-mmega > li >a{font-size: '+(100*rw)+'%}';
-        _style += '.navbar-pills >li> a{padding: '+(10*rw)+'px '+(15*rw)+'px}';
-        _style += '.navbar-pills >li> a>img{width: '+(16*rw)+'px;margin-right: '+(10*rw)+'px}';
-        _style += '.navbar-pills >li> a{padding: '+(10*rw)+'px '+(15*rw)+'px;border-left: '+(4*rw)+'px solid #FFF;font-size: '+(100*rw)+'%}';
-        $('#cssScrollBarMega').html('<style>.inner-megamenu{min-height:'+h+'px}'+_style+'</style>');
-    }catch(e){}
+    h = $('.megamenu').height();
+    h = Math.max(h, 50);
+    $('#cssScrollBarMega').html('<style>.inner-megamenu{min-height:'+h+'px}</style>');
+    /*h = $('[data-place="groupBannerHome"]').height();
+    h = h - $('.categories-home .aside-heading').eq(0).height()-50;
+    h = Math.max(h, 50);
+    $('#cssScrollBarHome').html( '<style>.categories-home .scrollbar{min-height:'+h+'px}</style>' );*/
 };
 alignHeight = function(){
     $('[data-align-height="wrap"]').each(function(i ,el){
@@ -157,7 +147,7 @@ $( document ).ready(function() {
             if( $.trim($('.nav-mm.open-search  .input-search').val()).length <=0 ){
                 e.preventDefault();
                 e.stopPropagation();
-                alert('BÃ¡ÂºÂ¡n chÃ†Â°a nhÃ¡ÂºÂ­p keyword ?');
+                alert('Báº¡n chÆ°a nháº­p keyword ?');
                 $('.nav-mm.open-search  .input-search').focus();
             }
         }
@@ -283,7 +273,7 @@ $( document ).ready(function() {
         if( $.trim($('input[name="first_name"]', '[data-form="editProfile"]').val()).length <=0 ){
             $('.box-error').show();
             $('input[name="first_name"]', '[data-form="editProfile"]').addClass('has-eror')
-                .after('<div class="input-error" data-input="first_name" >Frist name khÃ´ng Ä‘Æ°á»£c bá» trá»‘ng</div>');
+                .after('<div class="input-error" data-input="first_name" >Frist name không được bỏ trống</div>');
             flag = false;
         }
 
@@ -292,7 +282,7 @@ $( document ).ready(function() {
         if( $.trim($('input[name="last_name"]', '[data-form="editProfile"]').val()).length <=0 ){
             $('.box-error').show();
             $('input[name="last_name"]', '[data-form="editProfile"]').addClass('has-eror')
-                .after('<div class="input-error" data-input="last_name" >Last name khÃ´ng Ä‘Æ°á»£c bá» trá»‘ng</div>');
+                .after('<div class="input-error" data-input="last_name" >Last name không được bỏ trống</div>');
             flag = false;
         }
 
@@ -301,7 +291,7 @@ $( document ).ready(function() {
         if( $.trim($('input[name="phone"]', '[data-form="editProfile"]').val()).length <=0 ){
             $('.box-error').show();
             $('input[name="phone"]', '[data-form="editProfile"]').addClass('has-eror')
-                .after('<div class="input-error" data-input="phone" >Phone khÃ´ng Ä‘Æ°á»£c bá» trá»‘ng</div>');
+                .after('<div class="input-error" data-input="phone" >Phone không được bỏ trống</div>');
             flag = false;
         }
 
@@ -317,10 +307,10 @@ $( document ).ready(function() {
     $(document).on('click', '[data-btn="moreMenu"]', function(e){
         if( $('.categories-home').hasClass('full') ){
             $('.categories-home').removeClass('full');
-            $(this).html('Xem táº¥t cáº£ >');
+            $(this).html('Xem tất cả >');
         }else{
             $('.categories-home').addClass('full');
-            $(this).html('Thu ngáº¯n >');
+            $(this).html('Thu ngắn >');
         }
     });
 
