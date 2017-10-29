@@ -39,13 +39,13 @@ class StaticsTableSeeder extends Seeder
                 'translate' => array(
                     array(
                         'language_code' => 'vi',
-                        'title' => 'Hướng dẫn mua hang',
+                        'title' => 'Hướng dẫn mua hàng',
                         'slug' => 'huong-dan-mua-hang',
                     ),
                     array(
                         'language_code' => 'en',
-                        'title' => 'Hướng dẫn mua hang',
-                        'slug' => 'huong-dan-mua-hang',
+                        'title' => 'Purchase Instructions',
+                        'slug' => 'purchase-instructions',
                     ),
                 ),
             ),
@@ -61,8 +61,8 @@ class StaticsTableSeeder extends Seeder
                     ),
                     array(
                         'language_code' => 'en',
-                        'title' => 'Chính sách đổi trả',
-                        'slug' => 'chinh-sach-doi-tra',
+                        'title' => 'Replace – refund Policy',
+                        'slug' => 'replace-refund-policy',
                     ),
                 ),
             ),
@@ -78,8 +78,8 @@ class StaticsTableSeeder extends Seeder
                     ),
                     array(
                         'language_code' => 'en',
-                        'title' => 'Quy trình giải quyết tranh chap',
-                        'slug' => 'quy-trinh-giai-quyet-tranh-chap',
+                        'title' => 'Dispute Settlement Process',
+                        'slug' => 'dispute-settlement-process',
                     ),
                 ),
             ),
@@ -95,8 +95,8 @@ class StaticsTableSeeder extends Seeder
                     ),
                     array(
                         'language_code' => 'en',
-                        'title' => 'Chính sách bảo hành',
-                        'slug' => 'chinh-sach-bao-hanh',
+                        'title' => 'Warranty Policy ',
+                        'slug' => 'warranty-policy',
                     ),
                 ),
             ),
@@ -112,8 +112,8 @@ class StaticsTableSeeder extends Seeder
                     ),
                     array(
                         'language_code' => 'en',
-                        'title' => 'Quy định và hình thức thanh toán',
-                        'slug' => 'quy-dinh-va-hinh-thuc-thanh-toan',
+                        'title' => 'Payment Method and Regulations',
+                        'slug' => 'payment-method-and-regulations',
                     ),
                 ),
             ),
@@ -129,8 +129,8 @@ class StaticsTableSeeder extends Seeder
                     ),
                     array(
                         'language_code' => 'en',
-                        'title' => 'Chính sách vận chuyển',
-                        'slug' => 'chinh-sach-van-chuyen',
+                        'title' => 'Shipping service',
+                        'slug' => 'shipping-service',
                     ),
                 ),
             ),
@@ -146,8 +146,8 @@ class StaticsTableSeeder extends Seeder
                     ),
                     array(
                         'language_code' => 'en',
-                        'title' => 'Chính sách bảo mật thông tin khách hàng',
-                        'slug' => 'chinh-sach-bao-mat-thong-tin-khach-hang',
+                        'title' => 'Customer Privacy',
+                        'slug' => 'customer-privacy',
                     ),
                 ),
             ),
@@ -163,8 +163,8 @@ class StaticsTableSeeder extends Seeder
                     ),
                     array(
                         'language_code' => 'en',
-                        'title' => 'Quy chế hoạt động',
-                        'slug' => 'quy-che-hoat-dong',
+                        'title' => 'Operation Regulations',
+                        'slug' => 'operation-regulations',
                     ),
                 ),
             ),

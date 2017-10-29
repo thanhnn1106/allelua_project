@@ -8,7 +8,7 @@
                 <ul class="breadcrumbs" >
                     <li class="home" ><a href="{{ route('home') }}" >{{ trans('front.bread_crum.home') }}</a></li>
                     <li>
-                        <span>Về Allelua.com</span>
+                        <span>{{ $pageInfo->title }}</span>
                     </li>
                 </ul>
             </div>

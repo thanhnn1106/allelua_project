@@ -59,7 +59,7 @@ class StaticsTranslate extends Model
     public static function getStaticsTranslateBySlug($slug)
     {
         $result = DB::table('statics_translate')
-            ->select('content')
+            ->select('content', 'title')
             ->where('slug', '=', $slug)
             ->first();
 
