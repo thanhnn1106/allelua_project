@@ -317,10 +317,10 @@ $( document ).ready(function() {
     $(document).on('click', '[data-btn="moreMenu"]', function(e){
         if( $('.categories-home').hasClass('full') ){
             $('.categories-home').removeClass('full');
-            $(this).html('Xem táº¥t cáº£ >');
+            $(this).html($(this).attr('data-expand'));
         }else{
             $('.categories-home').addClass('full');
-            $(this).html('Thu ngáº¯n >');
+            $(this).html($(this).attr('data-collapse'));
         }
     });
 

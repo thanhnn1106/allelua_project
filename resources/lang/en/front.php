@@ -26,7 +26,8 @@ return [
     ],
     'menu' => [
         'index'                     => 'Menu',
-        'view_all'                  => 'Show all'
+        'view_all'                  => 'Show all >',
+        'view_short'                  => 'Hide >'
     ],
     'partial' => array(
         'watched_title'    => 'YOUR RECENTLY VIEWED',

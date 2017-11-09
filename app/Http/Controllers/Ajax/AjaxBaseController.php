@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AjaxBaseController extends Controller
 {
-    protected $lang;
     protected $user;
 
     /**
@@ -17,7 +16,7 @@ class AjaxBaseController extends Controller
      */
     public function __construct()
     {
-        $this->lang = \App::getLocale();
+        parent::__construct();
 
         $this->middleware(function ($request, $next) {
              if(\Auth::check() ) {

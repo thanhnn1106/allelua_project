@@ -9,7 +9,7 @@
                     <span class="pull-xs-left" >
                         {{ trans('front.menu.index') }}
                     </span>    
-                    <a href="javascript:void(0);" data-btn="moreMenu" class="pull-xs-right hidden-md-down" >
+                    <a href="javascript:void(0);" data-btn="moreMenu" data-expand="{{ trans('front.menu.view_all') }}" data-collapse="{{ trans('front.menu.view_short') }}" class="pull-xs-right hidden-md-down" >
                         {{ trans('front.menu.view_all') }} >
                     </a>
                 </h2>

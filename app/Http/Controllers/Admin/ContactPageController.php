@@ -9,6 +9,11 @@ use App\Contacts;
 
 class ContactPageController extends AdminBaseController
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * List contact page
      * @param Request $request

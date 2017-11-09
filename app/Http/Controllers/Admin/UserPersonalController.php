@@ -12,6 +12,11 @@ use DB;
 
 class UserPersonalController extends AdminBaseController
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * index
      * @param Request $request

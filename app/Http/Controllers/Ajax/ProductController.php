@@ -24,6 +24,7 @@ class ProductController extends AjaxBaseController
             $categoryId = $request->get('categoryId', NULL);
             $subCateId = $request->get('subCategory', NULL);
             $html = '<option value="">------</option>';
+
             if (!empty($categoryId)) {
                 $cates = Categories::getRowByLang($this->lang, $categoryId);
                 if(count($cates)) {

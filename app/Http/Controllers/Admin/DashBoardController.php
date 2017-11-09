@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class DashBoardController extends AdminBaseController
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function index(Request $request)
     {
         $data = array();

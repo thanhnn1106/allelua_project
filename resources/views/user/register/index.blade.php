@@ -84,8 +84,8 @@
                                             <div class="col-xs-4">
                                                 <label class="control-label">{{ trans('front.register_page.dob.day') }}</label>
                                                 <select name="dob_day" id="birthday_day" class="form-control">
-                                                @foreach ($dob['day'] as $day)
-                                                <option value="{{ $day }}"  @if (old('dob_day', isset($user->dob) ? getBirthDay($user->dob) : '') == $day) selected="selected" @endif>{{ $day }}</option>
+                                                @foreach ($dob['day'] as $keyD => $day)
+                                                <option value="{{ $keyD }}"  @if (old('dob_day', isset($user->dob) ? getBirthDay($user->dob) : '') == $keyD) selected="selected" @endif>{{ $day }}</option>
                                                 @endforeach
                                                 </select>
                                                 @if ($errors->has('dob_day'))
@@ -95,8 +95,8 @@
                                             <div class="col-xs-4">
                                                 <label class="control-label">{{ trans('front.register_page.dob.month') }}</label>
                                                 <select name="dob_month" id="birthday_month" class="form-control">
-                                                @foreach ($dob['month'] as $month)
-                                                <option value="{{ $month }}"  @if (old('dob_month', isset($user->dob) ? getBirthDay($user->dob, 'm') : '') == $month) selected="selected" @endif>{{ $month }}</option>
+                                                @foreach ($dob['month'] as $keyM => $month)
+                                                <option value="{{ $keyM }}"  @if (old('dob_month', isset($user->dob) ? getBirthDay($user->dob, 'm') : '') == $keyM) selected="selected" @endif>{{ $month }}</option>
                                                 @endforeach
                                                 </select>
                                                 @if ($errors->has('dob_month'))
@@ -106,8 +106,8 @@
                                             <div class="col-xs-4">
                                                 <label class="control-label">{{ trans('front.register_page.dob.year') }}</label>
                                                 <select name="dob_year" id="birthday_year" class="form-control">
-                                                @foreach ($dob['year'] as $year)
-                                                <option value="{{ $year }}"  @if (old('dob_year', isset($user->dob) ? getBirthDay($user->dob) : '') == $year) selected="selected" @endif>{{ $year }}</option>
+                                                @foreach ($dob['year'] as $keyY => $year)
+                                                <option value="{{ $keyY }}"  @if (old('dob_year', isset($user->dob) ? getBirthDay($user->dob) : '') == $keyY) selected="selected" @endif>{{ $year }}</option>
                                                 @endforeach
                                                 </select>
                                                 @if ($errors->has('dob_year'))

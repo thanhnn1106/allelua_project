@@ -12,6 +12,10 @@ use DB;
 
 class PersonalInfoController extends BaseController
 {
+    public function __construct() {
+        parent::__construct();
+    }
+
     /**
      * Index page - Setting personal information
      * @param Request $request

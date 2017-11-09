@@ -13,6 +13,16 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    public $lang = null;
+
+    public function __construct() {
+
+        $this->middleware(function ($request, $next) {
+            $this->lang = session()->has( 'applocale' ) ? session()->get( 'applocale' ) : \Config::get('app.fallback_locale');
+
+             return $next($request);
+        });
+    }
     protected function getIso2Lang()
     {
         $langs = Languages::getResults();

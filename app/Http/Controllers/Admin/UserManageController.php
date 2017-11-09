@@ -12,14 +12,9 @@ use Mail;
 
 class UserManageController extends AdminBaseController
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
-
+        parent::__construct();
     }
 
     /**

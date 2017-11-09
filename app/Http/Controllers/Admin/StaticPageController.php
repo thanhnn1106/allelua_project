@@ -10,6 +10,11 @@ use App\StaticsTranslate;
 
 class StaticPageController extends AdminBaseController
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * List static page
      * @param Request $request

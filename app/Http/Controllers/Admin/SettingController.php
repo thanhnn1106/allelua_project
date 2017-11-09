@@ -8,6 +8,11 @@ use Validator;
 
 class SettingController extends AdminBaseController
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Setting config as: rate and social
      * @param Request $request

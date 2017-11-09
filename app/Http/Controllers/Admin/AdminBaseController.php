@@ -7,8 +7,6 @@ use Illuminate\Validation\Rule;
 
 class AdminBaseController extends Controller
 {
-    protected $lang;
-
     /**
      * Create a new controller instance.
      *
@@ -16,7 +14,7 @@ class AdminBaseController extends Controller
      */
     public function __construct()
     {
-        $this->lang = \App::getLocale();
+        parent::__construct();
     }
 
     public function setRules($request)

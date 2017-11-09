@@ -7,6 +7,8 @@ use App\CategoriesTranslate;
 
 class CategoriesTableSeeder extends Seeder
 {
+    public $_cateTrans = array();
+
     /**
      * Run the database seeds.
      *
@@ -14,6 +16,167 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
+        $this->_cateTrans = array(
+            'en' => array(
+                'gach_men' => 'Ceramic Tiles',
+                'gach_lat_nen' => 'Floor Tiles',
+                'gach_op_tuong' => 'Wall Tiles',
+                'gach_vien' => 'Edging Tiles',
+                'gach_diem' => 'Painting Tiles',
+                'gach_trang_tri' => 'Decorative Tiles',
+                'gach_bong_gio' => 'Ventilation Bricks',
+
+                'thiet_bi_ve_sinh' => 'Sanitary ware',
+                'ban_cau_bet_toilet' => 'Toilets',
+                'chau_lavabo' => 'Lavatories',
+                'voi_chau_voi_bon' => 'Lavatories and Bathtubs',
+                'sen_tam' => 'Showers',
+                'bon_tam' => 'Bathtub',
+                'bon_tieu' => 'Urinals',
+                'van_xa_tieu_xa_toilet' => 'Urinal Flush Valve',
+                'phong_tam' => 'Bathroom',
+                'nap_ban_cau' => 'Toilet Lids',
+                'phu_kien_nha_tam' => 'Bathroom Accessories',
+
+                'thiet_bi_chieu_sang' => 'Lighting Equipments',
+                'den_phong_khach' => 'Living room lighting',
+                'den_phong_tam' => 'Bathroom Lighting',
+                'den_phong_ngu' => 'Bedroom Lighting',
+                'den_ban' => 'Lamp',
+                'den_tran_chieu_diem' => 'Ceiling Spotlights',
+                'den_ngoai_san_vuon' => 'Outdoor Lighting',
+                'bong_chieu_sang_tiet_kiem' => 'Outdoor Lighting',
+                'choa_den' => 'Lampshades',
+                'cong_tac' => 'Contacts',
+                'thiet_bi_dong_cat' => 'Switchgear',
+                'o_cam' => 'Sockets',
+                'chiet_ap_den' => 'Light potentiometer',
+                'giai_phap_khach_san' => 'Hotel Solutions',
+                'he_thong_ket_noi' => 'Connecting system',
+                'cam_bien_anh_sang' => 'Lighting sensor',
+                'thiet_bi_ngoai_vi' => 'Peripheral Device',
+                'dieu_toc_quat' => 'Fan governor',
+                'den_sac_led' => 'LED Charging',
+
+                'noi_that' => 'Interior',
+                'noi_that_van_phong' => 'Office Interior',
+                'noi_that_phong_khach' => 'Living room Interior',
+                'noi_that_phong_ngu' => 'Bedroom Interior',
+                'noi_that_nha_bep' => 'Kitchen Interior',
+                'do_trang_tri' => 'Decorations',
+                'tranh_treo_tuong' => 'Mural paintings',
+
+                'do_gia_dung' => 'Household Appliances',
+                'dung_cu_lam_do_an' => 'Cooking utensils',
+                'may_tam_nuoc_nong' => 'Water Heaters',
+                'may_hut_bui' => 'Vacuum cleaners',
+                'may_pha_ca_phe' => 'Coffee makers',
+                'ban_ui' => 'Irons',
+                'cay_nuoc_nong_lanh' => 'Hot & cold water dispensers',
+                'noi_com_dien' => 'Cookers',
+                'may_hut_am' => 'Humidity removing machines',
+                'may_nuong_banh_mi' => 'Sandwich Toaster',
+                'quat' => 'Fans',
+                'may_danh_sua' => 'Churns',
+                'may_xay_sinh_to' => 'Smoothie Blenders',
+                'may_xay_da_nang_cam_tay' => 'Multi-functional Blenders',
+                'may_ep_trai_cay' => 'Juicers',
+                'may_xay_thuc_an' => 'Blenders',
+                'noi_nau_lau' => 'Hot pots',
+                'noi_ap_suat' => 'Pressure cookers',
+                'may_hap_thuc_an' => 'Steamers',
+                'may_suoi_quat_suoi' => 'Heaters',
+                'may_say_toc' => 'Dryers',
+                'noi_chien_chan_khong' => 'Nồi Chiên Chân Không',
+                'am_dun_nuoc_pha_tra' => 'Pha Trà Kettles & Tea pots',
+                'may_tron_thuc_an' => 'Food Mixers',
+                'may_loc_nuoc' => 'Water Filters',
+                'may_lam_sua_chua' => 'Yoghurt Makers',
+                'may_tao_ozones' => 'Ozones Ozone Makers',
+                'may_lam_rau_mam' => 'Sprouting Makers',
+                'may_xay_sua_dau_nanh' => 'Soy Milk Makers',
+                'may_loc_khong_khi' => 'Air Filters',
+                'may_lam_mi' => 'Noodles Maker',
+                'may_cao_rau' => 'Electric Shavers',
+                'may_lam_banh' => 'Bread Machines',
+                'may_cat_rau_cu_va_lam_kem' => 'Vegetable slicers and Ice cream makers',
+
+                'thiet_bi_nha_bep' => 'Kitchen Equipment',
+                'may_hut_khoi' => 'Exhaust Hoods',
+                'bep_lap_am' => 'Recessed hobs',
+                'lo_lap_am' => 'Recessed Stoves',
+                'tu_ruou_vang' => 'Wine Chillers',
+                'may_huy_thuc_pham_thua' => 'Rubbish Disposal Machines',
+                'chau_bep_chau_rua_chen' => 'Sinks',
+                'may_rua_chen' => 'Dishwasher',
+                'may_say_chen' => 'Dish Dryers',
+                'bep_dat_ban' => 'Positive Cookers',
+                'lo_nuong' => 'Ovens',
+                'lo_vi_song_dat_ban' => 'Free-standing Microwaves',
+                'dung_dich_tay_rua' => 'Cleanser',
+                'phu_kien_bep' => 'Kitchen Accessories',
+                'ke' => 'Shelves',
+                'thung_gao' => 'Rice buckets',
+                'thung_rac' => 'Recycle bins',
+
+                'thiet_bi_van_phong' => 'Office Equipment',
+                'may_cham_cong' => 'Time Recorders',
+                'may_photocopy' => 'Photocopier',
+                'dien_thoai_fax' => 'Fax Telephones & Fax Machines',
+                'may_in' => 'Printers',
+                'may_scan' => 'Scanner',
+                'may_huy_giay_huy_tai_lieu' => 'Paper Shredders',
+                'may_tinh_ban_computer' => 'Desktop Computers',
+                'man_hinh_may_tinh' => 'Monitors',
+                'hop_muc_in_cartridge' => 'Ink Cartridge',
+                'may_chieu_projector' => 'Projectors',
+                'phu_kien_may_chieu' => 'Projector Components',
+                'may_dem_tien' => 'Money Counting Machine',
+                'bang_viet_flipchart' => 'Flipcharts',
+                'may_cat_giay' => 'Paper trimmers',
+                'bang_tuong_tac' => 'Interactive Panels',
+                'may_bo_tien' => 'Money Packing Machine',
+                'may_kiem_tra_tien' => 'Money Detetor Machines',
+
+                'thiet_bi_nganh_nuoc' => 'Water Equipment',
+                'ong_nuoc' => 'Water pipes',
+                'phu_kien_ong_nuoc' => 'Water pipes Components',
+                'may_bom' => 'Water Pumps',
+                'he_thong_xu_ly_nuoc' => 'Water Treatment System',
+                'may_phun_rua_ap_luc' => 'Water Treatment System',
+                'dong_ho_nuoc' => 'Water clocks',
+                'phu_kien_may_phun_rua_ap_luc' => 'Pressure Washer Accessories',
+                'kim_nuoc' => 'Water pump pliers',
+                'be_bon_nuoc_lap_ghep' => 'Sectional Water Tanks',
+                'hop_van_nuoc' => 'Valve boxes',
+                'bo_dieu_chinh_do_ph' => 'pH Controllers',
+
+                'thiet_bi_cong_cong' => 'Public Equipment',
+                'thung_rac_cong_cong' => 'Public Dustbins',
+                'nha_ve_sinh_cong_cong' => 'Public Restrooms',
+
+                'vat_lieu_xay_dung_tho' => 'Building Raw Materials',
+                'xi_mang' => 'Cement',
+                'sat' => 'Iron',
+                'cat' => 'Sand',
+                'da_xay_dung' => 'Building Stones',
+                'da_trang_tri' => 'Decorative Stones',
+                'soi' => 'Gravels',
+                'gach_xay_dung' => 'Building Bricks',
+                'vua' => 'Plaster',
+                'be_tong' => 'Concrete',
+                'phu_gia' => 'Additives',
+
+                'may_cong_nghiep' => 'Industrial Machinery',
+
+                'cay_va_hoa' => 'Flowers and Plants',
+                'cay' => 'Plants',
+                'hoa' => 'Flowers',
+
+                'vat_lieu_moi' => 'New Materials',
+                'ngoi' => '',
+            ),
+        );
         $categories = array(
             array(
                 'label' => 'Gạch men',
@@ -806,8 +969,10 @@ class CategoriesTableSeeder extends Seeder
     private function _setCategoryTrans($langs, $categoryId, $title)
     {
         $slug = str_slug($title);
+        $type = format_type_product($title);
+
         foreach ($langs as $lang) {
-            $rowSub = CategoriesTranslate::where('category_id', $categoryId)->where('language_code', $lang->iso2)->where('slug', $slug)->first();
+            $rowSub = CategoriesTranslate::where('category_id', $categoryId)->where('language_code', $lang->iso2)->first();
             if ($rowSub === NULL) {
                 $rowSub = new CategoriesTranslate();
                 $rowSub->language_code = $lang->iso2;
@@ -816,6 +981,14 @@ class CategoriesTableSeeder extends Seeder
                 $rowSub->slug = $slug;
                 $rowSub->created_at = date('Y-m-d H:i:s');
                 $rowSub->save();
+            } else {
+                if(isset($this->_cateTrans[$rowSub->language_code][$type])) {
+                    $title_parent = $this->_cateTrans[$rowSub->language_code][$type];
+                    $slug_new = str_slug($title_parent);
+                    $rowSub->title = $title_parent;
+                    $rowSub->slug = $slug_new;
+                    $rowSub->save();
+                }
             }
         }
     }

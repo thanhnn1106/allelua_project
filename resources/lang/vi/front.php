@@ -28,7 +28,8 @@ return [
     ],
     'menu' => [
         'index'                     => 'DANH MỤC',
-        'view_all'                  => 'Xem tất cả'
+        'view_all'                  => 'Xem tất cả >',
+        'view_short'                  => 'Thu ngắn >'
     ],
     'partial' => array(
         'watched_title'    => 'SẢN PHẨM BẠN ĐÃ XEM',

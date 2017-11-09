@@ -7,8 +7,13 @@ use Illuminate\Http\Request;
 class BaseController extends Controller
 {
     public function __construct() {
-        $this->lang = \App::getLocale();
-        \View::share('sp_categories', $this->loadMenuFront());
+        $this->middleware(function ($request, $next) {
+            $this->lang = session()->has( 'applocale' ) ? session()->get( 'applocale' ) : \Config::get('app.fallback_locale');
+
+            \View::share('sp_categories', $this->loadMenuFront());
+
+            return $next($request);
+        });
     }
 
     public function setRules($request)

@@ -12,6 +12,10 @@ use DB;
 
 class ManageController extends BaseController
 {
+    public function __construct() {
+        parent::__construct();
+    }
+
     public function index(Request $request)
     {
         $data = array();

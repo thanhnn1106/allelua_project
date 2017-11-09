@@ -10,6 +10,11 @@ use App\User;
 
 class UserProfileController extends AdminBaseController
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Edit user
      * @param Request $request

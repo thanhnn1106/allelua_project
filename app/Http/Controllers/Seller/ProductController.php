@@ -11,6 +11,10 @@ use Auth;
 
 class ProductController extends BaseController
 {
+    public function __construct() {
+        parent::__construct();
+    }
+
     /**
      * Setting config as: rate and social
      * @param Request $request
