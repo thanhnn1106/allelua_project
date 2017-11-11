@@ -21,7 +21,7 @@ return [
     'lb_customer_care'    => 'CHĂM SÓC KHÁCH HÀNG',
     'lb_safe_payment'     => 'THANH TOÁN AN TOÀN',
     'lb_check_service'    => 'DỊCH VỤ KIỂM TRA',
-    
+    'lbl_request_search'  => 'Gửi yêu cầu tìm kiếm',
 
     'bread_crum' => [
         'home' => 'Trang chủ',

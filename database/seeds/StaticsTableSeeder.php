@@ -189,6 +189,17 @@ class StaticsTableSeeder extends Seeder
                         $obj->save();
                     }
                 }
+            } else {
+                if(isset($static['translate'])) {
+                    foreach ($static['translate'] as $trans) {
+                        $row = StaticsTranslate::where('language_code', $trans['language_code'])->where('static_id', $chkStatic->id)->first();
+                        if($row !== NULL) {
+                            $row->title = $trans['title'];
+                            $row->slug = $trans['slug'];
+                            $row->save();
+                        }
+                    }
+                }
             }
         }
     }

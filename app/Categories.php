@@ -109,7 +109,8 @@ class Categories extends Model
                 ->where('t2.slug', $slug);
         if ( ! empty($cateId)) {
             $query->join('categories_translate AS t3', 't3.category_id', '=', 't1.parent_id')
-                ->where('t1.id', $cateId);
+                ->where('t1.id', $cateId)
+                ->where('t3.language_code', $lang);
             $query->join('categories AS t4','t4.id', '=','t1.parent_id');
         }
 

@@ -11,6 +11,7 @@ class LangController extends BaseController
         if (in_array($lt, $this->getIso2Lang())) {
             \Session::put('applocale', $lt);
         }
-        return redirect()->back();
+        //return redirect()->back();
+        return redirect(route('home'));
     }
 }

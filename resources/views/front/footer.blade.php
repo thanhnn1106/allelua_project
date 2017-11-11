@@ -82,7 +82,7 @@
                                 </li>
                                 <li>
                                     <a title="" href="{{ route('contact') }}">
-                                        Gửi yêu cầu tìm kiếm
+                                        {{ trans('front.lbl_request_search') }}
                                     </a>
                                 </li>
                             </ul>

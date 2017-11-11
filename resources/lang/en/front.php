@@ -15,11 +15,13 @@ return [
     'lb_call_us'          => 'Call us',
     'lb_cart'             => 'Cart',
     'lb_b2b'              => 'Business & Business',
+    'lb_find_country'     => 'Finding distributors according to countries',
     'lb_support_service'  => 'SUPPORT SERVICE',
     'lb_guaranteed_trade' => 'GUARANTEED TRADE',
     'lb_customer_care'    => 'CUSTOMER CARE',
     'lb_safe_payment'     => 'SAFE PAYMENT',
     'lb_check_service'    => 'CHECKING SERVICE',
+    'lbl_request_search'  => 'Search for Items',
 
     'bread_crum' => [
         'home' => 'Home page',
