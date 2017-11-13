@@ -22,6 +22,7 @@ return [
     'lb_safe_payment'     => 'SAFE PAYMENT',
     'lb_check_service'    => 'CHECKING SERVICE',
     'lbl_request_search'  => 'Search for Items',
+    'lbl_lang_select'     => 'Select languages',
 
     'bread_crum' => [
         'home' => 'Home page',

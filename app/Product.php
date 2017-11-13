@@ -432,6 +432,8 @@ class Product extends Model
         }
         if( ! empty($params['language_code'])) {
             $query->where('t2.language_code', $params['language_code']);
+            $query->where('t5.language_code', $params['language_code']);
+            $query->where('t6.language_code', $params['language_code']);
         }
 
         $row = $query->first();

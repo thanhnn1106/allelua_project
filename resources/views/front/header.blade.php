@@ -73,7 +73,7 @@
                                 <i class="fa fa-angle-down" data-toggle="dropdown"></i>
                             </a>
                             <div class="dropdown-menu">
-                                <span class="dropdown-label" >Chọn ngôn ngữ</span>
+                                <span class="dropdown-label" >{{ trans('front.lbl_lang_select') }}</span>
                                 @foreach($languages as $keyLang => $titleLang)
                                 <span class="dropdown-item">
                                     <a title="{{ $titleLang }}" href="{{ route('home_lang', ['lt' => $keyLang]) }}" >
