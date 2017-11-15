@@ -168,6 +168,74 @@ class StaticsTableSeeder extends Seeder
                     ),
                 ),
             ),
+            array(
+                'status' => 1,
+                'type' => 'type_10',
+                'created_at' => date('Y-m-d H:i:s'),
+                'translate' => array(
+                    array(
+                        'language_code' => 'vi',
+                        'title' => 'ĐẢM BẢO THƯƠNG MẠI',
+                        'slug' => 'dam-bao-thuong-mai',
+                    ),
+                    array(
+                        'language_code' => 'en',
+                        'title' => 'TRADING CERTIFICATION',
+                        'slug' => 'trading-certification',
+                    ),
+                ),
+            ),
+            array(
+                'status' => 1,
+                'type' => 'type_11',
+                'created_at' => date('Y-m-d H:i:s'),
+                'translate' => array(
+                    array(
+                        'language_code' => 'vi',
+                        'title' => 'THANH TOÁN AN TOÀN',
+                        'slug' => 'thanh-toan-an-toan',
+                    ),
+                    array(
+                        'language_code' => 'en',
+                        'title' => 'PAYMENT SAFETY',
+                        'slug' => 'payment-safety',
+                    ),
+                ),
+            ),
+            array(
+                'status' => 1,
+                'type' => 'type_12',
+                'created_at' => date('Y-m-d H:i:s'),
+                'translate' => array(
+                    array(
+                        'language_code' => 'vi',
+                        'title' => 'DỊCH VỤ HẬU CẦN',
+                        'slug' => 'dich-vu-hau-can',
+                    ),
+                    array(
+                        'language_code' => 'en',
+                        'title' => 'CUSTOMER SERVICE',
+                        'slug' => 'customer-service',
+                    ),
+                ),
+            ),
+            array(
+                'status' => 1,
+                'type' => 'type_13',
+                'created_at' => date('Y-m-d H:i:s'),
+                'translate' => array(
+                    array(
+                        'language_code' => 'vi',
+                        'title' => 'DỊCH VỤ KIỂM TRA',
+                        'slug' => 'dich-vu-kiem-tra',
+                    ),
+                    array(
+                        'language_code' => 'en',
+                        'title' => 'TESTING SERVICE',
+                        'slug' => 'testing-service',
+                    ),
+                ),
+            ),
         ];
 
         foreach ($statics as $static) {

@@ -70,7 +70,9 @@
                         <div class="item-fearture" >
                             <img src="{{ asset_front('dataimages/ft.png') }}" class="img-feature" >
                             <span class="text-feature">
-                                {{ trans('front.lb_guaranteed_trade') }}
+                                <a href="/page/{{ $staticPage['type_10']['slug'] }}" title="" >
+                                    {{ $staticPage['type_10']['title'] }}
+                                </a>
                             </span>
                         </div>
                     </div>
@@ -79,7 +81,9 @@
                         <div class="item-fearture" >
                             <img src="{{ asset_front('dataimages/ft2.png') }}" class="img-feature" >
                             <span class="text-feature">
-                                {{ trans('front.lb_customer_care') }}
+                                <a href="/page/{{ $staticPage['type_11']['slug'] }}" title="" >
+                                    {{ $staticPage['type_11']['title'] }}
+                                </a>
                             </span>
                         </div>
                     </div>
@@ -88,7 +92,9 @@
                         <div class="item-fearture" >
                             <img src="{{ asset_front('dataimages/ft3.png') }}" class="img-feature" >
                             <span class="text-feature">
-                                {{ trans('front.lb_safe_payment') }}
+                                <a href="/page/{{ $staticPage['type_12']['slug'] }}" title="" >
+                                    {{ $staticPage['type_12']['title'] }}
+                                </a>
                             </span>
                         </div>
                     </div>
@@ -97,7 +103,9 @@
                         <div class="item-fearture" >
                             <img src="{{ asset_front('dataimages/ft4.png') }}" class="img-feature" >
                             <span class="text-feature">
-                                {{ trans('front.lb_check_service') }}
+                                <a href="/page/{{ $staticPage['type_13']['slug'] }}" title="" >
+                                    {{ $staticPage['type_13']['title'] }}
+                                </a>
                             </span>
                         </div>
                     </div>

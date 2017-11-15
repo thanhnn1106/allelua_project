@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Front;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Front\BaseController;
+use App\Languages;
+use App\Statics;
 
 class HomeController extends BaseController
 {
@@ -23,6 +25,14 @@ class HomeController extends BaseController
         $arrCateId = array_keys($categories);
 
         $productBestPrice = $this->loadProductBestPrice($arrCateId);
+        $staticPageMenu = Statics::getPageInfoListByLang(\App::getLocale());
+        $arrStaticPage = array();
+        foreach ($staticPageMenu as $item) {
+            $arrStaticPage[$item->type] = array(
+               'title' => $item->title,
+               'slug' => $item->slug,
+            );
+        }
 
         return view('front.home.index', [
             'langs' => \App\Languages::getResults(),
@@ -33,6 +43,7 @@ class HomeController extends BaseController
             'productBestPrice' => $productBestPrice,
             'arrMenuBestPrice' => $this->loadMenuBestPrice($productBestPrice),
             'cssClass' => 'page-home',
+            'staticPage' => $arrStaticPage,
         ]);
     }
 }
