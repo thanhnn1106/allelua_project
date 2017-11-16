@@ -4,6 +4,7 @@ coz.banner = {
     width : 428
 }
 scrollbarHome = $('[data-place="scrollbarHome"]');
+/*
 updateScrollBarHome = function(){
     try{
         h = $('.megamenu').height();
@@ -16,6 +17,22 @@ updateScrollBarHome = function(){
         _style += '.navbar-pills >li> a{padding: '+(10*rw)+'px '+(15*rw)+'px}';
         _style += '.navbar-pills >li> a>img{width: '+(16*rw)+'px;margin-right: '+(10*rw)+'px}';
         _style += '.navbar-pills >li> a{padding: '+(10*rw)+'px '+(15*rw)+'px;border-left: '+(4*rw)+'px solid #FFF;font-size: '+(100*rw)+'%}';
+        $('#cssScrollBarMega').html('<style>.inner-megamenu{min-height:'+h+'px}'+_style+'</style>');
+    }catch(e){}
+};
+*/
+updateScrollBarHome = function(){
+    try{
+        h = $('.megamenu').height();
+        h = Math.max(h, 50);
+        var cw = $('[data-place="groupBannerHome"] .item-banner').eq(0).width();
+        rw = Math.min(cw, 428)/428;
+        _style = '.aside-heading{padding: '+(15*rw)+'px}';
+        //_style += '.aside-heading .title-aside{font-size: '+(100*rw)+'%}';
+        _style += '.nav-mmega > li >a{font-size: '+(100*rw)+'%}';
+        _style += '.navbar-pills >li> a{padding: '+(10*rw)+'px '+(15*rw)+'px}';
+        _style += '.navbar-pills >li> a>img{width: '+(16*rw)+'px;margin-right: '+(10*rw)+'px}';
+        _style += '.navbar-pills >li> a{padding: '+(9*rw-2)+'px '+(15*rw)+'px;border-left: '+(4*rw)+'px solid #FFF}';
         $('#cssScrollBarMega').html('<style>.inner-megamenu{min-height:'+h+'px}'+_style+'</style>');
     }catch(e){}
 };

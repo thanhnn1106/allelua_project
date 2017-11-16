@@ -132,7 +132,7 @@ class ProductController extends BaseController
             'productImages' => $productImages,
             'personal' => $personal,
             'productWatched' => $this->loadProductWatched(),
-            'productRelated' => $this->loadProductRelated($id, $product->sub_category_id),
+            'productRelated' => $this->loadProductRelated($id, isset($product->sub_category_id) ? $product->sub_category_id : NULL),
             'totalCart' => $cartCollection->count(),
             'totalQuantity' => ($totalQuantity > 0) ? $totalQuantity : 1,
             'loadStyles' => $loadStyles,
