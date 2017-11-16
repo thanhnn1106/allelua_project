@@ -116,6 +116,7 @@ button.btn-search:hover{
 .navbar-pills li {
 }
 .navbar-pills >li> a {
+    font-size: 12px;
     position: relative;
     padding: 10px 15px;
     display: block;
@@ -2172,6 +2173,11 @@ input.has-error {
 @media (min-width: 1200px){
     .org-container{
         max-width: 1140px;
+    }
+}
+@media (max-width: 1024px){
+    .navbar-pills >li> a {
+        font-size: 11px;
     }
 }
 @media (min-width: 1600px){

@@ -368,11 +368,14 @@ class Product extends Model
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->where('t1.status', 1)
                 ->where('t2.language_code', $lang)
-                ->where('t1.sub_category_id', $subCategoryId)
+//                ->where('t1.sub_category_id', $subCategoryId)
                 ->where('t1.id', '<>', $id)
                 ->whereNull('t1.deleted_at')
                 ->orderBy(\DB::raw("RAND()"))
                 ->limit(20);
+        if( ! empty($subCategoryId)) {
+            $query->where('t1.sub_category_id', $subCategoryId);
+        }
 
         return $query->get();
     }
@@ -423,8 +426,19 @@ class Product extends Model
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->leftJoin('categories AS t3', 't3.id', '=', 't1.category_id')
                 ->leftJoin('categories AS t4', 't4.id', '=', 't1.sub_category_id')
-                ->leftJoin('categories_translate AS t5', 't3.id', '=', 't5.category_id')
-                ->leftJoin('categories_translate AS t6', 't4.id', '=', 't6.category_id')
+                //->leftJoin('categories_translate AS t5', 't3.id', '=', 't5.category_id')
+				->leftJoin('categories_translate AS t5', function ($query) use ($params) {
+					$query->on('t3.id', '=', 't5.category_id');
+					if( ! empty($params['language_code'])) {
+						$query->where('t5.language_code', $params['language_code']);
+					}
+				})
+                ->leftJoin('categories_translate AS t6', function ($query) use ($params) {
+					$query->on('t4.id', '=', 't6.category_id');
+					if( ! empty($params['language_code'])) {
+						$query->where('t6.language_code', $params['language_code']);
+					}
+				})
                 ->where('t1.status', 1);
 
         if( ! empty($params['product_id'])) {
@@ -432,8 +446,6 @@ class Product extends Model
         }
         if( ! empty($params['language_code'])) {
             $query->where('t2.language_code', $params['language_code']);
-            $query->where('t5.language_code', $params['language_code']);
-            $query->where('t6.language_code', $params['language_code']);
         }
 
         $row = $query->first();
