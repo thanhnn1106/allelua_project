@@ -18,7 +18,7 @@ class ComposerServiceProvider extends ServiceProvider
         View::composers([
                 'App\Http\ViewComposers\MainMenuComposer' => ['admin.layout'],
                 'App\Http\ViewComposers\SellerMenuComposer' => ['seller.layout'],
-                'App\Http\ViewComposers\CommonComposer' => ['front.layout', 'seller.layout']
+                'App\Http\ViewComposers\CommonComposer' => ['front.layout', 'seller.layout', 'front.partial.country_service']
             ]
         );
     }

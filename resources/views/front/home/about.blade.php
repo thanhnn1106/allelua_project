@@ -33,7 +33,7 @@
     </div>
 
 <!-- BEGIN COUNTRY AND SERVICE -->
-
+@include('front.partial.country_service')
 <!-- END COUNTRY AND SERVICE -->
 </div>
 @endsection
