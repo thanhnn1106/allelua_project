@@ -5,6 +5,7 @@ namespace App\Http\ViewComposers;
 use Illuminate\View\View;
 use App\Languages;
 use App\Statics;
+use App\Settings;
 
 class CommonComposer
 {
@@ -27,11 +28,17 @@ class CommonComposer
                'slug' => $item->slug,
             );
         }
+        $mediaData = Settings::getAllMediaLink();
+        $mediaLinkList = array();
+        foreach ($mediaData as $item) {
+            $mediaLinkList[$item['key']] = $item['value'];
+        }
 
         $view->with([
             'languages' => $langs,
             'staticPage' => $arrStaticPage,
             'cartCount' => \Cart::getTotalQuantity(),
+            'mediaLink' => $mediaLinkList
         ]);
     }
 }

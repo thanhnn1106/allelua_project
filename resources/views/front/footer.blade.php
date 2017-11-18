@@ -90,13 +90,13 @@
                                 {{ trans('front.menu_footer.lb_connect_with_allelua') }}
                             </h2>
                             <div class="nav-socal" >
-                                <a href="" class="link-socal facebook" >
+                                <a href="{{ isset($mediaLink['setting_link_facebook']) ? $mediaLink['setting_link_facebook'] : '' }}" class="link-socal facebook" >
                                     <i class="fa fa-facebook" ></i>
                                 </a>
-                                <a href="" class="link-socal google" >
-                                    <i class="fa fa-google" ></i>
+                                <a href="{{ isset($mediaLink['setting_link_twitter']) ? $mediaLink['setting_link_twitter'] : '' }}" class="link-socal facebook" >
+                                    <i class="fa fa-twitter" ></i>
                                 </a>
-                                <a href="" class="link-socal google" >
+                                <a href="{{ isset($mediaLink['setting_link_youtube']) ? $mediaLink['setting_link_youtube'] : '' }}" class="link-socal google" >
                                     <i class="fa fa-youtube" aria-hidden="true"></i>
                                 </a>
                             </div>
