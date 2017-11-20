@@ -18,6 +18,7 @@ return [
     'msg_restore_product_failed'       => 'Khôi phục sản phẩm thất bại.',
     'msg_force_delete_product_success' => 'Xoá vĩnh viễn sản phẩm thành công.',
     'msg_force_delete_product_failed'  => 'Xoá vĩnh viễn sản phẩm thất bại.',
+    'msg_seller_not_except'            => 'Sản phẩm này chỉ có thể xem. Vui lòng liên hệ admin.',
 
     'register' => [
         'msg_register_failed'  => 'Đăng ký thất bại. Vui lòng thử lại sau.',

@@ -103,6 +103,7 @@
                                 <?php
                                 $isCheckOut = (isset($totalCart) && $totalCart > 0) ? 'display:block' : 'display:none';
                                 ?>
+                                @if(check_seller_cart($product->user_role_id, $product->user_status))
                                 <div id="butCheckout" class="product-form-group" style="{{ $isCheckOut }}">
                                     <button type="button" onclick="window.location.href ='{{ route('user_checkout_shipping') }}'" class="btn btn-block btn-style btn-cart add_to_cart" title="Cho vào giỏ hàng" >
                                         <span>{{ trans('front.product.lb_buy_now') }}</span>
@@ -114,6 +115,7 @@
                                         <span>{{ trans('front.product.lb_add_to_cart') }}</span>
                                     </button>
                                 </div>
+                                @endif
                             </form>
 
                             <div class="product-form-group">

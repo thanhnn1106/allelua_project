@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Front\BaseController;
 use App\Product;
+use App\User;
 use Validator;
 use Cart;
 
@@ -26,6 +27,10 @@ class CartController extends BaseController
             $product = Product::where('id', $productId)->where('status', config('product.product_status.value.publish'))->first();
             if($product === NULL) {
                 return response()->json(array('error' => 1, 'result' => trans('common.msg_data_not_found')));
+            }
+            $user = User::find($product->user_id);
+            if($user !== NULL && ! check_seller_cart($user->role_id, $user->status)) {
+                return response()->json(array('error' => 1, 'result' => trans('common.msg_seller_not_except')));
             }
 
             // validate the info, create rules for the inputs

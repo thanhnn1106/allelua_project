@@ -21,7 +21,7 @@
     </div>
 
     <div class="wrap-d-product" >
-        <div class="alert alert-error alert-block" style="display:none;">
+        <div class="alert alert-warning alert-block" style="display:none;">
             <p></p>
         </div>
         <div class="details-product clearfix" >

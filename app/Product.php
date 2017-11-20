@@ -125,6 +125,7 @@ class Product extends Model
                 ->join('categories AS t3', 't3.id', '=', 't1.category_id')
                 ->join('categories_translate AS t4', 't4.category_id', '=', 't3.id')
                 ->where('t1.status', 1)
+                ->whereNull('t1.deleted_at')
                 ->groupBy('t1.category_id')
                 ->orderBy('total', 'DESC')
                 ->limit(1);
@@ -142,6 +143,7 @@ class Product extends Model
                 ->select('t2.brand', \DB::raw('COUNT(t1.id) AS total'))
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->where('t1.status', 1)
+                ->whereNull('t1.deleted_at')
                 ->where('t2.brand', '!=', '')
                 ->whereNotNull('t2.brand')
                 ->groupBy('t2.brand');
@@ -159,6 +161,7 @@ class Product extends Model
                 ->select('t1.position_use', \DB::raw('COUNT(t1.id) AS total'))
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->where('t1.status', 1)
+                ->whereNull('t1.deleted_at')
                 ->groupBy('t1.position_use');
 
         self::_query_param($query, $params);
@@ -174,6 +177,7 @@ class Product extends Model
                 ->select('t1.size', \DB::raw('COUNT(t1.id) AS total'))
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->where('t1.status', 1)
+                ->whereNull('t1.deleted_at')
                 ->groupBy('t1.size');
 
         self::_query_param($query, $params);
@@ -189,6 +193,7 @@ class Product extends Model
                 ->select('t2.color', \DB::raw('COUNT(t1.id) AS total'))
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->where('t1.status', 1)
+                ->whereNull('t1.deleted_at')
                 ->where('t2.color', '!=', '')
                 ->whereNotNull('t2.color')
                 ->groupBy('t2.color');
@@ -213,7 +218,8 @@ class Product extends Model
         $query = \DB::table('products AS t1')
                 ->select(\DB::raw(implode(',', $select)))
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
-                ->where('t1.status', 1);
+                ->where('t1.status', 1)
+                ->whereNull('t1.deleted_at');
 
         self::_query_param($query, $params);
 
@@ -237,6 +243,7 @@ class Product extends Model
                 ->select(\DB::raw(implode(',', $select)))
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->where('t1.status', 1)
+                ->whereNull('t1.deleted_at')
                 ->where('t1.style', '<>', '')
                 ->whereNotNull('t1.style');
 
@@ -263,6 +270,7 @@ class Product extends Model
                 ->select(\DB::raw(implode(',', $select)))
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->where('t1.status', 1)
+                ->whereNull('t1.deleted_at')
                 ->where('t1.material', '<>', '')
                 ->whereNotNull('t1.material')
                 ->groupBy('t1.material');
@@ -282,6 +290,7 @@ class Product extends Model
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->where('t1.status', 1)
                 ->where('t1.price', '<>', '')
+                ->whereNull('t1.deleted_at')
                 ->whereNotNull('t1.price');
 
 
@@ -422,7 +431,8 @@ class Product extends Model
                 ->select('t1.id', 't1.category_id', 't1.sub_category_id', 't1.price', 't1.image_rand', 't1.image_real', 't1.payment_method', 't1.shipping_method', 't1.user_id', 't1.position_use', 't1.size', 't1.style', 't1.material',
                         't2.title', 't2.slug', 't2.brand', 't2.color', 't2.source', 't2.guarantee', 't2.delivery_location', 't2.detail', 't2.brand', 't2.info_tech', 't2.feature_highlight', 't2.detail', 't2.form_product',
                         't3.type as cate_type', 't4.type as subcate_type',
-                        't5.slug AS cate_slug', 't5.title AS cate_title', 't6.slug AS sub_cate_slug', 't6.title AS sub_cate_title', 't1.quantity_limit AS product_quantity_limit' , 't1.quantity AS product_quantity')
+                        't5.slug AS cate_slug', 't5.title AS cate_title', 't6.slug AS sub_cate_slug', 't6.title AS sub_cate_title', 't1.quantity_limit AS product_quantity_limit' , 't1.quantity AS product_quantity',
+                        't7.role_id AS user_role_id', 't7.status AS user_status')
                 ->join('product_translate AS t2', 't2.product_id', '=', 't1.id')
                 ->leftJoin('categories AS t3', 't3.id', '=', 't1.category_id')
                 ->leftJoin('categories AS t4', 't4.id', '=', 't1.sub_category_id')
@@ -439,6 +449,7 @@ class Product extends Model
 						$query->where('t6.language_code', $params['language_code']);
 					}
 				})
+                ->leftJoin('users AS t7', 't1.user_id', '=', 't7.id')
                 ->where('t1.status', 1);
 
         if( ! empty($params['product_id'])) {

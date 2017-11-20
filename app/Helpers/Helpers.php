@@ -281,3 +281,14 @@ function check_domain_name($url)
     }
     return false;
 }
+
+function check_seller_cart($role_id, $user_status)
+{
+    $role_seller = config('allelua.roles.seller');
+    if($role_seller == $role_id) {
+        if(empty($user_status)) {
+            return false;
+        }
+    }
+    return true;
+}

@@ -18,6 +18,7 @@ return [
     'msg_restore_product_failed'       => 'Restored product fail.',
     'msg_force_delete_product_success' => 'Deleted product successfully.',
     'msg_force_delete_product_failed'  => 'Deleted product fail.',
+    'msg_seller_not_except'            => 'This product only view. Please contact administrator.',
 
     'register' => [
         'msg_register_failed'  => 'Register failed. Please try again later.',
