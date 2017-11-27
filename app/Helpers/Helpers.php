@@ -124,12 +124,17 @@ function formatPrice($number)
     if ($lang === 'en') {
         $rate = App\Settings::where('key', 'setting_rate')->first();
         if ($rate !== NULL) {
-            $price = floor($number / $rate->value);
-            return number_format($price) . ' $';
+            $price = round(($number / $rate->value), 2);
+            if($price > 0) {
+                return number_format($price, 2, '.', ',') . ' $';
+            } else {
+                return 0 . ' $';
+            }
         }
     }
     return formatNumber($number) . ' đ';
 }
+
 function splitPrice($prices)
 {
     $prices = array_keys($prices);
