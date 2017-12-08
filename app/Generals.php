@@ -31,7 +31,7 @@ class Generals extends Model
 
     public static function getResultsByLang($langCode)
     {
-        $generals = Generals::where('language_code', '=', $langCode)->first();;
+        $generals = Generals::where('language_code', '=', $langCode)->first();
         return $generals;
     }
 }
