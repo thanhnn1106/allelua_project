@@ -489,7 +489,7 @@ $(function() {
         "table contextmenu directionality emoticons paste textcolor filemanager" 
         ], 
         image_advtab: true, 
-        toolbar: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect forecolor backcolor | link unlink anchor | image media | print preview code"
+        toolbar: "sizeselect | fontselect | fontsizeselect | undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect forecolor backcolor | link unlink anchor | image media | print preview code"
     });
 });
 </script>
