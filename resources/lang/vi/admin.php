@@ -65,6 +65,7 @@ return [
         'lb_payment_method'        => 'Phương thức thanh toán',
         'lb_shipping_method'       => 'Phương thức giao hàng',
         'lb_created_date'          => 'Ngày tạo',
+        'lb_updated_date'          => 'Ngày cập nhật',
         'lb_action'                => 'Thao tác',
         'btn_delete'               => 'Xoá',
         'btn_edit'                 => 'Sửa',

@@ -103,8 +103,9 @@ class User extends Authenticatable
             ->join('personal_translate as pt', 'p.id', '=', 'pt.personal_id')
             ->where('u.role_id', '=', 2)
             ->groupby('u.id')
-            ->orderby('p.created_at')
+            ->orderBy('p.created_at', 'DESC')
             ->get();
+
         return $result;
     }
 

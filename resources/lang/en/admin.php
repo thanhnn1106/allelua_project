@@ -65,6 +65,7 @@ return [
         'lb_payment_method'        => 'Payment method',
         'lb_shipping_method'       => 'Shipping method',
         'lb_created_date'          => 'Created at',
+        'lb_updated_date'          => 'Updated at',
         'lb_action'                => 'Action',
         'btn_delete'               => 'Delete',
         'btn_edit'                 => 'Edit',

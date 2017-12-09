@@ -30,6 +30,7 @@
                                             <th>{{ trans('admin.product.lb_shipping_method') }}</th>
                                             <th>{{ trans('admin.product.lb_status') }}</th>
                                             <th>{{ trans('admin.product.lb_created_date') }}</th>
+                                            <th>{{ trans('admin.product.lb_updated_date') }}</th>
                                             <th>{{ trans('admin.product.lb_action') }}</th>
                                         </tr>
                                         @foreach($products as $product)
@@ -49,6 +50,7 @@
                                                 </a>
                                             </td>
                                             <td>{{ $product->created_at }}</td>
+                                            <td>{{ $product->updated_at }}</td>
                                             <td>
                                                 <a href="{{ route('admin_product_restore', ['id' => $product->id]) }}" class="btn btn-default btn-xs">
                                                     {{ trans('admin.product.btn_restore_product') }}
