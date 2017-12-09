@@ -86,18 +86,8 @@
     <script type="text/javascript" src="{{ asset_front('js/elevatezoom/3.0.8/jquery.elevateZoom-3.0.8.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset_front('js/select2/dist/js/select2.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset_front('js/script.js') }}"></script>
-
-    <!--Embed from Zopim Live Chat Wordpress Plugin v1.4.3-->
-    <!--Start of Zendesk Chat Script-->
-    <script type="text/javascript">
-    window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-    d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-    _.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
-    $.src="https://v2.zopim.com/?5CajIEZND33t4OQOpq05MFAeSud5s2dZ";z.t=+new Date;$.
-    type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
-    </script>
-    <!--End of Zendesk Chat Script-->
-
+    <script type="text/javascript">function add_chatinline(){var hccid=67706874;var nt=document.createElement("script");nt.async=true;nt.src="https://mylivechat.com/chatinline.aspx?hccid="+hccid;var ct=document.getElementsByTagName("script")[0];ct.parentNode.insertBefore(nt,ct);}
+add_chatinline(); </script>
     <script>
     // Add token when use ajax
     $.ajaxSetup({
