@@ -143,6 +143,7 @@ return [
         'lb_seller'           => 'Seller',
         'lb_customer_name'    => 'Customer',
         'lb_customer_email'   => 'Customer email',
+        'lb_customer_phone'   => 'Customer phone',
         'lb_product_name'     => 'Product name',
         'lb_price'            => 'Price',
         'lb_quantity'         => 'Quantity',

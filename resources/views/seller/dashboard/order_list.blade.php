@@ -55,7 +55,7 @@ $draftStatus = config('product.product_seller_status.value.draft');
                                                 <td>{{ $item->order_id }}</td>
                                                 <td>{{ $item->full_name }}</td>
                                                 <td>{{ $item->email }}</td>
-                                                <td>{{ $item->phone_number }}</td>
+                                                <td>{{ $item->phone }}</td>
                                                 <td>{{ $item->address }}</td>
                                                 <td>{{ $item->product_name }}</td>
                                                 <td>{{ formatPrice($item->price) }}</td>

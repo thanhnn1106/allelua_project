@@ -177,7 +177,7 @@ return [
         'destroy_product'       => 'Hủy Đăng ',
         'id'                    => '#ID',
         'image'                 => 'Hình',
-        'category'              => 'Category',
+        'category'              => 'Danh mục hàng hoá',
         'sub_category'          => 'Sản phẩm cấp 2',
         'status'                => 'Trạng thái',
         'title'                 => 'Tên sản phẩm',

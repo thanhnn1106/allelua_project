@@ -143,6 +143,7 @@ return [
         'lb_seller'           => 'Người bán',
         'lb_customer_name'    => 'Người mua',
         'lb_customer_email'   => 'Email người mua',
+        'lb_customer_phone'   => 'Số điện thoại <br /> người mua',
         'lb_product_name'     => 'Tên sản phẩm',
         'lb_price'            => 'Giá',
         'lb_quantity'         => 'Số lượng',
