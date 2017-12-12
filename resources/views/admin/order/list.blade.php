@@ -25,7 +25,8 @@
                                             <th>{{ trans('admin.order_page.lb_seller') }}</th>
                                             <th>{{ trans('admin.order_page.lb_customer_name') }}</th>
                                             <th>{{ trans('admin.order_page.lb_customer_email') }}</th>
-                                            <th>{!! trans('admin.order_page.lb_customer_phone') !!}</th>
+                                            <th>{!! trans('admin.order_page.lb_customer_order_phone') !!}</th>
+                                            <th>{!! trans('admin.order_page.lb_customer_receive_phone') !!}</th>
                                             <th>{{ trans('admin.order_page.lb_product_name') }}</th>
                                             <th>{{ trans('admin.order_page.lb_price') }}</th>
                                             <th>{{ trans('admin.order_page.lb_quantity') }}</th>
@@ -39,7 +40,8 @@
                                             <td>{{ $item->seller_name }}</td>
                                             <td>{{ $item->customer_full_name }}</td>
                                             <td>{{ $item->customer_email }}</td>
-                                            <td>{{ $item->customer_phone }}</td>
+                                            <td>{{ $item->order_phone }}</td>
+                                            <td>{{ $item->receive_phone }}</td>
                                             <td>{{ $item->product_name }}</td>
                                             <td>{{ formatPrice($item->price) }}</td>
                                             <td>{{ $item->quantity }}</td>
