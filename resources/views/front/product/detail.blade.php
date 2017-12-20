@@ -1,7 +1,13 @@
 @extends('front.layout')
+
+<!-- // Meta data -->
+@section('og-title', $product->title)
+@section('meta-description', $product->feature_highlight)
+@section('meta-image', $productImages['initialPreview'][0])
+
 @section('content')
 <div class="container">
-    <div class="clearfix" >
+    <div class="clearfix">
         <ul class="breadcrumbs" >
             <li class="home" ><a href="{{ route('home') }}" >{{ trans('front.bread_crum.home') }}</a></li>
             @if(isset($product) && $product)

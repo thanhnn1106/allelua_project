@@ -10,7 +10,6 @@
         <meta content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=0" name="viewport">
         <meta name="csrf-token" content="{!! csrf_token() !!}" />
         <meta name="keywords" content="{{ $generalDataArr['seo_keyword'] }}">
-        <meta name="description" content="{{ $generalDataArr['description'] }}">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,700italic,400italic,300italic,300&subset=vietnamese&coz=20170520090756">
         <link href="{{ asset_front('js/bootstrap/4.0.0-alpha.2/css/bootstrap.css') }}" media="all" rel="stylesheet" type="text/css">
         <link href="{{ asset_front('js/font-awesome/4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" >
@@ -23,7 +22,10 @@
         <link rel="stylesheet" type="text/css" href="{{ asset_front('css/style.css') }}" >
         <link rel="stylesheet" type="text/css" href="{{ asset_front('css/style_custom.css') }}" >
         <link rel="shortcut icon" type="image/png" href="{{ asset_front('dataimages/favicon.png') }}"/>
-        <meta property="og:image" content="{{ asset_front('images/logo.png') }}">
+
+        <meta property="og:title" content="@yield('og-title', $generalDataArr['title'])" />
+        <meta name="description" content="@yield('meta-description', $generalDataArr['description'])" />
+        <meta property="og:image" content="@yield('meta-image', asset_front('images/logo.png'))">
 <!--         Start of allelua Zendesk Widget script 
         <script>/*<![CDATA[*/window.zEmbed||function(e,t){var n,o,d,i,s,a=[],r=document.createElement("iframe");window.zEmbed=function(){a.push(arguments)},window.zE=window.zE||window.zEmbed,r.src="javascript:false",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="display: none",d=document.getElementsByTagName("script"),d=d[d.length-1],d.parentNode.insertBefore(r,d),i=r.contentWindow,s=i.document;try{o=s}catch(e){n=document.domain,r.src='javascript:var d=document.open();d.domain="'+n+'";void(0);',o=s}o.open()._l=function(){var e=this.createElement("script");n&&(this.domain=n),e.id="js-iframe-async",e.src="https://assets.zendesk.com/embeddable_framework/main.js",this.t=+new Date,this.zendeskHost="allelua.zendesk.com",this.zEQueue=a,this.body.appendChild(e)},o.write('<body onload="document._l();">'),o.close()}();
 /*]]>*/</script>
