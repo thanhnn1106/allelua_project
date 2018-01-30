@@ -31,7 +31,9 @@ class CheckoutController extends BaseController
         $productBestPrice = $this->loadProductBestPrice();
         $cartCollection = Cart::getContent();
 
-        $customerInfo = \App\CustomerShipping::orderBy('is_default', 'DESC')->first();
+        // Get firstime shipping info of user
+        $customerInfo = \App\CustomerShipping::where('user_id', '=', Auth::user()->id)->orderBy('is_default', 'DESC')->first();
+
         $data = array(
             'languages' => $langs,
             'categories' => $categories,
